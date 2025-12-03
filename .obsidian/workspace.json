@@ -186,14 +186,17 @@
   "active": "a96831e975b2b29c",
   "lastOpenFiles": [
     "WinformsDocs/We need think about....md",
-    "WinformsDocs/Modelos/(Abstrata) Funcionario.md",
     "WinformsDocs/Estrutura de pastas.md",
-    "ADOSMELHORES/Modelos/Secretaria.cs",
-    "WinformsDocs/Modelos/Diretor.md",
-    "ADOSMELHORES/Modelos/Diretor.cs",
-    "WinformsDocs/Modelos/Secretaria.md",
-    "WinformsDocs/Modelos/Formador.md",
     "Relatório/Relatório.md",
-    "Relatório"
+    "Relatório",
+    "ADOSMELHORES/Modelos/Secretaria.cs",
+    "ADOSMELHORES/Modelos/Funcionário.cs",
+    "ADOSMELHORES/Modelos/Diretor.cs",
+    "ADOSMELHORES/Modelos/Funcionario.cs",
+    "ADOSMELHORES/Modelos/Empresa.cs",
+    "WinformsDocs/Modelos/(Abstrata) Funcionario.md",
+    "WinformsDocs/Modelos/Diretor.md",
+    "WinformsDocs/Modelos/Secretaria.md",
+    "WinformsDocs/Modelos/Formador.md"
   ]
 }
