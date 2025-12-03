@@ -13,6 +13,8 @@ namespace ADOSMELHORES
         public string Nome { get; set; }
         public string Morada { get; set; }
         public string Contacto { get; set; }
+        public decimal SalarioBase { get; set; }
+        public DateTime DataIniContrato { get; set; }
         public DateTime DataFimContrato { get; set; }
         public DateTime DataFimRegistoCrim { get; set; }
         public DateTime DataNascimento { get; set; }
