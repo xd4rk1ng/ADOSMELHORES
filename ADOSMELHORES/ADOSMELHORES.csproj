@@ -54,6 +54,8 @@
     </Compile>
     <Compile Include="Modelos\Empresa.cs" />
     <Compile Include="Modelos\Funcionario.cs" />
+    <Compile Include="Modelos\Diretor.cs" />
+    <Compile Include="Modelos\Secretaria.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
