@@ -22,10 +22,6 @@ namespace ADOSMELHORES.Modelos
 
         public decimal ValorHora { get; set; }
 
-        //Construtor vazio
-        public Formador()
-        { }
-
         //Construtor com parametros
         public Formador(
             int id,
@@ -41,7 +37,18 @@ namespace ADOSMELHORES.Modelos
             string areaLeciona,
             Disponibilidade disponibilidade,
             decimal valorHora)
-            : base(id, nif, nome, morada, contacto, dataFimContrato, dataIniContrato, dataFimRegistoCrim, dataNascimento, salarioBase)
+            : base(
+                  id,
+                  nif,
+                  nome,
+                  morada,
+                  contacto,
+                  salarioBase,
+                  dataIniContrato,
+                  dataFimContrato,
+                  dataFimRegistoCrim,
+                  dataNascimento
+            )
         {
             AreaLeciona = areaLeciona;
             Disponibilidade = disponibilidade;

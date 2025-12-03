@@ -53,10 +53,10 @@ namespace ADOSMELHORES.Modelos
         {
             FormadoresAssociados.Remove(formador);
         }
-        public override decimal CalcularCustoMensal()
-        {
-            return SalarioBase;
-        }
+        //public override decimal CalcularCustoMensal()
+        //{
+        //    return SalarioBase;
+        //}
         public int NumeroFormadores => FormadoresAssociados.Count;
 
         public override string ToString()
