@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Modelos/Formador.md",
+                "file": "Modelos/Coordenador.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Formador"
+              "title": "Coordenador"
             }
           }
         ]
@@ -185,11 +185,13 @@
   },
   "active": "221eaa5936d2fbb9",
   "lastOpenFiles": [
+    "Modelos/Formador.md",
+    "We need think about....md",
+    "Estrutura de pastas.md",
     "Modelos/Diretor.md",
     "Modelos/Coordenador.md",
     "Modelos/Secretaria.md",
     "Modelos/(Abstrata) Funcionario.md",
-    "Modelos/Formador.md",
     "Modelos/Empresa.md",
     "Utils",
     "Repositórios",
