@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ADOSMELHORES
+namespace ADOSMELHORES.Modelos
 {
-    internal class Funcionário
-    {//Teste
+    internal class Coordenador : Funcionario
+    {
     }
 }

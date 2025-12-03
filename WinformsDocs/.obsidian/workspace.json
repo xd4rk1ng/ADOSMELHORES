@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Modelos/Secretaria.md",
+                "file": "Modelos/Formador.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Secretaria"
+              "title": "Formador"
             }
           }
         ]
@@ -44,7 +44,7 @@
                 "autoReveal": false
               },
               "icon": "lucide-folder-closed",
-              "title": "Files"
+              "title": "Explorador de ficheiros"
             }
           },
           {
@@ -78,7 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 200
   },
   "right": {
     "id": "a59a78b8418f3cb4",
@@ -174,23 +174,23 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "switcher:Open quick switcher": false,
-      "graph:Open graph view": false,
+      "switcher:Abrir Quick Switcher": false,
+      "graph:Abrir Visualização de diagrama de grafo": false,
+      "daily-notes:Abrir nota de hoje": false,
+      "templates:Inserir templates": false,
+      "command-palette:Abrir paleta de comando": false,
       "canvas:Create new canvas": false,
-      "daily-notes:Open today's daily note": false,
-      "templates:Insert template": false,
-      "command-palette:Open command palette": false,
       "bases:Create new base": false
     }
   },
   "active": "221eaa5936d2fbb9",
   "lastOpenFiles": [
-    "Modelos/Formador.md",
-    "Modelos/Empresa.md",
     "Modelos/Diretor.md",
     "Modelos/Coordenador.md",
-    "Modelos/(Abstrata) Funcionario.md",
     "Modelos/Secretaria.md",
+    "Modelos/(Abstrata) Funcionario.md",
+    "Modelos/Formador.md",
+    "Modelos/Empresa.md",
     "Utils",
     "Repositórios",
     "Data",
