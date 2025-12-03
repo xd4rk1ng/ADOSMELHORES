@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ADOSMELHORES
 {
-    internal abstract class Funcionário
+    internal abstract class Funcionario
     {
         public int Id { get; set; }
         public int Nif { get; set; }
@@ -15,5 +15,6 @@ namespace ADOSMELHORES
         public string Contacto { get; set; }
         public DateTime DataFimContrato { get; set; }
         public DateTime DataFimRegistoCrim { get; set; }
+        public DateTime DataNascimento { get; set; }
     }
 }
