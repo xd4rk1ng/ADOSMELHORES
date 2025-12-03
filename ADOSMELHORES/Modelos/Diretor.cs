@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ADOSMELHORES.Modelos
 {
-    internal class Diretor : Funcionário
+    internal class Diretor : Funcionario
     {
         //atributos pedidos na ficha
         public decimal BonusMensal { get; set; }
@@ -19,13 +19,45 @@ namespace ADOSMELHORES.Modelos
         //lista de secretárias que trabalham com o diretor
         public List<Secretaria> SecretariasSubordinadas { get; set; }
 
-        public Diretor()
+        public Diretor(
+                int id,
+                int nif,
+                string nome,
+                string morada,
+                string contacto,
+                decimal salarioBase,
+                DateTime dataFimContrato,
+                DateTime dataIniContrato,
+                DateTime dataFimRegistoCrim,
+                DateTime dataNascimento,
+                decimal bonusMensal,
+                bool carroEmpresa,
+                bool isencaoHorario,
+                string areaDiretoria
+
+            ) : base (
+                id,
+                nif,
+                nome,
+                morada,
+                contacto,
+                salarioBase,
+                dataIniContrato,
+                dataFimContrato,
+                dataFimRegistoCrim,
+                dataNascimento
+            )
         {
+            BonusMensal = bonusMensal;
+            CarroEmpresa = carroEmpresa;
+            IsencaoHorario = isencaoHorario;
+            AreaDiretoria = areaDiretoria;
+            
             SecretariasSubordinadas = new List<Secretaria>();
         }
 
         //implementar método de calcula de salario do diretor
-        public override decimal CalcularSalario() => SalarioBase + BonusMensal;
+        //public override decimal CalcularSalario() => SalarioBase + BonusMensal;
 
         //metodo para calcular bonus mensal
         public decimal CalcularBonusMensal()
@@ -37,7 +69,7 @@ namespace ADOSMELHORES.Modelos
             bonus += SecretariasSubordinadas.Count * 50; //exemplo: 50 por secretária
 
             //2. Tempo na empresa
-            int anosNaEmpresa = DateTime.Now.Year - DataAdmissao.Year;
+            int anosNaEmpresa = DateTime.Now.Year - DataIniContrato.Year;
             bonus += anosNaEmpresa * 100; //exemplo: 100 por ano na empresa
 
             //3. Se tem carro da empresa

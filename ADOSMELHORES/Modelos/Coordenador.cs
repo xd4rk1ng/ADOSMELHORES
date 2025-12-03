@@ -11,16 +11,33 @@ namespace ADOSMELHORES.Modelos
         public List<Formador> FormadoresAssociados { get; set; }
         public string AreaCoordenacao { get; set; }
 
-        public Coordenador()
-        {
-            FormadoresAssociados = new List<Formador>();
-        }
-
         //construtor com parametros
-        public Coordenador(int id, int nif, string nome, string morada, string contacto, DateTime dataFimContrato, DateTime dataIniContrato, DateTime dataFimRegistoCrim, decimal salarioBase,
-            DateTime dataNascimento, string areaCoordenacao)
-            : base(id, nif, nome, morada, contacto, dataFimContrato, dataIniContrato, dataFimRegistoCrim, dataNascimento, salarioBase)
+        public Coordenador(int id,
+                int nif,
+                string nome,
+                string morada,
+                string contacto,
+                decimal salarioBase,
+                DateTime dataIniContrato,
+                DateTime dataFimContrato,
+                DateTime dataFimRegistoCrim,
+                DateTime dataNascimento,
+
+                string areaCoordenacao)
+            : base(
+                  id,
+                  nif,
+                  nome,
+                  morada,
+                  contacto,
+                  salarioBase,
+                  dataIniContrato,
+                  dataFimContrato,
+                  dataFimRegistoCrim,
+                  dataNascimento
+            )
         {
+
             AreaCoordenacao = areaCoordenacao;
             FormadoresAssociados = new List<Formador>();
         }

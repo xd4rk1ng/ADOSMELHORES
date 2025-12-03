@@ -6,18 +6,45 @@ using System.Threading.Tasks;
 
 namespace ADOSMELHORES.Modelos
 {
-    internal class Secretaria : Funcionário
+    internal class Secretaria : Funcionario
     {
         //atributos pedidos na ficha
         public Diretor DiretorReporta { get; set; }
         public string Area { get; set; }
 
         //atributos adicionais
-        public List<string> Idiomas { get; set; }
+        //public List<string> Idiomas { get; set; }
 
-        public Secretaria() 
+        public Secretaria(
+            int id,
+            int nif,
+            string nome,
+            string morada,
+            string contacto,
+            decimal salarioBase,
+            DateTime dataFimContrato,
+            DateTime dataIniContrato,
+            DateTime dataFimRegistoCrim,
+            DateTime dataNascimento,
+            Diretor diretorReporta,
+            string area
+            //List<string> idiomas
+            ) : base(
+                id,
+                nif,
+                nome,
+                morada,
+                contacto,
+                salarioBase,
+                dataIniContrato,
+                dataFimContrato,
+                dataFimRegistoCrim,
+                dataNascimento
+            )
         {
-            Idiomas = new List<string>();
+            //Idiomas = new List<string>();
+            DiretorReporta = diretorReporta;
+            Area = area;
         }
 
         // Método para verificar se reporta a um diretor específico

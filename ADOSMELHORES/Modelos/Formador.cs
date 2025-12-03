@@ -27,8 +27,20 @@ namespace ADOSMELHORES.Modelos
         { }
 
         //Construtor com parametros
-        public Formador(int id, int nif, string nome, string morada, string contacto, DateTime dataFimContrato, DateTime dataIniContrato, DateTime dataFimRegistoCrim, decimal salarioBase,
-            DateTime dataNascimento, string areaLeciona, Disponibilidade disponibilidade, decimal valorHora)
+        public Formador(
+            int id,
+            int nif,
+            string nome,
+            string morada,
+            string contacto,
+            DateTime dataFimContrato,
+            DateTime dataIniContrato,
+            DateTime dataFimRegistoCrim,
+            decimal salarioBase,
+            DateTime dataNascimento,
+            string areaLeciona,
+            Disponibilidade disponibilidade,
+            decimal valorHora)
             : base(id, nif, nome, morada, contacto, dataFimContrato, dataIniContrato, dataFimRegistoCrim, dataNascimento, salarioBase)
         {
             AreaLeciona = areaLeciona;

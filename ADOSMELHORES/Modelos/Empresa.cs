@@ -8,6 +8,7 @@ namespace ADOSMELHORES.Modelos
 {
     internal class Empresa
     {
-        List<Funcionário> Colaboradores { get; set; } = new List<Funcionário>();
+        List<Funcionario> Colaboradores { get; set; } = new List<Funcionario>();
+        // public decimal calcularDespesas(){}
     }
 }
