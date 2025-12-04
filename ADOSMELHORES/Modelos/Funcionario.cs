@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ADOSMELHORES
 {
-    internal abstract class Funcionario
+    public abstract class Funcionario
     {
         //protected Funcionario() { }
         protected Funcionario(

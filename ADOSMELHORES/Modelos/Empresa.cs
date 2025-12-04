@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace ADOSMELHORES.Modelos
 {
-    internal class Empresa
+    public static class Empresa
     {
-        List<Funcionario> Colaboradores { get; set; } = new List<Funcionario>();
+        public static List<Funcionario> Colaboradores { get; set; } = new List<Funcionario>();
         // public decimal calcularDespesas(){}
     }
 }
