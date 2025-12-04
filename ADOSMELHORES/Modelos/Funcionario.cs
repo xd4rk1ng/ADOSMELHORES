@@ -6,8 +6,33 @@ using System.Threading.Tasks;
 
 namespace ADOSMELHORES
 {
-    internal abstract class Funcionario
+    public abstract class Funcionario
     {
+        //protected Funcionario() { }
+        protected Funcionario(
+            int id,
+            int nif,
+            string nome,
+            string morada,
+            string contacto,
+            decimal salarioBase,
+            DateTime dataIniContrato,
+            DateTime dataFimContrato,
+            DateTime dataFimRegistoCrim,
+            DateTime dataNascimento
+        )
+        {
+            Id = id;
+            Nif = nif;
+            Morada = morada;
+            Contacto = contacto;
+            SalarioBase = salarioBase;
+            DataIniContrato = dataIniContrato;
+            DataFimContrato = dataFimContrato;
+            DataFimRegistoCrim = dataFimRegistoCrim;
+            DataNascimento = dataNascimento;
+        }
+
         public int Id { get; set; }
         public int Nif { get; set; }
         public string Nome { get; set; }
@@ -18,5 +43,7 @@ namespace ADOSMELHORES
         public DateTime DataFimContrato { get; set; }
         public DateTime DataFimRegistoCrim { get; set; }
         public DateTime DataNascimento { get; set; }
+
+
     }
 }

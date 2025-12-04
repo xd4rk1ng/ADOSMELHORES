@@ -15,3 +15,7 @@ Classes que herdam de **Funcionário**
 [Secretaria](Secretaria.md)
 [Coordenador](Coordenador.md)
 [Formador](Formador.md)
+
+
+
+?? Calcular tambem despesas por "classe" de funcionario.
