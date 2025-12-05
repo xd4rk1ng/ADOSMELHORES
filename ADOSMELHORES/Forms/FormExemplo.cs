@@ -24,8 +24,17 @@ namespace ADOSMELHORES.Forms
         {
             if(txtBxNome.Text != string.Empty) // se a text box nao estiver vazia
             {
-                Empresa.Colaboradores.Add(new Exemplo(nome: txtBxNome.Text));
-                _main.UpdateListBox();
+                // Corrigido: Faz cast para List<Funcionario> antes de chamar Add
+                var colaboradores = Empresa.Colaboradores as List<Funcionario>;
+                if (colaboradores != null)
+                {
+                    colaboradores.Add(new Exemplo(nome: txtBxNome.Text));
+                    _main.UpdateListBox();
+                }
+                else
+                {
+                    MessageBox.Show("A lista de colaboradores não está inicializada corretamente.");
+                }
             }
         }
     }

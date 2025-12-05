@@ -43,7 +43,21 @@ namespace ADOSMELHORES
         public DateTime DataFimContrato { get; set; }
         public DateTime DataFimRegistoCrim { get; set; }
         public DateTime DataNascimento { get; set; }
+        public object DataRegistoCriminal { get; internal set; }
 
+        internal int CalcularCustoMensal()
+        {
+            throw new NotImplementedException();
+        }
 
+        internal bool ContratoValido(DateTime data)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal bool RegistoCriminalExpirado(DateTime data)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

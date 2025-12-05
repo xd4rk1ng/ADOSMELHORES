@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\FormGerirFormadores.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormGerirFormadores.Designer.cs">
+      <DependentUpon>FormGerirFormadores.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FormExemplo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -67,6 +73,9 @@
     <Compile Include="Modelos\Formador.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\FormGerirFormadores.resx">
+      <DependentUpon>FormGerirFormadores.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormExemplo.resx">
       <DependentUpon>FormExemplo.cs</DependentUpon>
     </EmbeddedResource>
