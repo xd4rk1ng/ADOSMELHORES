@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "WinformsDocs/Modelos/Secretaria.md",
+                "file": "WinformsDocs/Modelos/Diretor.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Coordenador"
+              "title": "Diretor"
             }
           }
         ]
@@ -185,6 +185,8 @@
   },
   "active": "a96831e975b2b29c",
   "lastOpenFiles": [
+    "WinformsDocs/Modelos/(Abstrata) Funcionario.md",
+    "WinformsDocs/Modelos/Secretaria.md",
     "WinformsDocs/We need think about....md",
     "WinformsDocs/Estrutura de pastas.md",
     "Relatório/Relatório.md",
@@ -194,9 +196,7 @@
     "ADOSMELHORES/Modelos/Diretor.cs",
     "ADOSMELHORES/Modelos/Funcionario.cs",
     "ADOSMELHORES/Modelos/Empresa.cs",
-    "WinformsDocs/Modelos/(Abstrata) Funcionario.md",
     "WinformsDocs/Modelos/Diretor.md",
-    "WinformsDocs/Modelos/Secretaria.md",
     "WinformsDocs/Modelos/Formador.md"
   ]
 }

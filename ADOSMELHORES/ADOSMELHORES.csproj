@@ -58,6 +58,12 @@
     <Compile Include="Forms\FormInicial.Designer.cs">
       <DependentUpon>FormInicial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Form_Diretor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Form_Diretor.Designer.cs">
+      <DependentUpon>Form_Diretor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Modelos\Exemplo.cs" />
     <Compile Include="Modelos\Empresa.cs" />
     <Compile Include="Modelos\Funcionario.cs" />
@@ -72,6 +78,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormInicial.resx">
       <DependentUpon>FormInicial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Form_Diretor.resx">
+      <DependentUpon>Form_Diretor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
