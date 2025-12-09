@@ -77,7 +77,15 @@ namespace ADOSMELHORES.Modelos
             {                
                 bonus -= 300; //desconta 300 do bonus se tiver carro da empresa
             }
-            return bonus;
+            
+
+            //4. Se tem isençao de horário
+            if (IsencaoHorario)
+            {
+                bonus += 200; //adiciona 200 ao bonus se tiver isenção de horário
+            }
+
+            return Math.Max(bonus, 0);//garante que o bonus não seja negativo
 
         }
 
