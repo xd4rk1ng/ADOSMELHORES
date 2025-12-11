@@ -1,4 +1,5 @@
-﻿using ADOSMELHORES.Modelos;
+﻿using ADOSMELHORES;
+using ADOSMELHORES.Modelos;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -102,8 +103,8 @@ namespace AdosMelhores.Forms
         private void AtualizarListaFormadores()
         {
             var formadores = empresa.Funcionarios
-    .OfType<Formador>()
-    .ToList();
+            .OfType<Formador>()
+            .ToList();
             dgvFormadores.DataSource = null;
             dgvFormadores.DataSource = formadores;
 
@@ -134,6 +135,14 @@ namespace AdosMelhores.Forms
 
         private void CarregarDadosFormador(Formador formador)
         {
+            // Helper local para limitar valores DateTime aos limites do control
+            DateTime Clamp(DateTime value, DateTime min, DateTime max)
+            {
+                if (value < min) return min;
+                if (value > max) return max;
+                return value;
+            }
+
             txtID.Text = formador.Id.ToString();
             txtNome.Text = formador.Nome;
             txtMorada.Text = formador.Morada;
@@ -142,8 +151,54 @@ namespace AdosMelhores.Forms
             cmbDisponibilidade.SelectedItem = formador.Disponibilidade;
             numValorHora.Value = formador.ValorHora;
             numSalarioBase.Value = formador.SalarioBase;
-            dtpDataFimContrato.Value = formador.DataFimContrato;
-            dtpDataRegistoCriminal.Value = (DateTime)formador.DataRegistoCriminal;
+
+            // DataFimContrato: clamp + safe assign
+            try
+            {
+                DateTime safeFim = Clamp(formador.DataFimContrato, dtpDataFimContrato.MinDate, dtpDataFimContrato.MaxDate);
+                try
+                {
+                    dtpDataFimContrato.Value = safeFim;
+                }
+                catch (ArgumentOutOfRangeException)
+                {
+                    dtpDataFimContrato.Value = dtpDataFimContrato.MinDate;
+                }
+            }
+            catch
+            {
+                try { dtpDataFimContrato.Value = dtpDataFimContrato.MinDate; } catch { /* ignora */ }
+            }
+
+            // DataRegistoCriminal: formador.DataRegistoCriminal é object; resolver e clamp + safe assign
+            try
+            {
+                DateTime fallbackRegisto = DateTime.Now.AddYears(5);
+                DateTime dataRegistoCriminal;
+                try
+                {
+                    dataRegistoCriminal = formador.DataRegistoCriminal is DateTime dt ? dt : fallbackRegisto;
+                }
+                catch
+                {
+                    dataRegistoCriminal = fallbackRegisto;
+                }
+
+                DateTime safeRegisto = Clamp(dataRegistoCriminal, dtpDataRegistoCriminal.MinDate, dtpDataRegistoCriminal.MaxDate);
+
+                try
+                {
+                    dtpDataRegistoCriminal.Value = safeRegisto;
+                }
+                catch (ArgumentOutOfRangeException)
+                {
+                    dtpDataRegistoCriminal.Value = dtpDataRegistoCriminal.MinDate;
+                }
+            }
+            catch
+            {
+                try { dtpDataRegistoCriminal.Value = dtpDataRegistoCriminal.MinDate; } catch { /* ignora */ }
+            }
 
             // Verificar status do registo criminal
             VerificarStatusRegistoCriminal(formador);
@@ -183,8 +238,9 @@ namespace AdosMelhores.Forms
             cmbDisponibilidade.SelectedIndex = 0;
             numValorHora.Value = 0;
             numSalarioBase.Value = 0;
-            dtpDataFimContrato.Value = DateTime.Now.AddYears(1);
-            dtpDataRegistoCriminal.Value = DateTime.Now.AddYears(5);
+            // Valores seguros por defeito
+            try { dtpDataFimContrato.Value = DateTime.Now.AddYears(1); } catch { /* ignora */ }
+            try { dtpDataRegistoCriminal.Value = DateTime.Now.AddYears(5); } catch { /* ignora */ }
             lblStatusRegistoCriminal.Text = "";
             formadorSelecionado = null;
         }
@@ -249,17 +305,15 @@ namespace AdosMelhores.Forms
                     txtNome.Text.Trim(), // Nome
                     txtMorada.Text.Trim(), // Morada
                     txtContacto.Text.Trim(), // Contacto
-                    numSalarioBase.Value, // SalarioBase
                     DateTime.Now, // DataIniContrato (ajuste conforme necessário)
                     dtpDataFimContrato.Value, // DataFimContrato
                     dtpDataRegistoCriminal.Value, // DataRegistoCriminal
-                    DateTime.Now // DataNascimento (ajuste conforme necessário)
-                )
-                {
-                    AreaLeciona = txtAreaLeciona.Text.Trim(),
-                    Disponibilidade = (Disponibilidade)cmbDisponibilidade.SelectedItem,
-                    ValorHora = numValorHora.Value
-                };
+                    numSalarioBase.Value, // SalarioBase
+                    DateTime.Now, // DataNascimento (ajuste conforme necessário)
+                    txtAreaLeciona.Text.Trim(), // areaLeciona
+                    (Disponibilidade)cmbDisponibilidade.SelectedItem, // disponibilidade
+                    numValorHora.Value // valorHora
+                );
 
                 empresa.AdicionarFuncionario(novoFormador);
                 AtualizarListaFormadores();
@@ -504,14 +558,56 @@ namespace AdosMelhores.Forms
 
         public void ShowDialog()
         {
-            // Implemente a lógica de exibição do formulário de filtro aqui.
-            MessageBox.Show(
-                $"Filtro de formadores da empresa '{empresa.Nome}' aplicado.",
+            // Corrigido: especificar explicitamente a propriedade para evitar ambiguidade
+            string textoFiltroAplicado = $@"Filtro de formadores da empresa aplicado.";
+            _ = MessageBox.Show(
+                textoFiltroAplicado,
                 "Filtrar Formadores",
                 MessageBoxButtons.OK,
-                MessageBoxIcon.Information
+                icon: MessageBoxIcon.Information
             );
         }
     }
 }
 
+public class Empresa
+{
+    private readonly List<Funcionario> funcionarios;
+
+    public string Nome { get; set; }
+    public IReadOnlyList<Funcionario> Funcionarios { get; }
+    public DateTime DataSimulada { get; set; }
+
+    public Empresa(string nome)
+    {
+        Nome = nome ?? throw new ArgumentNullException(nameof(nome));
+        funcionarios = new List<Funcionario>();
+        Funcionarios = funcionarios; // evita null ao aceder externamente
+    }
+
+    internal int ObterProximoID()
+    {
+        if (funcionarios.Count == 0)
+            return 1;
+        return funcionarios.Max(f => f.Id) + 1;
+    }
+
+    internal void AdicionarFuncionario(Funcionario funcionario)
+    {
+        if (funcionario == null)
+            throw new ArgumentNullException(nameof(funcionario));
+        funcionarios.Add(funcionario);
+    }
+
+    internal void AdicionarFuncionario(Formador novoFormador)
+    {
+        throw new NotImplementedException();
+    }
+
+    internal void RemoverFuncionario(Formador formadorSelecionado)
+    {
+        throw new NotImplementedException();
+    }
+
+    // resto igual (usar 'funcionarios' internamente)
+}

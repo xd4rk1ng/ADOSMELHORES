@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ADOSMELHORES.Modelos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,7 +17,10 @@ namespace ADOSMELHORES
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Forms.FormInicial());
+
+            // Corrigido: instanciando Empresa e passando para FormInicial
+            var empresa = new Empresa("NomeDaEmpresa");
+            Application.Run(new Forms.FormInicial(empresa));
         }
     }
 }
