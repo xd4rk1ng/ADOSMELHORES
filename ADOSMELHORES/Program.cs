@@ -21,6 +21,7 @@ namespace ADOSMELHORES
 
 
             // Temporario, para testar
+            //  -   provavelmente havera algo (funcao, classe) que carregara eestas informacoes, provavelmente da parte da db
             var _colaboradores = new List<Funcionario>();
             var _centrosCustos = new Dictionary<Type, CentroCusto>();
             _centrosCustos.Add(typeof(Exemplo), new CentroCusto());

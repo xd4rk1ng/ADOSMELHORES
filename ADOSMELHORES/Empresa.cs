@@ -30,6 +30,7 @@ namespace ADOSMELHORES
             _nome = nome ?? throw new ArgumentNullException(nameof(nome));
         }
 
+        #region Gestao de Funcionarios
         // Retorna o funcionario se o encontrar na lista de colaboradores, usando o Nif.
         //  -   isto e usado para prevenir dupla insercao de funcionario, caso este ja tenha trabalhado na empresa, pois os ids serao autogerados
         private Funcionario FuncionarioExiste(int nif)
@@ -87,6 +88,17 @@ namespace ADOSMELHORES
             var f = EncontraFuncionarioId(id);
             f.Ativo = false;
         }
-        
+        #endregion
+        #region Gestao de Custos
+
+        // Retorna a soma de todos os centros de custo
+        public decimal ObterCustoMensalTotal()
+        {
+            return _centrosCusto.Sum(cc => cc.Value.CalcularCustoMensal());
+        }
+
+        // TODO: Adicionar mais metodos aqui
+
+        #endregion
     }
 }
