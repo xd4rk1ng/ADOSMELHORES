@@ -56,6 +56,10 @@ namespace ADOSMELHORES.Modelos
             SecretariasSubordinadas = new List<Secretaria>();
         }
 
+        public override decimal CustoMensal()
+        {
+            throw new NotImplementedException();
+        }
         //implementar método de calcula de salario do diretor
         //public override decimal CalcularSalario() => SalarioBase + BonusMensal;
 

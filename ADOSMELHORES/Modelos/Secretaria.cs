@@ -46,6 +46,10 @@ namespace ADOSMELHORES.Modelos
             DiretorReporta = diretorReporta;
             Area = area;
         }
+        public override decimal CustoMensal()
+        {
+            throw new NotImplementedException();
+        }
 
         // Método para verificar se reporta a um diretor específico
         public bool ReportaAoDiretor(int idDiretor)

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ADOSMELHORES.Modelos;
+using ADOSMELHORES.Servicos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,7 +18,18 @@ namespace ADOSMELHORES
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Forms.FormInicial());
+
+
+            // Temporario, para testar
+            var _colaboradores = new List<Funcionario>();
+            var _centrosCustos = new Dictionary<Type, CentroCusto>();
+            _centrosCustos.Add(typeof(Exemplo), new CentroCusto());
+
+            Application.Run(new Forms.FormInicial(new Empresa(
+                _centrosCustos,
+                _colaboradores,
+                "AdosMelhores!"
+                )));
         }
     }
 }

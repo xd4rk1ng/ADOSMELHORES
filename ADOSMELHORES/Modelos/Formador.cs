@@ -55,6 +55,10 @@ namespace ADOSMELHORES.Modelos
             ValorHora = valorHora;
         }
 
+        public override decimal CustoMensal()
+        {
+            throw new NotImplementedException();
+        }
         public decimal CalcularValorFormacao(DateTime DataIniContrato, DateTime DataFimContrato)
         {
             if (DataFimContrato < DataIniContrato)

@@ -14,17 +14,19 @@ namespace ADOSMELHORES.Forms
     public partial class FormExemplo : Form
     {
         private FormInicial _main;
-        public FormExemplo(FormInicial main)
+        private Empresa _empresa;
+        public FormExemplo(FormInicial main, Empresa empresa)
         {
             InitializeComponent();
             _main = main;
+            _empresa = empresa;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             if(txtBxNome.Text != string.Empty) // se a text box nao estiver vazia
             {
-                Empresa.Colaboradores.Add(new Exemplo(nome: txtBxNome.Text));
+                _empresa.AdicionarFuncionario(new Exemplo(nome: txtBxNome.Text));
                 _main.UpdateListBox();
             }
         }

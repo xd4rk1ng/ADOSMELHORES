@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ADOSMELHORES
+namespace ADOSMELHORES.Modelos
 {
     public abstract class Funcionario
     {
-        //protected Funcionario() { }
         protected Funcionario(
             int id,
             int nif,
@@ -24,6 +24,7 @@ namespace ADOSMELHORES
         {
             Id = id;
             Nif = nif;
+            Nome = nome;
             Morada = morada;
             Contacto = contacto;
             SalarioBase = salarioBase;
@@ -32,10 +33,12 @@ namespace ADOSMELHORES
             DataFimRegistoCrim = dataFimRegistoCrim;
             DataNascimento = dataNascimento;
         }
+        public abstract decimal CustoMensal();
 
         public int Id { get; set; }
         public int Nif { get; set; }
         public string Nome { get; set; }
+        public bool Ativo { get; set; }     
         public string Morada { get; set; }
         public string Contacto { get; set; }
         public decimal SalarioBase { get; set; }
@@ -43,6 +46,7 @@ namespace ADOSMELHORES
         public DateTime DataFimContrato { get; set; }
         public DateTime DataFimRegistoCrim { get; set; }
         public DateTime DataNascimento { get; set; }
+
 
 
     }

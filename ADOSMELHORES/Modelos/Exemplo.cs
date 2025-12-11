@@ -30,8 +30,11 @@ namespace ADOSMELHORES.Modelos
                 dataFimContrato,
                 dataFimRegistoCrim,
                 dataNascimento)
-        {
+        {}
 
+        public override decimal CustoMensal()
+        {
+            throw new NotImplementedException();
         }
     }
 }

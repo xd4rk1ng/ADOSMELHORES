@@ -42,6 +42,10 @@ namespace ADOSMELHORES.Modelos
             FormadoresAssociados = new List<Formador>();
         }
 
+        public override decimal CustoMensal()
+        {
+            throw new NotImplementedException();
+        }
         public void AdicionarFormador(Formador formador)
         {
             if (!FormadoresAssociados.Contains(formador))
