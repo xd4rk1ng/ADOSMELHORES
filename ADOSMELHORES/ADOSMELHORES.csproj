@@ -46,6 +46,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\FormAdicionarCoordenador.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormAdicionarCoordenador.Designer.cs">
+      <DependentUpon>FormAdicionarCoordenador.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormEditarCoordenador.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormEditarCoordenador.Designer.cs">
+      <DependentUpon>FormEditarCoordenador.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormGerirCoordenadores.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormGerirCoordenadores.Designer.cs">
+      <DependentUpon>FormGerirCoordenadores.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormGerirFormadores.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormGerirFormadores.Designer.cs">
+      <DependentUpon>FormGerirFormadores.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FormExemplo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -68,6 +92,12 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Servicos\CentroCusto.cs" />
+    <EmbeddedResource Include="Forms\FormAdicionarCoordenador.resx">
+      <DependentUpon>FormAdicionarCoordenador.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormGerirFormadores.resx">
+      <DependentUpon>FormGerirFormadores.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormExemplo.resx">
       <DependentUpon>FormExemplo.cs</DependentUpon>
     </EmbeddedResource>
