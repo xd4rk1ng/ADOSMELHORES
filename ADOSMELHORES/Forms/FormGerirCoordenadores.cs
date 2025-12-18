@@ -25,8 +25,8 @@ namespace ADOSMELHORES.Forms
         private void AtualizarListagem()
         {
             listViewCoordenadores.Items.Clear();
-
-            foreach (var coordenador in empresa.ObterCoordenadores())
+            var coordenadores = empresa.ColaboradoresTipo<Coordenador>();
+            foreach (var coordenador in coordenadores)
             {
                 ListViewItem item = new ListViewItem(coordenador.Nome);
                 item.SubItems.Add(coordenador.Id.ToString());
@@ -41,7 +41,7 @@ namespace ADOSMELHORES.Forms
                 listViewCoordenadores.Items.Add(item);
             }
 
-            lblTotal.Text = $"Total de Coordenadores: {empresa.ObterCoordenadores().Count}";
+            lblTotal.Text = $"Total de Coordenadores: {coordenadores.Count}";
         }
 
         private void btnAdicionar_Click(object sender, EventArgs e)
@@ -74,6 +74,7 @@ namespace ADOSMELHORES.Forms
             }
         }
 
+        // Passa a nao remover, apenas desabilitar
         private void btnRemover_Click(object sender, EventArgs e)
         {
             if (listViewCoordenadores.SelectedItems.Count == 0)
@@ -93,7 +94,7 @@ namespace ADOSMELHORES.Forms
 
             if (result == DialogResult.Yes)
             {
-                empresa.ObterCoordenadores().Remove(coordenador);
+                empresa.DesativarFuncionario(coordenador.Id);
                 AtualizarListagem();
                 MessageBox.Show("Coordenador removido com sucesso!", "Sucesso",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);

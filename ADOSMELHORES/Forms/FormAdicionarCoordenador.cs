@@ -61,7 +61,7 @@ namespace ADOSMELHORES.Forms
 
             try
             {
-                var proximoId = empresa.ObterProximoID();
+                var proximoId = empresa.ObterProximoID;
                 Coordenador coordenador = new Coordenador(
                     proximoId,
                     int.Parse(txtNIF.Text),

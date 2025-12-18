@@ -1,6 +1,4 @@
-﻿using ADOSMELHORES;
-using ADOSMELHORES.Modelos;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -9,8 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ADOSMELHORES.Modelos;
 
-namespace AdosMelhores.Forms
+namespace ADOSMELHORES.Forms
 {
     /// <summary>
     /// Form completo para gestão de Formadores
@@ -18,13 +17,15 @@ namespace AdosMelhores.Forms
     /// </summary>
     public partial class FormGerirFormadores : Form
     {
-        private Empresa empresa;
-        private Formador formadorSelecionado;
+        private Empresa _empresa;
+        private Formador _formadorSelecionado;
 
         public FormGerirFormadores(Empresa empresaRef)
         {
             InitializeComponent();
-            empresa = empresaRef;
+            _empresa = empresaRef;
+
+            cmbDisponibilidade.DataSource = Enum.GetValues(typeof(Disponibilidade));
             ConfigurarForm();
         }
 
@@ -102,7 +103,7 @@ namespace AdosMelhores.Forms
 
         private void AtualizarListaFormadores()
         {
-            var formadores = empresa.Funcionarios
+            var formadores = _empresa.Colaboradores
             .OfType<Formador>()
             .ToList();
             dgvFormadores.DataSource = null;
@@ -120,10 +121,10 @@ namespace AdosMelhores.Forms
         {
             if (dgvFormadores.SelectedRows.Count > 0)
             {
-                formadorSelecionado = dgvFormadores.SelectedRows[0].DataBoundItem as Formador;
-                if (formadorSelecionado != null)
+                _formadorSelecionado = dgvFormadores.SelectedRows[0].DataBoundItem as Formador;
+                if (_formadorSelecionado != null)
                 {
-                    CarregarDadosFormador(formadorSelecionado);
+                    CarregarDadosFormador(_formadorSelecionado);
                     HabilitarBotoesEdicao(true);
                 }
             }
@@ -206,18 +207,19 @@ namespace AdosMelhores.Forms
 
         private void VerificarStatusRegistoCriminal(Formador formador)
         {
-            if (formador.RegistoCriminalExpirado(empresa.DataSimulada))
-            {
-                lblStatusRegistoCriminal.Text = "EXPIRADO";
-                lblStatusRegistoCriminal.ForeColor = System.Drawing.Color.Red;
-                lblStatusRegistoCriminal.Font = new System.Drawing.Font(lblStatusRegistoCriminal.Font, System.Drawing.FontStyle.Bold);
-            }
-            else
-            {
-                lblStatusRegistoCriminal.Text = "Válido";
-                lblStatusRegistoCriminal.ForeColor = System.Drawing.Color.Green;
-                lblStatusRegistoCriminal.Font = new System.Drawing.Font(lblStatusRegistoCriminal.Font, System.Drawing.FontStyle.Regular);
-            }
+            //if (formador.RegistoCriminalExpirado(_empresa.DataSimulada))
+            //{
+            //    lblStatusRegistoCriminal.Text = "EXPIRADO";
+            //    lblStatusRegistoCriminal.ForeColor = System.Drawing.Color.Red;
+            //    lblStatusRegistoCriminal.Font = new System.Drawing.Font(lblStatusRegistoCriminal.Font, System.Drawing.FontStyle.Bold);
+            //}
+            //else
+            //{
+            //    lblStatusRegistoCriminal.Text = "Válido";
+            //    lblStatusRegistoCriminal.ForeColor = System.Drawing.Color.Green;
+            //    lblStatusRegistoCriminal.Font = new System.Drawing.Font(lblStatusRegistoCriminal.Font, System.Drawing.FontStyle.Regular);
+            //}
+            throw new NotImplementedException();
         }
 
         private void HabilitarBotoesEdicao(bool habilitar)
@@ -242,7 +244,7 @@ namespace AdosMelhores.Forms
             try { dtpDataFimContrato.Value = DateTime.Now.AddYears(1); } catch { /* ignora */ }
             try { dtpDataRegistoCriminal.Value = DateTime.Now.AddYears(5); } catch { /* ignora */ }
             lblStatusRegistoCriminal.Text = "";
-            formadorSelecionado = null;
+            _formadorSelecionado = null;
         }
 
         private bool ValidarCampos()
@@ -300,7 +302,7 @@ namespace AdosMelhores.Forms
             try
             {
                 var novoFormador = new Formador(
-                    empresa.ObterProximoID(), // id
+                    0,//_empresa.ObterProximoID(), // id
                     0, // Nif (ajuste conforme necessário)
                     txtNome.Text.Trim(), // Nome
                     txtMorada.Text.Trim(), // Morada
@@ -315,7 +317,7 @@ namespace AdosMelhores.Forms
                     numValorHora.Value // valorHora
                 );
 
-                empresa.AdicionarFuncionario(novoFormador);
+                _empresa.AdicionarFuncionario(novoFormador);
                 AtualizarListaFormadores();
                 LimparCampos();
 
@@ -331,7 +333,7 @@ namespace AdosMelhores.Forms
 
         private void btnAlterar_Click(object sender, EventArgs e)
         {
-            if (formadorSelecionado == null)
+            if (_formadorSelecionado == null)
             {
                 MessageBox.Show("Selecione um formador para alterar.", "Aviso",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -343,19 +345,19 @@ namespace AdosMelhores.Forms
 
             try
             {
-                formadorSelecionado.Nome = txtNome.Text.Trim();
-                formadorSelecionado.Morada = txtMorada.Text.Trim();
-                formadorSelecionado.Contacto = txtContacto.Text.Trim();
-                formadorSelecionado.AreaLeciona = txtAreaLeciona.Text.Trim();
-                formadorSelecionado.Disponibilidade = (Disponibilidade)cmbDisponibilidade.SelectedItem;
-                formadorSelecionado.ValorHora = numValorHora.Value;
-                formadorSelecionado.SalarioBase = numSalarioBase.Value;
-                formadorSelecionado.DataFimContrato = dtpDataFimContrato.Value;
-                formadorSelecionado.DataRegistoCriminal = dtpDataRegistoCriminal.Value;
+                _formadorSelecionado.Nome = txtNome.Text.Trim();
+                _formadorSelecionado.Morada = txtMorada.Text.Trim();
+                _formadorSelecionado.Contacto = txtContacto.Text.Trim();
+                _formadorSelecionado.AreaLeciona = txtAreaLeciona.Text.Trim();
+                _formadorSelecionado.Disponibilidade = (Disponibilidade)cmbDisponibilidade.SelectedItem;
+                _formadorSelecionado.ValorHora = numValorHora.Value;
+                _formadorSelecionado.SalarioBase = numSalarioBase.Value;
+                _formadorSelecionado.DataFimContrato = dtpDataFimContrato.Value;
+                _formadorSelecionado.DataRegistoCriminal = dtpDataRegistoCriminal.Value;
 
                 AtualizarListaFormadores();
 
-                MessageBox.Show($"Formador '{formadorSelecionado.Nome}' alterado com sucesso!", "Sucesso",
+                MessageBox.Show($"Formador '{_formadorSelecionado.Nome}' alterado com sucesso!", "Sucesso",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
@@ -367,36 +369,37 @@ namespace AdosMelhores.Forms
 
         private void btnRemover_Click(object sender, EventArgs e)
         {
-            if (formadorSelecionado == null)
-            {
-                MessageBox.Show("Selecione um formador para remover.", "Aviso",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+            //if (_formadorSelecionado == null)
+            //{
+            //    MessageBox.Show("Selecione um formador para remover.", "Aviso",
+            //        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //    return;
+            //}
 
-            var resultado = MessageBox.Show(
-                $"Tem certeza que deseja remover o formador '{formadorSelecionado.Nome}'?",
-                "Confirmar Remoção",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question);
+            //var resultado = MessageBox.Show(
+            //    $"Tem certeza que deseja remover o formador '{_formadorSelecionado.Nome}'?",
+            //    "Confirmar Remoção",
+            //    MessageBoxButtons.YesNo,
+            //    MessageBoxIcon.Question);
 
-            if (resultado == DialogResult.Yes)
-            {
-                try
-                {
-                    empresa.RemoverFuncionario(formadorSelecionado);
-                    AtualizarListaFormadores();
-                    LimparCampos();
+            //if (resultado == DialogResult.Yes)
+            //{
+            //    try
+            //    {
+            //        _empresa.RemoverFuncionario(_formadorSelecionado);
+            //        AtualizarListaFormadores();
+            //        LimparCampos();
 
-                    MessageBox.Show("Formador removido com sucesso!", "Sucesso",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Erro ao remover formador: {ex.Message}", "Erro",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
+            //        MessageBox.Show("Formador removido com sucesso!", "Sucesso",
+            //            MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        MessageBox.Show($"Erro ao remover formador: {ex.Message}", "Erro",
+            //            MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    }
+            //}
+            throw new NotImplementedException();
         }
 
         private void btnLimpar_Click(object sender, EventArgs e)
@@ -410,59 +413,63 @@ namespace AdosMelhores.Forms
 
         private void btnCalcularValor_Click(object sender, EventArgs e)
         {
-            if (formadorSelecionado == null)
-            {
-                MessageBox.Show("Selecione um formador para calcular o valor da formação.", "Aviso",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+            //if (_formadorSelecionado == null)
+            //{
+            //    MessageBox.Show("Selecione um formador para calcular o valor da formação.", "Aviso",
+            //        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //    return;
+            //}
 
-            using (var formCalculo = new FormCalcularValorFormacao(formadorSelecionado))
-            {
-                formCalculo.ShowDialog();
-            }
+            //using (var formCalculo = new FormCalcularValorFormacao(_formadorSelecionado))
+            //{
+            //    formCalculo.ShowDialog();
+            //}
+            throw new NotImplementedException();
         }
 
         private void btnAtualizarRegistoCriminal_Click(object sender, EventArgs e)
         {
-            if (formadorSelecionado == null)
-            {
-                MessageBox.Show("Selecione um formador para atualizar o registo criminal.", "Aviso",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+            //if (_formadorSelecionado == null)
+            //{
+            //    MessageBox.Show("Selecione um formador para atualizar o registo criminal.", "Aviso",
+            //        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //    return;
+            //}
 
-            using (var formRegistoCriminal = new FormAtualizarRegistoCriminal(formadorSelecionado, empresa))
-            {
-                if (formRegistoCriminal.ShowDialog() == DialogResult.OK)
-                {
-                    AtualizarListaFormadores();
-                    CarregarDadosFormador(formadorSelecionado);
-                }
-            }
+            //using (var formRegistoCriminal = new FormAtualizarRegistoCriminal(_formadorSelecionado, _empresa))
+            //{
+            //    if (formRegistoCriminal.ShowDialog() == DialogResult.OK)
+            //    {
+            //        AtualizarListaFormadores();
+            //        CarregarDadosFormador(_formadorSelecionado);
+            //    }
+            //}
+            throw new NotImplementedException();
         }
 
         private void btnAlocarFormador_Click(object sender, EventArgs e)
         {
-            if (formadorSelecionado == null)
-            {
-                MessageBox.Show("Selecione um formador para alocar.", "Aviso",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+            //if (_formadorSelecionado == null)
+            //{
+            //    MessageBox.Show("Selecione um formador para alocar.", "Aviso",
+            //        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //    return;
+            //}
 
-            using (var formAlocar = new FormAlocarFormador(formadorSelecionado, empresa))
-            {
-                formAlocar.ShowDialog();
-            }
+            //using (var formAlocar = new FormAlocarFormador(_formadorSelecionado, _empresa))
+            //{
+            //    formAlocar.ShowDialog();
+            //}
+            throw new NotImplementedException();
         }
 
         private void btnFiltrarDisponibilidade_Click(object sender, EventArgs e)
         {
-            using (var formFiltro = new FormFiltrarFormadores(empresa))
-            {
-                formFiltro.ShowDialog();
-            }
+            //using (var formFiltro = new FormFiltrarFormadores(_empresa))
+            //{
+            //    formFiltro.ShowDialog();
+            //}
+            throw new NotImplementedException();
         }
 
         private void btnFechar_Click(object sender, EventArgs e)
@@ -470,144 +477,103 @@ namespace AdosMelhores.Forms
             this.Close();
         }
 
-        private class FormCalcularValorFormacao : IDisposable
-        {
-            private Formador formadorSelecionado;
+        //    private class FormCalcularValorFormacao : IDisposable
+        //    {
+        //        private Formador _formadorSelecionado;
 
-            public FormCalcularValorFormacao(Formador formadorSelecionado)
-            {
-                this.formadorSelecionado = formadorSelecionado;
-            }
+        //        public FormCalcularValorFormacao(Formador _formadorSelecionado)
+        //        {
+        //            this._formadorSelecionado = _formadorSelecionado;
+        //        }
 
-            internal void ShowDialog()
-            {
-                throw new NotImplementedException();
-            }
+        //        internal void ShowDialog()
+        //        {
+        //            throw new NotImplementedException();
+        //        }
 
-            public void Dispose()
-            {
-                // Implementação de Dispose se necessário
-            }
-        }
+        //        public void Dispose()
+        //        {
+        //            // Implementação de Dispose se necessário
+        //        }
+        //    }
+        //}
+
+        //internal class FormAtualizarRegistoCriminal
+        //{
+        //    public FormAtualizarRegistoCriminal(Formador _formadorSelecionado, Empresa empresa)
+        //    {
+        //        FormadorSelecionado = _formadorSelecionado;
+        //        Empresa = empresa;
+        //    }
+
+        //    public Formador FormadorSelecionado { get; }
+        //    public Empresa Empresa { get; }
+
+        //    internal DialogResult ShowDialog()
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+
+        //    public void Dispose()
+        //    {
+        //        // Implementação de Dispose se necessário
+        //    }
+        //}
+
+        //internal class FormAlocarFormador
+        //{
+        //    private Formador _formadorSelecionado;
+        //    private Empresa empresa;
+
+        //    public FormAlocarFormador(Formador _formadorSelecionado, Empresa empresa)
+        //    {
+        //        this._formadorSelecionado = _formadorSelecionado;
+        //        this.empresa = empresa;
+        //    }
+
+        //    public void Dispose()
+        //    {
+        //        // Implementação de Dispose se necessário
+        //    }
+
+        //    public void ShowDialog()
+        //    {
+        //        // Implemente a lógica de exibição do formulário de alocação aqui.
+        //        // Por exemplo, pode abrir um novo Form se desejar.
+        //        MessageBox.Show(
+        //            $"Alocação do formador '{_formadorSelecionado.Nome}' (ID: {_formadorSelecionado.Id}) realizada.",
+        //            "Alocar Formador",
+        //            MessageBoxButtons.OK,
+        //            MessageBoxIcon.Information
+        //        );
+        //    }
+        //}
+
+        //internal class FormFiltrarFormadores : 
+        //{
+        //    private Empresa empresa;
+
+        //    public FormFiltrarFormadores(Empresa empresa)
+        //    {
+        //        this.empresa = empresa;
+        //    }
+
+        //    public void Dispose()
+        //    {
+        //        // Implementação de Dispose se necessário
+        //    }
+
+        //    public void ShowDialog()
+        //    {
+        //        // Corrigido: especificar explicitamente a propriedade para evitar ambiguidade
+        //        string textoFiltroAplicado = $@"Filtro de formadores da empresa aplicado.";
+        //        _ = MessageBox.Show(
+        //            textoFiltroAplicado,
+        //            "Filtrar Formadores",
+        //            MessageBoxButtons.OK,
+        //            icon: MessageBoxIcon.Information
+        //        );
+        //    }
+        //}
     }
-
-    internal class FormAtualizarRegistoCriminal : IDisposable
-    {
-        public FormAtualizarRegistoCriminal(Formador formadorSelecionado, Empresa empresa)
-        {
-            FormadorSelecionado = formadorSelecionado;
-            Empresa = empresa;
-        }
-
-        public Formador FormadorSelecionado { get; }
-        public Empresa Empresa { get; }
-
-        internal DialogResult ShowDialog()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Dispose()
-        {
-            // Implementação de Dispose se necessário
-        }
-    }
-
-    internal class FormAlocarFormador : IDisposable
-    {
-        private Formador formadorSelecionado;
-        private Empresa empresa;
-
-        public FormAlocarFormador(Formador formadorSelecionado, Empresa empresa)
-        {
-            this.formadorSelecionado = formadorSelecionado;
-            this.empresa = empresa;
-        }
-
-        public void Dispose()
-        {
-            // Implementação de Dispose se necessário
-        }
-
-        public void ShowDialog()
-        {
-            // Implemente a lógica de exibição do formulário de alocação aqui.
-            // Por exemplo, pode abrir um novo Form se desejar.
-            MessageBox.Show(
-                $"Alocação do formador '{formadorSelecionado.Nome}' (ID: {formadorSelecionado.Id}) realizada.",
-                "Alocar Formador",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information
-            );
-        }
-    }
-
-    internal class FormFiltrarFormadores : IDisposable
-    {
-        private Empresa empresa;
-
-        public FormFiltrarFormadores(Empresa empresa)
-        {
-            this.empresa = empresa;
-        }
-
-        public void Dispose()
-        {
-            // Implementação de Dispose se necessário
-        }
-
-        public void ShowDialog()
-        {
-            // Corrigido: especificar explicitamente a propriedade para evitar ambiguidade
-            string textoFiltroAplicado = $@"Filtro de formadores da empresa aplicado.";
-            _ = MessageBox.Show(
-                textoFiltroAplicado,
-                "Filtrar Formadores",
-                MessageBoxButtons.OK,
-                icon: MessageBoxIcon.Information
-            );
-        }
-    }
-}
-
-public class Empresa
-{
-    private readonly List<Funcionario> funcionarios;
-
-    public string Nome { get; set; }
-    public IReadOnlyList<Funcionario> Funcionarios { get; }
-    public DateTime DataSimulada { get; set; }
-
-    public Empresa(string nome)
-    {
-        Nome = nome ?? throw new ArgumentNullException(nameof(nome));
-        funcionarios = new List<Funcionario>();
-        Funcionarios = funcionarios; // evita null ao aceder externamente
-    }
-
-    internal int ObterProximoID()
-    {
-        if (funcionarios.Count == 0)
-            return 1;
-        return funcionarios.Max(f => f.Id) + 1;
-    }
-
-    internal void AdicionarFuncionario(Funcionario funcionario)
-    {
-        if (funcionario == null)
-            throw new ArgumentNullException(nameof(funcionario));
-        funcionarios.Add(funcionario);
-    }
-
-    internal void AdicionarFuncionario(Formador novoFormador)
-    {
-        throw new NotImplementedException();
-    }
-
-    internal void RemoverFuncionario(Formador formadorSelecionado)
-    {
-        throw new NotImplementedException();
-    }
-
-    // resto igual (usar 'funcionarios' internamente)
 }

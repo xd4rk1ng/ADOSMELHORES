@@ -1,4 +1,4 @@
-﻿namespace AdosMelhores.Forms
+﻿namespace ADOSMELHORES.Forms
 {
     partial class FormGerirFormadores
     {

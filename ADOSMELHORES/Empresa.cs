@@ -1,10 +1,10 @@
-﻿using ADOSMELHORES.Servicos;
-using ADOSMELHORES.Modelos;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ADOSMELHORES.Servicos;
+using ADOSMELHORES.Modelos;
 
 namespace ADOSMELHORES
 {
@@ -16,6 +16,10 @@ namespace ADOSMELHORES
         private Dictionary<Type, CentroCusto> _centrosCusto;
         private List<Funcionario> _colaboradores;
         private string _nome;
+        static private int _proxID = 0;
+
+        // Temporario
+        public int ObterProximoID { get {  return _proxID++; } }
 
         // Para uso externo, mas exclui metodos que modificariam os conteudos. Forca o uso dos metodos da empresa para fazer alteracoes, e apenas permite operacoes do tipo "read" ao atributo em si.
         public IReadOnlyDictionary<Type, CentroCusto> CentrosCustos { get => (IReadOnlyDictionary<Type, CentroCusto>)_centrosCusto; }
@@ -31,6 +35,12 @@ namespace ADOSMELHORES
         }
 
         #region Gestao de Funcionarios
+        // Retorna colecao de funcionarios correspondestes ao tipoFuncionario (Diretor, Coordenador...)
+        public IReadOnlyCollection<Type> ColaboradoresTipo<Type>()
+        {
+            return _colaboradores.OfType<Type>().ToList();
+        }
+
         // Retorna o funcionario se o encontrar na lista de colaboradores, usando o Nif.
         //  -   isto e usado para prevenir dupla insercao de funcionario, caso este ja tenha trabalhado na empresa, pois os ids serao autogerados
         private Funcionario FuncionarioExiste(int nif)
@@ -68,12 +78,6 @@ namespace ADOSMELHORES
             return _colaboradores.Where(f =>  f.Nome == nome).ToList();
         }
 
-        // Retorna colecao de funcionarios correspondestes ao tipoFuncionario (Diretor, Coordenador...)
-        public ICollection<Type> EncontraFuncionariosTipo<Type>()
-        {
-            return _colaboradores.OfType<Type>().ToList();
-        }
-
         // Ativa funcionario, do ponto de vista que este e recontratado
         public void AtivarFuncionario(int id)
         {
@@ -88,7 +92,7 @@ namespace ADOSMELHORES
             var f = EncontraFuncionarioId(id);
             f.Ativo = false;
         }
-        #endregion
+
         #region Gestao de Custos
 
         // Retorna a soma de todos os centros de custo
@@ -99,6 +103,7 @@ namespace ADOSMELHORES
 
         // TODO: Adicionar mais metodos aqui
 
+        #endregion
         #endregion
     }
 }
