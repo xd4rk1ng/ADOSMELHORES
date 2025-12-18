@@ -25,8 +25,8 @@ namespace ADOSMELHORES
         public Empresa(Dictionary<Type, CentroCusto> centrosCustos, List<Funcionario> colaboradores, string nome)
         {
             // lanca excecao se argumentos forem null
-            _centrosCusto = centrosCustos ?? throw new ArgumentNullException(nameof(centrosCustos));
             _colaboradores = colaboradores ?? throw new ArgumentNullException(nameof(colaboradores));
+            _centrosCusto = centrosCustos ?? throw new ArgumentNullException(nameof(centrosCustos));
             _nome = nome ?? throw new ArgumentNullException(nameof(nome));
         }
 
@@ -38,7 +38,7 @@ namespace ADOSMELHORES
             return _colaboradores.FirstOrDefault(f => f.Nif == nif);
         }
 
-        // TODO: Para uso durante registo de funcionario, precisa verificar Nif, se ja existe nos registos da empresa.
+        //  Para uso durante registo de funcionario, precisa verificar Nif, se ja existe nos registos da empresa.
         // Se sim, evita duplicacao da pessoa, e entende-se pessoa pretende ser reativa na empresa, mantendo a continuidade do
         // historico.
         // Adiciona Funcionario, lanca excecao se f for null
