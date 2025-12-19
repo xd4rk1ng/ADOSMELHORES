@@ -52,6 +52,12 @@
     <Compile Include="Forms\FormExemplo.Designer.cs">
       <DependentUpon>FormExemplo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FormGerirDiretores.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormGerirDiretores.Designer.cs">
+      <DependentUpon>FormGerirDiretores.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FormInicial.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -75,6 +81,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\FormExemplo.resx">
       <DependentUpon>FormExemplo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormGerirDiretores.resx">
+      <DependentUpon>FormGerirDiretores.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormInicial.resx">
       <DependentUpon>FormInicial.cs</DependentUpon>
