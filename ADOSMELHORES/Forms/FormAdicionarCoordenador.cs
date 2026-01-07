@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using ADOSMELHORES.Modelos;
+using System.Linq;
 
 namespace ADOSMELHORES.Forms
 {
@@ -61,7 +62,10 @@ namespace ADOSMELHORES.Forms
 
             try
             {
-                var proximoId = empresa.ObterProximoID();
+                // Obtenha o próximo ID baseado apenas nos Coordenadores já existentes
+                int proximoId = empresa.Funcionarios.OfType<Coordenador>().Count() + 1;
+
+                // Substitua a criação do Coordenador pelo construtor correto, passando todos os argumentos necessários
                 Coordenador coordenador = new Coordenador(
                     proximoId,
                     int.Parse(txtNIF.Text),
@@ -71,12 +75,13 @@ namespace ADOSMELHORES.Forms
                     (decimal)numericSalario.Value,
                     dateTimePickerNascimento.Value,
                     dateTimePickerContrato.Value,
-                    DateTime.MaxValue, // DataFimContrato (ajuste conforme necessário)
-                    DateTime.MaxValue, // DataFimRegistoCrim (ajuste conforme necessário)
+                    DateTime.MinValue, // DataFimContrato (ajuste conforme necessário)
+                    DateTime.MinValue, // DataFimRegistoCrim (ajuste conforme necessário)
                     txtAreaFormacao.Text // areaCoordenacao
                 );
 
                 empresa.AdicionarFuncionario(coordenador);
+
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }

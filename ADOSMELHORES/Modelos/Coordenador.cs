@@ -7,9 +7,7 @@ namespace ADOSMELHORES.Modelos
     {
         public List<Formador> FormadoresAssociados { get; set; }
         public string AreaCoordenacao { get; set; }
-        public int NumeroFormadores => FormadoresAssociados?.Count ?? 0;
 
-        // Construtor conforme assinatura fornecida
         public Coordenador(
             int id,
             int nif,
@@ -32,7 +30,8 @@ namespace ADOSMELHORES.Modelos
                   dataIniContrato,
                   dataFimContrato,
                   dataFimRegistoCrim,
-                  dataNascimento)
+                  dataNascimento
+            )
         {
             AreaCoordenacao = areaCoordenacao;
             FormadoresAssociados = new List<Formador>();
@@ -40,36 +39,29 @@ namespace ADOSMELHORES.Modelos
 
         public void AdicionarFormador(Formador formador)
         {
-            if (formador == null) throw new ArgumentNullException(nameof(formador));
-            if (FormadoresAssociados == null) FormadoresAssociados = new List<Formador>();
             if (!FormadoresAssociados.Contains(formador))
+            {
                 FormadoresAssociados.Add(formador);
+            }
         }
 
         public void RemoverFormador(Formador formador)
         {
-            if (formador == null) throw new ArgumentNullException(nameof(formador));
-            FormadoresAssociados?.Remove(formador);
+            FormadoresAssociados.Remove(formador);
         }
 
-        // Implementação simples: custo mensal como salário base (pode ser extendida)
+        public int NumeroFormadores => FormadoresAssociados.Count;
+
         public override string ToString()
         {
-            return $"{Nome} (NIF: {Nif}) - Área: {AreaCoordenacao}";
+            return $"{base.ToString()} - {AreaCoordenacao} - {NumeroFormadores} formadores";
         }
 
-        // Utilitários para lidar com sentinela DateTime.MaxValue usado noutros pontos do projeto
-        public bool HasDataNascimento()
+        
+        public DateTime ValidadeRegistoCriminal
         {
-            return DataNascimento != DateTime.MinValue && DataNascimento != DateTime.MaxValue;
-        }
-
-        // Retorna um valor seguro para utilizar em controls (clamp + fallback)
-        public DateTime GetSafeDataNascimento(DateTime minAllowed, DateTime maxAllowed, DateTime fallback)
-        {
-            var d = DataNascimento;
-            if (d < minAllowed || d > maxAllowed) return fallback;
-            return d;
+            get => DataFimRegistoCrim;
+            set => DataFimRegistoCrim = value;
         }
     }
 }

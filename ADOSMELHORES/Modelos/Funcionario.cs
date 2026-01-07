@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace ADOSMELHORES
+namespace ADOSMELHORES.Modelos
 {
     public abstract class Funcionario
     {
-        //protected Funcionario() { }
         protected Funcionario(
             int id,
             int nif,
@@ -24,6 +19,7 @@ namespace ADOSMELHORES
         {
             Id = id;
             Nif = nif;
+            Nome = nome;
             Morada = morada;
             Contacto = contacto;
             SalarioBase = salarioBase;
@@ -43,21 +39,26 @@ namespace ADOSMELHORES
         public DateTime DataFimContrato { get; set; }
         public DateTime DataFimRegistoCrim { get; set; }
         public DateTime DataNascimento { get; set; }
-        public object DataRegistoCriminal { get; internal set; }
 
-        internal int CalcularCustoMensal()
+        public virtual decimal CalcularCustoMensal()
         {
-            throw new NotImplementedException();
+            // Por padrão retorna o salário base
+            return SalarioBase;
         }
 
-        internal bool ContratoValido(DateTime data)
+        public bool ContratoValido(DateTime data)
         {
-            throw new NotImplementedException();
+            return data >= DataIniContrato && data <= DataFimContrato;
         }
 
-        internal bool RegistoCriminalExpirado(DateTime data)
+        public bool RegistoCriminalExpirado(DateTime data)
         {
-            throw new NotImplementedException();
+            return data > DataFimRegistoCrim;
+        }
+
+        public override string ToString()
+        {
+            return $"ID: {Id} - {Nome} - NIF: {Nif}";
         }
     }
 }

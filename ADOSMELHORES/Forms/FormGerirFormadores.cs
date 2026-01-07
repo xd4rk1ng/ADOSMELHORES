@@ -177,7 +177,7 @@ namespace AdosMelhores.Forms
                 DateTime dataRegistoCriminal;
                 try
                 {
-                    dataRegistoCriminal = formador.DataRegistoCriminal is DateTime dt ? dt : fallbackRegisto;
+                    dataRegistoCriminal = formador.DataFimRegistoCrim; // Corrigido aqui
                 }
                 catch
                 {
@@ -273,7 +273,7 @@ namespace AdosMelhores.Forms
 
             if (numValorHora.Value <= 0)
             {
-                MessageBox.Show("Por favor, insira um valor por hora válido.", "Campo Obrigatório",
+                MessageBox.Show("Por favor, insira um valor por hora válido.", "Campo Obligatório",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 numValorHora.Focus();
                 return false;
@@ -305,11 +305,11 @@ namespace AdosMelhores.Forms
                     txtNome.Text.Trim(), // Nome
                     txtMorada.Text.Trim(), // Morada
                     txtContacto.Text.Trim(), // Contacto
+                    numSalarioBase.Value, // SalarioBase (corrigido para decimal)
                     DateTime.Now, // DataIniContrato (ajuste conforme necessário)
                     dtpDataFimContrato.Value, // DataFimContrato
-                    dtpDataRegistoCriminal.Value, // DataRegistoCriminal
-                    numSalarioBase.Value, // SalarioBase
                     DateTime.Now, // DataNascimento (ajuste conforme necessário)
+                    dtpDataRegistoCriminal.Value, // DataRegistoCriminal (corrigido aqui)
                     txtAreaLeciona.Text.Trim(), // areaLeciona
                     (Disponibilidade)cmbDisponibilidade.SelectedItem, // disponibilidade
                     numValorHora.Value // valorHora
@@ -351,7 +351,7 @@ namespace AdosMelhores.Forms
                 formadorSelecionado.ValorHora = numValorHora.Value;
                 formadorSelecionado.SalarioBase = numSalarioBase.Value;
                 formadorSelecionado.DataFimContrato = dtpDataFimContrato.Value;
-                formadorSelecionado.DataRegistoCriminal = dtpDataRegistoCriminal.Value;
+                formadorSelecionado.DataFimRegistoCrim = dtpDataRegistoCriminal.Value;
 
                 AtualizarListaFormadores();
 
