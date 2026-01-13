@@ -31,6 +31,8 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.dateTimePicker4 = new System.Windows.Forms.DateTimePicker();
             this.label9 = new System.Windows.Forms.Label();
             this.dateTimePicker3 = new System.Windows.Forms.DateTimePicker();
             this.label8 = new System.Windows.Forms.Label();
@@ -63,8 +65,6 @@
             this.checkedListBox2 = new System.Windows.Forms.CheckedListBox();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.dateTimePicker4 = new System.Windows.Forms.DateTimePicker();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -122,6 +122,22 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Dados Pessoais";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(20, 236);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(152, 16);
+            this.label10.TabIndex = 14;
+            this.label10.Text = "Data de Fim do Contrato";
+            // 
+            // dateTimePicker4
+            // 
+            this.dateTimePicker4.Location = new System.Drawing.Point(217, 236);
+            this.dateTimePicker4.Name = "dateTimePicker4";
+            this.dateTimePicker4.Size = new System.Drawing.Size(254, 22);
+            this.dateTimePicker4.TabIndex = 13;
             // 
             // label9
             // 
@@ -292,10 +308,11 @@
             "Recursos Humanos",
             "Financeiro",
             "Formação",
-            "Eventos externos"});
+            "Comercial",
+            "Direção-Geral"});
             this.checkedListBox1.Location = new System.Drawing.Point(106, 47);
             this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(244, 72);
+            this.checkedListBox1.Size = new System.Drawing.Size(244, 106);
             this.checkedListBox1.TabIndex = 1;
             // 
             // label4
@@ -412,22 +429,6 @@
             this.label3.Size = new System.Drawing.Size(87, 16);
             this.label3.TabIndex = 0;
             this.label3.Text = "Salario base:";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(20, 236);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(152, 16);
-            this.label10.TabIndex = 14;
-            this.label10.Text = "Data de Fim do Contrato";
-            // 
-            // dateTimePicker4
-            // 
-            this.dateTimePicker4.Location = new System.Drawing.Point(217, 236);
-            this.dateTimePicker4.Name = "dateTimePicker4";
-            this.dateTimePicker4.Size = new System.Drawing.Size(254, 22);
-            this.dateTimePicker4.TabIndex = 13;
             // 
             // Form_Diretor
             // 

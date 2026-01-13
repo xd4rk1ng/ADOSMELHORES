@@ -11,14 +11,12 @@
             "id": "a96831e975b2b29c",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "pdf",
               "state": {
-                "file": "Relatório/Relatório.md",
-                "mode": "source",
-                "source": false
+                "file": "Relatório/TA-606-2.pdf"
               },
-              "icon": "lucide-file",
-              "title": "Relatório"
+              "icon": "lucide-file-text",
+              "title": "TA-606-2"
             }
           }
         ]
@@ -185,9 +183,11 @@
   },
   "active": "a96831e975b2b29c",
   "lastOpenFiles": [
+    "Relatório/Relatório.md",
+    "ADOSMELHORES.zip",
+    "ADOSMELHORES/obj/Debug/DesignTimeResolveAssemblyReferences.cache",
     "Pasted image 20260112180432.png",
     "Relatório/TA-606-2.pdf",
-    "Relatório/Relatório.md",
     "ADOSMELHORES/Sem título",
     "FormGerirFormadores.Designer.cs",
     "ADOSMELHORES/Forms/Frm_Diretor.resx",
@@ -195,8 +195,6 @@
     "ADOSMELHORES/Forms/Frm_Diretor.Designer.cs",
     "ADOSMELHORES/Forms/Form_Diretor.resx",
     "ADOSMELHORES/Forms/Form_Diretor.cs",
-    "ADOSMELHORES/Forms/Form_Diretor.Designer.cs",
-    "FormGerirFormadores.resx",
     "WinformsDocs/Estrutura de pastas.md",
     "WinformsDocs/Modelos/Secretaria.md",
     "WinformsDocs/Modelos/Formador.md",
