@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ADOSMELHORES.Modelos
 {
-    internal class Diretor : Funcionario
+    public class Diretor : Funcionario
     {
         //atributos pedidos na ficha
         public decimal BonusMensal { get; set; }

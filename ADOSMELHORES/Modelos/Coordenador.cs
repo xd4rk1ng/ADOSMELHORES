@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ADOSMELHORES.Modelos
 {
-    internal class Coordenador : Funcionario
+    public class Coordenador : Funcionario
     {
         public List<Formador> FormadoresAssociados { get; set; }
         public string AreaCoordenacao { get; set; }

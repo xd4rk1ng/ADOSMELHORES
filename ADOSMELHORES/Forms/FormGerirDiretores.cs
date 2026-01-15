@@ -672,69 +672,30 @@ namespace AdosMelhores.Forms
 
     }
 
-    internal class FormAtualizarRegistoCriminal : IDisposable
-    {
-        public FormAtualizarRegistoCriminal(Diretor diretorSelecionado, Empresa empresa)
-        {
-            DiretorSelecionado = diretorSelecionado;
-            Empresa = empresa;
-        }
+    //internal class FormAtualizarRegistoCriminal : IDisposable
+    //{
+    //    public FormAtualizarRegistoCriminal(Diretor diretorSelecionado, Empresa empresa)
+    //    {
+    //        DiretorSelecionado = diretorSelecionado;
+    //        Empresa = empresa;
+    //    }
 
-        public Diretor DiretorSelecionado { get; }
-        public Empresa Empresa { get; }
+    //    public Diretor DiretorSelecionado { get; }
+    //    public Empresa Empresa { get; }
 
-        internal DialogResult ShowDialog()
-        {
-            throw new NotImplementedException();
-        }
+    //    internal DialogResult ShowDialog()
+    //    {
+    //        throw new NotImplementedException();
+    //    }
 
-        public void Dispose()
-        {
-            // Implementação de Dispose se necessário
-        }
-    }
-
-
-    public class Empresa
-    {
-        private readonly List<Funcionario> funcionarios;
-
-        public string Nome { get; set; }
-        public IReadOnlyList<Funcionario> Funcionarios { get; }
-        public DateTime DataSimulada { get; set; }
-
-        public Empresa(string nome)
-        {
-            Nome = nome ?? throw new ArgumentNullException(nameof(nome));
-            funcionarios = new List<Funcionario>();
-            Funcionarios = funcionarios; // evita null ao aceder externamente
-        }
-
-        internal int ObterProximoID()
-        {
-            if (funcionarios.Count == 0)
-                return 1;
-            return funcionarios.Max(f => f.Id) + 1;
-        }
-
-        internal void AdicionarFuncionario(Funcionario funcionario)
-        {
-            if (funcionario == null)
-                throw new ArgumentNullException(nameof(funcionario));
-            funcionarios.Add(funcionario);
-        }
-
-        internal void AdicionarFuncionario(Diretor novoDiretor)
-        {
-            throw new NotImplementedException();
-        }
-
-        internal void RemoverFuncionario(Diretor diretorSelecionado)
-        {
-            throw new NotImplementedException();
-        }
+    //    public void Dispose()
+    //    {
+    //        // Implementação de Dispose se necessário
+    //    }
+    //}
 
 
-        // resto igual (usar 'funcionarios' internamente)
-    }
+    
+    //    // resto igual (usar 'funcionarios' internamente)
+    //}
 }

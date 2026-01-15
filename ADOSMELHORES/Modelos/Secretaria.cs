@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ADOSMELHORES.Modelos
 {
-    internal class Secretaria : Funcionario
+    public class Secretaria : Funcionario
     {
         //atributos pedidos na ficha
         public Diretor DiretorReporta { get; set; }

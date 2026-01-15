@@ -11,12 +11,14 @@
             "id": "a96831e975b2b29c",
             "type": "leaf",
             "state": {
-              "type": "pdf",
+              "type": "markdown",
               "state": {
-                "file": "Relatório/TA-606-2.pdf"
+                "file": "WinformsDocs/Modelos/Empresa.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-file-text",
-              "title": "TA-606-2"
+              "icon": "lucide-file",
+              "title": "Empresa"
             }
           }
         ]
@@ -183,21 +185,22 @@
   },
   "active": "a96831e975b2b29c",
   "lastOpenFiles": [
+    "ADOSMELHORES/Forms/FormGerirDiretores.cs",
+    "ADOSMELHORES/Modelos/lzzatnnr.1hi~",
+    "Relatório/TA-606-2.pdf",
+    "Pasted image 20260112180432.png",
+    "FormGerirFormadores.resx",
+    "FormGerirFormadores.cs",
+    "FormGerirFormadores.Designer.cs",
+    "ADOSMELHORES.zip",
+    "ADOSMELHORES/Forms/FormCalcularValorFormacao.cs",
+    "ADOSMELHORES/Forms/FormCalcularValorFormacao.Designer.cs",
+    "ADOSMELHORES/Forms/FormAtualizarRegistoCriminalCoordenador.cs",
+    "ADOSMELHORES/Forms/FormAtualizarRegistoCriminalCoordenador.Designer.cs",
     "WinformsDocs/Modelos/Empresa.md",
     "WinformsDocs/Modelos/Diretor.md",
-    "ADOSMELHORES/Forms/FormsCalcularRemuneracao.Designer.cs",
-    "ADOSMELHORES/Forms/FormsCalcularRemuneracao.cs",
-    "Relatório/TA-606-2.pdf",
     "WinformsDocs/Modelos/(Abstrata) Funcionario.md",
-    "ADOSMELHORES.zip",
-    "ADOSMELHORES/Forms/3h1saxv3.szh~",
-    "ADOSMELHORES/Forms/renpopbq.qwl~",
     "Relatório/Relatório.md",
-    "ADOSMELHORES/obj/Debug/DesignTimeResolveAssemblyReferences.cache",
-    "Pasted image 20260112180432.png",
-    "ADOSMELHORES/Sem título",
-    "FormGerirFormadores.Designer.cs",
-    "ADOSMELHORES/Forms/Frm_Diretor.resx",
     "WinformsDocs/Estrutura de pastas.md",
     "WinformsDocs/Modelos/Secretaria.md",
     "WinformsDocs/Modelos/Formador.md",

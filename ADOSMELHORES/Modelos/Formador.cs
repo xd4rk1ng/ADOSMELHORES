@@ -13,7 +13,7 @@ namespace ADOSMELHORES.Modelos
         PosLaboral,
         Ambas
     }
-    internal class Formador : Funcionario
+    public class Formador : Funcionario
     {
 
         public string AreaLeciona { get; set; }
