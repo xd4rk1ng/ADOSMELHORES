@@ -47,6 +47,8 @@
             this.lblTotalDiretores = new System.Windows.Forms.Label();
             this.dgvDiretores = new System.Windows.Forms.DataGridView();
             this.btnFechar = new System.Windows.Forms.Button();
+            this.checkedListBoxSecretarias = new System.Windows.Forms.CheckedListBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.grpDadosDiretor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numSalarioBase)).BeginInit();
             this.grpAcoes.SuspendLayout();
@@ -60,6 +62,8 @@
             this.grpDadosDiretor.Controls.Add(this.checkedListBoxAreasDiretoria);
             this.grpDadosDiretor.Controls.Add(this.numSalarioBase);
             this.grpDadosDiretor.Controls.Add(this.label7);
+            this.grpDadosDiretor.Controls.Add(this.checkedListBoxSecretarias);
+            this.grpDadosDiretor.Controls.Add(this.label5);
             this.grpDadosDiretor.Controls.Add(this.lblStatusRegistoCriminal);
             this.grpDadosDiretor.Controls.Add(this.label11);
             this.grpDadosDiretor.Controls.Add(this.dtpDataRegistoCriminal);
@@ -86,7 +90,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(28, 276);
+            this.label8.Location = new System.Drawing.Point(28, 263);
             this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(116, 16);
@@ -102,7 +106,7 @@
             "Formação",
             "Comercial",
             "Direção-Geral"});
-            this.checkedListBoxAreasDiretoria.Location = new System.Drawing.Point(200, 276);
+            this.checkedListBoxAreasDiretoria.Location = new System.Drawing.Point(200, 260);
             this.checkedListBoxAreasDiretoria.Margin = new System.Windows.Forms.Padding(4);
             this.checkedListBoxAreasDiretoria.Name = "checkedListBoxAreasDiretoria";
             this.checkedListBoxAreasDiretoria.Size = new System.Drawing.Size(265, 106);
@@ -401,6 +405,25 @@
             this.btnFechar.UseVisualStyleBackColor = true;
             this.btnFechar.Click += new System.EventHandler(this.btnFechar_Click);
             // 
+            // checkedListBoxSecretarias
+            // 
+            this.checkedListBoxSecretarias.FormattingEnabled = true;
+            this.checkedListBoxSecretarias.Location = new System.Drawing.Point(200, 384);
+            this.checkedListBoxSecretarias.Margin = new System.Windows.Forms.Padding(4);
+            this.checkedListBoxSecretarias.Name = "checkedListBoxSecretarias";
+            this.checkedListBoxSecretarias.Size = new System.Drawing.Size(272, 89);
+            this.checkedListBoxSecretarias.TabIndex = 22;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(27, 384);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(140, 16);
+            this.label5.TabIndex = 21;
+            this.label5.Text = "Secretárias Alocadas:";
+            // 
             // FormGerirDiretores
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -465,5 +488,7 @@
         private System.Windows.Forms.Button btnFechar;
         private System.Windows.Forms.CheckedListBox checkedListBoxAreasDiretoria;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.CheckedListBox checkedListBoxSecretarias;
+        private System.Windows.Forms.Label label5;
     }
 }
