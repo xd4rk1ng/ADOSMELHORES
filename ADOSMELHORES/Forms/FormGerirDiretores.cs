@@ -1,4 +1,5 @@
 ﻿using ADOSMELHORES;
+using ADOSMELHORES.Forms;
 using ADOSMELHORES.Modelos;
 using System;
 using System.Collections.Generic;
@@ -582,6 +583,24 @@ namespace AdosMelhores.Forms
                 return;
             }
 
+            // ✅ ABRIR o novo formulário de cálculo
+            try
+            {
+                using (var formCalculo = new FormsCalcularRemuneracao(diretorSelecionado, empresa))
+                {
+                    formCalculo.ShowDialog();
+
+                    // Atualizar a lista para refletir possíveis mudanças no bônus
+                    AtualizarListaDiretores();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erro ao abrir formulário de cálculo: {ex.Message}", "Erro",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            /*
             // MENSAGEM INFORMATIVA (o cálculo completo será no FormsCalcularRemuneracao)
             string info = $"Diretor: {diretorSelecionado.Nome}\n\n";
             info += $"Salário Base: {diretorSelecionado.SalarioBase:C2}\n";
@@ -592,7 +611,7 @@ namespace AdosMelhores.Forms
 
             MessageBox.Show(info, "Informações para Cálculo",
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+            */
             //// Calcular bônus baseado nas secretárias alocadas
             //decimal bonusCalculado = diretorSelecionado.CalcularBonusMensal();
 
