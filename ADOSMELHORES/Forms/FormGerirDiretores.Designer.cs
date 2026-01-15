@@ -17,7 +17,13 @@
 
         private void InitializeComponent()
         {
-            this.grpDadosFormador = new System.Windows.Forms.GroupBox();
+            this.grpDadosDiretor = new System.Windows.Forms.GroupBox();
+            this.numSalarioBase = new System.Windows.Forms.NumericUpDown();
+            this.label7 = new System.Windows.Forms.Label();
+            this.txtAreaDiretoria = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.checkedListBoxSecretarias = new System.Windows.Forms.CheckedListBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.lblStatusRegistoCriminal = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.dtpDataRegistoCriminal = new System.Windows.Forms.DateTimePicker();
@@ -34,75 +40,145 @@
             this.label1 = new System.Windows.Forms.Label();
             this.grpAcoes = new System.Windows.Forms.GroupBox();
             this.btnAtualizarRegistoCriminal = new System.Windows.Forms.Button();
-            this.btnAlocarFormador = new System.Windows.Forms.Button();
             this.btnCalcularValor = new System.Windows.Forms.Button();
             this.btnLimpar = new System.Windows.Forms.Button();
             this.btnRemover = new System.Windows.Forms.Button();
             this.btnAlterar = new System.Windows.Forms.Button();
             this.btnInserir = new System.Windows.Forms.Button();
-            this.grpListaFormadores = new System.Windows.Forms.GroupBox();
-            this.lblTotalFormadores = new System.Windows.Forms.Label();
-            this.dgvFormadores = new System.Windows.Forms.DataGridView();
+            this.grpListaDiretores = new System.Windows.Forms.GroupBox();
+            this.lblTotalDiretores = new System.Windows.Forms.Label();
+            this.dgvDiretores = new System.Windows.Forms.DataGridView();
             this.btnFechar = new System.Windows.Forms.Button();
-            this.grpDadosFormador.SuspendLayout();
+            //this.checkedListBoxAreaSecret = new System.Windows.Forms.CheckedListBox();
+            //this.label5 = new System.Windows.Forms.Label();
+            this.grpDadosDiretor.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numSalarioBase)).BeginInit();
             this.grpAcoes.SuspendLayout();
-            this.grpListaFormadores.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvFormadores)).BeginInit();
+            this.grpListaDiretores.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDiretores)).BeginInit();
             this.SuspendLayout();
             // 
-            // grpDadosFormador
+            // grpDadosDiretores
             // 
-            this.grpDadosFormador.Controls.Add(this.lblStatusRegistoCriminal);
-            this.grpDadosFormador.Controls.Add(this.label11);
-            this.grpDadosFormador.Controls.Add(this.dtpDataRegistoCriminal);
-            this.grpDadosFormador.Controls.Add(this.label10);
-            this.grpDadosFormador.Controls.Add(this.dtpDataFimContrato);
-            this.grpDadosFormador.Controls.Add(this.label9);
-            this.grpDadosFormador.Controls.Add(this.txtContacto);
-            this.grpDadosFormador.Controls.Add(this.label4);
-            this.grpDadosFormador.Controls.Add(this.txtMorada);
-            this.grpDadosFormador.Controls.Add(this.label3);
-            this.grpDadosFormador.Controls.Add(this.txtNome);
-            this.grpDadosFormador.Controls.Add(this.label2);
-            this.grpDadosFormador.Controls.Add(this.txtID);
-            this.grpDadosFormador.Controls.Add(this.label1);
-            this.grpDadosFormador.Location = new System.Drawing.Point(16, 15);
-            this.grpDadosFormador.Margin = new System.Windows.Forms.Padding(4);
-            this.grpDadosFormador.Name = "grpDadosFormador";
-            this.grpDadosFormador.Padding = new System.Windows.Forms.Padding(4);
-            this.grpDadosFormador.Size = new System.Drawing.Size(667, 468);
-            this.grpDadosFormador.TabIndex = 0;
-            this.grpDadosFormador.TabStop = false;
-            this.grpDadosFormador.Text = "Dados do Diretor";
+            this.grpDadosDiretor.Controls.Add(this.numSalarioBase);
+            this.grpDadosDiretor.Controls.Add(this.label7);
+            this.grpDadosDiretor.Controls.Add(this.txtAreaDiretoria);
+            this.grpDadosDiretor.Controls.Add(this.label6);
+            this.grpDadosDiretor.Controls.Add(this.checkedListBoxSecretarias);
+            this.grpDadosDiretor.Controls.Add(this.label5);
+            this.grpDadosDiretor.Controls.Add(this.lblStatusRegistoCriminal);
+            this.grpDadosDiretor.Controls.Add(this.label11);
+            this.grpDadosDiretor.Controls.Add(this.dtpDataRegistoCriminal);
+            this.grpDadosDiretor.Controls.Add(this.label10);
+            this.grpDadosDiretor.Controls.Add(this.dtpDataFimContrato);
+            this.grpDadosDiretor.Controls.Add(this.label9);
+            this.grpDadosDiretor.Controls.Add(this.txtContacto);
+            this.grpDadosDiretor.Controls.Add(this.label4);
+            this.grpDadosDiretor.Controls.Add(this.txtMorada);
+            this.grpDadosDiretor.Controls.Add(this.label3);
+            this.grpDadosDiretor.Controls.Add(this.txtNome);
+            this.grpDadosDiretor.Controls.Add(this.label2);
+            this.grpDadosDiretor.Controls.Add(this.txtID);
+            this.grpDadosDiretor.Controls.Add(this.label1);
+            this.grpDadosDiretor.Location = new System.Drawing.Point(16, 15);
+            this.grpDadosDiretor.Margin = new System.Windows.Forms.Padding(4);
+            this.grpDadosDiretor.Name = "grpDadosDiretor";
+            this.grpDadosDiretor.Padding = new System.Windows.Forms.Padding(4);
+            this.grpDadosDiretor.Size = new System.Drawing.Size(667, 468);
+            this.grpDadosDiretor.TabIndex = 0;
+            this.grpDadosDiretor.TabStop = false;
+            this.grpDadosDiretor.Text = "Dados do Diretor";
+            //
+            // numSalarioBase
+            //
+            this.numSalarioBase.DecimalPlaces = 2;
+            this.numSalarioBase.Location = new System.Drawing.Point(200, 186);
+            this.numSalarioBase.Margin = new System.Windows.Forms.Padding(4);
+            this.numSalarioBase.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+            this.numSalarioBase.Name = "numSalarioBase";
+            this.numSalarioBase.Size = new System.Drawing.Size(160, 22);
+            this.numSalarioBase.TabIndex = 26;
+            this.numSalarioBase.ThousandsSeparator = true;
+            //
+            // label7
+            //
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(27, 188);
+            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(85, 16);
+            this.label7.TabIndex = 25;
+            this.label7.Text = "Salário Base:";
+            //
+            // txtAreaDiretoria
+            //
+            this.txtAreaDiretoria.Location = new System.Drawing.Point(200, 228);
+            this.txtAreaDiretoria.Margin = new System.Windows.Forms.Padding(4);
+            this.txtAreaDiretoria.Name = "txtAreaDiretoria";
+            this.txtAreaDiretoria.Size = new System.Drawing.Size(265, 22);
+            this.txtAreaDiretoria.TabIndex = 24;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(27, 230);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(100, 16);
+            this.label6.TabIndex = 23;
+            this.label6.Text = "Área Diretoria:";
+            // 
+            // checkedListBoxSecretarias
+            // 
+            this.checkedListBoxSecretarias.FormattingEnabled = true;
+            this.checkedListBoxSecretarias.Location = new System.Drawing.Point(200, 299);
+            this.checkedListBoxSecretarias.Margin = new System.Windows.Forms.Padding(4);
+            this.checkedListBoxSecretarias.Name = "checkedListBoxSecretarias";
+            this.checkedListBoxSecretarias.Size = new System.Drawing.Size(293, 123);
+            this.checkedListBoxSecretarias.TabIndex = 22;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(27, 299);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(128, 16);
+            this.label5.TabIndex = 21;
+            this.label5.Text = "Secretárias Alocadas:";
             // 
             // lblStatusRegistoCriminal
             // 
             this.lblStatusRegistoCriminal.AutoSize = true;
-            this.lblStatusRegistoCriminal.Location = new System.Drawing.Point(200, 406);
+            this.lblStatusRegistoCriminal.Location = new System.Drawing.Point(200, 438);
             this.lblStatusRegistoCriminal.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblStatusRegistoCriminal.Name = "lblStatusRegistoCriminal";
             this.lblStatusRegistoCriminal.Size = new System.Drawing.Size(11, 16);
-            this.lblStatusRegistoCriminal.TabIndex = 21;
+            this.lblStatusRegistoCriminal.TabIndex = 20;
             this.lblStatusRegistoCriminal.Text = "-";
             // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(27, 276);
+            this.label11.Location = new System.Drawing.Point(27, 438);
             this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(148, 16);
-            this.label11.TabIndex = 20;
+            this.label11.TabIndex = 19;
             this.label11.Text = "Status Registo Criminal:";
             // 
             // dtpDataRegistoCriminal
             // 
             this.dtpDataRegistoCriminal.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpDataRegistoCriminal.Location = new System.Drawing.Point(200, 228);
+            this.dtpDataRegistoCriminal.Location = new System.Drawing.Point(200, 263);
             this.dtpDataRegistoCriminal.Margin = new System.Windows.Forms.Padding(4);
             this.dtpDataRegistoCriminal.Name = "dtpDataRegistoCriminal";
             this.dtpDataRegistoCriminal.Size = new System.Drawing.Size(159, 22);
-            this.dtpDataRegistoCriminal.TabIndex = 19;
+            this.dtpDataRegistoCriminal.TabIndex = 18;
             // 
             // label10
             // 
@@ -117,25 +193,25 @@
             // dtpDataFimContrato
             // 
             this.dtpDataFimContrato.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpDataFimContrato.Location = new System.Drawing.Point(200, 186);
+            this.dtpDataFimContrato.Location = new System.Drawing.Point(200, 144);
             this.dtpDataFimContrato.Margin = new System.Windows.Forms.Padding(4);
             this.dtpDataFimContrato.Name = "dtpDataFimContrato";
             this.dtpDataFimContrato.Size = new System.Drawing.Size(159, 22);
-            this.dtpDataFimContrato.TabIndex = 17;
+            this.dtpDataFimContrato.TabIndex = 16;
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(27, 188);
+            this.label9.Location = new System.Drawing.Point(27, 148);
             this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(117, 16);
-            this.label9.TabIndex = 16;
+            this.label9.TabIndex = 15;
             this.label9.Text = "Data Fim Contrato:";
             // 
             // txtContacto
             // 
-            this.txtContacto.Location = new System.Drawing.Point(200, 144);
+            this.txtContacto.Location = new System.Drawing.Point(200, 107);
             this.txtContacto.Margin = new System.Windows.Forms.Padding(4);
             this.txtContacto.Name = "txtContacto";
             this.txtContacto.Size = new System.Drawing.Size(265, 22);
@@ -144,7 +220,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(27, 148);
+            this.label4.Location = new System.Drawing.Point(27, 111);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(63, 16);
@@ -153,7 +229,7 @@
             // 
             // txtMorada
             // 
-            this.txtMorada.Location = new System.Drawing.Point(200, 107);
+            this.txtMorada.Location = new System.Drawing.Point(200, 70);
             this.txtMorada.Margin = new System.Windows.Forms.Padding(4);
             this.txtMorada.Name = "txtMorada";
             this.txtMorada.Size = new System.Drawing.Size(425, 22);
@@ -162,7 +238,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(27, 111);
+            this.label3.Location = new System.Drawing.Point(27, 74);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(57, 16);
@@ -171,7 +247,7 @@
             // 
             // txtNome
             // 
-            this.txtNome.Location = new System.Drawing.Point(200, 70);
+            this.txtNome.Location = new System.Drawing.Point(200, 33);
             this.txtNome.Margin = new System.Windows.Forms.Padding(4);
             this.txtNome.Name = "txtNome";
             this.txtNome.Size = new System.Drawing.Size(425, 22);
@@ -180,7 +256,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(27, 74);
+            this.label2.Location = new System.Drawing.Point(27, 37);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(47, 16);
@@ -210,7 +286,6 @@
             // grpAcoes
             // 
             this.grpAcoes.Controls.Add(this.btnAtualizarRegistoCriminal);
-            this.grpAcoes.Controls.Add(this.btnAlocarFormador);
             this.grpAcoes.Controls.Add(this.btnCalcularValor);
             this.grpAcoes.Controls.Add(this.btnLimpar);
             this.grpAcoes.Controls.Add(this.btnRemover);
@@ -237,22 +312,10 @@
             this.btnAtualizarRegistoCriminal.UseVisualStyleBackColor = true;
             this.btnAtualizarRegistoCriminal.Click += new System.EventHandler(this.btnAtualizarRegistoCriminal_Click);
             // 
-            // btnAlocarFormador
-            // 
-            this.btnAlocarFormador.Enabled = false;
-            this.btnAlocarFormador.Location = new System.Drawing.Point(27, 314);
-            this.btnAlocarFormador.Margin = new System.Windows.Forms.Padding(4);
-            this.btnAlocarFormador.Name = "btnAlocarFormador";
-            this.btnAlocarFormador.Size = new System.Drawing.Size(213, 43);
-            this.btnAlocarFormador.TabIndex = 5;
-            this.btnAlocarFormador.Text = "Alocar Secretarias";
-            this.btnAlocarFormador.UseVisualStyleBackColor = true;
-            this.btnAlocarFormador.Click += new System.EventHandler(this.btnAlocarFormador_Click);
-            // 
             // btnCalcularValor
             // 
             this.btnCalcularValor.Enabled = false;
-            this.btnCalcularValor.Location = new System.Drawing.Point(27, 379);
+            this.btnCalcularValor.Location = new System.Drawing.Point(27, 327);
             this.btnCalcularValor.Margin = new System.Windows.Forms.Padding(4);
             this.btnCalcularValor.Name = "btnCalcularValor";
             this.btnCalcularValor.Size = new System.Drawing.Size(213, 43);
@@ -307,43 +370,43 @@
             this.btnInserir.UseVisualStyleBackColor = true;
             this.btnInserir.Click += new System.EventHandler(this.btnInserir_Click);
             // 
-            // grpListaFormadores
+            // grpListaDiretores
             // 
-            this.grpListaFormadores.Controls.Add(this.lblTotalFormadores);
-            this.grpListaFormadores.Controls.Add(this.dgvFormadores);
-            this.grpListaFormadores.Location = new System.Drawing.Point(16, 490);
-            this.grpListaFormadores.Margin = new System.Windows.Forms.Padding(4);
-            this.grpListaFormadores.Name = "grpListaFormadores";
-            this.grpListaFormadores.Padding = new System.Windows.Forms.Padding(4);
-            this.grpListaFormadores.Size = new System.Drawing.Size(941, 308);
-            this.grpListaFormadores.TabIndex = 2;
-            this.grpListaFormadores.TabStop = false;
-            this.grpListaFormadores.Text = "Lista de Diretores";
+            this.grpListaDiretores.Controls.Add(this.lblTotalDiretores);
+            this.grpListaDiretores.Controls.Add(this.dgvDiretores);
+            this.grpListaDiretores.Location = new System.Drawing.Point(16, 490);
+            this.grpListaDiretores.Margin = new System.Windows.Forms.Padding(4);
+            this.grpListaDiretores.Name = "grpListaDiretores";
+            this.grpListaDiretores.Padding = new System.Windows.Forms.Padding(4);
+            this.grpListaDiretores.Size = new System.Drawing.Size(941, 308);
+            this.grpListaDiretores.TabIndex = 2;
+            this.grpListaDiretores.TabStop = false;
+            this.grpListaDiretores.Text = "Lista de Diretores";
             // 
-            // lblTotalFormadores
+            // lblTotalDiretores
             // 
-            this.lblTotalFormadores.AutoSize = true;
-            this.lblTotalFormadores.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold);
-            this.lblTotalFormadores.Location = new System.Drawing.Point(20, 271);
-            this.lblTotalFormadores.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblTotalFormadores.Name = "lblTotalFormadores";
-            this.lblTotalFormadores.Size = new System.Drawing.Size(163, 18);
-            this.lblTotalFormadores.TabIndex = 1;
-            this.lblTotalFormadores.Text = "Total de Diretores: 0";
+            this.lblTotalDiretores.AutoSize = true;
+            this.lblTotalDiretores.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold);
+            this.lblTotalDiretores.Location = new System.Drawing.Point(20, 271);
+            this.lblTotalDiretores.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblTotalDiretores.Name = "lblTotalDiretores";
+            this.lblTotalDiretores.Size = new System.Drawing.Size(163, 18);
+            this.lblTotalDiretores.TabIndex = 1;
+            this.lblTotalDiretores.Text = "Total de Diretores: 0";
             // 
-            // dgvFormadores
+            // dgvDiretores
             // 
-            this.dgvFormadores.AllowUserToAddRows = false;
-            this.dgvFormadores.AllowUserToDeleteRows = false;
-            this.dgvFormadores.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvFormadores.Location = new System.Drawing.Point(20, 31);
-            this.dgvFormadores.Margin = new System.Windows.Forms.Padding(4);
-            this.dgvFormadores.Name = "dgvFormadores";
-            this.dgvFormadores.ReadOnly = true;
-            this.dgvFormadores.RowHeadersWidth = 51;
-            this.dgvFormadores.Size = new System.Drawing.Size(900, 228);
-            this.dgvFormadores.TabIndex = 0;
-            this.dgvFormadores.SelectionChanged += new System.EventHandler(this.dgvFormadores_SelectionChanged);
+            this.dgvDiretores.AllowUserToAddRows = false;
+            this.dgvDiretores.AllowUserToDeleteRows = false;
+            this.dgvDiretores.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvDiretores.Location = new System.Drawing.Point(20, 31);
+            this.dgvDiretores.Margin = new System.Windows.Forms.Padding(4);
+            this.dgvDiretores.Name = "dgvDiretores";
+            this.dgvDiretores.ReadOnly = true;
+            this.dgvDiretores.RowHeadersWidth = 51;
+            this.dgvDiretores.Size = new System.Drawing.Size(900, 228);
+            this.dgvDiretores.TabIndex = 0;
+            this.dgvDiretores.SelectionChanged += new System.EventHandler(this.dgvDiretores_SelectionChanged);
             // 
             // btnFechar
             // 
@@ -355,6 +418,30 @@
             this.btnFechar.Text = "Fechar";
             this.btnFechar.UseVisualStyleBackColor = true;
             this.btnFechar.Click += new System.EventHandler(this.btnFechar_Click);
+            //// 
+            //// checkedListBoxAreaSecret
+            //// 
+            //this.checkedListBoxAreaSecret.FormattingEnabled = true;
+            //this.checkedListBoxAreaSecret.Items.AddRange(new object[] {
+            //"Recursos Humanos",
+            //"Financeiro",
+            //"Formação",
+            //"Comercial",
+            //"Direção-Geral"});
+            //this.checkedListBoxAreaSecret.Location = new System.Drawing.Point(200, 299);
+            //this.checkedListBoxAreaSecret.Name = "checkedListBoxAreaSecret";
+            //this.checkedListBoxAreaSecret.Size = new System.Drawing.Size(293, 123);
+            //this.checkedListBoxAreaSecret.TabIndex = 22;
+            //// 
+            //// label5
+            //// 
+            //this.label5.AutoSize = true;
+            //this.label5.Location = new System.Drawing.Point(27, 299);
+            //this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            //this.label5.Name = "label5";
+            //this.label5.Size = new System.Drawing.Size(128, 16);
+            //this.label5.TabIndex = 23;
+            //this.label5.Text = "Área de secretarias:";
             // 
             // FormGerirDiretores
             // 
@@ -362,28 +449,28 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(973, 857);
             this.Controls.Add(this.btnFechar);
-            this.Controls.Add(this.grpListaFormadores);
+            this.Controls.Add(this.grpListaDiretores);
             this.Controls.Add(this.grpAcoes);
-            this.Controls.Add(this.grpDadosFormador);
+            this.Controls.Add(this.grpDadosDiretor);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "FormGerirDiretores";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Gestão de Diretores - ADOSMELHORES";
-            this.grpDadosFormador.ResumeLayout(false);
-            this.grpDadosFormador.PerformLayout();
+            this.grpDadosDiretor.ResumeLayout(false);
+            this.grpDadosDiretor.PerformLayout();
             this.grpAcoes.ResumeLayout(false);
-            this.grpListaFormadores.ResumeLayout(false);
-            this.grpListaFormadores.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvFormadores)).EndInit();
+            this.grpListaDiretores.ResumeLayout(false);
+            this.grpListaDiretores.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDiretores)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.GroupBox grpDadosFormador;
+        private System.Windows.Forms.GroupBox grpDadosDiretor;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtID;
         private System.Windows.Forms.Label label2;
@@ -405,13 +492,22 @@
         private System.Windows.Forms.Button btnRemover;
         private System.Windows.Forms.Button btnLimpar;
         private System.Windows.Forms.Button btnCalcularValor;
-        private System.Windows.Forms.Button btnAlocarFormador;
         private System.Windows.Forms.Button btnAtualizarRegistoCriminal;
 
-        private System.Windows.Forms.GroupBox grpListaFormadores;
-        private System.Windows.Forms.DataGridView dgvFormadores;
-        private System.Windows.Forms.Label lblTotalFormadores;
+        private System.Windows.Forms.CheckedListBox checkedListBoxSecretarias;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox txtAreaDiretoria;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.NumericUpDown numSalarioBase;
+        private System.Windows.Forms.Label label7;
+
+
+        private System.Windows.Forms.GroupBox grpListaDiretores;
+        private System.Windows.Forms.DataGridView dgvDiretores;
+        private System.Windows.Forms.Label lblTotalDiretores;
 
         private System.Windows.Forms.Button btnFechar;
+        //private System.Windows.Forms.CheckedListBox checkedListBoxAreaSecret;
+        //private System.Windows.Forms.Label label5;
     }
 }

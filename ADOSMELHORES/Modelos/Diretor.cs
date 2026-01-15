@@ -69,8 +69,8 @@ namespace ADOSMELHORES.Modelos
             bonus += SecretariasSubordinadas.Count * 50; //exemplo: 50 por secretária
 
             //2. Tempo na empresa
-            int anosNaEmpresa = DateTime.Now.Year - DataIniContrato.Year;
-            bonus += anosNaEmpresa * 100; //exemplo: 100 por ano na empresa
+            //int anosNaEmpresa = DateTime.Now.Year - DataIniContrato.Year;
+            //bonus += anosNaEmpresa * 100; //exemplo: 100 por ano na empresa
 
             //3. Se tem carro da empresa
             if (CarroEmpresa)

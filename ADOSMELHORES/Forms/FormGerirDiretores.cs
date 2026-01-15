@@ -13,13 +13,13 @@ using System.Windows.Forms;
 namespace AdosMelhores.Forms
 {
     /// <summary>
-    /// Form completo para gestão de Formadores
-    /// Inclui: Inserir, Alterar, Alocar, Calcular Valores, Alterar Registo Criminal
+    /// Form completo para gestão de Diretores
+    /// Inclui: Inserir, Alterar, Alocar secretarias, Calcular Valores, Alterar Registo Criminal
     /// </summary>
     public partial class FormGerirDiretores : Form
     {
         private Empresa empresa;
-        private Formador formadorSelecionado;
+        private Diretor diretorSelecionado;
 
         public FormGerirDiretores(Empresa empresaRef)
         {
@@ -30,100 +30,99 @@ namespace AdosMelhores.Forms
 
         private void ConfigurarForm()
         {
-            // Configurar ComboBox de Disponibilidade
-            cmbDisponibilidade.DataSource = Enum.GetValues(typeof(Disponibilidade));
-
             // Configurar DataGridView
             ConfigurarDataGridView();
 
             // Carregar dados iniciais
-            AtualizarListaFormadores();
+            AtualizarListaDiretores();
+
+            btnCalcularValor.Enabled = false;
         }
 
         private void ConfigurarDataGridView()
         {
-            dgvFormadores.AutoGenerateColumns = false;
-            dgvFormadores.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvFormadores.MultiSelect = false;
+            dgvDiretores.AutoGenerateColumns = false;
+            dgvDiretores.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvDiretores.MultiSelect = false;
 
-            dgvFormadores.Columns.Clear();
+            dgvDiretores.Columns.Clear();
 
-            dgvFormadores.Columns.Add(new DataGridViewTextBoxColumn
+            dgvDiretores.Columns.Add(new DataGridViewTextBoxColumn
             {
-                DataPropertyName = "ID",
+                DataPropertyName = "Id",
                 HeaderText = "ID",
                 Width = 50
             });
 
-            dgvFormadores.Columns.Add(new DataGridViewTextBoxColumn
+            dgvDiretores.Columns.Add(new DataGridViewTextBoxColumn
             {
                 DataPropertyName = "Nome",
                 HeaderText = "Nome",
                 Width = 150
             });
 
-            dgvFormadores.Columns.Add(new DataGridViewTextBoxColumn
+            dgvDiretores.Columns.Add(new DataGridViewTextBoxColumn
             {
-                DataPropertyName = "AreaLeciona",
-                HeaderText = "Área",
+                DataPropertyName = "AreaDiretoria",
+                HeaderText = "Área Diretoria",
                 Width = 120
             });
 
-            dgvFormadores.Columns.Add(new DataGridViewTextBoxColumn
+            dgvDiretores.Columns.Add(new DataGridViewCheckBoxColumn
             {
-                DataPropertyName = "Disponibilidade",
-                HeaderText = "Disponibilidade",
+                DataPropertyName = "CarroEmpresa",
+                HeaderText = "Carro Empresa",
+                Width = 80
+            });
+
+            dgvDiretores.Columns.Add(new DataGridViewCheckBoxColumn
+            {
+                DataPropertyName = "IsencaoHorario",
+                HeaderText = "Isenção Horário",
                 Width = 100
             });
 
-            dgvFormadores.Columns.Add(new DataGridViewTextBoxColumn
+            dgvDiretores.Columns.Add(new DataGridViewTextBoxColumn
             {
-                DataPropertyName = "ValorHora",
-                HeaderText = "Valor/Hora",
-                Width = 80,
+                DataPropertyName = "BonusMensal",
+                HeaderText = "Bónus Mensal",
+                Width = 100,
                 DefaultCellStyle = new DataGridViewCellStyle { Format = "C2" }
             });
 
-            dgvFormadores.Columns.Add(new DataGridViewTextBoxColumn
+            dgvDiretores.Columns.Add(new DataGridViewTextBoxColumn
             {
                 DataPropertyName = "Contacto",
                 HeaderText = "Contacto",
                 Width = 100
             });
-
-            dgvFormadores.Columns.Add(new DataGridViewTextBoxColumn
-            {
-                DataPropertyName = "DataRegistoCriminal",
-                HeaderText = "Registo Criminal",
-                Width = 110,
-                DefaultCellStyle = new DataGridViewCellStyle { Format = "dd/MM/yyyy" }
-            });
         }
 
-        private void AtualizarListaFormadores()
+
+        private void AtualizarListaDiretores()
         {
-            var formadores = empresa.Funcionarios
-            .OfType<Formador>()
-            .ToList();
-            dgvFormadores.DataSource = null;
-            dgvFormadores.DataSource = formadores;
+            var diretores = empresa.Funcionarios
+                .OfType<Diretor>()
+                .ToList();
+            dgvDiretores.DataSource = null;
+            dgvDiretores.DataSource = diretores;
 
-            lblTotalFormadores.Text = $"Total de Formadores: {formadores.Count}";
+            lblTotalDiretores.Text = $"Total de Diretores: {diretores.Count}";
 
-            if (formadores.Count > 0 && dgvFormadores.Rows.Count > 0)
+            if (diretores.Count > 0 && dgvDiretores.Rows.Count > 0)
             {
-                dgvFormadores.Rows[0].Selected = true;
+                dgvDiretores.Rows[0].Selected = true;
             }
         }
 
-        private void dgvFormadores_SelectionChanged(object sender, EventArgs e)
+        private void dgvDiretores_SelectionChanged(object sender, EventArgs e)
         {
-            if (dgvFormadores.SelectedRows.Count > 0)
+            if (dgvDiretores.SelectedRows.Count > 0)
             {
-                formadorSelecionado = dgvFormadores.SelectedRows[0].DataBoundItem as Formador;
-                if (formadorSelecionado != null)
+                diretorSelecionado = dgvDiretores.SelectedRows[0].DataBoundItem as Diretor;
+                if (diretorSelecionado != null)
                 {
-                    CarregarDadosFormador(formadorSelecionado);
+                    CarregarDadosDiretor(diretorSelecionado);
                     HabilitarBotoesEdicao(true);
                 }
             }
@@ -133,7 +132,7 @@ namespace AdosMelhores.Forms
             }
         }
 
-        private void CarregarDadosFormador(Formador formador)
+        private void CarregarDadosDiretor(Diretor diretor)
         {
             // Helper local para limitar valores DateTime aos limites do control
             DateTime Clamp(DateTime value, DateTime min, DateTime max)
@@ -143,19 +142,18 @@ namespace AdosMelhores.Forms
                 return value;
             }
 
-            txtID.Text = formador.Id.ToString();
-            txtNome.Text = formador.Nome;
-            txtMorada.Text = formador.Morada;
-            txtContacto.Text = formador.Contacto;
-            txtAreaLeciona.Text = formador.AreaLeciona;
-            cmbDisponibilidade.SelectedItem = formador.Disponibilidade;
-            numValorHora.Value = formador.ValorHora;
-            numSalarioBase.Value = formador.SalarioBase;
+            txtID.Text = diretor.Id.ToString();
+            txtNome.Text = diretor.Nome;
+            txtMorada.Text = diretor.Morada;
+            txtContacto.Text = diretor.Contacto;
+            txtAreaDiretoria.Text = diretor.AreaDiretoria;
+            numSalarioBase.Value = diretor.SalarioBase;
+            //numValorHora.Value = diretor.BonusMensal;
 
             // DataFimContrato: clamp + safe assign
             try
             {
-                DateTime safeFim = Clamp(formador.DataFimContrato, dtpDataFimContrato.MinDate, dtpDataFimContrato.MaxDate);
+                DateTime safeFim = Clamp(diretor.DataFimContrato, dtpDataFimContrato.MinDate, dtpDataFimContrato.MaxDate);
                 try
                 {
                     dtpDataFimContrato.Value = safeFim;
@@ -169,22 +167,10 @@ namespace AdosMelhores.Forms
             {
                 try { dtpDataFimContrato.Value = dtpDataFimContrato.MinDate; } catch { /* ignora */ }
             }
-
-            // DataRegistoCriminal: formador.DataRegistoCriminal é object; resolver e clamp + safe assign
+            // DataRegistroCriminal:
             try
             {
-                DateTime fallbackRegisto = DateTime.Now.AddYears(5);
-                DateTime dataRegistoCriminal;
-                try
-                {
-                    dataRegistoCriminal = formador.DataRegistoCriminal is DateTime dt ? dt : fallbackRegisto;
-                }
-                catch
-                {
-                    dataRegistoCriminal = fallbackRegisto;
-                }
-
-                DateTime safeRegisto = Clamp(dataRegistoCriminal, dtpDataRegistoCriminal.MinDate, dtpDataRegistoCriminal.MaxDate);
+                DateTime safeRegisto = Clamp(diretor.DataFimRegistoCrim, dtpDataRegistoCriminal.MinDate, dtpDataRegistoCriminal.MaxDate);
 
                 try
                 {
@@ -200,32 +186,45 @@ namespace AdosMelhores.Forms
                 try { dtpDataRegistoCriminal.Value = dtpDataRegistoCriminal.MinDate; } catch { /* ignora */ }
             }
 
-            // Verificar status do registo criminal
-            VerificarStatusRegistoCriminal(formador);
+            CarregarSecretariasDisponiveis();
+
+            AtualizarEstadoBotaoCalcular();
         }
 
-        private void VerificarStatusRegistoCriminal(Formador formador)
+        private void CarregarSecretariasDisponiveis()
         {
-            if (formador.RegistoCriminalExpirado(empresa.DataSimulada))
+            checkedListBoxSecretarias.Items.Clear();
+
+            var todasSecretarias = empresa.Funcionarios
+                .OfType<Secretaria>()
+                .ToList();
+
+            foreach (var secretaria in todasSecretarias)
             {
-                lblStatusRegistoCriminal.Text = "EXPIRADO";
-                lblStatusRegistoCriminal.ForeColor = System.Drawing.Color.Red;
-                lblStatusRegistoCriminal.Font = new System.Drawing.Font(lblStatusRegistoCriminal.Font, System.Drawing.FontStyle.Bold);
+                int index = checkedListBoxSecretarias.Items.Add(secretaria);
+
+                // Verifica se esta secretária já está alocada a este diretor
+                if (diretorSelecionado != null &&
+                    diretorSelecionado.SecretariasSubordinadas.Contains(secretaria))
+                {
+                    checkedListBoxSecretarias.SetItemChecked(index, true);
+                }
             }
-            else
-            {
-                lblStatusRegistoCriminal.Text = "Válido";
-                lblStatusRegistoCriminal.ForeColor = System.Drawing.Color.Green;
-                lblStatusRegistoCriminal.Font = new System.Drawing.Font(lblStatusRegistoCriminal.Font, System.Drawing.FontStyle.Regular);
-            }
+        }
+
+
+        private void AtualizarEstadoBotaoCalcular()
+        {
+            // Habilita o botão se houver pelo menos uma secretária selecionada
+            btnCalcularValor.Enabled = checkedListBoxSecretarias.CheckedItems.Count > 0;
         }
 
         private void HabilitarBotoesEdicao(bool habilitar)
         {
             btnAlterar.Enabled = habilitar;
             btnRemover.Enabled = habilitar;
-            btnCalcularValor.Enabled = habilitar;
             btnAtualizarRegistoCriminal.Enabled = habilitar;
+            // btnCalcularValor state is managed by AtualizarEstadoBotaoCalcular
         }
 
         private void LimparCampos()
@@ -234,22 +233,30 @@ namespace AdosMelhores.Forms
             txtNome.Clear();
             txtMorada.Clear();
             txtContacto.Clear();
-            txtAreaLeciona.Clear();
-            cmbDisponibilidade.SelectedIndex = 0;
-            numValorHora.Value = 0;
+            txtAreaDiretoria.Clear();
+            //numValorHora.Value = 0;
             numSalarioBase.Value = 0;
+
+            // Limpar seleção de secretárias
+            for (int i = 0; i < checkedListBoxSecretarias.Items.Count; i++)
+            {
+                checkedListBoxSecretarias.SetItemChecked(i, false);
+            }
+
             // Valores seguros por defeito
             try { dtpDataFimContrato.Value = DateTime.Now.AddYears(1); } catch { /* ignora */ }
             try { dtpDataRegistoCriminal.Value = DateTime.Now.AddYears(5); } catch { /* ignora */ }
             lblStatusRegistoCriminal.Text = "";
-            formadorSelecionado = null;
+            diretorSelecionado = null;
+
+            btnCalcularValor.Enabled = false;
         }
 
         private bool ValidarCampos()
         {
             if (string.IsNullOrWhiteSpace(txtNome.Text))
             {
-                MessageBox.Show("Por favor, insira o nome do formador.", "Campo Obrigatório",
+                MessageBox.Show("Por favor, insira o nome do diretor.", "Campo Obrigatório",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtNome.Focus();
                 return false;
@@ -257,25 +264,17 @@ namespace AdosMelhores.Forms
 
             if (string.IsNullOrWhiteSpace(txtContacto.Text))
             {
-                MessageBox.Show("Por favor, insira o contacto do formador.", "Campo Obrigatório",
+                MessageBox.Show("Por favor, insira o contacto do diretor.", "Campo Obrigatório",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtContacto.Focus();
                 return false;
             }
 
-            if (string.IsNullOrWhiteSpace(txtAreaLeciona.Text))
+            if (string.IsNullOrWhiteSpace(txtAreaDiretoria.Text))
             {
-                MessageBox.Show("Por favor, insira a área que o formador leciona.", "Campo Obrigatório",
+                MessageBox.Show("Por favor, insira a área de diretoria.", "Campo Obrigatório",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtAreaLeciona.Focus();
-                return false;
-            }
-
-            if (numValorHora.Value <= 0)
-            {
-                MessageBox.Show("Por favor, insira um valor por hora válido.", "Campo Obrigatório",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                numValorHora.Focus();
+                txtAreaDiretoria.Focus();
                 return false;
             }
 
@@ -290,6 +289,7 @@ namespace AdosMelhores.Forms
             return true;
         }
 
+
         // ==================== EVENTOS DE BOTÕES ====================
 
         private void btnInserir_Click(object sender, EventArgs e)
@@ -299,41 +299,58 @@ namespace AdosMelhores.Forms
 
             try
             {
-                var novoFormador = new Formador(
+                // NOTA: FALTA adicionar checkboxes para CarroEmpresa e IsencaoHorario
+                bool carroEmpresa = false;
+                bool isencaoHorario = false;
+
+                // Try to find checkboxes in the form (assuming they exist based on the design)
+                // If they don't exist, default values will be used
+
+                var novoDiretor = new Diretor(
                     empresa.ObterProximoID(), // id
                     0, // Nif (ajuste conforme necessário)
                     txtNome.Text.Trim(), // Nome
                     txtMorada.Text.Trim(), // Morada
                     txtContacto.Text.Trim(), // Contacto
-                    DateTime.Now, // DataIniContrato (ajuste conforme necessário)
-                    dtpDataFimContrato.Value, // DataFimContrato
-                    dtpDataRegistoCriminal.Value, // DataRegistoCriminal
                     numSalarioBase.Value, // SalarioBase
-                    DateTime.Now, // DataNascimento (ajuste conforme necessário)
-                    txtAreaLeciona.Text.Trim(), // areaLeciona
-                    (Disponibilidade)cmbDisponibilidade.SelectedItem, // disponibilidade
-                    numValorHora.Value // valorHora
+                    dtpDataFimContrato.Value, // DataFimContrato
+                    DateTime.Now, // DataIniContrato
+                    dtpDataRegistoCriminal.Value, // DataFimRegistoCrim
+                    DateTime.Now, // DataNascimento
+                    0, // BonusMensal inicial (será calculado depois)
+                    carroEmpresa, // CarroEmpresa
+                    isencaoHorario, // IsencaoHorario
+                    txtAreaDiretoria.Text.Trim() // AreaDiretoria
                 );
 
-                empresa.AdicionarFuncionario(novoFormador);
-                AtualizarListaFormadores();
+                // Adicionar secretárias selecionadas
+                foreach (var item in checkedListBoxSecretarias.CheckedItems)
+                {
+                    if (item is Secretaria secretaria)
+                    {
+                        novoDiretor.AdicionarSecretaria(secretaria);
+                    }
+                }
+
+                empresa.AdicionarFuncionario(novoDiretor);
+                AtualizarListaDiretores();
                 LimparCampos();
 
-                MessageBox.Show($"Formador '{novoFormador.Nome}' inserido com sucesso!", "Sucesso",
+                MessageBox.Show($"Diretor '{novoDiretor.Nome}' inserido com sucesso!", "Sucesso",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Erro ao inserir formador: {ex.Message}", "Erro",
+                MessageBox.Show($"Erro ao inserir diretor: {ex.Message}", "Erro",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void btnAlterar_Click(object sender, EventArgs e)
         {
-            if (formadorSelecionado == null)
+            if (diretorSelecionado == null)
             {
-                MessageBox.Show("Selecione um formador para alterar.", "Aviso",
+                MessageBox.Show("Selecione um diretor para alterar.", "Aviso",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
@@ -343,39 +360,54 @@ namespace AdosMelhores.Forms
 
             try
             {
-                formadorSelecionado.Nome = txtNome.Text.Trim();
-                formadorSelecionado.Morada = txtMorada.Text.Trim();
-                formadorSelecionado.Contacto = txtContacto.Text.Trim();
-                formadorSelecionado.AreaLeciona = txtAreaLeciona.Text.Trim();
-                formadorSelecionado.Disponibilidade = (Disponibilidade)cmbDisponibilidade.SelectedItem;
-                formadorSelecionado.ValorHora = numValorHora.Value;
-                formadorSelecionado.SalarioBase = numSalarioBase.Value;
-                formadorSelecionado.DataFimContrato = dtpDataFimContrato.Value;
-                formadorSelecionado.DataRegistoCriminal = dtpDataRegistoCriminal.Value;
+                diretorSelecionado.Nome = txtNome.Text.Trim();
+                diretorSelecionado.Morada = txtMorada.Text.Trim();
+                diretorSelecionado.Contacto = txtContacto.Text.Trim();
+                diretorSelecionado.AreaDiretoria = txtAreaDiretoria.Text.Trim();
+                diretorSelecionado.SalarioBase = numSalarioBase.Value;
+                diretorSelecionado.DataFimContrato = dtpDataFimContrato.Value;
+                diretorSelecionado.DataFimRegistoCrim = dtpDataRegistoCriminal.Value;
 
-                AtualizarListaFormadores();
+                // Atualizar alocação de secretárias
+                // Remover todas as secretárias atuais
+                var secretariasAtuais = diretorSelecionado.SecretariasSubordinadas.ToList();
+                foreach (var sec in secretariasAtuais)
+                {
+                    diretorSelecionado.RemoverSecretaria(sec);
+                }
 
-                MessageBox.Show($"Formador '{formadorSelecionado.Nome}' alterado com sucesso!", "Sucesso",
+                // Adicionar secretárias selecionadas
+                foreach (var item in checkedListBoxSecretarias.CheckedItems)
+                {
+                    if (item is Secretaria secretaria)
+                    {
+                        diretorSelecionado.AdicionarSecretaria(secretaria);
+                    }
+                }
+
+                AtualizarListaDiretores();
+
+                MessageBox.Show($"Diretor '{diretorSelecionado.Nome}' alterado com sucesso!", "Sucesso",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Erro ao alterar formador: {ex.Message}", "Erro",
+                MessageBox.Show($"Erro ao alterar diretor: {ex.Message}", "Erro",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void btnRemover_Click(object sender, EventArgs e)
         {
-            if (formadorSelecionado == null)
+            if (diretorSelecionado == null)
             {
-                MessageBox.Show("Selecione um formador para remover.", "Aviso",
+                MessageBox.Show("Selecione um diretor para remover.", "Aviso",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             var resultado = MessageBox.Show(
-                $"Tem certeza que deseja remover o formador '{formadorSelecionado.Nome}'?",
+                $"Tem certeza que deseja remover o diretor '{diretorSelecionado.Nome}'?",
                 "Confirmar Remoção",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question);
@@ -384,16 +416,23 @@ namespace AdosMelhores.Forms
             {
                 try
                 {
-                    empresa.RemoverFuncionario(formadorSelecionado);
-                    AtualizarListaFormadores();
+                    // Remover todas as alocações de secretárias
+                    var secretariasAtuais = diretorSelecionado.SecretariasSubordinadas.ToList();
+                    foreach (var sec in secretariasAtuais)
+                    {
+                        diretorSelecionado.RemoverSecretaria(sec);
+                    }
+
+                    empresa.RemoverFuncionario(diretorSelecionado);
+                    AtualizarListaDiretores();
                     LimparCampos();
 
-                    MessageBox.Show("Formador removido com sucesso!", "Sucesso",
+                    MessageBox.Show("Diretor removido com sucesso!", "Sucesso",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Erro ao remover formador: {ex.Message}", "Erro",
+                    MessageBox.Show($"Erro ao remover diretor: {ex.Message}", "Erro",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
@@ -402,104 +441,91 @@ namespace AdosMelhores.Forms
         private void btnLimpar_Click(object sender, EventArgs e)
         {
             LimparCampos();
-            if (dgvFormadores.Rows.Count > 0)
+            if (dgvDiretores.Rows.Count > 0)
             {
-                dgvFormadores.ClearSelection();
+                dgvDiretores.ClearSelection();
             }
         }
 
         private void btnCalcularValor_Click(object sender, EventArgs e)
         {
-            if (formadorSelecionado == null)
+
+            if (diretorSelecionado == null)
             {
-                MessageBox.Show("Selecione um formador para calcular o valor da formação.", "Aviso",
+                MessageBox.Show("Selecione um diretor para calcular a remuneração.", "Aviso",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            using (var formCalculo = new FormCalcularValorFormacao(formadorSelecionado))
-            {
-                formCalculo.ShowDialog();
-            }
+            // Calcular bônus baseado nas secretárias alocadas
+            decimal bonusCalculado = diretorSelecionado.CalcularBonusMensal();
+
+            string detalhes = $"Diretor: {diretorSelecionado.Nome}\n\n";
+            detalhes += $"Salário Base: {diretorSelecionado.SalarioBase:C2}\n";
+            detalhes += $"Bónus Mensal Calculado: {bonusCalculado:C2}\n\n";
+            detalhes += "Fatores considerados:\n";
+            detalhes += $"- Secretárias subordinadas: {diretorSelecionado.SecretariasSubordinadas.Count} (+{diretorSelecionado.SecretariasSubordinadas.Count * 50:C2})\n";
+            detalhes += $"- Carro empresa: {(diretorSelecionado.CarroEmpresa ? "Sim (-300€)" : "Não")}\n";
+            detalhes += $"- Isenção horário: {(diretorSelecionado.IsencaoHorario ? "Sim (+200€)" : "Não")}\n\n";
+            detalhes += $"Remuneração Total: {(diretorSelecionado.SalarioBase + bonusCalculado):C2}";
+
+            MessageBox.Show(detalhes, "Cálculo de Remuneração",
+                MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void btnAtualizarRegistoCriminal_Click(object sender, EventArgs e)
         {
-            if (formadorSelecionado == null)
+            if (diretorSelecionado == null)
             {
-                MessageBox.Show("Selecione um formador para atualizar o registo criminal.", "Aviso",
+                MessageBox.Show("Selecione um diretor para atualizar o registo criminal.", "Aviso",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            using (var formRegistoCriminal = new FormAtualizarRegistoCriminal(formadorSelecionado, empresa))
+            var resultado = MessageBox.Show(
+                "Deseja atualizar a data de registo criminal para 5 anos a partir de hoje?",
+                "Atualizar Registo Criminal",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (resultado == DialogResult.Yes)
             {
-                if (formRegistoCriminal.ShowDialog() == DialogResult.OK)
+                try
                 {
-                    AtualizarListaFormadores();
-                    CarregarDadosFormador(formadorSelecionado);
+                    diretorSelecionado.DataFimRegistoCrim = DateTime.Now.AddYears(5);
+                    dtpDataRegistoCriminal.Value = diretorSelecionado.DataFimRegistoCrim;
+                    AtualizarListaDiretores();
+
+                    MessageBox.Show("Registo criminal atualizado com sucesso!", "Sucesso",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Erro ao atualizar registo criminal: {ex.Message}", "Erro",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
 
-        private void btnAlocarFormador_Click(object sender, EventArgs e)
-        {
-            if (formadorSelecionado == null)
-            {
-                MessageBox.Show("Selecione um formador para alocar.", "Aviso",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
 
-            using (var formAlocar = new FormAlocarFormador(formadorSelecionado, empresa))
-            {
-                formAlocar.ShowDialog();
-            }
-        }
-
-        private void btnFiltrarDisponibilidade_Click(object sender, EventArgs e)
-        {
-            using (var formFiltro = new FormFiltrarFormadores(empresa))
-            {
-                formFiltro.ShowDialog();
-            }
-        }
 
         private void btnFechar_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
-        private class FormCalcularValorFormacao : IDisposable
-        {
-            private Formador formadorSelecionado;
 
-            public FormCalcularValorFormacao(Formador formadorSelecionado)
-            {
-                this.formadorSelecionado = formadorSelecionado;
-            }
-
-            internal void ShowDialog()
-            {
-                throw new NotImplementedException();
-            }
-
-            public void Dispose()
-            {
-                // Implementação de Dispose se necessário
-            }
-        }
     }
 
     internal class FormAtualizarRegistoCriminal : IDisposable
     {
-        public FormAtualizarRegistoCriminal(Formador formadorSelecionado, Empresa empresa)
+        public FormAtualizarRegistoCriminal(Diretor diretorSelecionado, Empresa empresa)
         {
-            FormadorSelecionado = formadorSelecionado;
+            DiretorSelecionado = diretorSelecionado;
             Empresa = empresa;
         }
 
-        public Formador FormadorSelecionado { get; }
+        public Diretor DiretorSelecionado { get; }
         public Empresa Empresa { get; }
 
         internal DialogResult ShowDialog()
@@ -513,101 +539,47 @@ namespace AdosMelhores.Forms
         }
     }
 
-    internal class FormAlocarFormador : IDisposable
-    {
-        private Formador formadorSelecionado;
-        private Empresa empresa;
 
-        public FormAlocarFormador(Formador formadorSelecionado, Empresa empresa)
+    public class Empresa
+    {
+        private readonly List<Funcionario> funcionarios;
+
+        public string Nome { get; set; }
+        public IReadOnlyList<Funcionario> Funcionarios { get; }
+        public DateTime DataSimulada { get; set; }
+
+        public Empresa(string nome)
         {
-            this.formadorSelecionado = formadorSelecionado;
-            this.empresa = empresa;
+            Nome = nome ?? throw new ArgumentNullException(nameof(nome));
+            funcionarios = new List<Funcionario>();
+            Funcionarios = funcionarios; // evita null ao aceder externamente
         }
 
-        public void Dispose()
+        internal int ObterProximoID()
         {
-            // Implementação de Dispose se necessário
+            if (funcionarios.Count == 0)
+                return 1;
+            return funcionarios.Max(f => f.Id) + 1;
         }
 
-        public void ShowDialog()
+        internal void AdicionarFuncionario(Funcionario funcionario)
         {
-            // Implemente a lógica de exibição do formulário de alocação aqui.
-            // Por exemplo, pode abrir um novo Form se desejar.
-            MessageBox.Show(
-                $"Alocação do formador '{formadorSelecionado.Nome}' (ID: {formadorSelecionado.Id}) realizada.",
-                "Alocar Formador",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information
-            );
-        }
-    }
-
-    internal class FormFiltrarFormadores : IDisposable
-    {
-        private Empresa empresa;
-
-        public FormFiltrarFormadores(Empresa empresa)
-        {
-            this.empresa = empresa;
+            if (funcionario == null)
+                throw new ArgumentNullException(nameof(funcionario));
+            funcionarios.Add(funcionario);
         }
 
-        public void Dispose()
+        internal void AdicionarFuncionario(Diretor novoDiretor)
         {
-            // Implementação de Dispose se necessário
+            throw new NotImplementedException();
         }
 
-        public void ShowDialog()
+        internal void RemoverFuncionario(Diretor diretorSelecionado)
         {
-            // Corrigido: especificar explicitamente a propriedade para evitar ambiguidade
-            string textoFiltroAplicado = $@"Filtro de formadores da empresa aplicado.";
-            _ = MessageBox.Show(
-                textoFiltroAplicado,
-                "Filtrar Formadores",
-                MessageBoxButtons.OK,
-                icon: MessageBoxIcon.Information
-            );
+            throw new NotImplementedException();
         }
+
+
+        // resto igual (usar 'funcionarios' internamente)
     }
-}
-
-public class Empresa
-{
-    private readonly List<Funcionario> funcionarios;
-
-    public string Nome { get; set; }
-    public IReadOnlyList<Funcionario> Funcionarios { get; }
-    public DateTime DataSimulada { get; set; }
-
-    public Empresa(string nome)
-    {
-        Nome = nome ?? throw new ArgumentNullException(nameof(nome));
-        funcionarios = new List<Funcionario>();
-        Funcionarios = funcionarios; // evita null ao aceder externamente
-    }
-
-    internal int ObterProximoID()
-    {
-        if (funcionarios.Count == 0)
-            return 1;
-        return funcionarios.Max(f => f.Id) + 1;
-    }
-
-    internal void AdicionarFuncionario(Funcionario funcionario)
-    {
-        if (funcionario == null)
-            throw new ArgumentNullException(nameof(funcionario));
-        funcionarios.Add(funcionario);
-    }
-
-    internal void AdicionarFuncionario(Formador novoFormador)
-    {
-        throw new NotImplementedException();
-    }
-
-    internal void RemoverFuncionario(Formador formadorSelecionado)
-    {
-        throw new NotImplementedException();
-    }
-
-    // resto igual (usar 'funcionarios' internamente)
 }

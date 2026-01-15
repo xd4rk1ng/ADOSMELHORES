@@ -11,12 +11,14 @@
             "id": "a96831e975b2b29c",
             "type": "leaf",
             "state": {
-              "type": "pdf",
+              "type": "markdown",
               "state": {
-                "file": "Relatório/TA-606-2.pdf"
+                "file": "WinformsDocs/Modelos/(Abstrata) Funcionario.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-file-text",
-              "title": "TA-606-2"
+              "icon": "lucide-file",
+              "title": "(Abstrata) Funcionario"
             }
           }
         ]
@@ -183,23 +185,23 @@
   },
   "active": "a96831e975b2b29c",
   "lastOpenFiles": [
-    "Relatório/Relatório.md",
+    "WinformsDocs/Modelos/Diretor.md",
     "ADOSMELHORES.zip",
+    "ADOSMELHORES/Forms/3h1saxv3.szh~",
+    "ADOSMELHORES/Forms/renpopbq.qwl~",
+    "Relatório/Relatório.md",
+    "Relatório/TA-606-2.pdf",
     "ADOSMELHORES/obj/Debug/DesignTimeResolveAssemblyReferences.cache",
     "Pasted image 20260112180432.png",
-    "Relatório/TA-606-2.pdf",
     "ADOSMELHORES/Sem título",
     "FormGerirFormadores.Designer.cs",
     "ADOSMELHORES/Forms/Frm_Diretor.resx",
     "ADOSMELHORES/Forms/Frm_Diretor.cs",
     "ADOSMELHORES/Forms/Frm_Diretor.Designer.cs",
-    "ADOSMELHORES/Forms/Form_Diretor.resx",
-    "ADOSMELHORES/Forms/Form_Diretor.cs",
     "WinformsDocs/Estrutura de pastas.md",
     "WinformsDocs/Modelos/Secretaria.md",
     "WinformsDocs/Modelos/Formador.md",
     "WinformsDocs/Modelos/Empresa.md",
-    "WinformsDocs/Modelos/Diretor.md",
     "WinformsDocs/Modelos/Coordenador.md",
     "WinformsDocs/Modelos/(Abstrata) Funcionario.md",
     "WinformsDocs/We need think about....md"
