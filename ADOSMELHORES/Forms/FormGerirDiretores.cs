@@ -44,7 +44,6 @@ namespace AdosMelhores.Forms
             dgvDiretores.AutoGenerateColumns = false;
             dgvDiretores.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvDiretores.MultiSelect = false;
-
             dgvDiretores.Columns.Clear();
 
             dgvDiretores.Columns.Add(new DataGridViewTextBoxColumn
@@ -63,24 +62,31 @@ namespace AdosMelhores.Forms
 
             dgvDiretores.Columns.Add(new DataGridViewTextBoxColumn
             {
+                DataPropertyName = "AreasDiretoriaString", // Precisaremos desta propriedade
+                HeaderText = "Áreas",
+                Width = 200
+            });
+
+            dgvDiretores.Columns.Add(new DataGridViewTextBoxColumn
+            {
                 DataPropertyName = "AreaDiretoria",
                 HeaderText = "Área Diretoria",
                 Width = 120
             });
 
-            dgvDiretores.Columns.Add(new DataGridViewCheckBoxColumn
-            {
-                DataPropertyName = "CarroEmpresa",
-                HeaderText = "Carro Empresa",
-                Width = 80
-            });
+            //dgvDiretores.Columns.Add(new DataGridViewCheckBoxColumn
+            //{
+            //    DataPropertyName = "CarroEmpresa",
+            //    HeaderText = "Carro Empresa",
+            //    Width = 80
+            //});
 
-            dgvDiretores.Columns.Add(new DataGridViewCheckBoxColumn
-            {
-                DataPropertyName = "IsencaoHorario",
-                HeaderText = "Isenção Horário",
-                Width = 100
-            });
+            //dgvDiretores.Columns.Add(new DataGridViewCheckBoxColumn
+            //{
+            //    DataPropertyName = "IsencaoHorario",
+            //    HeaderText = "Isenção Horário",
+            //    Width = 100
+            //});
 
             dgvDiretores.Columns.Add(new DataGridViewTextBoxColumn
             {
@@ -146,9 +152,11 @@ namespace AdosMelhores.Forms
             txtNome.Text = diretor.Nome;
             txtMorada.Text = diretor.Morada;
             txtContacto.Text = diretor.Contacto;
-            txtAreaDiretoria.Text = diretor.AreaDiretoria;
+            //txtAreaDiretoria.Text = diretor.AreaDiretoria;
             numSalarioBase.Value = diretor.SalarioBase;
             //numValorHora.Value = diretor.BonusMensal;
+
+            CarregarAreasDiretoria(diretor);
 
             // DataFimContrato: clamp + safe assign
             try
@@ -191,6 +199,24 @@ namespace AdosMelhores.Forms
             AtualizarEstadoBotaoCalcular();
         }
 
+        private void CarregarAreasDiretoria(Diretor diretor)
+        {
+            // Limpar todas as seleções
+            for (int i = 0; i < checkedListBoxAreasDiretoria.Items.Count; i++)
+            {
+                checkedListBoxAreasDiretoria.SetItemChecked(i, false);
+            }
+
+            // Marcar as áreas do diretor
+            foreach (string area in diretor.AreasDiretoria)
+            {
+                int index = checkedListBoxAreasDiretoria.Items.IndexOf(area);
+                if (index >= 0)
+                {
+                    checkedListBoxAreasDiretoria.SetItemChecked(index, true);
+                }
+            }
+        }
         private void CarregarSecretariasDisponiveis()
         {
             checkedListBoxSecretarias.Items.Clear();
@@ -227,15 +253,20 @@ namespace AdosMelhores.Forms
             // btnCalcularValor state is managed by AtualizarEstadoBotaoCalcular
         }
 
+
         private void LimparCampos()
         {
             txtID.Clear();
             txtNome.Clear();
             txtMorada.Clear();
             txtContacto.Clear();
-            txtAreaDiretoria.Clear();
-            //numValorHora.Value = 0;
             numSalarioBase.Value = 0;
+
+            // ✅ NOVO: Limpar seleção de áreas
+            for (int i = 0; i < checkedListBoxAreasDiretoria.Items.Count; i++)
+            {
+                checkedListBoxAreasDiretoria.SetItemChecked(i, false);
+            }
 
             // Limpar seleção de secretárias
             for (int i = 0; i < checkedListBoxSecretarias.Items.Count; i++)
@@ -251,6 +282,34 @@ namespace AdosMelhores.Forms
 
             btnCalcularValor.Enabled = false;
         }
+
+
+
+        //private void LimparCampos()
+        //{
+        //    txtID.Clear();
+        //    txtNome.Clear();
+        //    txtMorada.Clear();
+        //    txtContacto.Clear();
+        //    txtAreaDiretoria.Clear();
+        //    //numValorHora.Value = 0;
+        //    numSalarioBase.Value = 0;
+
+        //    // Limpar seleção de secretárias
+        //    for (int i = 0; i < checkedListBoxSecretarias.Items.Count; i++)
+        //    {
+        //        checkedListBoxSecretarias.SetItemChecked(i, false);
+        //    }
+
+        //    // Valores seguros por defeito
+        //    try { dtpDataFimContrato.Value = DateTime.Now.AddYears(1); } catch { /* ignora */ }
+        //    try { dtpDataRegistoCriminal.Value = DateTime.Now.AddYears(5); } catch { /* ignora */ }
+        //    lblStatusRegistoCriminal.Text = "";
+        //    diretorSelecionado = null;
+
+        //    btnCalcularValor.Enabled = false;
+        //}
+
 
         private bool ValidarCampos()
         {
@@ -270,12 +329,29 @@ namespace AdosMelhores.Forms
                 return false;
             }
 
-            if (string.IsNullOrWhiteSpace(txtAreaDiretoria.Text))
+            // ✅ NOVA VALIDAÇÃO: Pelo menos uma área selecionada
+            if (checkedListBoxAreasDiretoria.CheckedItems.Count == 0)
             {
-                MessageBox.Show("Por favor, insira a área de diretoria.", "Campo Obrigatório",
+                MessageBox.Show("Selecione pelo menos uma área de direção.", "Campo Obrigatório",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtAreaDiretoria.Focus();
+                checkedListBoxAreasDiretoria.Focus();
                 return false;
+            }
+
+            // ✅ NOVA VALIDAÇÃO: Verificar duplicidade de áreas com outros diretores
+            foreach (var areaSelecionada in checkedListBoxAreasDiretoria.CheckedItems)
+            {
+                string area = areaSelecionada.ToString();
+                bool areaOcupada = empresa.Funcionarios.OfType<Diretor>()
+                    .Where(d => d.Id != (diretorSelecionado?.Id ?? 0)) // Excluir o próprio diretor em edição
+                    .Any(d => d.AreasDiretoria.Contains(area));
+
+                if (areaOcupada)
+                {
+                    MessageBox.Show($"A área '{area}' já está ocupada por outro diretor!",
+                        "Área Ocupada", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return false;
+                }
             }
 
             if (dtpDataFimContrato.Value <= DateTime.Now)
@@ -288,6 +364,43 @@ namespace AdosMelhores.Forms
 
             return true;
         }
+
+        //private bool ValidarCampos()
+        //{
+        //    if (string.IsNullOrWhiteSpace(txtNome.Text))
+        //    {
+        //        MessageBox.Show("Por favor, insira o nome do diretor.", "Campo Obrigatório",
+        //            MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        //        txtNome.Focus();
+        //        return false;
+        //    }
+
+        //    if (string.IsNullOrWhiteSpace(txtContacto.Text))
+        //    {
+        //        MessageBox.Show("Por favor, insira o contacto do diretor.", "Campo Obrigatório",
+        //            MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        //        txtContacto.Focus();
+        //        return false;
+        //    }
+
+        //    if (string.IsNullOrWhiteSpace(txtAreaDiretoria.Text))
+        //    {
+        //        MessageBox.Show("Por favor, insira a área de diretoria.", "Campo Obrigatório",
+        //            MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        //        txtAreaDiretoria.Focus();
+        //        return false;
+        //    }
+
+        //    if (dtpDataFimContrato.Value <= DateTime.Now)
+        //    {
+        //        MessageBox.Show("A data de fim de contrato deve ser futura.", "Data Inválida",
+        //            MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        //        dtpDataFimContrato.Focus();
+        //        return false;
+        //    }
+
+        //    return true;
+        //}
 
 
         // ==================== EVENTOS DE BOTÕES ====================
@@ -319,9 +432,14 @@ namespace AdosMelhores.Forms
                     DateTime.Now, // DataNascimento
                     0, // BonusMensal inicial (será calculado depois)
                     carroEmpresa, // CarroEmpresa
-                    isencaoHorario, // IsencaoHorario
-                    txtAreaDiretoria.Text.Trim() // AreaDiretoria
+                    isencaoHorario // IsencaoHorario                   
                 );
+
+                // ADICIONAR: Áreas de direção selecionadas
+                foreach (var area in checkedListBoxAreasDiretoria.CheckedItems)
+                {
+                    novoDiretor.AreasDiretoria.Add(area.ToString());
+                }
 
                 // Adicionar secretárias selecionadas
                 foreach (var item in checkedListBoxSecretarias.CheckedItems)
@@ -363,10 +481,17 @@ namespace AdosMelhores.Forms
                 diretorSelecionado.Nome = txtNome.Text.Trim();
                 diretorSelecionado.Morada = txtMorada.Text.Trim();
                 diretorSelecionado.Contacto = txtContacto.Text.Trim();
-                diretorSelecionado.AreaDiretoria = txtAreaDiretoria.Text.Trim();
+                //diretorSelecionado.AreaDiretoria = txtAreaDiretoria.Text.Trim();
                 diretorSelecionado.SalarioBase = numSalarioBase.Value;
                 diretorSelecionado.DataFimContrato = dtpDataFimContrato.Value;
                 diretorSelecionado.DataFimRegistoCrim = dtpDataRegistoCriminal.Value;
+
+                // ATUALIZAR: Áreas de direção
+                diretorSelecionado.AreasDiretoria.Clear();
+                foreach (var area in checkedListBoxAreasDiretoria.CheckedItems)
+                {
+                    diretorSelecionado.AreasDiretoria.Add(area.ToString());
+                }
 
                 // Atualizar alocação de secretárias
                 // Remover todas as secretárias atuais
@@ -457,20 +582,31 @@ namespace AdosMelhores.Forms
                 return;
             }
 
-            // Calcular bônus baseado nas secretárias alocadas
-            decimal bonusCalculado = diretorSelecionado.CalcularBonusMensal();
+            // MENSAGEM INFORMATIVA (o cálculo completo será no FormsCalcularRemuneracao)
+            string info = $"Diretor: {diretorSelecionado.Nome}\n\n";
+            info += $"Salário Base: {diretorSelecionado.SalarioBase:C2}\n";
+            info += $"Áreas de Direção: {diretorSelecionado.AreasDiretoria.Count}\n";
+            info += $"Secretárias Subordinadas: {diretorSelecionado.SecretariasSubordinadas.Count}\n\n";
+            info += "Para cálculo completo da remuneração,\n";
+            info += "utilize o formulário de Cálculo de Remuneração.";
 
-            string detalhes = $"Diretor: {diretorSelecionado.Nome}\n\n";
-            detalhes += $"Salário Base: {diretorSelecionado.SalarioBase:C2}\n";
-            detalhes += $"Bónus Mensal Calculado: {bonusCalculado:C2}\n\n";
-            detalhes += "Fatores considerados:\n";
-            detalhes += $"- Secretárias subordinadas: {diretorSelecionado.SecretariasSubordinadas.Count} (+{diretorSelecionado.SecretariasSubordinadas.Count * 50:C2})\n";
-            detalhes += $"- Carro empresa: {(diretorSelecionado.CarroEmpresa ? "Sim (-300€)" : "Não")}\n";
-            detalhes += $"- Isenção horário: {(diretorSelecionado.IsencaoHorario ? "Sim (+200€)" : "Não")}\n\n";
-            detalhes += $"Remuneração Total: {(diretorSelecionado.SalarioBase + bonusCalculado):C2}";
-
-            MessageBox.Show(detalhes, "Cálculo de Remuneração",
+            MessageBox.Show(info, "Informações para Cálculo",
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            //// Calcular bônus baseado nas secretárias alocadas
+            //decimal bonusCalculado = diretorSelecionado.CalcularBonusMensal();
+
+            //string detalhes = $"Diretor: {diretorSelecionado.Nome}\n\n";
+            //detalhes += $"Salário Base: {diretorSelecionado.SalarioBase:C2}\n";
+            //detalhes += $"Bónus Mensal Calculado: {bonusCalculado:C2}\n\n";
+            //detalhes += "Fatores considerados:\n";
+            //detalhes += $"- Secretárias subordinadas: {diretorSelecionado.SecretariasSubordinadas.Count} (+{diretorSelecionado.SecretariasSubordinadas.Count * 50:C2})\n";
+            //detalhes += $"- Carro empresa: {(diretorSelecionado.CarroEmpresa ? "Sim (-300€)" : "Não")}\n";
+            //detalhes += $"- Isenção horário: {(diretorSelecionado.IsencaoHorario ? "Sim (+200€)" : "Não")}\n\n";
+            //detalhes += $"Remuneração Total: {(diretorSelecionado.SalarioBase + bonusCalculado):C2}";
+
+            //MessageBox.Show(detalhes, "Cálculo de Remuneração",
+            //    MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void btnAtualizarRegistoCriminal_Click(object sender, EventArgs e)

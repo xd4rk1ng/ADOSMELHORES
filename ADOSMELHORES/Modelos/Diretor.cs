@@ -14,7 +14,7 @@ namespace ADOSMELHORES.Modelos
         public bool IsencaoHorario { get; set; } //bool faz sentido?
 
         //atributos adicionais
-        public string AreaDiretoria { get; set; } //para correlacionar com a secretaria
+        public List<string> AreasDiretoria { get; set; } = new List<string>(); //para correlacionar com a secretaria
 
         //lista de secretárias que trabalham com o diretor
         public List<Secretaria> SecretariasSubordinadas { get; set; }
@@ -32,8 +32,8 @@ namespace ADOSMELHORES.Modelos
                 DateTime dataNascimento,
                 decimal bonusMensal,
                 bool carroEmpresa,
-                bool isencaoHorario,
-                string areaDiretoria
+                bool isencaoHorario
+                //string areaDiretoria
 
             ) : base (
                 id,
@@ -51,43 +51,44 @@ namespace ADOSMELHORES.Modelos
             BonusMensal = bonusMensal;
             CarroEmpresa = carroEmpresa;
             IsencaoHorario = isencaoHorario;
-            AreaDiretoria = areaDiretoria;
             
+            //AreaDiretoria = areaDiretoria;
+            AreasDiretoria = new List<string>();
             SecretariasSubordinadas = new List<Secretaria>();
         }
 
         //implementar método de calcula de salario do diretor
         //public override decimal CalcularSalario() => SalarioBase + BonusMensal;
 
-        //metodo para calcular bonus mensal
-        public decimal CalcularBonusMensal()
-        {
-            decimal bonus = 0;
+        //metodo para calcular bonus mensal (irá para FormsCalcularRemuneracao)
+        //public decimal CalcularBonusMensal()
+        //{
+        //    decimal bonus = 0;
 
-            //Fatores que influenciam no bonus
-            //1. Número de secretárias subordinadas
-            bonus += SecretariasSubordinadas.Count * 50; //exemplo: 50 por secretária
+        //    //Fatores que influenciam no bonus
+        //    //1. Número de secretárias subordinadas
+        //    bonus += SecretariasSubordinadas.Count * 50; //exemplo: 50 por secretária
 
-            //2. Tempo na empresa
-            //int anosNaEmpresa = DateTime.Now.Year - DataIniContrato.Year;
-            //bonus += anosNaEmpresa * 100; //exemplo: 100 por ano na empresa
+        //    //2. Tempo na empresa
+        //    //int anosNaEmpresa = DateTime.Now.Year - DataIniContrato.Year;
+        //    //bonus += anosNaEmpresa * 100; //exemplo: 100 por ano na empresa
 
-            //3. Se tem carro da empresa
-            if (CarroEmpresa)
-            {                
-                bonus -= 300; //desconta 300 do bonus se tiver carro da empresa
-            }
+        //    //3. Se tem carro da empresa
+        //    if (CarroEmpresa)
+        //    {                
+        //        bonus -= 300; //desconta 300 do bonus se tiver carro da empresa
+        //    }
             
 
-            //4. Se tem isençao de horário
-            if (IsencaoHorario)
-            {
-                bonus += 200; //adiciona 200 ao bonus se tiver isenção de horário
-            }
+        //    //4. Se tem isençao de horário
+        //    if (IsencaoHorario)
+        //    {
+        //        bonus += 200; //adiciona 200 ao bonus se tiver isenção de horário
+        //    }
 
-            return Math.Max(bonus, 0);//garante que o bonus não seja negativo
+        //    return Math.Max(bonus, 0);//garante que o bonus não seja negativo
 
-        }
+        //}
 
         //      ----  Métodos para gerenciar secretarias subordinadas  ----
         // Ao adicionar uma secretaria
