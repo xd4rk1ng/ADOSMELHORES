@@ -9,8 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ADOSMELHORES.Forms;
-using AdosMelhores.Forms;
-
+using ADOSMELHORES.Forms.Gestao;
 
 namespace ADOSMELHORES.Forms
 {
@@ -40,8 +39,9 @@ namespace ADOSMELHORES.Forms
 
         private void btnFormador_Click(object sender, EventArgs e)
         {
-            FormGerirFormadores f = new FormGerirFormadores(empresa); // passa a instância correta de Empresa
-            f.Show(); // corrigido para "Show" com S maiúsculo
+            // Usa a referência explícita ao namespace que contém o formulário completo.
+            var f = new AdosMelhores.Forms.FormGerirFormadores(empresa);
+            f.Show();
         }
 
         private void btnCoordenador_Click(object sender, EventArgs e)
