@@ -1,81 +1,97 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
+using System.Linq;
 
 namespace ADOSMELHORES.Modelos
 {
     public class Empresa
     {
-        public List<Funcionario> funcionarios;
+        private readonly List<Funcionario> funcionarios;
+
         public string Nome { get; set; }
         public DateTime DataSimulada { get; set; }
 
-        public List<Coordenador> Coordenadores => Funcionarios.OfType<Coordenador>().ToList();
-        public List<Formador> Formadores => Funcionarios.OfType<Formador>().ToList();
+        // Expor apenas leitura
+        public IReadOnlyList<Funcionario> Funcionarios => funcionarios.AsReadOnly();
 
         public Empresa(string nome)
         {
-            Nome = nome;
+            Nome = nome ?? throw new ArgumentNullException(nameof(nome));
             funcionarios = new List<Funcionario>();
-            DataSimulada = DateTime.Now.Date;
         }
 
         public int ObterProximoID()
         {
-            return funcionarios.Any() ? funcionarios.Max(f => f.Id) + 1 : 1;
+            if (funcionarios.Count == 0) return 1;
+            return funcionarios.Max(f => f.Id) + 1;
         }
 
         public void AdicionarFuncionario(Funcionario funcionario)
         {
+            if (funcionario == null) throw new ArgumentNullException(nameof(funcionario));
             funcionarios.Add(funcionario);
         }
 
+        // Implementação específica para Formador (comodidade)
         public void AdicionarFuncionario(Formador novoFormador)
         {
-            funcionarios.Add(novoFormador);
-        }
-
-        public void RemoverFuncionario(Formador formadorSelecionado)
-        {
-            funcionarios.Remove(formadorSelecionado);
+            AdicionarFuncionario((Funcionario)novoFormador);
         }
 
         public void RemoverFuncionario(Funcionario funcionario)
         {
-            if (funcionario == null)
-                return;
+            if (funcionario == null) throw new ArgumentNullException(nameof(funcionario));
+            funcionarios.Remove(funcionario);
+        }
 
-            // Tenta remover por referência da lista interna
-            if (this.funcionarios != null)
-            {
-                bool removed = this.funcionarios.Remove(funcionario);
+        public void RemoverFuncionario(Formador formadorSelecionado)
+        {
+            RemoverFuncionario((Funcionario)formadorSelecionado);
+        }
 
-                // Se não removeu por referência, tenta localizar pelo Id e remover
-                if (!removed)
-                {
-                    for (int i = this.funcionarios.Count - 1; i >= 0; i--)
-                    {
-                        if (this.funcionarios[i].Id == funcionario.Id)
-                        {
-                            this.funcionarios.RemoveAt(i);
-                            removed = true;
-                            break;
-                        }
-                    }
-                }
-            }
+        // Novos métodos para gerir formadores eficientemente
 
-            // Se houver listas específicas mantenha-as sincronizadas
-            if (funcionario is Coordenador coord && this.Coordenadores != null)
-            {
-                this.Coordenadores.Remove(coord);
-            }
-            else if (funcionario is Formador form && this.Formadores != null)
-            {
-                this.Formadores.Remove(form);
-            }
+        public List<Formador> ObterFormadores()
+        {
+            return funcionarios.OfType<Formador>().ToList();
+        }
+
+        public Formador BuscarFormadorPorId(int id)
+        {
+            return funcionarios.OfType<Formador>().FirstOrDefault(f => f.Id == id);
+        }
+
+        public List<Formador> FiltrarFormadoresPorDisponibilidade(Disponibilidade disponibilidade)
+        {
+            return funcionarios.OfType<Formador>()
+                .Where(f => f.Disponibilidade == disponibilidade)
+                .ToList();
+        }
+
+        public List<Formador> FiltrarFormadoresPorArea(string areaLeciona)
+        {
+            if (string.IsNullOrWhiteSpace(areaLeciona)) return new List<Formador>();
+            return funcionarios.OfType<Formador>()
+                .Where(f => string.Equals(f.AreaLeciona, areaLeciona.Trim(), StringComparison.OrdinalIgnoreCase))
+                .ToList();
+        }
+
+        public bool RemoverFormadorPorId(int id)
+        {
+            var f = BuscarFormadorPorId(id);
+            if (f == null) return false;
+            funcionarios.Remove(f);
+            return true;
+        }
+
+        public void AtualizarFormador(Formador atualizado)
+        {
+            if (atualizado == null) throw new ArgumentNullException(nameof(atualizado));
+            var existente = BuscarFormadorPorId(atualizado.Id);
+            if (existente == null) throw new InvalidOperationException("Formador não encontrado.");
+            var idx = funcionarios.IndexOf(existente);
+            funcionarios[idx] = atualizado;
         }
 
         public List<Funcionario> ObterFuncionariosContratoValido(DateTime data)
@@ -88,78 +104,31 @@ namespace ADOSMELHORES.Modelos
             return funcionarios.Where(f => f.RegistoCriminalExpirado(data)).ToList();
         }
 
-        public List<Coordenador> ObterCoordenadores()
-        {
-            // Considerando que Coordenador herda de Funcionario
-            return funcionarios.OfType<Coordenador>().ToList();
-        }
-
         public decimal CalcularDespesaMensal()
         {
             return funcionarios.Sum(f => f.CalcularCustoMensal());
         }
 
-        public List<string> AvancarDia()
+        // Exemplo simples de exportar formadores para CSV (opcional)
+        public void ExportarFormadoresParaCSV(string caminhoFicheiro)
         {
-            DataSimulada = DataSimulada.AddDays(1);
-            List<string> alertas = new List<string>();
-
-            foreach (var funcionario in funcionarios)
+            var lines = new List<string> { "Id;Nome;Area;Disponibilidade;ValorHora;Contacto;DataFimRegistoCrim" };
+            foreach (var f in ObterFormadores())
             {
-                if (funcionario.DataFimContrato.Date == DataSimulada)
-                {
-                    alertas.Add($"ALERTA: Contrato de {funcionario.Nome} termina hoje!");
-                }
-
-                if (funcionario.DataFimRegistoCrim.Date == DataSimulada)
-                {
-                    alertas.Add($"ALERTA: Registo criminal de {funcionario.Nome} expira hoje!");
-                }
+                lines.Add(string.Join(";",
+                    f.Id,
+                    EscapeCsv(f.Nome),
+                    EscapeCsv(f.AreaLeciona),
+                    f.Disponibilidade,
+                    f.ValorHora,
+                    EscapeCsv(f.Contacto),
+                    f.DataFimRegistoCrim.ToString("yyyy-MM-dd")
+                ));
             }
-
-            return alertas;
+            File.WriteAllLines(caminhoFicheiro, lines);
         }
 
-        public void ExportarParaCSV(string caminhoFicheiro)
-        {
-            StringBuilder csv = new StringBuilder();
-
-            csv.AppendLine("ID;Nome;Tipo;Morada;Contacto;Data Fim Contrato;Data Registo Criminal;Salário Base;Informações Adicionais");
-
-            foreach (var funcionario in funcionarios)
-            {
-                string infoAdicional = "";
-
-                if (funcionario is Diretor diretor)
-                {
-                    infoAdicional = $"Bónus: {diretor.BonusMensal}; Carro: {(diretor.CarroEmpresa ? "Sim" : "Não")}";
-                }
-                else if (funcionario is Secretaria secretaria)
-                {
-                    infoAdicional = $"Área: {secretaria.Area}; Reporta a: {secretaria.DiretorReporta?.Nome ?? "N/A"}";
-                }
-                else if (funcionario is Formador formador)
-                {
-                    infoAdicional = $"Área: {formador.AreaLeciona}; Disponibilidade: {formador.Disponibilidade}; Valor/Hora: {formador.ValorHora}";
-                }
-                else if (funcionario is Coordenador coordenador)
-                {
-                    infoAdicional = $"Área: {coordenador.AreaCoordenacao}; Formadores: {coordenador.NumeroFormadores}";
-                }
-
-                csv.AppendLine($"{funcionario.Id};{funcionario.Nome};{funcionario.GetType().Name};" +
-                    $"{funcionario.Morada};{funcionario.Contacto};" +
-                    $"{funcionario.DataFimContrato:dd/MM/yyyy};{funcionario.DataFimRegistoCrim:dd/MM/yyyy};" +
-                    $"{funcionario.SalarioBase};{infoAdicional}");
-            }
-
-            File.WriteAllText(caminhoFicheiro, csv.ToString(), Encoding.UTF8);
-        }
-
-        public List<Funcionario> Funcionarios
-        {
-            get { return funcionarios; }
-        }
+        private string EscapeCsv(string s) => s?.Replace(";", ",") ?? string.Empty;
     }
 }
 

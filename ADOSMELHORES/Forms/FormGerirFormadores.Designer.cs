@@ -1,4 +1,5 @@
-﻿namespace AdosMelhores.Forms
+﻿using ADOSMELHORES.Forms;
+namespace AdosMelhores.Forms
 {
     partial class FormGerirFormadores
     {
@@ -371,6 +372,9 @@
             this.dgvFormadores.Location = new System.Drawing.Point(15, 25);
             this.dgvFormadores.Name = "dgvFormadores";
             this.dgvFormadores.ReadOnly = true;
+            // Garantir que a seleção seja por linha inteira e apenas uma linha de cada vez.
+            this.dgvFormadores.MultiSelect = false;
+            this.dgvFormadores.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvFormadores.Size = new System.Drawing.Size(675, 185);
             this.dgvFormadores.TabIndex = 0;
             this.dgvFormadores.SelectionChanged += new System.EventHandler(this.dgvFormadores_SelectionChanged);
