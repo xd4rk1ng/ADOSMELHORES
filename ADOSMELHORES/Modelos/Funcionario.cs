@@ -8,7 +8,6 @@ namespace ADOSMELHORES
 {
     public abstract class Funcionario
     {
-        //protected Funcionario() { }
         protected Funcionario(
             int id,
             int nif,
@@ -24,6 +23,7 @@ namespace ADOSMELHORES
         {
             Id = id;
             Nif = nif;
+            Nome = nome;
             Morada = morada;
             Contacto = contacto;
             SalarioBase = salarioBase;
@@ -44,6 +44,25 @@ namespace ADOSMELHORES
         public DateTime DataFimRegistoCrim { get; set; }
         public DateTime DataNascimento { get; set; }
 
+        public virtual decimal CalcularCustoMensal()
+        {
+            // Por padrão retorna o salário base
+            return SalarioBase;
+        }
 
+        public bool ContratoValido(DateTime data)
+        {
+            return data >= DataIniContrato && data <= DataFimContrato;
+        }
+
+        public bool RegistoCriminalExpirado(DateTime data)
+        {
+            return data > DataFimRegistoCrim;
+        }
+
+        public override string ToString()
+        {
+            return $"ID: {Id} - {Nome} - NIF: {Nif}";
+        }
     }
 }

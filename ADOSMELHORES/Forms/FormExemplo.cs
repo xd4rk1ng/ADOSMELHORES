@@ -24,7 +24,7 @@ namespace ADOSMELHORES.Forms
         {
             if(txtBxNome.Text != string.Empty) // se a text box nao estiver vazia
             {
-                Empresa.Colaboradores.Add(new Exemplo(nome: txtBxNome.Text));
+                //Empresa.Colaboradores.Add(new Exemplo(nome: txtBxNome.Text));
                 _main.UpdateListBox();
             }
         }

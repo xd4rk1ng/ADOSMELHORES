@@ -26,8 +26,76 @@ namespace AdosMelhores.Forms
         {
             InitializeComponent();
             empresa = empresaRef;
+
+            //Criar Secretárias de exemplo (se não existirem). APAGAR DEPOIS
+            CriarSecretariasExemplo();
+
             ConfigurarForm();
         }
+
+        //Podemos apagar isso depois, é só para termos secretárias para alocar
+        private void CriarSecretariasExemplo()
+        {
+            // Verificar se já existem secretárias
+            var secretariasExistentes = empresa.Funcionarios.OfType<Secretaria>().Count();
+
+            if (secretariasExistentes == 0)
+            {
+                // Criar algumas secretárias de exemplo
+                var secretariasExemplo = new List<Secretaria>
+                {
+                    new Secretaria(
+                        id: empresa.ObterProximoID(),
+                        nif: 100000001,
+                        nome: "Ana Silva",
+                        morada: "Rua das Flores, 123",
+                        contacto: "912345678",
+                        salarioBase: 900m,
+                        dataFimContrato: DateTime.Now.AddYears(2),
+                        dataIniContrato: DateTime.Now,
+                        dataFimRegistoCrim: DateTime.Now.AddYears(5),
+                        dataNascimento: new DateTime(1990, 5, 15),
+                        diretorReporta: null,
+                        area: "Administração"
+                    ),
+                    new Secretaria(
+                        id: empresa.ObterProximoID(),
+                        nif: 100000002,
+                        nome: "Maria Santos",
+                        morada: "Avenida Central, 456",
+                        contacto: "923456789",
+                        salarioBase: 950m,
+                        dataFimContrato: DateTime.Now.AddYears(3),
+                        dataIniContrato: DateTime.Now.AddMonths(-6),
+                        dataFimRegistoCrim: DateTime.Now.AddYears(4),
+                        dataNascimento: new DateTime(1988, 8, 22),
+                        diretorReporta: null,
+                        area: "Recursos Humanos"
+                    ),
+                    new Secretaria(
+                        id: empresa.ObterProximoID(),
+                        nif: 100000003,
+                        nome: "Carla Oliveira",
+                        morada: "Travessa do Comércio, 789",
+                        contacto: "934567890",
+                        salarioBase: 850m,
+                        dataFimContrato: DateTime.Now.AddYears(1),
+                        dataIniContrato: DateTime.Now.AddMonths(-3),
+                        dataFimRegistoCrim: DateTime.Now.AddYears(3),
+                        dataNascimento: new DateTime(1995, 3, 10),
+                        diretorReporta: null,
+                        area: "Financeiro"
+                    )
+                };
+
+                // Adicionar à empresa
+                foreach (var secretaria in secretariasExemplo)
+                {
+                    empresa.AdicionarFuncionario(secretaria);
+                }
+            }
+        }
+        
 
         private void ConfigurarForm()
         {

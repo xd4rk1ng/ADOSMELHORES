@@ -11,14 +11,12 @@
             "id": "a96831e975b2b29c",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "pdf",
               "state": {
-                "file": "WinformsDocs/Modelos/Empresa.md",
-                "mode": "source",
-                "source": false
+                "file": "Relatório/TA-606-2.pdf"
               },
-              "icon": "lucide-file",
-              "title": "Empresa"
+              "icon": "lucide-file-text",
+              "title": "TA-606-2"
             }
           }
         ]
@@ -185,6 +183,7 @@
   },
   "active": "a96831e975b2b29c",
   "lastOpenFiles": [
+    "WinformsDocs/Modelos/Empresa.md",
     "ADOSMELHORES/Forms/FormGerirDiretores.cs",
     "ADOSMELHORES/Modelos/lzzatnnr.1hi~",
     "Relatório/TA-606-2.pdf",
@@ -196,8 +195,6 @@
     "ADOSMELHORES/Forms/FormCalcularValorFormacao.cs",
     "ADOSMELHORES/Forms/FormCalcularValorFormacao.Designer.cs",
     "ADOSMELHORES/Forms/FormAtualizarRegistoCriminalCoordenador.cs",
-    "ADOSMELHORES/Forms/FormAtualizarRegistoCriminalCoordenador.Designer.cs",
-    "WinformsDocs/Modelos/Empresa.md",
     "WinformsDocs/Modelos/Diretor.md",
     "WinformsDocs/Modelos/(Abstrata) Funcionario.md",
     "Relatório/Relatório.md",
