@@ -38,8 +38,8 @@
             // 
             // btnFormador
             // 
-            this.btnFormador.Location = new System.Drawing.Point(39, 31);
-            this.btnFormador.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnFormador.Location = new System.Drawing.Point(39, 32);
+            this.btnFormador.Margin = new System.Windows.Forms.Padding(4);
             this.btnFormador.Name = "btnFormador";
             this.btnFormador.Size = new System.Drawing.Size(493, 28);
             this.btnFormador.TabIndex = 0;
@@ -50,7 +50,7 @@
             // btnCoordenador
             // 
             this.btnCoordenador.Location = new System.Drawing.Point(39, 66);
-            this.btnCoordenador.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnCoordenador.Margin = new System.Windows.Forms.Padding(4);
             this.btnCoordenador.Name = "btnCoordenador";
             this.btnCoordenador.Size = new System.Drawing.Size(493, 28);
             this.btnCoordenador.TabIndex = 1;
@@ -62,7 +62,7 @@
             // btnSecretaria
             // 
             this.btnSecretaria.Location = new System.Drawing.Point(540, 31);
-            this.btnSecretaria.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSecretaria.Margin = new System.Windows.Forms.Padding(4);
             this.btnSecretaria.Name = "btnSecretaria";
             this.btnSecretaria.Size = new System.Drawing.Size(511, 28);
             this.btnSecretaria.TabIndex = 2;
@@ -72,19 +72,20 @@
             // btnDiretor
             // 
             this.btnDiretor.Location = new System.Drawing.Point(540, 66);
-            this.btnDiretor.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnDiretor.Margin = new System.Windows.Forms.Padding(4);
             this.btnDiretor.Name = "btnDiretor";
             this.btnDiretor.Size = new System.Drawing.Size(511, 28);
             this.btnDiretor.TabIndex = 3;
             this.btnDiretor.Text = "Inserir Diretor";
             this.btnDiretor.UseVisualStyleBackColor = true;
+            this.btnDiretor.Click += new System.EventHandler(this.btnDiretor_Click);
             // 
             // listBox1
             // 
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 16;
             this.listBox1.Location = new System.Drawing.Point(39, 139);
-            this.listBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.listBox1.Margin = new System.Windows.Forms.Padding(4);
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(1011, 372);
             this.listBox1.TabIndex = 4;
@@ -92,7 +93,7 @@
             // btnExemplo
             // 
             this.btnExemplo.Location = new System.Drawing.Point(39, 103);
-            this.btnExemplo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnExemplo.Margin = new System.Windows.Forms.Padding(4);
             this.btnExemplo.Name = "btnExemplo";
             this.btnExemplo.Size = new System.Drawing.Size(493, 28);
             this.btnExemplo.TabIndex = 5;
@@ -111,7 +112,7 @@
             this.Controls.Add(this.btnSecretaria);
             this.Controls.Add(this.btnCoordenador);
             this.Controls.Add(this.btnFormador);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FormInicial";
             this.Text = "Form Inicial";
             this.ResumeLayout(false);
