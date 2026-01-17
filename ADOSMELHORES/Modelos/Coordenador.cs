@@ -1,29 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ADOSMELHORES.Modelos
 {
-    internal class Coordenador : Funcionario
+    public class Coordenador : Funcionario
     {
         public List<Formador> FormadoresAssociados { get; set; }
         public string AreaCoordenacao { get; set; }
 
-        //construtor com parametros
-        public Coordenador(int id,
-                int nif,
-                string nome,
-                string morada,
-                string contacto,
-                decimal salarioBase,
-                DateTime dataIniContrato,
-                DateTime dataFimContrato,
-                DateTime dataFimRegistoCrim,
-                DateTime dataNascimento,
-
-                string areaCoordenacao)
+        public Coordenador(
+            int id,
+            int nif,
+            string nome,
+            string morada,
+            string contacto,
+            decimal salarioBase,
+            DateTime dataIniContrato,
+            DateTime dataFimContrato,
+            DateTime dataFimRegistoCrim,
+            DateTime dataNascimento,
+            string areaCoordenacao)
             : base(
                   id,
                   nif,
@@ -37,7 +33,6 @@ namespace ADOSMELHORES.Modelos
                   dataNascimento
             )
         {
-
             AreaCoordenacao = areaCoordenacao;
             FormadoresAssociados = new List<Formador>();
         }
@@ -49,19 +44,24 @@ namespace ADOSMELHORES.Modelos
                 FormadoresAssociados.Add(formador);
             }
         }
+
         public void RemoverFormador(Formador formador)
         {
             FormadoresAssociados.Remove(formador);
         }
-        //public override decimal CalcularCustoMensal()
-        //{
-        //    return SalarioBase;
-        //}
+
         public int NumeroFormadores => FormadoresAssociados.Count;
 
         public override string ToString()
         {
             return $"{base.ToString()} - {AreaCoordenacao} - {NumeroFormadores} formadores";
+        }
+
+        
+        public DateTime ValidadeRegistoCriminal
+        {
+            get => DataFimRegistoCrim;
+            set => DataFimRegistoCrim = value;
         }
     }
 }

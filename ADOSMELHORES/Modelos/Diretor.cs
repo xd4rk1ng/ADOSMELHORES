@@ -1,20 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ADOSMELHORES.Modelos
 {
-    internal class Diretor : Funcionario
+    public class Diretor : Funcionario
     {
-        //atributos pedidos na ficha
+        public bool IsencaoHorario { get; set; }
         public decimal BonusMensal { get; set; }
         public bool CarroEmpresa { get; set; }
-        public bool IsencaoHorario { get; set; } //bool faz sentido?
 
         //atributos adicionais
-        public string AreaDiretoria { get; set; } //para correlacionar com a secretaria
+        public List<string> AreasDiretoria { get; set; } = new List<string>(); //para correlacionar com a secretaria
+
+        public string AreasDiretoriaString
+        {
+            get
+            {
+                return AreasDiretoria != null && AreasDiretoria.Count > 0
+                    ? string.Join(", ", AreasDiretoria)
+                    : "Nenhuma";
+            }
+        }
 
         //lista de secretárias que trabalham com o diretor
         public List<Secretaria> SecretariasSubordinadas { get; set; }
@@ -32,8 +38,8 @@ namespace ADOSMELHORES.Modelos
                 DateTime dataNascimento,
                 decimal bonusMensal,
                 bool carroEmpresa,
-                bool isencaoHorario,
-                string areaDiretoria
+                bool isencaoHorario
+                //string areaDiretoria
 
             ) : base (
                 id,
@@ -48,36 +54,45 @@ namespace ADOSMELHORES.Modelos
                 dataNascimento
             )
         {
+            IsencaoHorario = isencaoHorario;
             BonusMensal = bonusMensal;
             CarroEmpresa = carroEmpresa;
             IsencaoHorario = isencaoHorario;
-            AreaDiretoria = areaDiretoria;
             
+            //AreaDiretoria = areaDiretoria;
+            AreasDiretoria = new List<string>();
             SecretariasSubordinadas = new List<Secretaria>();
         }
 
         //implementar método de calcula de salario do diretor
         //public override decimal CalcularSalario() => SalarioBase + BonusMensal;
 
-        //metodo para calcular bonus mensal
+        //metodo para calcular bonus mensal(irá para FormsCalcularRemuneracao)
         public decimal CalcularBonusMensal()
         {
             decimal bonus = 0;
 
             //Fatores que influenciam no bonus
-            //1. Número de secretárias subordinadas
-            bonus += SecretariasSubordinadas.Count * 50; //exemplo: 50 por secretária
+            // 1. Bônus por áreas de direção (200€ por área)
+            bonus += (AreasDiretoria?.Count ?? 0) * 200;
 
-            //2. Tempo na empresa
-            int anosNaEmpresa = DateTime.Now.Year - DataIniContrato.Year;
-            bonus += anosNaEmpresa * 100; //exemplo: 100 por ano na empresa
+            // 2. Bônus por secretárias subordinadas (30€ por secretária)
+            bonus += (SecretariasSubordinadas?.Count ?? 0) * 30;
 
             //3. Se tem carro da empresa
             if (CarroEmpresa)
-            {                
+            {
                 bonus -= 300; //desconta 300 do bonus se tiver carro da empresa
             }
-            return bonus;
+
+
+            //4. Se tem isençao de horário
+            if (IsencaoHorario)
+            {
+                bonus += 200; //adiciona 200 ao bonus se tiver isenção de horário
+            }
+
+            return Math.Max(bonus, 0);//garante que o bonus não seja negativo
 
         }
 
@@ -99,12 +114,9 @@ namespace ADOSMELHORES.Modelos
             }
         }
 
-        // Obter todas as secretarias de um diretor
-        public List<Secretaria> ObterSecretarias()
+        public override string ToString()
         {
-            return SecretariasSubordinadas;
+            return $"{base.ToString()} - Diretor - Bónus: {BonusMensal:C} - Carro: {(CarroEmpresa ? "Sim" : "Não")}";
         }
-
-
     }
 }
