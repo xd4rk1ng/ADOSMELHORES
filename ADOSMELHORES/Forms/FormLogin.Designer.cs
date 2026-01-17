@@ -32,7 +32,7 @@
             this.lblPassword = new System.Windows.Forms.Label();
             this.btnEntrar = new System.Windows.Forms.Button();
             this.txtPassword = new System.Windows.Forms.TextBox();
-            this.butaoToggle1 = new ADOSMELHORES.Controls.ButaoToggle();
+            this.customDatePicker1 = new ADOSMELHORES.Controls.RJControls.CustomDatePicker();
             this.SuspendLayout();
             // 
             // lblTitulo
@@ -74,26 +74,26 @@
             this.txtPassword.Size = new System.Drawing.Size(160, 20);
             this.txtPassword.TabIndex = 1;
             // 
-            // butaoToggle1
+            // customDatePicker1
             // 
-            this.butaoToggle1.AutoSize = true;
-            this.butaoToggle1.Location = new System.Drawing.Point(125, 204);
-            this.butaoToggle1.MinimumSize = new System.Drawing.Size(45, 22);
-            this.butaoToggle1.Name = "butaoToggle1";
-            this.butaoToggle1.OffBackColor = System.Drawing.Color.Gray;
-            this.butaoToggle1.OffToggleColor = System.Drawing.Color.Gainsboro;
-            this.butaoToggle1.OnBackColor = System.Drawing.Color.MediumSlateBlue;
-            this.butaoToggle1.OnToggleColor = System.Drawing.Color.WhiteSmoke;
-            this.butaoToggle1.Size = new System.Drawing.Size(45, 22);
-            this.butaoToggle1.TabIndex = 2;
-            this.butaoToggle1.UseVisualStyleBackColor = true;
+            this.customDatePicker1.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.customDatePicker1.BorderSize = 0;
+            this.customDatePicker1.CalendarMonthBackground = System.Drawing.Color.MediumSlateBlue;
+            this.customDatePicker1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F);
+            this.customDatePicker1.Location = new System.Drawing.Point(45, 205);
+            this.customDatePicker1.MinimumSize = new System.Drawing.Size(0, 35);
+            this.customDatePicker1.Name = "customDatePicker1";
+            this.customDatePicker1.Size = new System.Drawing.Size(232, 35);
+            this.customDatePicker1.SkinColor = System.Drawing.Color.MediumSlateBlue;
+            this.customDatePicker1.TabIndex = 2;
+            this.customDatePicker1.TextColor = System.Drawing.Color.White;
             // 
             // FormLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(309, 261);
-            this.Controls.Add(this.butaoToggle1);
+            this.Controls.Add(this.customDatePicker1);
             this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.btnEntrar);
             this.Controls.Add(this.lblTitulo);
@@ -115,6 +115,6 @@
         private System.Windows.Forms.Label lblPassword;
         private System.Windows.Forms.Button btnEntrar;
         private System.Windows.Forms.TextBox txtPassword;
-        private Controls.ButaoToggle butaoToggle1;
+        private Controls.RJControls.CustomDatePicker customDatePicker1;
     }
 }

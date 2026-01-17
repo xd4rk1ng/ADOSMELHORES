@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ADOSMELHORES.Controls
+namespace ADOSMELHORES.Controls.Features
 {
     public partial class ButaoToggle : CheckBox
     {
