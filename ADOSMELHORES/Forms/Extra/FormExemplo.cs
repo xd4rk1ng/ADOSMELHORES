@@ -25,7 +25,7 @@ namespace ADOSMELHORES.Forms
             if (txtBxNome.Text != string.Empty) // se a text box nao estiver vazia
                 {
                 // Corrigido: Usa a propriedade empresa da FormInicial e correspondência de padrão
-                if (_main.empresa is Empresa empresa && empresa.Funcionarios is List<Funcionario> colaboradores)
+                if (_main._empresa is Empresa empresa && empresa.Funcionarios is List<Funcionario> colaboradores)
                 {
                     colaboradores.Add(new Exemplo(nome: txtBxNome.Text));
                     _main.UpdateListBox();

@@ -20,7 +20,7 @@ namespace ADOSMELHORES
 
             // Corrigido: instanciando Empresa e passando para FormInicial
             var empresa = new Empresa("NomeDaEmpresa");
-            Application.Run(new Forms.FormInicial(empresa));
+            Application.Run(new Forms.FormLogin(empresa));
         }
     }
 }
