@@ -25,11 +25,11 @@ namespace ADOSMELHORES.Forms
             _empresa = empresa;
         }
 
-        public void UpdateListBox()
-        {
-            listBox1.DataSource = null;
-            listBox1.DataSource = _empresa.Funcionarios; 
-        }
+        //public void UpdateListBox()
+        //{
+        //    listBox1.DataSource = null;
+        //    listBox1.DataSource = _empresa.Funcionarios; 
+        //}
 
         private void btnExemplo_Click_1(object sender, EventArgs e)
         {
@@ -46,7 +46,7 @@ namespace ADOSMELHORES.Forms
 
         private void btnCoordenador_Click(object sender, EventArgs e)
         {
-            listBox1.DataSource = null;                // reset binding
+            //listBox1.DataSource = null;                // reset binding
             //listBox1.DataSource = Empresa.Colaboradores; // or any list
         }
 

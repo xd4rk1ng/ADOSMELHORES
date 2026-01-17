@@ -28,7 +28,7 @@ namespace ADOSMELHORES.Forms
                 if (_main._empresa is Empresa empresa && empresa.Funcionarios is List<Funcionario> colaboradores)
                 {
                     colaboradores.Add(new Exemplo(nome: txtBxNome.Text));
-                    _main.UpdateListBox();
+                    //_main.UpdateListBox();
                 }
                 else
                 {
