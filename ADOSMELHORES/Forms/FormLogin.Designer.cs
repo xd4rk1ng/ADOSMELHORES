@@ -32,6 +32,7 @@
             this.lblPassword = new System.Windows.Forms.Label();
             this.btnEntrar = new System.Windows.Forms.Button();
             this.txtPassword = new System.Windows.Forms.TextBox();
+            this.butaoToggle1 = new ADOSMELHORES.Controls.ButaoToggle();
             this.SuspendLayout();
             // 
             // lblTitulo
@@ -73,18 +74,33 @@
             this.txtPassword.Size = new System.Drawing.Size(160, 20);
             this.txtPassword.TabIndex = 1;
             // 
-            // Login
+            // butaoToggle1
+            // 
+            this.butaoToggle1.AutoSize = true;
+            this.butaoToggle1.Location = new System.Drawing.Point(125, 204);
+            this.butaoToggle1.MinimumSize = new System.Drawing.Size(45, 22);
+            this.butaoToggle1.Name = "butaoToggle1";
+            this.butaoToggle1.OffBackColor = System.Drawing.Color.Gray;
+            this.butaoToggle1.OffToggleColor = System.Drawing.Color.Gainsboro;
+            this.butaoToggle1.OnBackColor = System.Drawing.Color.MediumSlateBlue;
+            this.butaoToggle1.OnToggleColor = System.Drawing.Color.WhiteSmoke;
+            this.butaoToggle1.Size = new System.Drawing.Size(45, 22);
+            this.butaoToggle1.TabIndex = 2;
+            this.butaoToggle1.UseVisualStyleBackColor = true;
+            // 
+            // FormLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(309, 261);
+            this.Controls.Add(this.butaoToggle1);
             this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.btnEntrar);
             this.Controls.Add(this.lblTitulo);
             this.Controls.Add(this.lblPassword);
             this.MaximumSize = new System.Drawing.Size(325, 300);
             this.MinimumSize = new System.Drawing.Size(325, 300);
-            this.Name = "Login";
+            this.Name = "FormLogin";
             this.Padding = new System.Windows.Forms.Padding(10);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Login";
@@ -99,5 +115,6 @@
         private System.Windows.Forms.Label lblPassword;
         private System.Windows.Forms.Button btnEntrar;
         private System.Windows.Forms.TextBox txtPassword;
+        private Controls.ButaoToggle butaoToggle1;
     }
 }

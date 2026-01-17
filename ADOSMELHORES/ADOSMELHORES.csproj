@@ -191,5 +191,11 @@
   <ItemGroup>
     <Folder Include="Forms\Secretarias\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ADOSMELHORES.Controls\ADOSMELHORES.Controls.csproj">
+      <Project>{c83e06be-e010-496a-ad5b-7a471d648a4f}</Project>
+      <Name>ADOSMELHORES.Controls</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
