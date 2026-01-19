@@ -13,7 +13,17 @@ namespace ADOSMELHORES.Modelos
         public string Area { get; set; }
 
         //atributos adicionais
-        //public List<string> Idiomas { get; set; }
+        public List<string> IdiomasFalados { get; set; }
+
+        public string IdiomasFaladosString
+        {
+            get
+            {
+                return IdiomasFalados != null && IdiomasFalados.Count > 0
+                    ? string.Join(", ", IdiomasFalados)
+                    : "Nenhum";
+            }
+        }
 
         public Secretaria(
             int id,
@@ -45,6 +55,7 @@ namespace ADOSMELHORES.Modelos
             //Idiomas = new List<string>();
             DiretorReporta = diretorReporta;
             Area = area;
+            IdiomasFalados = new List<string>();
         }
 
         // Método para verificar se reporta a um diretor específico
@@ -59,6 +70,12 @@ namespace ADOSMELHORES.Modelos
             return DiretorReporta != null ?
                    $"Diretor: {DiretorReporta.Nome} - Contacto: {DiretorReporta.Contacto}" :
                    "Não reporta a nenhum diretor";
+        }
+
+        //NOVO: Método ToString para exibir no CheckedListBox
+        public override string ToString()
+        {
+            return $"{Nome} - {Area}";
         }
     }
 }

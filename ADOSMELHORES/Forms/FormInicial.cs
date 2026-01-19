@@ -1,4 +1,5 @@
 ﻿using AdosMelhores.Forms;
+using ADOSMELHORES.Forms.Secretarias;
 using ADOSMELHORES.Modelos;
 using System;
 using System.Collections.Generic;
@@ -57,6 +58,14 @@ namespace ADOSMELHORES.Forms
             {
                 MessageBox.Show($"Erro ao abrir formulário de Diretores: {ex.Message}",
                     "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnSecretaria_Click(object sender, EventArgs e)
+        {
+            using (var form = new FormGerirSecretarias(empresa))
+            {
+                form.ShowDialog();
             }
         }
     }

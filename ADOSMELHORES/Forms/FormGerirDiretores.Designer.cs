@@ -475,8 +475,6 @@
         private System.Windows.Forms.Button btnLimpar;
         private System.Windows.Forms.Button btnCalcularValor;
         private System.Windows.Forms.Button btnAtualizarRegistoCriminal;
-        //private System.Windows.Forms.TextBox txtAreaDiretoria;
-        //private System.Windows.Forms.Label label6;
         private System.Windows.Forms.NumericUpDown numSalarioBase;
         private System.Windows.Forms.Label label7;
 

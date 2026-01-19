@@ -67,6 +67,7 @@
             this.btnSecretaria.TabIndex = 2;
             this.btnSecretaria.Text = "Inserir Secretaria";
             this.btnSecretaria.UseVisualStyleBackColor = true;
+            this.btnSecretaria.Click += new System.EventHandler(this.btnSecretaria_Click);
             // 
             // btnDiretor
             // 
