@@ -30,73 +30,73 @@ namespace AdosMelhores.Forms
             empresa = empresaRef;
 
             //Criar Secretárias de exemplo (se não existirem). APAGAR DEPOIS
-            CriarSecretariasExemplo();
+            //CriarSecretariasExemplo();
 
             ConfigurarForm();
         }
 
         //Podemos apagar isso depois, é só para termos secretárias para alocar
-        private void CriarSecretariasExemplo()
-        {
-            // Verificar se já existem secretárias
-            var secretariasExistentes = empresa.Funcionarios.OfType<Secretaria>().Count();
+        //private void CriarSecretariasExemplo()
+        //{
+        //    // Verificar se já existem secretárias
+        //    var secretariasExistentes = empresa.Funcionarios.OfType<Secretaria>().Count();
 
-            if (secretariasExistentes == 0)
-            {
-                // Criar algumas secretárias de exemplo
-                var secretariasExemplo = new List<Secretaria>
-                {
-                    new Secretaria(
-                        id: empresa.ObterProximoID(),
-                        nif: 100000001,
-                        nome: "Ana Silva",
-                        morada: "Rua das Flores, 123",
-                        contacto: "912345678",
-                        salarioBase: 900m,
-                        dataFimContrato: DateTime.Now.AddYears(2),
-                        dataIniContrato: DateTime.Now,
-                        dataFimRegistoCrim: DateTime.Now.AddYears(5),
-                        dataNascimento: new DateTime(1990, 5, 15),
-                        diretorReporta: null,
-                        area: "Administração"
-                    ),
-                    new Secretaria(
-                        id: empresa.ObterProximoID(),
-                        nif: 100000002,
-                        nome: "Maria Santos",
-                        morada: "Avenida Central, 456",
-                        contacto: "923456789",
-                        salarioBase: 950m,
-                        dataFimContrato: DateTime.Now.AddYears(3),
-                        dataIniContrato: DateTime.Now.AddMonths(-6),
-                        dataFimRegistoCrim: DateTime.Now.AddYears(4),
-                        dataNascimento: new DateTime(1988, 8, 22),
-                        diretorReporta: null,
-                        area: "Recursos Humanos"
-                    ),
-                    new Secretaria(
-                        id: empresa.ObterProximoID(),
-                        nif: 100000003,
-                        nome: "Carla Oliveira",
-                        morada: "Travessa do Comércio, 789",
-                        contacto: "934567890",
-                        salarioBase: 850m,
-                        dataFimContrato: DateTime.Now.AddYears(1),
-                        dataIniContrato: DateTime.Now.AddMonths(-3),
-                        dataFimRegistoCrim: DateTime.Now.AddYears(3),
-                        dataNascimento: new DateTime(1995, 3, 10),
-                        diretorReporta: null,
-                        area: "Financeiro"
-                    )
-                };
+        //    if (secretariasExistentes == 0)
+        //    {
+        //        // Criar algumas secretárias de exemplo
+        //        var secretariasExemplo = new List<Secretaria>
+        //        {
+        //            new Secretaria(
+        //                id: empresa.ObterProximoID(),
+        //                nif: 100000001,
+        //                nome: "Ana Silva",
+        //                morada: "Rua das Flores, 123",
+        //                contacto: "912345678",
+        //                salarioBase: 900m,
+        //                dataFimContrato: DateTime.Now.AddYears(2),
+        //                dataIniContrato: DateTime.Now,
+        //                dataFimRegistoCrim: DateTime.Now.AddYears(5),
+        //                dataNascimento: new DateTime(1990, 5, 15),
+        //                diretorReporta: null,
+        //                area: "Administração"
+        //            ),
+        //            new Secretaria(
+        //                id: empresa.ObterProximoID(),
+        //                nif: 100000002,
+        //                nome: "Maria Santos",
+        //                morada: "Avenida Central, 456",
+        //                contacto: "923456789",
+        //                salarioBase: 950m,
+        //                dataFimContrato: DateTime.Now.AddYears(3),
+        //                dataIniContrato: DateTime.Now.AddMonths(-6),
+        //                dataFimRegistoCrim: DateTime.Now.AddYears(4),
+        //                dataNascimento: new DateTime(1988, 8, 22),
+        //                diretorReporta: null,
+        //                area: "Recursos Humanos"
+        //            ),
+        //            new Secretaria(
+        //                id: empresa.ObterProximoID(),
+        //                nif: 100000003,
+        //                nome: "Carla Oliveira",
+        //                morada: "Travessa do Comércio, 789",
+        //                contacto: "934567890",
+        //                salarioBase: 850m,
+        //                dataFimContrato: DateTime.Now.AddYears(1),
+        //                dataIniContrato: DateTime.Now.AddMonths(-3),
+        //                dataFimRegistoCrim: DateTime.Now.AddYears(3),
+        //                dataNascimento: new DateTime(1995, 3, 10),
+        //                diretorReporta: null,
+        //                area: "Financeiro"
+        //            )
+        //        };
 
-                // Adicionar à empresa
-                foreach (var secretaria in secretariasExemplo)
-                {
-                    empresa.AdicionarFuncionario(secretaria);
-                }
-            }
-        }
+        //        // Adicionar à empresa
+        //        foreach (var secretaria in secretariasExemplo)
+        //        {
+        //            empresa.AdicionarFuncionario(secretaria);
+        //        }
+        //    }
+        //}
         
 
         private void ConfigurarForm()
@@ -297,7 +297,8 @@ namespace AdosMelhores.Forms
                 }
             }
         }
-                
+
+        //novo
         private void CarregarSecretariasDisponiveis()
         {
             checkedListBoxSecretarias.Items.Clear();
@@ -314,65 +315,117 @@ namespace AdosMelhores.Forms
                 areasSelecionadas.Add(item.ToString());
             }
 
-            //Se não houver áreas selecionadas, não mostrar secretárias
+            // Se não houver áreas selecionadas, não mostrar secretárias
             if (areasSelecionadas.Count == 0)
             {
                 return;
             }
 
-            //Filtrar secretárias pelas áreas selecionadas ATUALIZAR DEPOIS
+            // Filtrar secretárias pelas áreas selecionadas
+            // AGORA: correspondência direta entre área do diretor e área da secretária
             foreach (var secretaria in todasSecretarias)
             {
                 bool pertenceAreaSelecionada = false;
 
                 foreach (string area in areasSelecionadas)
                 {
-                    if (area == "Direção-Geral")
+                    // Verificar se a secretária pertence à mesma área do diretor
+                    if (secretaria.Area == area)
                     {
-                        // Direção-Geral pode ter acesso a todas as secretárias de Administração
-                        if (secretaria.Area == "Administração")
-                        {
-                            pertenceAreaSelecionada = true;
-                            break;
-                        }
-                    }
-                    else if (area == "Comercial")
-                    {
-                        // Comercial pode ter acesso a secretárias de Comercial e Administração
-                        if (secretaria.Area == "Comercial" || secretaria.Area == "Administração")
-                        {
-                            pertenceAreaSelecionada = true;
-                            break;
-                        }
-                    }
-                    else if (area == "Formação")
-                    {
-                        // Formação pode ter acesso a secretárias de Administração
-                        if (secretaria.Area == "Administração")
-                        {
-                            pertenceAreaSelecionada = true;
-                            break;
-                        }
-                    }
-                    else
-                    {
-                        // Para outras áreas (Recursos Humanos, Financeiro), correspondência direta
-                        if (secretaria.Area == area)
-                        {
-                            pertenceAreaSelecionada = true;
-                            break;
-                        }
+                        pertenceAreaSelecionada = true;
+                        break;
                     }
                 }
 
-                //Adicionar apenas secretárias que pertencem às áreas selecionadas
+                // Adicionar apenas secretárias que pertencem às áreas selecionadas
                 if (pertenceAreaSelecionada)
                 {
                     checkedListBoxSecretarias.Items.Add(secretaria);
                 }
             }
-            AtualizarEstadoBotoes();            
+
+            AtualizarEstadoBotoes();
         }
+
+
+
+
+        //antigo
+        //private void CarregarSecretariasDisponiveis()
+        //{
+        //    checkedListBoxSecretarias.Items.Clear();
+
+        //    // Obter todas as secretárias disponíveis
+        //    var todasSecretarias = empresa.Funcionarios
+        //        .OfType<Secretaria>()
+        //        .ToList();
+
+        //    // Obter as áreas selecionadas do diretor
+        //    List<string> areasSelecionadas = new List<string>();
+        //    foreach (var item in checkedListBoxAreasDiretoria.CheckedItems)
+        //    {
+        //        areasSelecionadas.Add(item.ToString());
+        //    }
+
+        //    //Se não houver áreas selecionadas, não mostrar secretárias
+        //    if (areasSelecionadas.Count == 0)
+        //    {
+        //        return;
+        //    }
+
+        //    //Filtrar secretárias pelas áreas selecionadas ATUALIZAR DEPOIS
+        //    foreach (var secretaria in todasSecretarias)
+        //    {
+        //        bool pertenceAreaSelecionada = false;
+
+        //        foreach (string area in areasSelecionadas)
+        //        {
+        //            if (area == "Direção-Geral")
+        //            {
+        //                // Direção-Geral pode ter acesso a todas as secretárias de Administração
+        //                if (secretaria.Area == "Administração")
+        //                {
+        //                    pertenceAreaSelecionada = true;
+        //                    break;
+        //                }
+        //            }
+        //            else if (area == "Comercial")
+        //            {
+        //                // Comercial pode ter acesso a secretárias de Comercial e Administração
+        //                if (secretaria.Area == "Comercial" || secretaria.Area == "Administração")
+        //                {
+        //                    pertenceAreaSelecionada = true;
+        //                    break;
+        //                }
+        //            }
+        //            else if (area == "Formação")
+        //            {
+        //                // Formação pode ter acesso a secretárias de Administração
+        //                if (secretaria.Area == "Administração")
+        //                {
+        //                    pertenceAreaSelecionada = true;
+        //                    break;
+        //                }
+        //            }
+        //            else
+        //            {
+        //                // Para outras áreas (Recursos Humanos, Financeiro), correspondência direta
+        //                if (secretaria.Area == area)
+        //                {
+        //                    pertenceAreaSelecionada = true;
+        //                    break;
+        //                }
+        //            }
+        //        }
+
+        //        //Adicionar apenas secretárias que pertencem às áreas selecionadas
+        //        if (pertenceAreaSelecionada)
+        //        {
+        //            checkedListBoxSecretarias.Items.Add(secretaria);
+        //        }
+        //    }
+        //    AtualizarEstadoBotoes();            
+        //}
 
         // Marcar secretárias já alocadas ao diretor VERIFICAR SE ISSO É UTIL
         private void MarcarSecretariasAlocadas(Diretor diretor)

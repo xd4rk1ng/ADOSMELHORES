@@ -228,6 +228,7 @@ namespace ADOSMELHORES.Forms.Secretarias
             CarregarDiretoresDisponiveis();
         }
 
+        //novo CarregarDiretoresDisponiveis
         private void CarregarDiretoresDisponiveis()
         {
             checkedListBoxDiretores.Items.Clear();
@@ -242,22 +243,56 @@ namespace ADOSMELHORES.Forms.Secretarias
                 .OfType<Diretor>()
                 .ToList();
 
-            // Filtrar diretores pela área selecionada
+            // Filtrar diretores pela área selecionada (correspondência direta)
             foreach (var diretor in todosDiretores)
             {
-                if (diretor.AreasDiretoria != null && diretor.AreasDiretoria.Contains(areaSelecionada))
+                bool podeSerResponsavel = false;
+
+                if (diretor.AreasDiretoria != null)
+                {
+                    // Verificar se o diretor tem a mesma área que a secretária                    
+                    podeSerResponsavel = diretor.AreasDiretoria.Contains(areaSelecionada);
+                }
+
+                if (podeSerResponsavel)
                 {
                     checkedListBoxDiretores.Items.Add(diretor);
                 }
             }
-
-            // ✅ PARA TESTE: Se não houver diretores, adicionar mensagem informativa
-            if (checkedListBoxDiretores.Items.Count == 0)
-            {
-                // Você pode descomentar a linha abaixo se quiser uma mensagem
-                // MessageBox.Show($"Não há diretores disponíveis para a área '{areaSelecionada}'.", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
         }
+
+
+        //Antigo CarregarDiretoresDisponiveis
+        //private void CarregarDiretoresDisponiveis()
+        //{
+        //    checkedListBoxDiretores.Items.Clear();
+
+        //    if (listBoxArea.SelectedItem == null)
+        //        return;
+
+        //    string areaSelecionada = listBoxArea.SelectedItem.ToString();
+
+        //    // Obter todos os diretores
+        //    var todosDiretores = empresa.Funcionarios
+        //        .OfType<Diretor>()
+        //        .ToList();
+
+        //    // Filtrar diretores pela área selecionada
+        //    foreach (var diretor in todosDiretores)
+        //    {
+        //        if (diretor.AreasDiretoria != null && diretor.AreasDiretoria.Contains(areaSelecionada))
+        //        {
+        //            checkedListBoxDiretores.Items.Add(diretor);
+        //        }
+        //    }
+
+        //    //Se não houver diretores, adicionar mensagem informativa
+        //    if (checkedListBoxDiretores.Items.Count == 0)
+        //    {
+                
+        //       MessageBox.Show($"Não há diretores disponíveis para a área '{areaSelecionada}'.", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        //    }
+        //}
 
         private void ValidarCamposParaHabilitarInserir(object sender, EventArgs e)
         {
