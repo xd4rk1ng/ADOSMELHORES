@@ -7,7 +7,7 @@ Tem que ter:
 
 
 O Diretor poderá trabalhar em em uma ou mais áreas de Direção. Quando não há diretor em uma área, ele pode ocupar essa área. mas não pode haver mais do que um diretor por área. as áreas são:
- Recursos Humanos
+Recursos Humanos
 Financeiro
 Formação
 Comercial

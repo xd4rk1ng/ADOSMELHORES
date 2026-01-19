@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Relatório/Relatório.md",
+                "file": "WinformsDocs/Modelos/Secretaria.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Relatório"
+              "title": "Secretaria"
             }
           }
         ]
@@ -185,6 +185,9 @@
   },
   "active": "a96831e975b2b29c",
   "lastOpenFiles": [
+    "WinformsDocs/Modelos/Diretor.md",
+    "WinformsDocs/Modelos/Secretaria.md",
+    "Relatório/Relatório.md",
     "Relatório/TA-606-2.pdf",
     "WinformsDocs/Modelos/Empresa.md",
     "ADOSMELHORES/Forms/FormGerirDiretores.cs",
@@ -197,11 +200,8 @@
     "ADOSMELHORES/Forms/FormCalcularValorFormacao.cs",
     "ADOSMELHORES/Forms/FormCalcularValorFormacao.Designer.cs",
     "ADOSMELHORES/Forms/FormAtualizarRegistoCriminalCoordenador.cs",
-    "WinformsDocs/Modelos/Diretor.md",
     "WinformsDocs/Modelos/(Abstrata) Funcionario.md",
-    "Relatório/Relatório.md",
     "WinformsDocs/Estrutura de pastas.md",
-    "WinformsDocs/Modelos/Secretaria.md",
     "WinformsDocs/Modelos/Formador.md",
     "WinformsDocs/Modelos/Coordenador.md",
     "WinformsDocs/We need think about....md"

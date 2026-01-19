@@ -1,9 +1,16 @@
-﻿namespace AdosMelhores.Forms
+﻿namespace ADOSMELHORES.Forms.Secretarias
 {
-    partial class FormGerirDiretores
+    partial class FormGerirSecretarias
     {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -15,15 +22,18 @@
 
         #region Windows Form Designer generated code
 
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
         private void InitializeComponent()
         {
             this.grpDadosDiretor = new System.Windows.Forms.GroupBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.btnCalcularValor = new System.Windows.Forms.Button();
             this.checkedListBoxAreasDiretoria = new System.Windows.Forms.CheckedListBox();
             this.numSalarioBase = new System.Windows.Forms.NumericUpDown();
             this.label7 = new System.Windows.Forms.Label();
-            this.checkedListBoxSecretarias = new System.Windows.Forms.CheckedListBox();
+            this.checkedListBoxDiretores = new System.Windows.Forms.CheckedListBox();
             this.label5 = new System.Windows.Forms.Label();
             this.lblStatusRegistoCriminal = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
@@ -59,11 +69,10 @@
             // grpDadosDiretor
             // 
             this.grpDadosDiretor.Controls.Add(this.label8);
-            this.grpDadosDiretor.Controls.Add(this.btnCalcularValor);
             this.grpDadosDiretor.Controls.Add(this.checkedListBoxAreasDiretoria);
             this.grpDadosDiretor.Controls.Add(this.numSalarioBase);
             this.grpDadosDiretor.Controls.Add(this.label7);
-            this.grpDadosDiretor.Controls.Add(this.checkedListBoxSecretarias);
+            this.grpDadosDiretor.Controls.Add(this.checkedListBoxDiretores);
             this.grpDadosDiretor.Controls.Add(this.label5);
             this.grpDadosDiretor.Controls.Add(this.lblStatusRegistoCriminal);
             this.grpDadosDiretor.Controls.Add(this.label11);
@@ -79,36 +88,24 @@
             this.grpDadosDiretor.Controls.Add(this.label2);
             this.grpDadosDiretor.Controls.Add(this.txtID);
             this.grpDadosDiretor.Controls.Add(this.label1);
-            this.grpDadosDiretor.Location = new System.Drawing.Point(16, 15);
+            this.grpDadosDiretor.Location = new System.Drawing.Point(13, 13);
             this.grpDadosDiretor.Margin = new System.Windows.Forms.Padding(4);
             this.grpDadosDiretor.Name = "grpDadosDiretor";
             this.grpDadosDiretor.Padding = new System.Windows.Forms.Padding(4);
             this.grpDadosDiretor.Size = new System.Drawing.Size(667, 468);
-            this.grpDadosDiretor.TabIndex = 0;
+            this.grpDadosDiretor.TabIndex = 1;
             this.grpDadosDiretor.TabStop = false;
-            this.grpDadosDiretor.Text = "Dados do Diretor";
+            this.grpDadosDiretor.Text = "Dados da Secretária";
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(28, 263);
+            this.label8.Location = new System.Drawing.Point(27, 333);
             this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(116, 16);
+            this.label8.Size = new System.Drawing.Size(130, 16);
             this.label8.TabIndex = 28;
-            this.label8.Text = "Áreas de Direção:";
-            // 
-            // btnCalcularValor
-            // 
-            this.btnCalcularValor.Enabled = false;
-            this.btnCalcularValor.Location = new System.Drawing.Point(494, 395);
-            this.btnCalcularValor.Margin = new System.Windows.Forms.Padding(4);
-            this.btnCalcularValor.Name = "btnCalcularValor";
-            this.btnCalcularValor.Size = new System.Drawing.Size(155, 43);
-            this.btnCalcularValor.TabIndex = 4;
-            this.btnCalcularValor.Text = "Calcular Remuneração";
-            this.btnCalcularValor.UseVisualStyleBackColor = true;
-            this.btnCalcularValor.Click += new System.EventHandler(this.btnCalcularValor_Click);
+            this.label8.Text = "Áreas de Secretaria:";
             // 
             // checkedListBoxAreasDiretoria
             // 
@@ -119,10 +116,10 @@
             "Formação",
             "Comercial",
             "Direção-Geral"});
-            this.checkedListBoxAreasDiretoria.Location = new System.Drawing.Point(200, 260);
+            this.checkedListBoxAreasDiretoria.Location = new System.Drawing.Point(200, 333);
             this.checkedListBoxAreasDiretoria.Margin = new System.Windows.Forms.Padding(4);
             this.checkedListBoxAreasDiretoria.Name = "checkedListBoxAreasDiretoria";
-            this.checkedListBoxAreasDiretoria.Size = new System.Drawing.Size(265, 106);
+            this.checkedListBoxAreasDiretoria.Size = new System.Drawing.Size(200, 106);
             this.checkedListBoxAreasDiretoria.TabIndex = 27;
             // 
             // numSalarioBase
@@ -150,24 +147,24 @@
             this.label7.TabIndex = 25;
             this.label7.Text = "Salário Base:";
             // 
-            // checkedListBoxSecretarias
+            // checkedListBoxDiretores
             // 
-            this.checkedListBoxSecretarias.FormattingEnabled = true;
-            this.checkedListBoxSecretarias.Location = new System.Drawing.Point(200, 374);
-            this.checkedListBoxSecretarias.Margin = new System.Windows.Forms.Padding(4);
-            this.checkedListBoxSecretarias.Name = "checkedListBoxSecretarias";
-            this.checkedListBoxSecretarias.Size = new System.Drawing.Size(265, 89);
-            this.checkedListBoxSecretarias.TabIndex = 22;
+            this.checkedListBoxDiretores.FormattingEnabled = true;
+            this.checkedListBoxDiretores.Location = new System.Drawing.Point(459, 276);
+            this.checkedListBoxDiretores.Margin = new System.Windows.Forms.Padding(4);
+            this.checkedListBoxDiretores.Name = "checkedListBoxDiretores";
+            this.checkedListBoxDiretores.Size = new System.Drawing.Size(200, 89);
+            this.checkedListBoxDiretores.TabIndex = 22;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(27, 374);
+            this.label5.Location = new System.Drawing.Point(408, 256);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(140, 16);
+            this.label5.Size = new System.Drawing.Size(156, 16);
             this.label5.TabIndex = 21;
-            this.label5.Text = "Secretárias Alocadas:";
+            this.label5.Text = "Diretores Responsáveis:";
             // 
             // lblStatusRegistoCriminal
             // 
@@ -308,12 +305,12 @@
             this.grpAcoes.Controls.Add(this.btnRemover);
             this.grpAcoes.Controls.Add(this.btnAlterar);
             this.grpAcoes.Controls.Add(this.btnInserir);
-            this.grpAcoes.Location = new System.Drawing.Point(691, 15);
+            this.grpAcoes.Location = new System.Drawing.Point(714, 13);
             this.grpAcoes.Margin = new System.Windows.Forms.Padding(4);
             this.grpAcoes.Name = "grpAcoes";
             this.grpAcoes.Padding = new System.Windows.Forms.Padding(4);
             this.grpAcoes.Size = new System.Drawing.Size(267, 468);
-            this.grpAcoes.TabIndex = 1;
+            this.grpAcoes.TabIndex = 2;
             this.grpAcoes.TabStop = false;
             this.grpAcoes.Text = "Ações";
             // 
@@ -327,7 +324,6 @@
             this.btnAtualizarRegistoCriminal.TabIndex = 6;
             this.btnAtualizarRegistoCriminal.Text = "Atualizar Registo Criminal";
             this.btnAtualizarRegistoCriminal.UseVisualStyleBackColor = true;
-            this.btnAtualizarRegistoCriminal.Click += new System.EventHandler(this.btnAtualizarRegistoCriminal_Click);
             // 
             // btnLimpar
             // 
@@ -338,7 +334,6 @@
             this.btnLimpar.TabIndex = 3;
             this.btnLimpar.Text = "Limpar Campos";
             this.btnLimpar.UseVisualStyleBackColor = true;
-            this.btnLimpar.Click += new System.EventHandler(this.btnLimpar_Click);
             // 
             // btnRemover
             // 
@@ -350,7 +345,6 @@
             this.btnRemover.TabIndex = 2;
             this.btnRemover.Text = "Remover";
             this.btnRemover.UseVisualStyleBackColor = true;
-            this.btnRemover.Click += new System.EventHandler(this.btnRemover_Click);
             // 
             // btnAlterar
             // 
@@ -362,7 +356,6 @@
             this.btnAlterar.TabIndex = 1;
             this.btnAlterar.Text = "Alterar Selecionado";
             this.btnAlterar.UseVisualStyleBackColor = true;
-            this.btnAlterar.Click += new System.EventHandler(this.btnAlterar_Click);
             // 
             // btnInserir
             // 
@@ -373,20 +366,19 @@
             this.btnInserir.TabIndex = 0;
             this.btnInserir.Text = "Inserir Novo";
             this.btnInserir.UseVisualStyleBackColor = true;
-            this.btnInserir.Click += new System.EventHandler(this.btnInserir_Click);
             // 
             // grpListaDiretores
             // 
             this.grpListaDiretores.Controls.Add(this.lblTotalDiretores);
             this.grpListaDiretores.Controls.Add(this.dgvDiretores);
-            this.grpListaDiretores.Location = new System.Drawing.Point(16, 489);
+            this.grpListaDiretores.Location = new System.Drawing.Point(23, 493);
             this.grpListaDiretores.Margin = new System.Windows.Forms.Padding(4);
             this.grpListaDiretores.Name = "grpListaDiretores";
             this.grpListaDiretores.Padding = new System.Windows.Forms.Padding(4);
             this.grpListaDiretores.Size = new System.Drawing.Size(941, 308);
-            this.grpListaDiretores.TabIndex = 2;
+            this.grpListaDiretores.TabIndex = 7;
             this.grpListaDiretores.TabStop = false;
-            this.grpListaDiretores.Text = "Lista de Diretores";
+            this.grpListaDiretores.Text = "Lista de Secretárias";
             // 
             // lblTotalDiretores
             // 
@@ -411,34 +403,28 @@
             this.dgvDiretores.RowHeadersWidth = 51;
             this.dgvDiretores.Size = new System.Drawing.Size(900, 228);
             this.dgvDiretores.TabIndex = 0;
-            this.dgvDiretores.SelectionChanged += new System.EventHandler(this.dgvDiretores_SelectionChanged);
             // 
             // btnFechar
             // 
-            this.btnFechar.Location = new System.Drawing.Point(824, 805);
+            this.btnFechar.Location = new System.Drawing.Point(860, 809);
             this.btnFechar.Margin = new System.Windows.Forms.Padding(4);
             this.btnFechar.Name = "btnFechar";
             this.btnFechar.Size = new System.Drawing.Size(133, 37);
-            this.btnFechar.TabIndex = 3;
+            this.btnFechar.TabIndex = 8;
             this.btnFechar.Text = "Fechar";
             this.btnFechar.UseVisualStyleBackColor = true;
-            this.btnFechar.Click += new System.EventHandler(this.btnFechar_Click);
             // 
-            // FormGerirDiretores
+            // FormGerirSecretarias
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(973, 857);
+            this.ClientSize = new System.Drawing.Size(1006, 854);
             this.Controls.Add(this.btnFechar);
             this.Controls.Add(this.grpListaDiretores);
             this.Controls.Add(this.grpAcoes);
             this.Controls.Add(this.grpDadosDiretor);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Margin = new System.Windows.Forms.Padding(4);
-            this.MaximizeBox = false;
-            this.Name = "FormGerirDiretores";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Gestão de Diretores - ADOSMELHORES";
+            this.Name = "FormGerirSecretarias";
+            this.Text = "FormGerirSecretarias";
             this.grpDadosDiretor.ResumeLayout(false);
             this.grpDadosDiretor.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numSalarioBase)).EndInit();
@@ -453,42 +439,35 @@
         #endregion
 
         private System.Windows.Forms.GroupBox grpDadosDiretor;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtID;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox txtNome;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox txtMorada;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox txtContacto;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.DateTimePicker dtpDataFimContrato;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.DateTimePicker dtpDataRegistoCriminal;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label lblStatusRegistoCriminal;
-
-        private System.Windows.Forms.GroupBox grpAcoes;
-        private System.Windows.Forms.Button btnInserir;
-        private System.Windows.Forms.Button btnAlterar;
-        private System.Windows.Forms.Button btnRemover;
-        private System.Windows.Forms.Button btnLimpar;
-        private System.Windows.Forms.Button btnCalcularValor;
-        private System.Windows.Forms.Button btnAtualizarRegistoCriminal;
-        //private System.Windows.Forms.TextBox txtAreaDiretoria;
-        //private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.CheckedListBox checkedListBoxAreasDiretoria;
         private System.Windows.Forms.NumericUpDown numSalarioBase;
         private System.Windows.Forms.Label label7;
-
-
-        private System.Windows.Forms.GroupBox grpListaDiretores;
-        private System.Windows.Forms.DataGridView dgvDiretores;
-        private System.Windows.Forms.Label lblTotalDiretores;
-
-        private System.Windows.Forms.Button btnFechar;
-        private System.Windows.Forms.CheckedListBox checkedListBoxAreasDiretoria;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.CheckedListBox checkedListBoxSecretarias;
+        private System.Windows.Forms.CheckedListBox checkedListBoxDiretores;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label lblStatusRegistoCriminal;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.DateTimePicker dtpDataRegistoCriminal;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.DateTimePicker dtpDataFimContrato;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox txtContacto;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox txtMorada;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txtNome;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox txtID;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.GroupBox grpAcoes;
+        private System.Windows.Forms.Button btnAtualizarRegistoCriminal;
+        private System.Windows.Forms.Button btnLimpar;
+        private System.Windows.Forms.Button btnRemover;
+        private System.Windows.Forms.Button btnAlterar;
+        private System.Windows.Forms.Button btnInserir;
+        private System.Windows.Forms.GroupBox grpListaDiretores;
+        private System.Windows.Forms.Label lblTotalDiretores;
+        private System.Windows.Forms.DataGridView dgvDiretores;
+        private System.Windows.Forms.Button btnFechar;
     }
 }
