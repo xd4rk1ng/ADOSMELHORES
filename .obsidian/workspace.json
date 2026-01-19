@@ -11,12 +11,14 @@
             "id": "a96831e975b2b29c",
             "type": "leaf",
             "state": {
-              "type": "pdf",
+              "type": "markdown",
               "state": {
-                "file": "Relatório/TA-606-2.pdf"
+                "file": "Relatório/Relatório.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-file-text",
-              "title": "TA-606-2"
+              "icon": "lucide-file",
+              "title": "Relatório"
             }
           }
         ]
@@ -183,10 +185,10 @@
   },
   "active": "a96831e975b2b29c",
   "lastOpenFiles": [
+    "Relatório/TA-606-2.pdf",
     "WinformsDocs/Modelos/Empresa.md",
     "ADOSMELHORES/Forms/FormGerirDiretores.cs",
     "ADOSMELHORES/Modelos/lzzatnnr.1hi~",
-    "Relatório/TA-606-2.pdf",
     "Pasted image 20260112180432.png",
     "FormGerirFormadores.resx",
     "FormGerirFormadores.cs",

@@ -22,6 +22,8 @@
             this.checkedListBoxAreasDiretoria = new System.Windows.Forms.CheckedListBox();
             this.numSalarioBase = new System.Windows.Forms.NumericUpDown();
             this.label7 = new System.Windows.Forms.Label();
+            this.checkedListBoxSecretarias = new System.Windows.Forms.CheckedListBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.lblStatusRegistoCriminal = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.dtpDataRegistoCriminal = new System.Windows.Forms.DateTimePicker();
@@ -47,8 +49,6 @@
             this.lblTotalDiretores = new System.Windows.Forms.Label();
             this.dgvDiretores = new System.Windows.Forms.DataGridView();
             this.btnFechar = new System.Windows.Forms.Button();
-            this.checkedListBoxSecretarias = new System.Windows.Forms.CheckedListBox();
-            this.label5 = new System.Windows.Forms.Label();
             this.grpDadosDiretor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numSalarioBase)).BeginInit();
             this.grpAcoes.SuspendLayout();
@@ -59,6 +59,7 @@
             // grpDadosDiretor
             // 
             this.grpDadosDiretor.Controls.Add(this.label8);
+            this.grpDadosDiretor.Controls.Add(this.btnCalcularValor);
             this.grpDadosDiretor.Controls.Add(this.checkedListBoxAreasDiretoria);
             this.grpDadosDiretor.Controls.Add(this.numSalarioBase);
             this.grpDadosDiretor.Controls.Add(this.label7);
@@ -136,6 +137,25 @@
             this.label7.Size = new System.Drawing.Size(88, 16);
             this.label7.TabIndex = 25;
             this.label7.Text = "Salário Base:";
+            // 
+            // checkedListBoxSecretarias
+            // 
+            this.checkedListBoxSecretarias.FormattingEnabled = true;
+            this.checkedListBoxSecretarias.Location = new System.Drawing.Point(200, 374);
+            this.checkedListBoxSecretarias.Margin = new System.Windows.Forms.Padding(4);
+            this.checkedListBoxSecretarias.Name = "checkedListBoxSecretarias";
+            this.checkedListBoxSecretarias.Size = new System.Drawing.Size(265, 89);
+            this.checkedListBoxSecretarias.TabIndex = 22;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(27, 374);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(140, 16);
+            this.label5.TabIndex = 21;
+            this.label5.Text = "Secretárias Alocadas:";
             // 
             // lblStatusRegistoCriminal
             // 
@@ -272,7 +292,6 @@
             // grpAcoes
             // 
             this.grpAcoes.Controls.Add(this.btnAtualizarRegistoCriminal);
-            this.grpAcoes.Controls.Add(this.btnCalcularValor);
             this.grpAcoes.Controls.Add(this.btnLimpar);
             this.grpAcoes.Controls.Add(this.btnRemover);
             this.grpAcoes.Controls.Add(this.btnAlterar);
@@ -301,10 +320,10 @@
             // btnCalcularValor
             // 
             this.btnCalcularValor.Enabled = false;
-            this.btnCalcularValor.Location = new System.Drawing.Point(27, 327);
+            this.btnCalcularValor.Location = new System.Drawing.Point(494, 395);
             this.btnCalcularValor.Margin = new System.Windows.Forms.Padding(4);
             this.btnCalcularValor.Name = "btnCalcularValor";
-            this.btnCalcularValor.Size = new System.Drawing.Size(213, 43);
+            this.btnCalcularValor.Size = new System.Drawing.Size(155, 43);
             this.btnCalcularValor.TabIndex = 4;
             this.btnCalcularValor.Text = "Calcular Remuneração";
             this.btnCalcularValor.UseVisualStyleBackColor = true;
@@ -404,25 +423,6 @@
             this.btnFechar.Text = "Fechar";
             this.btnFechar.UseVisualStyleBackColor = true;
             this.btnFechar.Click += new System.EventHandler(this.btnFechar_Click);
-            // 
-            // checkedListBoxSecretarias
-            // 
-            this.checkedListBoxSecretarias.FormattingEnabled = true;
-            this.checkedListBoxSecretarias.Location = new System.Drawing.Point(200, 384);
-            this.checkedListBoxSecretarias.Margin = new System.Windows.Forms.Padding(4);
-            this.checkedListBoxSecretarias.Name = "checkedListBoxSecretarias";
-            this.checkedListBoxSecretarias.Size = new System.Drawing.Size(272, 89);
-            this.checkedListBoxSecretarias.TabIndex = 22;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(27, 384);
-            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(140, 16);
-            this.label5.TabIndex = 21;
-            this.label5.Text = "Secretárias Alocadas:";
             // 
             // FormGerirDiretores
             // 

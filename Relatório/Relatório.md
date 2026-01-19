@@ -9,7 +9,7 @@ Criar slides iniciais e finais (powerpoint ou canva): equipa, tema, app.. sem cÃ
 
 (Principais desafios:)
 
-
+Â **Diagrama de Gantt** COLOCAR NO RELATORIO
 #### Estrutura geral do Forms:
 
 Login

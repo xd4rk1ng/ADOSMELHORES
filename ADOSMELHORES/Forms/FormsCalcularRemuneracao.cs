@@ -74,8 +74,20 @@ namespace ADOSMELHORES.Forms
                 // Exibir o resultado detalhado
                 ExibirResultado(bonusCalculado, salarioTotal);
 
-                // Atualizar na empresa (se necessário)
-                // empresa.AtualizarDiretor(diretor);
+                // ✅ NOVO: Após calcular, perguntar se deseja gravar
+                var resultado = MessageBox.Show(
+                    $"Gravar os valores de remuneração para o Diretor {diretor.Nome}?",
+                    "Confirmar Remuneração",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question);
+
+                if (resultado == DialogResult.Yes)
+                {
+                    // ✅ Retornar OK para indicar que foi confirmado
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();
+                }
+                // Se clicar em "Não", o formulário permanece aberto para ajustes
             }
             catch (Exception ex)
             {
@@ -155,11 +167,14 @@ namespace ADOSMELHORES.Forms
 
             txtResultado.Text = resultado;
         }
-
+               
         private void btnFechar_Click(object sender, EventArgs e)
         {
+            // ✅ Se fechar sem confirmar, retorna Cancel
+            this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
+              
 
         // Propriedade para acessar o número de áreas
         private int areasDiretoria
