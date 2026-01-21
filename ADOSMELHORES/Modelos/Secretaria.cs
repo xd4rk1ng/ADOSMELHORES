@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ADOSMELHORES.Modelos
 {
@@ -64,10 +65,5 @@ namespace ADOSMELHORES.Modelos
             return $"{base.ToString()} - {Area} - Reporta a: {diretor}";
         }
 
-        //NOVO: Método ToString para exibir no CheckedListBox
-        public override string ToString()
-        {
-            return $"{Nome} - {Area}";
-        }
     }
 }

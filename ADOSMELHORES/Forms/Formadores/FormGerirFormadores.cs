@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace AdosMelhores.Forms
+namespace ADOSMELHORES.Forms.Formadores
 {
     /// <summary>
     /// Form completo para gestão de Formadores

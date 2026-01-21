@@ -427,8 +427,8 @@ namespace ADOSMELHORES.Forms.Secretarias
                     DateTime.Now, // DataIniContrato
                     dtpDataRegistoCriminal.Value,
                     DateTime.Now, // DataNascimento - você pode adicionar um campo se necessário
-                    diretorSelecionado,
-                    listBoxArea.SelectedItem.ToString()
+                    listBoxArea.SelectedItem.ToString(),
+                    diretorSelecionado
                 );
 
                 // Adicionar idiomas selecionados

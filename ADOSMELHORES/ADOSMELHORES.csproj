@@ -172,7 +172,7 @@
     <EmbeddedResource Include="Forms\FormInicial.resx">
       <DependentUpon>FormInicial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormsCalcularRemuneracao.resx">
+    <EmbeddedResource Include="Forms\Extra\FormsCalcularRemuneracao.resx">
       <DependentUpon>FormsCalcularRemuneracao.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Secretarias\FormGerirSecretarias.resx">
@@ -200,8 +200,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Forms\Secretarias\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

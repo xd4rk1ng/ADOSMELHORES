@@ -1,5 +1,5 @@
 ﻿using ADOSMELHORES.Forms;
-namespace AdosMelhores.Forms
+namespace ADOSMELHORES.Forms.Formadores
 {
     partial class FormGerirFormadores
     {

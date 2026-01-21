@@ -1,7 +1,4 @@
-﻿using AdosMelhores.Forms;
-using ADOSMELHORES.Forms.Secretarias;
-using ADOSMELHORES.Modelos;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,7 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using ADOSMELHORES.Forms;
+using ADOSMELHORES.Modelos;
+using ADOSMELHORES.Forms.Formadores;
+using ADOSMELHORES.Forms.Diretores;
+using ADOSMELHORES.Forms.Secretarias;
+using ADOSMELHORES.Forms.Coordenadores;
 
 namespace ADOSMELHORES.Forms
 {
@@ -35,7 +36,7 @@ namespace ADOSMELHORES.Forms
         private void btnFormador_Click(object sender, EventArgs e)
         {
             // Usa a referência explícita ao namespace que contém o formulário completo.
-            var f = new AdosMelhores.Forms.FormGerirFormadores(_empresa);
+            var f = new FormGerirFormadores(_empresa);
             f.Show();
         }
 
@@ -74,7 +75,7 @@ namespace ADOSMELHORES.Forms
 
         private void btnSecretaria_Click(object sender, EventArgs e)
         {
-            using (var form = new FormGerirSecretarias(empresa))
+            using (var form = new FormGerirSecretarias(_empresa))
             {
                 form.ShowDialog();
             }

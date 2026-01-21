@@ -1,4 +1,4 @@
-﻿namespace ADOSMELHORES.Forms
+﻿namespace ADOSMELHORES.Forms.Coordenadores
 {
     partial class FormGerirCoordenadores
     {

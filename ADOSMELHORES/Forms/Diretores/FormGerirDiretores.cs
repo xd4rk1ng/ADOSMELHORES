@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace AdosMelhores.Forms
+namespace ADOSMELHORES.Forms.Diretores
 {
     /// <summary>
     /// Form completo para gestão de Diretores

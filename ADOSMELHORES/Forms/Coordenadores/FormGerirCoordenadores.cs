@@ -5,7 +5,7 @@ using System.Windows.Forms;
 using System.Reflection;
 using ADOSMELHORES.Modelos;
 
-namespace ADOSMELHORES.Forms
+namespace ADOSMELHORES.Forms.Coordenadores
 {
     public partial class FormGerirCoordenadores : Form
     {
