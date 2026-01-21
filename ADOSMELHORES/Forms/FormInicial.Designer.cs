@@ -85,6 +85,7 @@
             this.Controls.Add(this.btnFormador);
             this.Name = "FormInicial";
             this.Text = "Form Inicial";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormInicialClose);
             this.ResumeLayout(false);
 
         }

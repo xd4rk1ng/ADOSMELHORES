@@ -57,7 +57,6 @@
             this.btnCriar.TabIndex = 2;
             this.btnCriar.Text = "Criar";
             this.btnCriar.UseVisualStyleBackColor = true;
-            this.btnCriar.Click += new System.EventHandler(this.button1_Click);
             // 
             // FormExemplo
             // 
