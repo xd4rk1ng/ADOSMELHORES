@@ -1,4 +1,5 @@
 ﻿using AdosMelhores.Forms;
+using ADOSMELHORES.Forms.Secretarias;
 using ADOSMELHORES.Modelos;
 using System;
 using System.Collections.Generic;
@@ -69,6 +70,14 @@ namespace ADOSMELHORES.Forms
         private void FormInicialClose(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
+        }
+
+        private void btnSecretaria_Click(object sender, EventArgs e)
+        {
+            using (var form = new FormGerirSecretarias(empresa))
+            {
+                form.ShowDialog();
+            }
         }
     }
 }

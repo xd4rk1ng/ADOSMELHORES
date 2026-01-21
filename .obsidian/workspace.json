@@ -11,12 +11,14 @@
             "id": "a96831e975b2b29c",
             "type": "leaf",
             "state": {
-              "type": "pdf",
+              "type": "markdown",
               "state": {
-                "file": "Relatório/TA-606-2.pdf"
+                "file": "WinformsDocs/Modelos/Secretaria.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-file-text",
-              "title": "TA-606-2"
+              "icon": "lucide-file",
+              "title": "Secretaria"
             }
           }
         ]
@@ -183,23 +185,24 @@
   },
   "active": "a96831e975b2b29c",
   "lastOpenFiles": [
-    "WinformsDocs/Modelos/Empresa.md",
-    "ADOSMELHORES/Forms/FormGerirDiretores.cs",
-    "ADOSMELHORES/Modelos/lzzatnnr.1hi~",
-    "Relatório/TA-606-2.pdf",
-    "Pasted image 20260112180432.png",
-    "FormGerirFormadores.resx",
-    "FormGerirFormadores.cs",
-    "FormGerirFormadores.Designer.cs",
-    "ADOSMELHORES.zip",
-    "ADOSMELHORES/Forms/FormCalcularValorFormacao.cs",
-    "ADOSMELHORES/Forms/FormCalcularValorFormacao.Designer.cs",
-    "ADOSMELHORES/Forms/FormAtualizarRegistoCriminalCoordenador.cs",
+    "ADOSMELHORES/obj/Debug/ADOSMELHORES.Forms.Secretarias.FormGerirSecretarias.resources",
     "WinformsDocs/Modelos/Diretor.md",
-    "WinformsDocs/Modelos/(Abstrata) Funcionario.md",
-    "Relatório/Relatório.md",
-    "WinformsDocs/Estrutura de pastas.md",
     "WinformsDocs/Modelos/Secretaria.md",
+    "ADOSMELHORES/Forms/Secretarias/FormGerirSecretarias.resx",
+    "ADOSMELHORES/Forms/Secretarias/FormGerirSecretarias.cs",
+    "ADOSMELHORES/Forms/Secretarias/FormGerirSecretarias.Designer.cs",
+    "ADOSMELHORES/Forms/Secretarias",
+    "ADOSMELHORES/Forms/FormsCalcularRemuneracao.resx",
+    "ADOSMELHORES/Forms/FormsCalcularRemuneracao.cs",
+    "ADOSMELHORES/Forms/FormsCalcularRemuneracao.Designer.cs",
+    "ADOSMELHORES/Forms/FormGerirDiretores.resx",
+    "ADOSMELHORES/Forms/FormGerirDiretores.cs",
+    "ADOSMELHORES/Forms/FormGerirDiretores.Designer.cs",
+    "Relatório/Relatório.md",
+    "WinformsDocs/Modelos/Empresa.md",
+    "Pasted image 20260112180432.png",
+    "WinformsDocs/Modelos/(Abstrata) Funcionario.md",
+    "WinformsDocs/Estrutura de pastas.md",
     "WinformsDocs/Modelos/Formador.md",
     "WinformsDocs/Modelos/Coordenador.md",
     "WinformsDocs/We need think about....md"
