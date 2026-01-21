@@ -10,4 +10,3 @@ Direção-Geral
 
 Atributos adicionais para avaliarmos:
 - Lista de idiomas
-- hora extra?
