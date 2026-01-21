@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace ADOSMELHORES
+namespace ADOSMELHORES.Modelos
 {
     public abstract class Funcionario
     {

@@ -1,17 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ADOSMELHORES.Modelos
 {
     public class Diretor : Funcionario
     {
-        //atributos pedidos na ficha
+        public bool IsencaoHorario { get; set; }
         public decimal BonusMensal { get; set; }
         public bool CarroEmpresa { get; set; }
-        public bool IsencaoHorario { get; set; } //bool faz sentido?
 
         //atributos adicionais
         public List<string> AreasDiretoria { get; set; } = new List<string>(); //para correlacionar com a secretaria
@@ -58,6 +54,7 @@ namespace ADOSMELHORES.Modelos
                 dataNascimento
             )
         {
+            IsencaoHorario = isencaoHorario;
             BonusMensal = bonusMensal;
             CarroEmpresa = carroEmpresa;
             IsencaoHorario = isencaoHorario;
@@ -117,12 +114,9 @@ namespace ADOSMELHORES.Modelos
             }
         }
 
-        // Obter todas as secretarias de um diretor
-        public List<Secretaria> ObterSecretarias()
+        public override string ToString()
         {
-            return SecretariasSubordinadas;
+            return $"{base.ToString()} - Diretor - Bónus: {BonusMensal:C} - Carro: {(CarroEmpresa ? "Sim" : "Não")}";
         }
-
-
     }
 }

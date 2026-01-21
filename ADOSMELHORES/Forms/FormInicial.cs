@@ -1,7 +1,4 @@
-﻿using AdosMelhores.Forms;
-using ADOSMELHORES.Forms.Secretarias;
-using ADOSMELHORES.Modelos;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,32 +7,42 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using ADOSMELHORES.Modelos;
+using ADOSMELHORES.Forms.Formadores;
+using ADOSMELHORES.Forms.Diretores;
+using ADOSMELHORES.Forms.Secretarias;
+using ADOSMELHORES.Forms.Coordenadores;
 
 namespace ADOSMELHORES.Forms
 {
     public partial class FormInicial : Form
     {
-        private Empresa empresa;
-        public FormInicial()
+        // Altere o modificador de acesso do campo 'empresa' de 'private' para 'internal' ou 'public'
+        private Empresa _empresa;
+
+        // Modifique o construtor para receber a instância de Empresa
+        public FormInicial(Empresa empresa)
         {
             InitializeComponent();
-            empresa = new Empresa("A DOS MELHORES");
+            _empresa = empresa;
         }
+
         private void btnExemplo_Click_1(object sender, EventArgs e)
         {
             FormExemplo f = new FormExemplo(this);   // create the new form
-            f.Show();                // show it (non-blocking)
+            f.Show();                // show it
         }
-
+        
         private void btnFormador_Click(object sender, EventArgs e)
         {
-
+            // Usa a referência explícita ao namespace que contém o formulário completo.
+            var f = new FormGerirFormadores(_empresa);
+            f.Show();
         }
 
-        public void UpdateListBox()
+        private void btnCoordenador_Click(object sender, EventArgs e)
         {
-            listBox1.DataSource = null;                // reset binding
+            //listBox1.DataSource = null;                // reset binding
             //listBox1.DataSource = Empresa.Colaboradores; // or any list
         }
 
@@ -44,7 +51,7 @@ namespace ADOSMELHORES.Forms
             try
             {
                 // Crie uma instância do FormGerirDiretores passando a empresa
-                var formDiretores = new FormGerirDiretores(empresa);
+                var formDiretores = new FormGerirDiretores(_empresa);
 
                 // Mostre o formulário
                 // Use ShowDialog() se quiser bloquear até fechar
@@ -61,9 +68,14 @@ namespace ADOSMELHORES.Forms
             }
         }
 
+        private void FormInicialClose(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
+
         private void btnSecretaria_Click(object sender, EventArgs e)
         {
-            using (var form = new FormGerirSecretarias(empresa))
+            using (var form = new FormGerirSecretarias(_empresa))
             {
                 form.ShowDialog();
             }

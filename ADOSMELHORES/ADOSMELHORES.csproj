@@ -46,17 +46,89 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Forms\FormExemplo.cs">
+    <Compile Include="Forms\Extra\FormAdicionarCoordenador.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FormExemplo.Designer.cs">
+    <Compile Include="Forms\Extra\FormAdicionarCoordenador.Designer.cs">
+      <DependentUpon>FormAdicionarCoordenador.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Extra\FormAlocarFormador.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Extra\FormAlocarFormador.Designer.cs">
+      <DependentUpon>FormAlocarFormador.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Extra\FormAlocarFormadorCoordenador.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Extra\FormAlocarFormadorCoordenador.Designer.cs">
+      <DependentUpon>FormAlocarFormadorCoordenador.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Extra\FormAtualizarRegistoCriminal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Extra\FormAtualizarRegistoCriminal.Designer.cs">
+      <DependentUpon>FormAtualizarRegistoCriminal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Extra\FormAtualizarRegistoCriminalCoordenador.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Extra\FormAtualizarRegistoCriminalCoordenador.Designer.cs">
+      <DependentUpon>FormAtualizarRegistoCriminalCoordenador.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Extra\FormCalcularValorFormacao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Extra\FormCalcularValorFormacao.Designer.cs">
+      <DependentUpon>FormCalcularValorFormacao.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Extra\FormEditarCoordenador.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Extra\FormEditarCoordenador.Designer.cs">
+      <DependentUpon>FormEditarCoordenador.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Extra\FormFiltrarCoordenadores.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Extra\FormFiltrarCoordenadores.Designer.cs">
+      <DependentUpon>FormFiltrarCoordenadores.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Extra\FormFiltrarFormadores.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Extra\FormFiltrarFormadores.Designer.cs">
+      <DependentUpon>FormFiltrarFormadores.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Coordenadores\FormGerirCoordenadores.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Coordenadores\FormGerirCoordenadores.Designer.cs">
+      <DependentUpon>FormGerirCoordenadores.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Formadores\FormGerirFormadores.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Formadores\FormGerirFormadores.Designer.cs">
+      <DependentUpon>FormGerirFormadores.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Extra\FormExemplo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Extra\FormExemplo.Designer.cs">
       <DependentUpon>FormExemplo.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormGerirDiretores.cs">
+    <Compile Include="Forms\Diretores\FormGerirDiretores.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FormGerirDiretores.Designer.cs">
+    <Compile Include="Forms\Diretores\FormGerirDiretores.Designer.cs">
       <DependentUpon>FormGerirDiretores.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormLogin.Designer.cs">
+      <DependentUpon>FormLogin.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\FormInicial.cs">
       <SubType>Form</SubType>
@@ -64,10 +136,10 @@
     <Compile Include="Forms\FormInicial.Designer.cs">
       <DependentUpon>FormInicial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormsCalcularRemuneracao.cs">
+    <Compile Include="Forms\Extra\FormsCalcularRemuneracao.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FormsCalcularRemuneracao.Designer.cs">
+    <Compile Include="Forms\Extra\FormsCalcularRemuneracao.Designer.cs">
       <DependentUpon>FormsCalcularRemuneracao.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Secretarias\FormGerirSecretarias.cs">
@@ -85,16 +157,22 @@
     <Compile Include="Modelos\Formador.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Forms\FormExemplo.resx">
+    <EmbeddedResource Include="Forms\Formadores\FormGerirFormadores.resx">
+      <DependentUpon>FormGerirFormadores.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Extra\FormExemplo.resx">
       <DependentUpon>FormExemplo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormGerirDiretores.resx">
+    <EmbeddedResource Include="Forms\Diretores\FormGerirDiretores.resx">
       <DependentUpon>FormGerirDiretores.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormLogin.resx">
+      <DependentUpon>FormLogin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormInicial.resx">
       <DependentUpon>FormInicial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormsCalcularRemuneracao.resx">
+    <EmbeddedResource Include="Forms\Extra\FormsCalcularRemuneracao.resx">
       <DependentUpon>FormsCalcularRemuneracao.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Secretarias\FormGerirSecretarias.resx">
@@ -122,5 +200,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
