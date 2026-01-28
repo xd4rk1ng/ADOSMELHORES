@@ -136,10 +136,10 @@
     <Compile Include="Forms\FormInicial.Designer.cs">
       <DependentUpon>FormInicial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Extra\FormsCalcularRemuneracao.cs">
+    <Compile Include="Forms\Diretores\FormsCalcularRemuneracao.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Extra\FormsCalcularRemuneracao.Designer.cs">
+    <Compile Include="Forms\Diretores\FormsCalcularRemuneracao.Designer.cs">
       <DependentUpon>FormsCalcularRemuneracao.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Secretarias\FormGerirSecretarias.cs">
@@ -172,7 +172,7 @@
     <EmbeddedResource Include="Forms\FormInicial.resx">
       <DependentUpon>FormInicial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Extra\FormsCalcularRemuneracao.resx">
+    <EmbeddedResource Include="Forms\Diretores\FormsCalcularRemuneracao.resx">
       <DependentUpon>FormsCalcularRemuneracao.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Secretarias\FormGerirSecretarias.resx">

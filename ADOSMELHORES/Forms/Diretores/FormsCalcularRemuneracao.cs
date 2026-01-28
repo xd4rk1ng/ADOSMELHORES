@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ADOSMELHORES.Forms
+namespace ADOSMELHORES.Forms.Diretores
 {
     public partial class FormsCalcularRemuneracao : Form
     {
