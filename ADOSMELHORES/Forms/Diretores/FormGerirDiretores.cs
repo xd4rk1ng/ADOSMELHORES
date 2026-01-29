@@ -228,7 +228,7 @@ namespace ADOSMELHORES.Forms.Diretores
                 return value;
             }
 
-            txtID.Text = diretor.Id.ToString();
+            //txtID.Text = diretor.Id.ToString();
             txtNome.Text = diretor.Nome;
             txtMorada.Text = diretor.Morada;
             txtContacto.Text = diretor.Contacto;
@@ -482,7 +482,8 @@ namespace ADOSMELHORES.Forms.Diretores
 
         private void LimparCampos()
         {
-            txtID.Clear();
+            //txtID.Clear();
+            textBoxNIF.Clear();
             txtNome.Clear();
             txtMorada.Clear();
             txtContacto.Clear();
