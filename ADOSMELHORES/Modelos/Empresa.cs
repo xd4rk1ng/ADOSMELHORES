@@ -33,7 +33,7 @@ namespace ADOSMELHORES.Modelos
             funcionarios.Add(funcionario);
         }
 
-        // Implementação específica para Formador (comodidade)
+        // ===== Métodos para gerir Formadores =====
         public void AdicionarFuncionario(Formador novoFormador)
         {
             AdicionarFuncionario((Funcionario)novoFormador);
@@ -93,6 +93,54 @@ namespace ADOSMELHORES.Modelos
             var idx = funcionarios.IndexOf(existente);
             funcionarios[idx] = atualizado;
         }
+
+        // ===== Métodos para gerir Diretores =====
+        public List<Diretor> ObterDiretores()
+        {
+            return funcionarios.OfType<Diretor>().ToList();
+        }
+
+        public Diretor BuscarDiretorPorId(int id)
+        {
+            return funcionarios.OfType<Diretor>().FirstOrDefault(d => d.Id == id);
+        }
+
+        public bool RemoverDiretorPorId(int id)
+        {
+            var d = BuscarDiretorPorId(id);
+            if (d == null) return false;
+            funcionarios.Remove(d);
+            return true;
+        }
+
+        // ===== Métodos para gerir Secretárias =====
+        public List<Secretaria> ObterSecretarias()
+        {
+            return funcionarios.OfType<Secretaria>().ToList();
+        }
+
+        public Secretaria BuscarSecretariaPorId(int id)
+        {
+            return funcionarios.OfType<Secretaria>().FirstOrDefault(s => s.Id == id);
+        }
+
+        public bool RemoverSecretariaPorId(int id)
+        {
+            var s = BuscarSecretariaPorId(id);
+            if (s == null) return false;
+            funcionarios.Remove(s);
+            return true;
+        }
+
+        public List<Secretaria> FiltrarSecretariasPorArea(string area)
+        {
+            if (string.IsNullOrWhiteSpace(area)) return new List<Secretaria>();
+            return funcionarios.OfType<Secretaria>()
+                .Where(s => string.Equals(s.Area, area.Trim(), StringComparison.OrdinalIgnoreCase))
+                .ToList();
+        }
+
+        // ===== Fim dos Métodos para gerir Secretárias =====
 
         public List<Funcionario> ObterFuncionariosContratoValido(DateTime data)
         {

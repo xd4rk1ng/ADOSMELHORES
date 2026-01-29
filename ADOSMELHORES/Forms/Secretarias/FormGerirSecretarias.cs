@@ -19,6 +19,14 @@ namespace ADOSMELHORES.Forms.Secretarias
         {
             InitializeComponent();
             empresa = empresaRef;
+
+            //ConfigurarForm(); estava sendo chamado muito cedo antes do InitializeComponent terminar,
+            //substitui por um evento Load do form
+            this.Load += FormGerirSecretarias_Load;
+        }
+        //novo
+        private void FormGerirSecretarias_Load(object sender, EventArgs e)
+        {
             ConfigurarForm();
         }
 
@@ -99,11 +107,11 @@ namespace ADOSMELHORES.Forms.Secretarias
             });
         }
 
+        //NOVO AtualizarListaSecretarias
         private void AtualizarListaSecretarias()
         {
-            var secretarias = empresa.Funcionarios
-                .OfType<Secretaria>()
-                .ToList();
+            // Usando método novo da Empresa - facilita migração para BD
+            var secretarias = empresa.ObterSecretarias();
 
             dgvSecretarias.DataSource = null;
             dgvSecretarias.DataSource = secretarias;
@@ -115,6 +123,7 @@ namespace ADOSMELHORES.Forms.Secretarias
                 dgvSecretarias.Rows[0].Selected = true;
             }
         }
+                
 
         private void dgvSecretarias_SelectionChanged(object sender, EventArgs e)
         {
@@ -228,7 +237,7 @@ namespace ADOSMELHORES.Forms.Secretarias
             CarregarDiretoresDisponiveis();
         }
 
-        //novo CarregarDiretoresDisponiveis
+        
         private void CarregarDiretoresDisponiveis()
         {
             checkedListBoxDiretores.Items.Clear();
@@ -237,11 +246,8 @@ namespace ADOSMELHORES.Forms.Secretarias
                 return;
 
             string areaSelecionada = listBoxArea.SelectedItem.ToString();
-
-            // Obter todos os diretores
-            var todosDiretores = empresa.Funcionarios
-                .OfType<Diretor>()
-                .ToList();
+                        
+            var todosDiretores = empresa.ObterDiretores();
 
             // Filtrar diretores pela área selecionada (correspondência direta)
             foreach (var diretor in todosDiretores)
@@ -261,39 +267,7 @@ namespace ADOSMELHORES.Forms.Secretarias
             }
         }
 
-
-        //Antigo CarregarDiretoresDisponiveis
-        //private void CarregarDiretoresDisponiveis()
-        //{
-        //    checkedListBoxDiretores.Items.Clear();
-
-        //    if (listBoxArea.SelectedItem == null)
-        //        return;
-
-        //    string areaSelecionada = listBoxArea.SelectedItem.ToString();
-
-        //    // Obter todos os diretores
-        //    var todosDiretores = empresa.Funcionarios
-        //        .OfType<Diretor>()
-        //        .ToList();
-
-        //    // Filtrar diretores pela área selecionada
-        //    foreach (var diretor in todosDiretores)
-        //    {
-        //        if (diretor.AreasDiretoria != null && diretor.AreasDiretoria.Contains(areaSelecionada))
-        //        {
-        //            checkedListBoxDiretores.Items.Add(diretor);
-        //        }
-        //    }
-
-        //    //Se não houver diretores, adicionar mensagem informativa
-        //    if (checkedListBoxDiretores.Items.Count == 0)
-        //    {
-                
-        //       MessageBox.Show($"Não há diretores disponíveis para a área '{areaSelecionada}'.", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        //    }
-        //}
-
+       
         private void ValidarCamposParaHabilitarInserir(object sender, EventArgs e)
         {
             this.BeginInvoke(new Action(() =>
@@ -521,7 +495,7 @@ namespace ADOSMELHORES.Forms.Secretarias
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
+       
         private void btnRemover_Click(object sender, EventArgs e)
         {
             if (secretariaSelecionada == null)
@@ -547,12 +521,22 @@ namespace ADOSMELHORES.Forms.Secretarias
                         secretariaSelecionada.DiretorReporta.RemoverSecretaria(secretariaSelecionada);
                     }
 
-                    empresa.RemoverFuncionario(secretariaSelecionada);
-                    AtualizarListaSecretarias();
-                    LimparCampos();
+                    // ✅ Usando método novo da Empresa
+                    bool removido = empresa.RemoverSecretariaPorId(secretariaSelecionada.Id);
 
-                    MessageBox.Show("Secretária removida com sucesso!", "Sucesso",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if (removido)
+                    {
+                        AtualizarListaSecretarias();
+                        LimparCampos();
+
+                        MessageBox.Show("Secretária removida com sucesso!", "Sucesso",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Erro ao remover secretária.", "Erro",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -561,6 +545,7 @@ namespace ADOSMELHORES.Forms.Secretarias
                 }
             }
         }
+
 
         private void btnLimpar_Click(object sender, EventArgs e)
         {
