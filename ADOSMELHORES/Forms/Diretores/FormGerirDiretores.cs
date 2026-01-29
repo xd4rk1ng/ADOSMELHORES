@@ -170,6 +170,7 @@ namespace ADOSMELHORES.Forms.Diretores
             }
                         
             txtNome.Text = diretor.Nome;
+            txtNIF.Text = diretor.Nif.ToString();
             txtMorada.Text = diretor.Morada;
             txtContacto.Text = diretor.Contacto;
             numSalarioBase.Value = diretor.SalarioBase;
@@ -280,7 +281,6 @@ namespace ADOSMELHORES.Forms.Diretores
                     checkedListBoxSecretarias.Items.Add(secretaria);
                 }
             }
-
             AtualizarEstadoBotoes();
         }
 
@@ -341,7 +341,7 @@ namespace ADOSMELHORES.Forms.Diretores
         private void LimparCampos()
         {
             //txtID.Clear();
-            textBoxNIF.Clear();
+            txtNIF.Clear();
             txtNome.Clear();
             txtMorada.Clear();
             txtContacto.Clear();

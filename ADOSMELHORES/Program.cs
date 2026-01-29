@@ -77,7 +77,7 @@ namespace ADOSMELHORES
                 carroEmpresa: true,
                 isencaoHorario: true
             );
-            diretor2.AreasDiretoria.Add("Pedagógico");
+            diretor2.AreasDiretoria.Add("Formação");
             //diretor2.AreasDiretoria.Add("Qualidade");
 
             var diretor3 = new Diretor(
@@ -95,7 +95,7 @@ namespace ADOSMELHORES
                 carroEmpresa: false,
                 isencaoHorario: true
             );
-            diretor3.AreasDiretoria.Add("Administrativo");
+            diretor3.AreasDiretoria.Add("Financeiro");
 
             // Adicionar diretores à empresa
             empresa.AdicionarFuncionario(diretor1);
@@ -149,7 +149,7 @@ namespace ADOSMELHORES
                 dataFimContrato: fimContrato,
                 dataFimRegistoCrim: fimRegistoCriminal,
                 dataNascimento: new DateTime(1992, 9, 25),
-                area: "Pedagógico",
+                area: "Formação",
                 diretorReporta: diretor2
             );
             secretaria3.IdiomasFalados.Add("Português");
@@ -167,7 +167,7 @@ namespace ADOSMELHORES
                 dataFimContrato: fimContrato,
                 dataFimRegistoCrim: fimRegistoCriminal,
                 dataNascimento: new DateTime(1995, 1, 30),
-                area: "Qualidade"
+                area: "Comercial"
                 //diretorReporta: diretor2
             );
             secretaria4.IdiomasFalados.Add("Português");
@@ -183,7 +183,7 @@ namespace ADOSMELHORES
                 dataFimContrato: fimContrato,
                 dataFimRegistoCrim: fimRegistoCriminal,
                 dataNascimento: new DateTime(1987, 12, 8),
-                area: "Administrativo"
+                area: "Recursos Humanos"
                 //diretorReporta: diretor3
             );
             secretaria5.IdiomasFalados.Add("Português");
