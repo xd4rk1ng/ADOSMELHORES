@@ -204,5 +204,8 @@
   <ItemGroup>
     <None Include="Properties\a-dos-melhores-high-resolution-logo.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Forms\Despesas\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
