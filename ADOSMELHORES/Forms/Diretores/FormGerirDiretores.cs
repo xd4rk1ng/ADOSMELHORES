@@ -47,7 +47,7 @@ namespace ADOSMELHORES.Forms.Diretores
 
             // Configurar evento para áreas de direção
             checkedListBoxAreasDiretoria.ItemCheck += checkedListBoxAreasDiretoria_ItemCheck;
-
+                       
             // Eventos para validação em tempo real para habilitar o botão Calcular Remuneração
             txtNome.TextChanged += ValidarCamposParaCalcular;
             txtMorada.TextChanged += ValidarCamposParaCalcular;
@@ -65,6 +65,7 @@ namespace ADOSMELHORES.Forms.Diretores
             btnInserir.Enabled = false;
         }
 
+        
         private void checkedListBoxAreasDiretoria_ItemCheck(object sender, ItemCheckEventArgs e)
         {
             // Este método será executado quando uma área for marcada/desmarcada
@@ -381,13 +382,23 @@ namespace ADOSMELHORES.Forms.Diretores
                 return false;
             }
 
-            if (string.IsNullOrWhiteSpace(txtContacto.Text))
+            if (!ValidarNIF(txtNIF.Text))
             {
-                MessageBox.Show("Por favor, insira o contacto do diretor.", "Campo Obrigatório",
+                MessageBox.Show("NIF inválido! O NIF deve ter 9 dígitos (entre 111111111 e 999999999).",
+                    "NIF Inválido",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtNIF.Focus();
+                return false;
+            }
+            
+            if (!ValidarContacto(txtContacto.Text))
+            {
+                MessageBox.Show("Contacto inválido! O contacto deve ter 9 dígitos e começar com 9 (ex: 912345678).",
+                    "Contacto Inválido",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtContacto.Focus();
                 return false;
-            }
+            }            
                       
             if (checkedListBoxAreasDiretoria.CheckedItems.Count == 0)
             {
@@ -422,8 +433,68 @@ namespace ADOSMELHORES.Forms.Diretores
             }
 
             return true;
-        }      
+        }
 
+        // ==================== MÉTODOS DE VALIDAÇÃO ====================
+                
+        /// Valida NIF: deve ter 9 dígitos numéricos entre 111111111 e 999999999        
+        private bool ValidarNIF(string nif)
+        {
+            // Remover espaços em branco
+            nif = nif?.Trim();
+
+            // Verificar se está vazio
+            if (string.IsNullOrWhiteSpace(nif))
+                return false;
+
+            // Verificar se tem exatamente 9 caracteres
+            if (nif.Length != 9)
+                return false;
+
+            // Verificar se são todos dígitos
+            if (!nif.All(char.IsDigit))
+                return false;
+
+            // Converter para número e verificar intervalo
+            if (int.TryParse(nif, out int nifNumero))
+            {
+                return nifNumero >= 111111111 && nifNumero <= 999999999;
+            }
+
+            return false;
+        }
+
+        
+        /// Valida Contacto: deve ter 9 dígitos numéricos entre 900000000 e 999999999 (começa com 9)        
+        private bool ValidarContacto(string contacto)
+        {
+            // Remover espaços em branco
+            contacto = contacto?.Trim();
+
+            // Verificar se está vazio
+            if (string.IsNullOrWhiteSpace(contacto))
+                return false;
+
+            // Verificar se tem exatamente 9 caracteres
+            if (contacto.Length != 9)
+                return false;
+
+            // Verificar se são todos dígitos
+            if (!contacto.All(char.IsDigit))
+                return false;
+
+            // Verificar se começa com 9
+            if (!contacto.StartsWith("9"))
+                return false;
+
+            // Converter para número e verificar intervalo
+            if (int.TryParse(contacto, out int contactoNumero))
+            {
+                return contactoNumero >= 900000000 && contactoNumero <= 999999999;
+            }
+
+            return false;
+        }
 
         // ==================== EVENTOS DE BOTÕES ====================
 

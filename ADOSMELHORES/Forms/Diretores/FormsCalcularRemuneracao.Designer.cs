@@ -57,9 +57,9 @@
             this.grpDadosDiretor.Controls.Add(this.lblNomeDiretor);
             this.grpDadosDiretor.Controls.Add(this.label1);
             this.grpDadosDiretor.Location = new System.Drawing.Point(16, 15);
-            this.grpDadosDiretor.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpDadosDiretor.Margin = new System.Windows.Forms.Padding(4);
             this.grpDadosDiretor.Name = "grpDadosDiretor";
-            this.grpDadosDiretor.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpDadosDiretor.Padding = new System.Windows.Forms.Padding(4);
             this.grpDadosDiretor.Size = new System.Drawing.Size(747, 155);
             this.grpDadosDiretor.TabIndex = 0;
             this.grpDadosDiretor.TabStop = false;
@@ -154,9 +154,9 @@
             this.grpConfiguracoes.Controls.Add(this.chkIsencaoHorario);
             this.grpConfiguracoes.Controls.Add(this.chkCarroEmpresa);
             this.grpConfiguracoes.Location = new System.Drawing.Point(16, 178);
-            this.grpConfiguracoes.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpConfiguracoes.Margin = new System.Windows.Forms.Padding(4);
             this.grpConfiguracoes.Name = "grpConfiguracoes";
-            this.grpConfiguracoes.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpConfiguracoes.Padding = new System.Windows.Forms.Padding(4);
             this.grpConfiguracoes.Size = new System.Drawing.Size(747, 68);
             this.grpConfiguracoes.TabIndex = 1;
             this.grpConfiguracoes.TabStop = false;
@@ -168,7 +168,7 @@
             this.chkIsencaoHorario.Checked = true;
             this.chkIsencaoHorario.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkIsencaoHorario.Location = new System.Drawing.Point(267, 33);
-            this.chkIsencaoHorario.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkIsencaoHorario.Margin = new System.Windows.Forms.Padding(4);
             this.chkIsencaoHorario.Name = "chkIsencaoHorario";
             this.chkIsencaoHorario.Size = new System.Drawing.Size(125, 20);
             this.chkIsencaoHorario.TabIndex = 1;
@@ -179,7 +179,7 @@
             // 
             this.chkCarroEmpresa.AutoSize = true;
             this.chkCarroEmpresa.Location = new System.Drawing.Point(28, 33);
-            this.chkCarroEmpresa.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkCarroEmpresa.Margin = new System.Windows.Forms.Padding(4);
             this.chkCarroEmpresa.Name = "chkCarroEmpresa";
             this.chkCarroEmpresa.Size = new System.Drawing.Size(120, 20);
             this.chkCarroEmpresa.TabIndex = 0;
@@ -192,9 +192,9 @@
             this.grpCalculo.Controls.Add(this.txtResultado);
             this.grpCalculo.Controls.Add(this.label5);
             this.grpCalculo.Location = new System.Drawing.Point(16, 254);
-            this.grpCalculo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpCalculo.Margin = new System.Windows.Forms.Padding(4);
             this.grpCalculo.Name = "grpCalculo";
-            this.grpCalculo.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpCalculo.Padding = new System.Windows.Forms.Padding(4);
             this.grpCalculo.Size = new System.Drawing.Size(747, 315);
             this.grpCalculo.TabIndex = 2;
             this.grpCalculo.TabStop = false;
@@ -204,7 +204,7 @@
             // 
             this.btnCalcular.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCalcular.Location = new System.Drawing.Point(31, 264);
-            this.btnCalcular.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnCalcular.Margin = new System.Windows.Forms.Padding(4);
             this.btnCalcular.Name = "btnCalcular";
             this.btnCalcular.Size = new System.Drawing.Size(695, 43);
             this.btnCalcular.TabIndex = 2;
@@ -217,14 +217,13 @@
             this.txtResultado.BackColor = System.Drawing.SystemColors.Info;
             this.txtResultado.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtResultado.Location = new System.Drawing.Point(31, 48);
-            this.txtResultado.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtResultado.Margin = new System.Windows.Forms.Padding(4);
             this.txtResultado.Multiline = true;
             this.txtResultado.Name = "txtResultado";
             this.txtResultado.ReadOnly = true;
             this.txtResultado.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtResultado.Size = new System.Drawing.Size(693, 208);
             this.txtResultado.TabIndex = 1;
-            this.txtResultado.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label5
             // 
@@ -239,7 +238,7 @@
             // btnFechar
             // 
             this.btnFechar.Location = new System.Drawing.Point(663, 577);
-            this.btnFechar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnFechar.Margin = new System.Windows.Forms.Padding(4);
             this.btnFechar.Name = "btnFechar";
             this.btnFechar.Size = new System.Drawing.Size(100, 28);
             this.btnFechar.TabIndex = 3;
@@ -251,13 +250,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(782, 636);
+            this.ClientSize = new System.Drawing.Size(790, 636);
             this.Controls.Add(this.btnFechar);
             this.Controls.Add(this.grpCalculo);
             this.Controls.Add(this.grpConfiguracoes);
             this.Controls.Add(this.grpDadosDiretor);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormsCalcularRemuneracao";

@@ -124,50 +124,67 @@ namespace ADOSMELHORES.Forms.Diretores
             return Math.Max(bonus, 0);
         }
 
+
         private void ExibirResultado(decimal bonusCalculado, decimal salarioTotal)
         {
-            string resultado = "═══════════════════════════════════════════════\n";
-            resultado += "            CÁLCULO DE REMUNERAÇÃO\n";
-            resultado += "═══════════════════════════════════════════════\n\n";
+            StringBuilder resultado = new StringBuilder();
+            
+            resultado.AppendLine("═══════════════════════════════════════════════════════════════");
+            resultado.AppendLine("       CÁLCULO DE REMUNERAÇÃO DO DIRETOR        ");
+            resultado.AppendLine("═══════════════════════════════════════════════════════════════");
+            resultado.AppendLine();
+                        
+            resultado.AppendLine("📋 DADOS DO DIRETOR:");            
+            resultado.AppendLine($"   Nome: {diretor.Nome}");
+            resultado.AppendLine($"   Áreas de Direção: {areasDiretoria} área(s)");
+            resultado.AppendLine($"   Secretárias Subordinadas: {diretor.SecretariasSubordinadas.Count}");
+            resultado.AppendLine();
 
-            resultado += $"📋 DADOS DO DIRETOR:\n";
-            resultado += $"   • Nome: {diretor.Nome}\n";
-            resultado += $"   • Áreas de Direção: {areasDiretoria} área(s)\n";
-            resultado += $"   • Secretárias Subordinadas: {diretor.SecretariasSubordinadas.Count}\n\n";
+            resultado.AppendLine("💰 SALÁRIO BASE:");
+            resultado.AppendLine($"   R$ {diretor.SalarioBase:N2}");
+            resultado.AppendLine();
 
-            resultado += $"💰 SALÁRIO BASE: {diretor.SalarioBase:C2}\n\n";
+            resultado.AppendLine("➕ BÔNUS MENSAL CALCULADO:");
 
-            resultado += $"➕ BÔNUS CALCULADO: {bonusCalculado:C2}\n";
-            resultado += $"   └── Detalhamento:\n";
-
-            // Detalhamento do bônus
             int areas = diretor.AreasDiretoria?.Count ?? 0;
             int secretarias = diretor.SecretariasSubordinadas?.Count ?? 0;
 
             if (areas > 0)
-                resultado += $"       • {areas} área(s) de direção: +{areas * 200:C2}\n";
+            {
+                resultado.AppendLine($"   • {areas} área(s) de direção:");
+                resultado.AppendLine($"     {areas} × R$ 200,00 = +R$ {areas * 200:N2}");
+            }
 
             if (secretarias > 0)
-                resultado += $"       • {secretarias} secretária(s): +{secretarias * 30:C2}\n";
-
-            if (diretor.CarroEmpresa)
-                resultado += $"       • Carro empresa: -300,00€\n";
+            {
+                resultado.AppendLine($"   • {secretarias} secretária(s):");
+                resultado.AppendLine($"     {secretarias} × R$ 30,00 = +R$ {secretarias * 30:N2}");
+            }
 
             if (diretor.IsencaoHorario)
-                resultado += $"       • Isenção horário: +200,00€\n";
+            {
+                resultado.AppendLine($"   • Isenção de horário:");
+                resultado.AppendLine($"     +R$ 200,00");
+            }
 
-            resultado += $"\n";
-            resultado += $"═══════════════════════════════════════════════\n";
-            resultado += $"💶 REMUNERAÇÃO TOTAL: {salarioTotal:C2}\n";
-            resultado += $"═══════════════════════════════════════════════\n\n";
+            if (diretor.CarroEmpresa)
+            {
+                resultado.AppendLine($"   • Carro empresa (desconto):");
+                resultado.AppendLine($"     -R$ 300,00");
+            }
 
-            resultado += $"⚙️ CONFIGURAÇÕES APLICADAS:\n";
-            resultado += $"   • Carro empresa: {(diretor.CarroEmpresa ? "SIM" : "NÃO")}\n";
-            resultado += $"   • Isenção horário: {(diretor.IsencaoHorario ? "SIM" : "NÃO")}\n";
+            resultado.AppendLine();
+            resultado.AppendLine($"   Subtotal de Bônus: R$ {bonusCalculado:N2}");
+            resultado.AppendLine();
 
-            txtResultado.Text = resultado;
+            resultado.AppendLine("═══════════════════════════════════════════════════════");
+            resultado.AppendLine($"  💶 REMUNERAÇÃO TOTAL: R$ {salarioTotal:N2}".PadRight(54) + "");
+            resultado.AppendLine("═══════════════════════════════════════════════════════");
+            resultado.AppendLine();
+
+            txtResultado.Text = resultado.ToString();
         }
-               
+
         private void btnFechar_Click(object sender, EventArgs e)
         {
             // ✅ Se fechar sem confirmar, retorna Cancel
