@@ -39,6 +39,8 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnSalvar = new System.Windows.Forms.Button();
+            this.txtDescricao = new System.Windows.Forms.TextBox();
+            this.lblDescricao = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numValor)).BeginInit();
             this.SuspendLayout();
             // 
@@ -64,18 +66,18 @@
             this.cmbTipo.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbTipo.FormattingEnabled = true;
             this.cmbTipo.Items.AddRange(new object[] {
-            "Janeiro",
-            "Fevereiro",
-            "Março",
-            "Abril",
-            "Maio",
-            "Junho",
-            "Julho",
-            "Agosto",
-            "Setembro",
-            "Outubro",
-            "Novembro",
-            "Dezembro"});
+            "Agua",
+            "Luz",
+            "Internet",
+            "Material Administrativo",
+            "Material Informático",
+            "Limpeza",
+            "Manutenção",
+            "Segurança",
+            "Aluguel",
+            "Seguros",
+            "Marketing",
+            "Outros"});
             this.cmbTipo.Location = new System.Drawing.Point(275, 108);
             this.cmbTipo.Name = "cmbTipo";
             this.cmbTipo.Size = new System.Drawing.Size(237, 31);
@@ -178,11 +180,31 @@
             this.btnSalvar.Text = "✓ Salvar";
             this.btnSalvar.UseVisualStyleBackColor = false;
             // 
+            // txtDescricao
+            // 
+            this.txtDescricao.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDescricao.Location = new System.Drawing.Point(275, 334);
+            this.txtDescricao.Name = "txtDescricao";
+            this.txtDescricao.Size = new System.Drawing.Size(235, 30);
+            this.txtDescricao.TabIndex = 15;
+            // 
+            // lblDescricao
+            // 
+            this.lblDescricao.AutoSize = true;
+            this.lblDescricao.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDescricao.Location = new System.Drawing.Point(100, 334);
+            this.lblDescricao.Name = "lblDescricao";
+            this.lblDescricao.Size = new System.Drawing.Size(87, 23);
+            this.lblDescricao.TabIndex = 14;
+            this.lblDescricao.Text = "Descrição:";
+            // 
             // FormAdicionarDespesa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(631, 548);
+            this.Controls.Add(this.txtDescricao);
+            this.Controls.Add(this.lblDescricao);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnSalvar);
             this.Controls.Add(this.textBox1);
@@ -215,5 +237,7 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.Button btnSalvar;
+        private System.Windows.Forms.TextBox txtDescricao;
+        private System.Windows.Forms.Label lblDescricao;
     }
 }

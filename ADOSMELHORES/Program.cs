@@ -21,8 +21,9 @@ namespace ADOSMELHORES
             // Corrigido: instanciando Empresa e passando para FormInicial
             var empresa = new Empresa("NomeDaEmpresa");
 
-            //TEMPORÁRIO: Carregar dados de teste (remover quando implementar Base de Dados)
+            //TEMPORÁRIO: Carregar dados de teste e dados despesas (remover quando implementar Base de Dados)
             CarregarDadosTeste(empresa);
+            CarregarDadosDespesasExemplo(empresa);
 
             // Carregar dados da base de dados UTILIZAR ESTE MÉTODO QUANDO A BASE DE DADOS ESTIVER IMPLEMENTADA
             //CarregarDadosDaBaseDeDados(empresa);
@@ -30,6 +31,7 @@ namespace ADOSMELHORES
             Application.Run(new Forms.FormLogin(empresa));
         }
 
+        
         /// <summary>
         /// MÉTODO TEMPORÁRIO - Carrega dados de teste para desenvolvimento
         /// TODO: REMOVER este método quando a base de dados estiver implementada
@@ -202,6 +204,16 @@ namespace ADOSMELHORES
             diretor2.AdicionarSecretaria(secretaria3);
             diretor2.AdicionarSecretaria(secretaria4);
             diretor3.AdicionarSecretaria(secretaria5);
+        }
+
+        /// MÉTODO TEMPORÁRIO - Carrega dados de despesas de exemplo
+        /// Meses: Novembro 2025, Dezembro 2025, Janeiro 2026
+        /// TODO: REMOVER este método quando a base de dados estiver implementada
+        private static void CarregarDadosDespesasExemplo(Empresa empresa)
+        {
+            // TEMPORÁRIO - Carrega despesas físicas de exemplo
+            // MIGRAÇÃO BD: REMOVER este método completamente
+            empresa.GestorDespesas.CarregarDadosExemplo();
         }
     }
 }

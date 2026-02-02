@@ -12,6 +12,7 @@ using ADOSMELHORES.Forms.Formadores;
 using ADOSMELHORES.Forms.Diretores;
 using ADOSMELHORES.Forms.Secretarias;
 using ADOSMELHORES.Forms.Coordenadores;
+using ADOSMELHORES.Forms.Despesas;
 
 namespace ADOSMELHORES.Forms
 {
@@ -78,6 +79,28 @@ namespace ADOSMELHORES.Forms
             using (var form = new FormGerirSecretarias(_empresa))
             {
                 form.ShowDialog();
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Crie uma instância do FormGerirDiretores passando a empresa
+                var formDespesas = new FormDespesas(_empresa);
+
+                // Mostre o formulário
+                // Use ShowDialog() se quiser bloquear até fechar
+                // Use Show() se quiser permitir múltiplas janelas
+                formDespesas.Show();
+
+                // Ou se quiser modal (bloqueia até fechar):
+                // formDespesas.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erro ao abrir formulário de Despesas: {ex.Message}",
+                    "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

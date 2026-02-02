@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "WinformsDocs/Modelos/Secretaria.md",
+                "file": "WinformsDocs/Modelos/Formador.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Secretaria"
+              "title": "Formador"
             }
           }
         ]
@@ -185,26 +185,25 @@
   },
   "active": "a96831e975b2b29c",
   "lastOpenFiles": [
-    "ADOSMELHORES/obj/Debug/ADOSMELHORES.Forms.Secretarias.FormGerirSecretarias.resources",
-    "WinformsDocs/Modelos/Diretor.md",
+    "WinformsDocs/Modelos/Coordenador.md",
+    "WinformsDocs/Estrutura de pastas.md",
+    "~WRL0994.tmp",
+    "~WRD0978.tmp",
     "WinformsDocs/Modelos/Secretaria.md",
+    "WinformsDocs/Modelos/Diretor.md",
+    "~WRL4001.tmp",
+    "~WRD3966.tmp",
+    "WinformsDocs/Modelos/Formador.md",
+    "WinformsDocs/Modelos/(Abstrata) Funcionario.md",
+    "Relatório/TA-606-2.pdf",
+    "~WRL0003.tmp",
+    "~WRD0002.tmp",
+    "ADOSMELHORES/obj/Debug/ADOSMELHORES.Forms.Secretarias.FormGerirSecretarias.resources",
     "ADOSMELHORES/Forms/Secretarias/FormGerirSecretarias.resx",
     "ADOSMELHORES/Forms/Secretarias/FormGerirSecretarias.cs",
-    "ADOSMELHORES/Forms/Secretarias/FormGerirSecretarias.Designer.cs",
-    "ADOSMELHORES/Forms/Secretarias",
-    "ADOSMELHORES/Forms/FormsCalcularRemuneracao.resx",
-    "ADOSMELHORES/Forms/FormsCalcularRemuneracao.cs",
-    "ADOSMELHORES/Forms/FormsCalcularRemuneracao.Designer.cs",
-    "ADOSMELHORES/Forms/FormGerirDiretores.resx",
-    "ADOSMELHORES/Forms/FormGerirDiretores.cs",
-    "ADOSMELHORES/Forms/FormGerirDiretores.Designer.cs",
     "Relatório/Relatório.md",
     "WinformsDocs/Modelos/Empresa.md",
     "Pasted image 20260112180432.png",
-    "WinformsDocs/Modelos/(Abstrata) Funcionario.md",
-    "WinformsDocs/Estrutura de pastas.md",
-    "WinformsDocs/Modelos/Formador.md",
-    "WinformsDocs/Modelos/Coordenador.md",
     "WinformsDocs/We need think about....md"
   ]
 }
