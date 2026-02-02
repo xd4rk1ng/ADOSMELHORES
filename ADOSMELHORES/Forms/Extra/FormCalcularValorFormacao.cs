@@ -19,19 +19,23 @@ namespace ADOSMELHORES.Forms
         {
             this.Text = $"Calcular Valor Formação - {formador.Nome}";
             lblFormador.Text = $"Formador: {formador.Nome} ({formador.ValorHora:C}/hora)";
-            dtpDataInicio.Value = DateTime.Now;
-            dtpDataFim.Value = DateTime.Now.AddDays(5);
+            dtpDataInicio.Value = DateTime.Now.Date;
+            dtpDataFim.Value = DateTime.Now.Date.AddDays(5);
         }
 
         private void btnCalcular_Click(object sender, EventArgs e)
         {
             try
             {
-                decimal valor = formador.CalcularValorFormacao(dtpDataInicio.Value, dtpDataFim.Value);
-                int dias = (dtpDataFim.Value - dtpDataInicio.Value).Days + 1;
+                // Garantir que o cálculo ignora componente hora e inclui o dia final
+                var inicio = dtpDataInicio.Value.Date;
+                var fim = dtpDataFim.Value.Date;
+
+                decimal valor = formador.CalcularValorFormacao(inicio, fim);
+                int dias = (fim - inicio).Days + 1;
                 int horas = dias * 6;
 
-                txtResultado.Text = $"Período: {dtpDataInicio.Value:dd/MM/yyyy} a {dtpDataFim.Value:dd/MM/yyyy}\r\n" +
+                txtResultado.Text = $"Período: {inicio:dd/MM/yyyy} a {fim:dd/MM/yyyy}\r\n" +
                                   $"Total de dias: {dias}\r\n" +
                                   $"Total de horas (6h/dia): {horas}\r\n" +
                                   $"Valor por hora: {formador.ValorHora:C}\r\n" +

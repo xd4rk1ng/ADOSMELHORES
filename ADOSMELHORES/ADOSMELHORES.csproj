@@ -157,6 +157,9 @@
     <Compile Include="Modelos\Formador.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\Coordenadores\FormGerirCoordenadores.resx">
+      <DependentUpon>FormGerirCoordenadores.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Formadores\FormGerirFormadores.resx">
       <DependentUpon>FormGerirFormadores.cs</DependentUpon>
     </EmbeddedResource>

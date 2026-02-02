@@ -42,8 +42,8 @@ namespace ADOSMELHORES.Forms
 
         private void btnCoordenador_Click(object sender, EventArgs e)
         {
-            //listBox1.DataSource = null;                // reset binding
-            //listBox1.DataSource = Empresa.Colaboradores; // or any list
+            var f = new FormGerirCoordenadores(_empresa);
+            f.Show();
         }
 
         private void btnDiretor_Click(object sender, EventArgs e)

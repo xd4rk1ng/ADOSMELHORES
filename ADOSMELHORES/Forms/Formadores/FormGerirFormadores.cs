@@ -35,6 +35,10 @@ namespace ADOSMELHORES.Forms.Formadores
             // Configurar ComboBox de Disponibilidade
             cmbDisponibilidade.DataSource = Enum.GetValues(typeof(Disponibilidade));
 
+            // Subscribes para validação do NIF
+            txtNIF.KeyPress += TxtNIF_KeyPress;
+            txtNIF.Validating += TxtNIF_Validating;
+
             // Configurar DataGridView
             ConfigurarDataGridView();
 
@@ -43,6 +47,42 @@ namespace ADOSMELHORES.Forms.Formadores
 
             // Carregar dados iniciais
             AtualizarListaFormadores();
+        }
+
+        private void TxtNIF_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Permitir apenas dígitos e teclas de controlo (backspace, etc.)
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void TxtNIF_Validating(object sender, CancelEventArgs e)
+        {
+            string text = txtNIF.Text?.Trim() ?? string.Empty;
+
+            if (string.IsNullOrEmpty(text))
+            {
+                // Se NIF for obrigatório descomente abaixo:
+                // e.Cancel = true;
+                // MessageBox.Show("Por favor, insira o NIF.", "Campo Obrigatório", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (!text.All(char.IsDigit))
+            {
+                e.Cancel = true;
+                MessageBox.Show("NIF deve conter apenas dígitos.", "Entrada Inválida", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Validação opcional de comprimento (NIF PT tem 9 dígitos)
+            if (text.Length != 9)
+            {
+                e.Cancel = true;
+                MessageBox.Show("NIF deve ter 9 dígitos.", "Entrada Inválida", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void ConfigurarDataGridView()
@@ -55,7 +95,7 @@ namespace ADOSMELHORES.Forms.Formadores
 
             dgvFormadores.Columns.Add(new DataGridViewTextBoxColumn
             {
-                DataPropertyName = "ID",
+                DataPropertyName = "Id",
                 HeaderText = "ID",
                 Width = 50
             });
@@ -98,7 +138,7 @@ namespace ADOSMELHORES.Forms.Formadores
 
             dgvFormadores.Columns.Add(new DataGridViewTextBoxColumn
             {
-                DataPropertyName = "DataRegistoCriminal",
+                DataPropertyName = "DataFimRegistoCrim",
                 HeaderText = "Registo Criminal",
                 Width = 110,
                 DefaultCellStyle = new DataGridViewCellStyle { Format = "dd/MM/yyyy" }
@@ -116,10 +156,40 @@ namespace ADOSMELHORES.Forms.Formadores
 
             lblTotalFormadores.Text = $"Total de Formadores: {formadores.Count}";
 
+            // Tentar preservar seleção atual (se existir) ou selecionar o primeiro
             if (formadores.Count > 0 && dgvFormadores.Rows.Count > 0)
             {
                 dgvFormadores.ClearSelection();
-                dgvFormadores.Rows[0].Selected = true;
+
+                int indexToSelect = 0;
+                if (formadorSelecionado != null)
+                {
+                    int found = formadores.FindIndex(f => f.Id == formadorSelecionado.Id);
+                    if (found >= 0)
+                        indexToSelect = found;
+                }
+
+                dgvFormadores.Rows[indexToSelect].Selected = true;
+                try { dgvFormadores.CurrentCell = dgvFormadores.Rows[indexToSelect].Cells[0]; } catch { /* ignora */ }
+
+                // Atualizar estado interno e campos visuais
+                formadorSelecionado = dgvFormadores.SelectedRows.Count > 0
+                    ? dgvFormadores.SelectedRows[0].DataBoundItem as Formador
+                    : null;
+
+                if (formadorSelecionado != null)
+                {
+                    CarregarDadosFormador(formadorSelecionado);
+                    HabilitarBotoesEdicao(true);
+                }
+                else
+                {
+                    HabilitarBotoesEdicao(false);
+                }
+            }
+            else
+            {
+                HabilitarBotoesEdicao(false);
             }
         }
 
@@ -151,13 +221,16 @@ namespace ADOSMELHORES.Forms.Formadores
             }
 
             txtID.Text = formador.Id.ToString();
+            // Preencher NIF (novo campo)
+            try { txtNIF.Text = formador.Nif.ToString(); } catch { txtNIF.Text = string.Empty; }
+
             txtNome.Text = formador.Nome;
             txtMorada.Text = formador.Morada;
             txtContacto.Text = formador.Contacto;
             txtAreaLeciona.Text = formador.AreaLeciona;
             cmbDisponibilidade.SelectedItem = formador.Disponibilidade;
             numValorHora.Value = formador.ValorHora;
-            numSalarioBase.Value = formador.SalarioBase;
+            // numSalarioBase.Value = formador.SalarioBase; // removido: não preencher salário base para formadores
 
             // DataFimContrato: clamp + safe assign
             try
@@ -177,14 +250,14 @@ namespace ADOSMELHORES.Forms.Formadores
                 try { dtpDataFimContrato.Value = dtpDataFimContrato.MinDate; } catch { /* ignora */ }
             }
 
-            // DataRegistoCriminal: formador.DataRegistoCriminal é object; resolver e clamp + safe assign
+            // DataRegistoCriminal
             try
             {
                 DateTime fallbackRegisto = DateTime.Now.AddYears(5);
                 DateTime dataRegistoCriminal;
                 try
                 {
-                    dataRegistoCriminal = formador.DataFimRegistoCrim; // Corrigido aqui
+                    dataRegistoCriminal = formador.DataFimRegistoCrim;
                 }
                 catch
                 {
@@ -213,7 +286,13 @@ namespace ADOSMELHORES.Forms.Formadores
 
         private void VerificarStatusRegistoCriminal(Formador formador)
         {
-            if (formador.RegistoCriminalExpirado(empresa.DataSimulada))
+            // Usar DataSimulada se estiver configurada; caso contrário, usar data actual.
+            DateTime referencia = (empresa != null && empresa.DataSimulada > DateTime.MinValue)
+                ? empresa.DataSimulada.Date
+                : DateTime.Now.Date;
+
+            // Normalizar comparação para ignorar componente hora
+            if (formador.RegistoCriminalExpirado(referencia))
             {
                 lblStatusRegistoCriminal.Text = "EXPIRADO";
                 lblStatusRegistoCriminal.ForeColor = System.Drawing.Color.Red;
@@ -238,18 +317,19 @@ namespace ADOSMELHORES.Forms.Formadores
         private void LimparCampos()
         {
             txtID.Clear();
+            txtNIF.Clear(); // limpar NIF
             txtNome.Clear();
             txtMorada.Clear();
             txtContacto.Clear();
             txtAreaLeciona.Clear();
             cmbDisponibilidade.SelectedIndex = 0;
             numValorHora.Value = 0;
-            numSalarioBase.Value = 0;
             // Valores seguros por defeito
             try { dtpDataFimContrato.Value = DateTime.Now.AddYears(1); } catch { /* ignora */ }
             try { dtpDataRegistoCriminal.Value = DateTime.Now.AddYears(5); } catch { /* ignora */ }
             lblStatusRegistoCriminal.Text = "";
             formadorSelecionado = null;
+            HabilitarBotoesEdicao(false);
         }
 
         private bool ValidarCampos()
@@ -264,7 +344,7 @@ namespace ADOSMELHORES.Forms.Formadores
 
             if (string.IsNullOrWhiteSpace(txtContacto.Text))
             {
-                MessageBox.Show("Por favor, insira o contacto do formador.", "Campo Obrigatório",
+                MessageBox.Show("Por favor, insira o contacto do formador.", "Campo Obligatório",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtContacto.Focus();
                 return false;
@@ -277,6 +357,18 @@ namespace ADOSMELHORES.Forms.Formadores
                 txtAreaLeciona.Focus();
                 return false;
             }
+
+            // Verifica NIF (se preenchido deve conter apenas dígitos)
+            if (!string.IsNullOrWhiteSpace(txtNIF.Text) && !txtNIF.Text.Trim().All(char.IsDigit))
+            {
+                MessageBox.Show("O NIF deve conter apenas números.", "Campo Inválido",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtNIF.Focus();
+                return false;
+            }
+
+            // Se quiser tornar NIF obrigatório:
+            // if (string.IsNullOrWhiteSpace(txtNIF.Text)) { ... }
 
             if (numValorHora.Value <= 0)
             {
@@ -306,13 +398,26 @@ namespace ADOSMELHORES.Forms.Formadores
 
             try
             {
+                // ler NIF com parsing seguro
+                int nif = 0;
+                int.TryParse(txtNIF.Text?.Trim(), out nif);
+
+                // Impedir duplicação de NIF
+                if (nif > 0 && NifDuplicado(nif))
+                {
+                    MessageBox.Show("Já existe um formador com este NIF.", "NIF Duplicado",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtNIF.Focus();
+                    return;
+                }
+
                 var novoFormador = new Formador(
                     empresa.ObterProximoID(), // id
-                    0, // Nif (ajuste conforme necessário)
+                    nif, // Nif agora vindo do campo
                     txtNome.Text.Trim(), // Nome
                     txtMorada.Text.Trim(), // Morada
                     txtContacto.Text.Trim(), // Contacto
-                    numSalarioBase.Value, // SalarioBase
+                    0m, // SalarioBase removido para formador -> passa-se 0
                     DateTime.Now, // DataIniContrato
                     dtpDataFimContrato.Value, // DataFimContrato
                     dtpDataRegistoCriminal.Value, // DataFimRegistoCrim
@@ -327,7 +432,7 @@ namespace ADOSMELHORES.Forms.Formadores
                 // Atualiza a lista e seleciona o novo formador imediatamente
                 AtualizarListaFormadores();
 
-                // Tenta localizar e selecionar o novo formador no BindingSource / DataGridView
+                // Forçar seleção do novo formador (caso não selecionado pela AtualizarListaFormadores)
                 var lista = bsFormadores.DataSource as List<Formador>;
                 if (lista != null)
                 {
@@ -336,18 +441,12 @@ namespace ADOSMELHORES.Forms.Formadores
                     {
                         dgvFormadores.ClearSelection();
                         dgvFormadores.Rows[index].Selected = true;
-                        try
-                        {
-                            dgvFormadores.CurrentCell = dgvFormadores.Rows[index].Cells[0];
-                        }
-                        catch { /* ignora se cell não estiver disponível */ }
+                        try { dgvFormadores.CurrentCell = dgvFormadores.Rows[index].Cells[0]; } catch { }
+                        formadorSelecionado = novoFormador;
+                        CarregarDadosFormador(formadorSelecionado);
+                        HabilitarBotoesEdicao(true);
                     }
                 }
-
-                // Atualiza seleção/estado interno e habilita botões
-                formadorSelecionado = novoFormador;
-                CarregarDadosFormador(formadorSelecionado);
-                HabilitarBotoesEdicao(true);
 
                 MessageBox.Show($"Formador '{novoFormador.Nome}' inserido com sucesso!", "Sucesso",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -373,15 +472,33 @@ namespace ADOSMELHORES.Forms.Formadores
 
             try
             {
+                // validar/parsar NIF do campo
+                int nif;
+                int.TryParse(txtNIF.Text?.Trim(), out nif);
+
+                // Impedir duplicação (excluir o próprio formador da verificação)
+                if (nif > 0 && NifDuplicado(nif, formadorSelecionado.Id))
+                {
+                    MessageBox.Show("Outro formador já utiliza este NIF. Corrija o NIF.", "NIF Duplicado",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtNIF.Focus();
+                    return;
+                }
+
                 formadorSelecionado.Nome = txtNome.Text.Trim();
                 formadorSelecionado.Morada = txtMorada.Text.Trim();
                 formadorSelecionado.Contacto = txtContacto.Text.Trim();
                 formadorSelecionado.AreaLeciona = txtAreaLeciona.Text.Trim();
                 formadorSelecionado.Disponibilidade = (Disponibilidade)cmbDisponibilidade.SelectedItem;
                 formadorSelecionado.ValorHora = numValorHora.Value;
-                formadorSelecionado.SalarioBase = numSalarioBase.Value;
                 formadorSelecionado.DataFimContrato = dtpDataFimContrato.Value;
                 formadorSelecionado.DataFimRegistoCrim = dtpDataRegistoCriminal.Value;
+
+                // actualizar NIF se o campo estiver presente e for válido
+                if (nif > 0)
+                {
+                    formadorSelecionado.Nif = nif;
+                }
 
                 // Persistir via Empresa (se existir método especifico)
                 empresa.AtualizarFormador(formadorSelecionado);
@@ -513,6 +630,20 @@ namespace ADOSMELHORES.Forms.Formadores
         private void btnFechar_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void label11_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        // novo helper para verificar duplicados de NIF
+        private bool NifDuplicado(int nif, int? excludeId = null)
+        {
+            if (nif <= 0) return false; // NIF inválido não conta como duplicado
+            return empresa.Funcionarios
+                .OfType<Formador>()
+                .Any(f => f.Nif == nif && (!excludeId.HasValue || f.Id != excludeId.Value));
         }
     }
 }

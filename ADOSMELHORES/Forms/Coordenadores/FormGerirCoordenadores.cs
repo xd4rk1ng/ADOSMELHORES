@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows.Forms;
 using System.Reflection;
 using ADOSMELHORES.Modelos;
+using System.ComponentModel;
 
 namespace ADOSMELHORES.Forms.Coordenadores
 {
@@ -12,10 +13,19 @@ namespace ADOSMELHORES.Forms.Coordenadores
         private Empresa empresa;
         private Coordenador coordenadorSelecionado;
 
+        // constantes para validação do NIF
+        private const int NIF_MIN = 100000000;
+        private const int NIF_MAX = 999999999;
+
         public FormGerirCoordenadores(Empresa empresa)
         {
             InitializeComponent();
             this.empresa = empresa;
+
+            // Subscrever eventos do campo NIF (uso correto do txtNIF)
+            this.txtNIF.KeyPress += TxtNIF_KeyPress;
+            this.txtNIF.Validating += TxtNIF_Validating;
+
             AtualizarListagem();
             LimparCampos();
         }
@@ -48,6 +58,7 @@ namespace ADOSMELHORES.Forms.Coordenadores
         private void LimparCampos()
         {
             txtId.Clear();
+            txtNIF.Clear();
             txtNome.Clear();
             txtMorada.Clear();
             txtContacto.Clear();
@@ -71,6 +82,7 @@ namespace ADOSMELHORES.Forms.Coordenadores
         private void PreencherCampos(Coordenador coordenador)
         {
             txtId.Text = coordenador.Id.ToString();
+            txtNIF.Text = coordenador.Nif.ToString();
             txtNome.Text = coordenador.Nome;
             txtMorada.Text = coordenador.Morada;
             txtContacto.Text = coordenador.Contacto;
@@ -80,6 +92,57 @@ namespace ADOSMELHORES.Forms.Coordenadores
             dtpDataRegistoCriminal.Value = coordenador.DataFimRegistoCrim;
 
             txtStatusRegistoCriminal.Text = coordenador.RegistoCriminalExpirado(DateTime.Now) ? "Expirado" : "Válido";
+        }
+
+        private void TxtNIF_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // permitir apenas dígitos e teclas de controlo
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void TxtNIF_Validating(object sender, CancelEventArgs e)
+        {
+            string text = txtNIF.Text?.Trim() ?? string.Empty;
+
+            if (string.IsNullOrEmpty(text))
+            {
+                // Se optar por tornar NIF obrigatório, cancele e mostre mensagem.
+                // Por agora permitimos vazio, mas se preenchido valida-se abaixo.
+                return;
+            }
+
+            if (!text.All(char.IsDigit))
+            {
+                e.Cancel = true;
+                MessageBox.Show("NIF deve conter apenas dígitos.", "Entrada Inválida", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (text.Length != 9)
+            {
+                e.Cancel = true;
+                MessageBox.Show("NIF deve ter 9 dígitos.", "Entrada Inválida", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            int nif;
+            if (!int.TryParse(text, out nif) || nif < NIF_MIN || nif > NIF_MAX)
+            {
+                e.Cancel = true;
+                MessageBox.Show($"NIF deve estar entre {NIF_MIN} e {NIF_MAX}.", "Entrada Inválida", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        // Helper para verificar duplicação de NIF entre coordenadores
+        private bool NifDuplicado(int nif, int? excludeId = null)
+        {
+            if (nif < NIF_MIN || nif > NIF_MAX) return false;
+            return empresa.Funcionarios
+                .OfType<Coordenador>()
+                .Any(c => c.Nif == nif && (!excludeId.HasValue || c.Id != excludeId.Value));
         }
 
         private void btnInserirNovo_Click(object sender, EventArgs e)
@@ -98,11 +161,38 @@ namespace ADOSMELHORES.Forms.Coordenadores
                 return;
             }
 
+            // validar NIF (obrigatório para este fluxo)
+            if (string.IsNullOrWhiteSpace(txtNIF.Text) || !txtNIF.Text.All(char.IsDigit) || txtNIF.Text.Length != 9)
+            {
+                MessageBox.Show("Por favor, insira um NIF válido de 9 dígitos.", "Aviso",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtNIF.Focus();
+                return;
+            }
+
+            int nif = int.Parse(txtNIF.Text);
+
+            if (nif < NIF_MIN || nif > NIF_MAX)
+            {
+                MessageBox.Show($"NIF deve estar entre {NIF_MIN} e {NIF_MAX}.", "Aviso",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtNIF.Focus();
+                return;
+            }
+
+            if (NifDuplicado(nif))
+            {
+                MessageBox.Show("Já existe um coordenador com este NIF.", "NIF Duplicado",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtNIF.Focus();
+                return;
+            }
+
             int novoId = empresa.ObterProximoID();
 
             Coordenador novoCoordenador = new Coordenador(
                 id: novoId,
-                nif: 0,
+                nif: nif,
                 nome: txtNome.Text,
                 morada: txtMorada.Text,
                 contacto: txtContacto.Text,
@@ -116,7 +206,24 @@ namespace ADOSMELHORES.Forms.Coordenadores
 
             empresa.AdicionarFuncionario(novoCoordenador);
             AtualizarListagem();
-            LimparCampos();
+
+            // selecionar o novo item na listView e preencher os campos para permitir uso imediato dos botões laterais
+            var item = listViewCoordenadores.Items
+                .Cast<ListViewItem>()
+                .FirstOrDefault(i => ((Coordenador)i.Tag).Id == novoCoordenador.Id);
+
+            if (item != null)
+            {
+                // garante seleção única e foco
+                listViewCoordenadores.SelectedItems.Clear();
+                item.Selected = true;
+                listViewCoordenadores.EnsureVisible(item.Index);
+
+                // atualizar estado interno e UI com os dados do novo coordenador
+                coordenadorSelecionado = novoCoordenador;
+                PreencherCampos(coordenadorSelecionado);
+                listViewCoordenadores.Focus();
+            }
 
             MessageBox.Show("Coordenador adicionado com sucesso!", "Sucesso",
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -131,6 +238,34 @@ namespace ADOSMELHORES.Forms.Coordenadores
                 return;
             }
 
+            // validar NIF (obrigatório para alteração também)
+            if (string.IsNullOrWhiteSpace(txtNIF.Text) || !txtNIF.Text.All(char.IsDigit) || txtNIF.Text.Length != 9)
+            {
+                MessageBox.Show("Por favor, insira um NIF válido de 9 dígitos.", "Aviso",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtNIF.Focus();
+                return;
+            }
+
+            int nif = int.Parse(txtNIF.Text);
+
+            if (nif < NIF_MIN || nif > NIF_MAX)
+            {
+                MessageBox.Show($"NIF deve estar entre {NIF_MIN} e {NIF_MAX}.", "Aviso",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtNIF.Focus();
+                return;
+            }
+
+            if (NifDuplicado(nif, coordenadorSelecionado.Id))
+            {
+                MessageBox.Show("Outro coordenador já utiliza este NIF. Corrija o NIF.", "NIF Duplicado",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtNIF.Focus();
+                return;
+            }
+
+            coordenadorSelecionado.Nif = nif;
             coordenadorSelecionado.Nome = txtNome.Text;
             coordenadorSelecionado.Morada = txtMorada.Text;
             coordenadorSelecionado.Contacto = txtContacto.Text;
@@ -161,9 +296,6 @@ namespace ADOSMELHORES.Forms.Coordenadores
 
             if (result == DialogResult.Yes)
             {
-                // Tentativa segura de invocar o método RemoverFuncionario que aceite um Funcionario.
-                // Em alguns cenários a sobrecarga visível por compilador pode ser apenas para Formador,
-                // causando erro de compilação ao passar um Coordenador. Usamos reflexão com fallback.
                 MethodInfo removerFuncionarioMetodo = empresa.GetType().GetMethod("RemoverFuncionario", new Type[] { typeof(Funcionario) });
 
                 if (removerFuncionarioMetodo != null)
@@ -172,7 +304,6 @@ namespace ADOSMELHORES.Forms.Coordenadores
                 }
                 else
                 {
-                    // Fallback: tentar remover diretamente da lista interna 'funcionarios' se existir (reflectivamente)
                     FieldInfo fieldFuncionarios = empresa.GetType().GetField("funcionarios", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
                     if (fieldFuncionarios != null)
                     {
@@ -208,27 +339,6 @@ namespace ADOSMELHORES.Forms.Coordenadores
             LimparCampos();
         }
 
-        private void btnCalcularValorFormacao_Click(object sender, EventArgs e)
-        {
-            if (coordenadorSelecionado == null)
-            {
-                MessageBox.Show("Selecione um coordenador.", "Aviso",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            decimal custoMensal = coordenadorSelecionado.CalcularCustoMensal();
-
-            MessageBox.Show(
-                $"Custo mensal do Coordenador {coordenadorSelecionado.Nome}:\n\n" +
-                $"Salário Base: {coordenadorSelecionado.SalarioBase:C}\n" +
-                $"Formadores Associados: {coordenadorSelecionado.NumeroFormadores}\n" +
-                $"Área: {coordenadorSelecionado.AreaCoordenacao}",
-                "Informação do Coordenador",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information);
-        }
-
         private void btnAlocarFormador_Click(object sender, EventArgs e)
         {
             if (coordenadorSelecionado == null)
@@ -246,7 +356,6 @@ namespace ADOSMELHORES.Forms.Coordenadores
                 return;
             }
 
-            // Criar form simples inline para alocar formadores
             using (Form formAlocar = new Form())
             {
                 formAlocar.Text = "Alocar Formador";
@@ -288,12 +397,84 @@ namespace ADOSMELHORES.Forms.Coordenadores
                 if (formAlocar.ShowDialog() == DialogResult.OK && cboFormadores.SelectedItem != null)
                 {
                     Formador formadorSelecionado = (Formador)cboFormadores.SelectedItem;
+
+                    // Verifica se o formador já está alocado noutro coordenador
+                    var outroCoordenador = empresa.Funcionarios
+                        .OfType<Coordenador>()
+                        .FirstOrDefault(c => c.FormadoresAssociados.Any(f => f.Id == formadorSelecionado.Id));
+
+                    if (outroCoordenador != null && outroCoordenador.Id != coordenadorSelecionado.Id)
+                    {
+                        MessageBox.Show($"O formador {formadorSelecionado.Nome} já está alocado ao coordenador {outroCoordenador.Nome}.",
+                            "Alocação Inválida", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+
+                    // Se já estiver alocado ao mesmo coordenador, avisar
+                    if (coordenadorSelecionado.FormadoresAssociados.Any(f => f.Id == formadorSelecionado.Id))
+                    {
+                        MessageBox.Show($"O formador {formadorSelecionado.Nome} já está alocado a este coordenador.", "Informação",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return;
+                    }
+
                     coordenadorSelecionado.AdicionarFormador(formadorSelecionado);
                     AtualizarListagem();
                     PreencherCampos(coordenadorSelecionado);
                     MessageBox.Show($"Formador {formadorSelecionado.Nome} alocado com sucesso!", "Sucesso",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
+            }
+        }
+
+        // Novo botão: lista de formadores alocados ao coordenador selecionado
+        private void btnListaFormadoresAlocados_Click(object sender, EventArgs e)
+        {
+            if (coordenadorSelecionado == null)
+            {
+                MessageBox.Show("Selecione um coordenador.", "Aviso",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            var associados = coordenadorSelecionado.FormadoresAssociados;
+            if (associados == null || associados.Count == 0)
+            {
+                MessageBox.Show("Não existem formadores alocados a este coordenador.", "Informação",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            using (Form listaForm = new Form())
+            {
+                listaForm.Text = $"Formadores alocados a {coordenadorSelecionado.Nome}";
+                listaForm.Size = new System.Drawing.Size(500, 350);
+                listaForm.StartPosition = FormStartPosition.CenterParent;
+
+                ListBox lb = new ListBox()
+                {
+                    Dock = DockStyle.Top,
+                    Height = 260
+                };
+                lb.DisplayMember = "Nome";
+                foreach (var f in associados)
+                {
+                    lb.Items.Add(f);
+                }
+
+                Button btnOk = new Button()
+                {
+                    Text = "OK",
+                    DialogResult = DialogResult.OK,
+                    Dock = DockStyle.Bottom,
+                    Height = 30
+                };
+
+                listaForm.Controls.Add(lb);
+                listaForm.Controls.Add(btnOk);
+                listaForm.AcceptButton = btnOk;
+
+                listaForm.ShowDialog();
             }
         }
 
@@ -377,6 +558,16 @@ namespace ADOSMELHORES.Forms.Coordenadores
         private void btnFechar_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void groupBoxDados_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
