@@ -1,30 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using ADOSMELHORES.Modelos;
 using ADOSMELHORES.Forms.Formadores;
 using ADOSMELHORES.Forms.Diretores;
 using ADOSMELHORES.Forms.Secretarias;
 using ADOSMELHORES.Forms.Coordenadores;
+using System.Text;
 
 namespace ADOSMELHORES.Forms
 {
     public partial class FormInicial : Form
     {
-        // Altere o modificador de acesso do campo 'empresa' de 'private' para 'internal' ou 'public'
         private Empresa _empresa;
 
-        // Modifique o construtor para receber a instância de Empresa
         public FormInicial(Empresa empresa)
         {
             InitializeComponent();
-            _empresa = empresa;
+            _empresa = empresa ?? throw new ArgumentNullException(nameof(empresa));
+
+            // Inicializar data simulada na primeira execução
+            if (_empresa.DataSimulada == DateTime.MinValue)
+            {
+                _empresa.DataSimulada = DateTime.Now.Date;
+            }
+
+            AtualizarLabelDataSimulada();
+        }
+
+        private void AtualizarLabelDataSimulada()
+        {
+            lblDataSimulada.Text = $"Data simulada: {_empresa.DataSimulada:dd/MM/yyyy}";
+            // opcional: atualizar título da janela
+            this.Text = $"Form Inicial - Data simulada: {_empresa.DataSimulada:dd/MM/yyyy}";
         }
 
         private void btnExemplo_Click_1(object sender, EventArgs e)
@@ -32,10 +41,9 @@ namespace ADOSMELHORES.Forms
             FormExemplo f = new FormExemplo(this);   // create the new form
             f.Show();                // show it
         }
-        
+
         private void btnFormador_Click(object sender, EventArgs e)
         {
-            // Usa a referência explícita ao namespace que contém o formulário completo.
             var f = new FormGerirFormadores(_empresa);
             f.Show();
         }
@@ -50,16 +58,8 @@ namespace ADOSMELHORES.Forms
         {
             try
             {
-                // Crie uma instância do FormGerirDiretores passando a empresa
                 var formDiretores = new FormGerirDiretores(_empresa);
-
-                // Mostre o formulário
-                // Use ShowDialog() se quiser bloquear até fechar
-                // Use Show() se quiser permitir múltiplas janelas
                 formDiretores.Show();
-
-                // Ou se quiser modal (bloqueia até fechar):
-                // formDiretores.ShowDialog();
             }
             catch (Exception ex)
             {
@@ -78,6 +78,59 @@ namespace ADOSMELHORES.Forms
             using (var form = new FormGerirSecretarias(_empresa))
             {
                 form.ShowDialog();
+            }
+        }
+
+        // Avança 1 dia na DataSimulada e verifica alertas
+        private void btnAvancarDia_Click(object sender, EventArgs e)
+        {
+            _empresa.DataSimulada = _empresa.DataSimulada.AddDays(1);
+            AtualizarLabelDataSimulada();
+            VerificarAlertasData(_empresa.DataSimulada);
+        }
+
+        // Verifica contratos e registos criminais atingidos na data simulada
+        private void VerificarAlertasData(DateTime dataSimulada)
+        {
+            var funcionarios = _empresa.Funcionarios.ToList();
+
+            var contratosQueTerminam = funcionarios
+                .Where(f => f.DataFimContrato.Date == dataSimulada.Date)
+                .ToList();
+
+            var registosAtingidos = funcionarios
+                .Where(f => f.DataFimRegistoCrim.Date == dataSimulada.Date)
+                .ToList();
+
+            StringBuilder sb = new StringBuilder();
+
+            if (contratosQueTerminam.Any())
+            {
+                sb.AppendLine("Contratos com fim na data simulada:");
+                foreach (var f in contratosQueTerminam)
+                {
+                    sb.AppendLine($" - {f.Nome} (ID: {f.Id}) termina contrato em {f.DataFimContrato:dd/MM/yyyy}");
+                }
+                sb.AppendLine();
+            }
+
+            if (registosAtingidos.Any())
+            {
+                sb.AppendLine("Registos criminais atingem validade na data simulada:");
+                foreach (var f in registosAtingidos)
+                {
+                    sb.AppendLine($" - {f.Nome} (ID: {f.Id}) registo termina em {f.DataFimRegistoCrim:dd/MM/yyyy}");
+                }
+                sb.AppendLine();
+            }
+
+            if (sb.Length > 0)
+            {
+                MessageBox.Show(sb.ToString(), "Alerta - Data Simulada", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                MessageBox.Show("Nenhum contrato ou registo criminal atinge término nesta data simulada.", "Sem alertas", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
     }

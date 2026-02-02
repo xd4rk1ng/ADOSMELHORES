@@ -48,12 +48,18 @@ namespace ADOSMELHORES.Modelos
 
         public bool ContratoValido(DateTime data)
         {
-            return data >= DataIniContrato && data <= DataFimContrato;
+            // Normalizar para comparação por dia (ignora componente hora)
+            var d = data.Date;
+            return d >= DataIniContrato.Date && d <= DataFimContrato.Date;
         }
 
         public bool RegistoCriminalExpirado(DateTime data)
         {
-            return data > DataFimRegistoCrim;
+            // Normalizar para comparação por dia (ignora componente hora)
+            var d = data.Date;
+            // Se DataFimRegistoCrim não estiver definida, considerar expirado
+            if (DataFimRegistoCrim == DateTime.MinValue) return true;
+            return d > DataFimRegistoCrim.Date;
         }
 
         public override string ToString()

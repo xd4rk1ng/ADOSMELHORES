@@ -8,9 +8,9 @@
         private System.ComponentModel.IContainer components = null;
 
         /// <summary>
-        /// Clean up any resources being used.
+        /// Limpar os recursos em uso.
         /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        /// <param name="disposing"></param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -32,6 +32,8 @@
             this.btnCoordenador = new System.Windows.Forms.Button();
             this.btnSecretaria = new System.Windows.Forms.Button();
             this.btnDiretor = new System.Windows.Forms.Button();
+            this.lblDataSimulada = new System.Windows.Forms.Label();
+            this.btnAvancarDia = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnFormador
@@ -75,11 +77,32 @@
             this.btnDiretor.UseVisualStyleBackColor = true;
             this.btnDiretor.Click += new System.EventHandler(this.btnDiretor_Click);
             // 
+            // lblDataSimulada
+            // 
+            this.lblDataSimulada.AutoSize = true;
+            this.lblDataSimulada.Location = new System.Drawing.Point(29, 95);
+            this.lblDataSimulada.Name = "lblDataSimulada";
+            this.lblDataSimulada.Size = new System.Drawing.Size(110, 13);
+            this.lblDataSimulada.TabIndex = 4;
+            this.lblDataSimulada.Text = "Data simulada: --/--/----";
+            // 
+            // btnAvancarDia
+            // 
+            this.btnAvancarDia.Location = new System.Drawing.Point(405, 90);
+            this.btnAvancarDia.Name = "btnAvancarDia";
+            this.btnAvancarDia.Size = new System.Drawing.Size(150, 23);
+            this.btnAvancarDia.TabIndex = 5;
+            this.btnAvancarDia.Text = "Avançar 1 dia";
+            this.btnAvancarDia.UseVisualStyleBackColor = true;
+            this.btnAvancarDia.Click += new System.EventHandler(this.btnAvancarDia_Click);
+            // 
             // FormInicial
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 150);
+            this.Controls.Add(this.btnAvancarDia);
+            this.Controls.Add(this.lblDataSimulada);
             this.Controls.Add(this.btnDiretor);
             this.Controls.Add(this.btnSecretaria);
             this.Controls.Add(this.btnCoordenador);
@@ -88,6 +111,7 @@
             this.Text = "Form Inicial";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormInicialClose);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -97,6 +121,8 @@
         private System.Windows.Forms.Button btnCoordenador;
         private System.Windows.Forms.Button btnSecretaria;
         private System.Windows.Forms.Button btnDiretor;
+        private System.Windows.Forms.Label lblDataSimulada;
+        private System.Windows.Forms.Button btnAvancarDia;
     }
 }
 
