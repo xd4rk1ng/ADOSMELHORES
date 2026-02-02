@@ -43,7 +43,6 @@ namespace ADOSMELHORES.Forms.Formadores
             this.label1 = new System.Windows.Forms.Label();
             this.grpAcoes = new System.Windows.Forms.GroupBox();
             this.btnAtualizarRegistoCriminal = new System.Windows.Forms.Button();
-            this.btnAlocarFormador = new System.Windows.Forms.Button();
             this.btnCalcularValor = new System.Windows.Forms.Button();
             this.btnFiltrarDisponibilidade = new System.Windows.Forms.Button();
             this.btnLimpar = new System.Windows.Forms.Button();
@@ -310,7 +309,6 @@ namespace ADOSMELHORES.Forms.Formadores
             // grpAcoes
             // 
             this.grpAcoes.Controls.Add(this.btnAtualizarRegistoCriminal);
-            this.grpAcoes.Controls.Add(this.btnAlocarFormador);
             this.grpAcoes.Controls.Add(this.btnCalcularValor);
             this.grpAcoes.Controls.Add(this.btnFiltrarDisponibilidade);
             this.grpAcoes.Controls.Add(this.btnLimpar);
@@ -338,22 +336,10 @@ namespace ADOSMELHORES.Forms.Formadores
             this.btnAtualizarRegistoCriminal.UseVisualStyleBackColor = true;
             this.btnAtualizarRegistoCriminal.Click += new System.EventHandler(this.btnAtualizarRegistoCriminal_Click);
             // 
-            // btnAlocarFormador
-            // 
-            this.btnAlocarFormador.Enabled = false;
-            this.btnAlocarFormador.Location = new System.Drawing.Point(27, 314);
-            this.btnAlocarFormador.Margin = new System.Windows.Forms.Padding(4);
-            this.btnAlocarFormador.Name = "btnAlocarFormador";
-            this.btnAlocarFormador.Size = new System.Drawing.Size(213, 43);
-            this.btnAlocarFormador.TabIndex = 5;
-            this.btnAlocarFormador.Text = "Alocar a Coordenador";
-            this.btnAlocarFormador.UseVisualStyleBackColor = true;
-            this.btnAlocarFormador.Click += new System.EventHandler(this.btnAlocarFormador_Click);
-            // 
             // btnCalcularValor
             // 
             this.btnCalcularValor.Enabled = false;
-            this.btnCalcularValor.Location = new System.Drawing.Point(27, 258);
+            this.btnCalcularValor.Location = new System.Drawing.Point(27, 304);
             this.btnCalcularValor.Margin = new System.Windows.Forms.Padding(4);
             this.btnCalcularValor.Name = "btnCalcularValor";
             this.btnCalcularValor.Size = new System.Drawing.Size(213, 43);
@@ -375,7 +361,7 @@ namespace ADOSMELHORES.Forms.Formadores
             // 
             // btnLimpar
             // 
-            this.btnLimpar.Location = new System.Drawing.Point(27, 203);
+            this.btnLimpar.Location = new System.Drawing.Point(27, 240);
             this.btnLimpar.Margin = new System.Windows.Forms.Padding(4);
             this.btnLimpar.Name = "btnLimpar";
             this.btnLimpar.Size = new System.Drawing.Size(213, 43);
@@ -387,7 +373,7 @@ namespace ADOSMELHORES.Forms.Formadores
             // btnRemover
             // 
             this.btnRemover.Enabled = false;
-            this.btnRemover.Location = new System.Drawing.Point(27, 148);
+            this.btnRemover.Location = new System.Drawing.Point(27, 175);
             this.btnRemover.Margin = new System.Windows.Forms.Padding(4);
             this.btnRemover.Name = "btnRemover";
             this.btnRemover.Size = new System.Drawing.Size(213, 43);
@@ -399,7 +385,7 @@ namespace ADOSMELHORES.Forms.Formadores
             // btnAlterar
             // 
             this.btnAlterar.Enabled = false;
-            this.btnAlterar.Location = new System.Drawing.Point(27, 92);
+            this.btnAlterar.Location = new System.Drawing.Point(27, 116);
             this.btnAlterar.Margin = new System.Windows.Forms.Padding(4);
             this.btnAlterar.Name = "btnAlterar";
             this.btnAlterar.Size = new System.Drawing.Size(213, 43);
@@ -410,7 +396,7 @@ namespace ADOSMELHORES.Forms.Formadores
             // 
             // btnInserir
             // 
-            this.btnInserir.Location = new System.Drawing.Point(27, 37);
+            this.btnInserir.Location = new System.Drawing.Point(27, 56);
             this.btnInserir.Margin = new System.Windows.Forms.Padding(4);
             this.btnInserir.Name = "btnInserir";
             this.btnInserir.Size = new System.Drawing.Size(213, 43);
@@ -530,7 +516,6 @@ namespace ADOSMELHORES.Forms.Formadores
         private System.Windows.Forms.Button btnRemover;
         private System.Windows.Forms.Button btnLimpar;
         private System.Windows.Forms.Button btnCalcularValor;
-        private System.Windows.Forms.Button btnAlocarFormador;
         private System.Windows.Forms.Button btnAtualizarRegistoCriminal;
         private System.Windows.Forms.Button btnFiltrarDisponibilidade;
 

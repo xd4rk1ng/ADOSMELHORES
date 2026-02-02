@@ -344,7 +344,7 @@ namespace ADOSMELHORES.Forms.Formadores
 
             if (string.IsNullOrWhiteSpace(txtContacto.Text))
             {
-                MessageBox.Show("Por favor, insira o contacto do formador.", "Campo Obligatório",
+                MessageBox.Show("Por favor, insira o contacto do formador.", "Campo Obrigatório",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtContacto.Focus();
                 return false;
