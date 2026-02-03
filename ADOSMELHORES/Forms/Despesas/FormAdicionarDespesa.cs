@@ -253,8 +253,7 @@ namespace ADOSMELHORES.Forms.Despesas
                     return tipo;
                 }
             }
-
-            // Fallback (não deve acontecer)
+                        
             return TipoDespesaFisica.Outros;
         }
     }

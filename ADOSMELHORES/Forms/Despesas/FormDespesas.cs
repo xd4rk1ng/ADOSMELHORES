@@ -35,17 +35,11 @@ namespace ADOSMELHORES.Forms.Despesas
             CarregarMesesAnos();
             AtualizarDados();
         }
-        /// <summary>
-        /// Configura propriedades iniciais do formulário
-        /// </summary>
         private void ConfigurarFormulario()
         {
             this.StartPosition = FormStartPosition.CenterScreen;
 
-            // IMPORTANTE: Verificar se os controles existem no Designer
-            // Se não existirem, você precisará adicioná-los manualmente
-
-            // Configurar eventos dos botões (verificar se existem no Designer)
+            // eventos nos botoes
             if (btnAdicionar != null)
                 btnAdicionar.Click += BtnAdicionar_Click;
 
@@ -58,7 +52,7 @@ namespace ADOSMELHORES.Forms.Despesas
             if (btnAtualizar != null)
                 btnAtualizar.Click += BtnAtualizar_Click;
 
-            // Configurar eventos dos seletores
+            // eventos dos seletores
             if (cmbMes != null)
                 cmbMes.SelectedIndexChanged += CmbMesAno_SelectedIndexChanged;
 
@@ -69,10 +63,7 @@ namespace ADOSMELHORES.Forms.Despesas
             if (dgvHistorico != null)
                 ConfigurarDataGridView();
         }
-
-        /// <summary>
-        /// Carrega os meses e anos nos controles
-        /// </summary>
+               
         private void CarregarMesesAnos()
         {
             // Carregar meses no ComboBox
@@ -95,9 +86,7 @@ namespace ADOSMELHORES.Forms.Despesas
             }
         }
 
-        /// <summary>
-        /// Configura o DataGridView de histórico
-        /// </summary>
+
         private void ConfigurarDataGridView()
         {
             if (dgvHistorico == null)
@@ -144,9 +133,8 @@ namespace ADOSMELHORES.Forms.Despesas
             });
         }
 
-        /// <summary>
-        /// Atualiza todos os dados do formulário
-        /// </summary>
+         /// Atualiza todos os dados do formulário
+   
         private void AtualizarDados()
         {
             try
@@ -161,6 +149,9 @@ namespace ADOSMELHORES.Forms.Despesas
                 // Atualizar labels de resumo
                 AtualizarResumo(relatorio);
 
+                // Atualizar despesas na txtBoxDespesasFisicas
+                AtualizarListBoxDespesasFisicas();
+
                 // Atualizar histórico
                 AtualizarHistorico(ano);
             }
@@ -174,6 +165,51 @@ namespace ADOSMELHORES.Forms.Despesas
                 );
             }
         }
+
+        /// Atualiza a ListBox de despesas físicas
+        private void AtualizarListBoxDespesasFisicas()
+        {            
+            if (lstDespesasFisicas == null)
+                return;
+
+            try
+            {
+                // Obter mês e ano selecionados
+                int mes = cmbMes.SelectedIndex + 1;
+                int ano = (int)numAno.Value;
+
+                // Limpar ListBox
+                lstDespesasFisicas.Items.Clear();
+
+                // Obter despesas do mês
+                var despesas = gestorDespesas.ObterDespesasFisicasPorMes(mes, ano);
+
+                // Verificar se há despesas
+                if (despesas.Count == 0)
+                {
+                    lstDespesasFisicas.Items.Add("Nenhuma despesa cadastrada.");
+                    return;
+                }
+
+                // Adicionar cada despesa
+                foreach (var d in despesas)
+                {
+                    string linha = $"{d.Data:dd/MM} │ {d.TipoDescricao,-35} │ €{d.Valor,8:N2}";
+                    lstDespesasFisicas.Items.Add(linha);
+                }
+
+                // Total
+                lstDespesasFisicas.Items.Add("".PadRight(60, '─'));
+                decimal total = despesas.Sum(x => x.Valor);
+                lstDespesasFisicas.Items.Add($"TOTAL: €{total:N2}");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erro: {ex.Message}", "Erro",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
 
         /// <summary>
         /// Atualiza o painel de resumo com os dados do relatório
@@ -198,7 +234,7 @@ namespace ADOSMELHORES.Forms.Despesas
 
             if (lblTotalCoordenadores != null)
                 lblTotalCoordenadores.Text = $"€{relatorio.DespesasCoordenadores:N2}";
-
+            
             if (lblDespesasFuncionarios != null)
                 lblDespesasFuncionarios.Text = $"€{relatorio.TotalFuncionarios:N2}";
 
@@ -244,17 +280,14 @@ namespace ADOSMELHORES.Forms.Despesas
             }
         }
 
-        /// <summary>
+ 
         /// Evento quando mês ou ano é alterado
-        /// </summary>
         private void CmbMesAno_SelectedIndexChanged(object sender, EventArgs e)
         {
             AtualizarDados();
         }
 
-        /// <summary>
         /// Evento do botão Adicionar Despesa
-        /// </summary>
         private void BtnAdicionar_Click(object sender, EventArgs e)
         {
             try
@@ -287,9 +320,7 @@ namespace ADOSMELHORES.Forms.Despesas
             }
         }
 
-        /// <summary>
-        /// Evento do botão Exportar CSV
-        /// </summary>
+        // Evento do botão Exportar CSV
         private void BtnExportar_Click(object sender, EventArgs e)
         {
             try
@@ -336,9 +367,7 @@ namespace ADOSMELHORES.Forms.Despesas
             }
         }
 
-        /// <summary>
         /// Evento do botão Atualizar
-        /// </summary>
         private void BtnAtualizar_Click(object sender, EventArgs e)
         {
             AtualizarDados();
@@ -350,14 +379,10 @@ namespace ADOSMELHORES.Forms.Despesas
             );
         }
 
-        /// <summary>
         /// Evento do botão Fechar
-        /// </summary>
         private void BtnFechar_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
-
     }
 }

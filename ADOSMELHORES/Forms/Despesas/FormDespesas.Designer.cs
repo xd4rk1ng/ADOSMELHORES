@@ -36,11 +36,10 @@
             this.lblMes = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.panelResumo = new System.Windows.Forms.Panel();
-            this.txtBoxDespesasFisicas = new System.Windows.Forms.TextBox();
             this.lblTotalDespesas = new System.Windows.Forms.Label();
             this.lblLabelTotal = new System.Windows.Forms.Label();
-            this.lblDespesasFuncionariosTotal = new System.Windows.Forms.Label();
             this.lblDespesasFuncionarios = new System.Windows.Forms.Label();
+            this.lablDespesasFuncionarios = new System.Windows.Forms.Label();
             this.lblDespesasFisicas = new System.Windows.Forms.Label();
             this.lblLabelDespesasFisicas = new System.Windows.Forms.Label();
             this.panelHistorico = new System.Windows.Forms.Panel();
@@ -65,6 +64,7 @@
             this.lblTotalFormadores = new System.Windows.Forms.Label();
             this.labelDespesasFisicas = new System.Windows.Forms.Label();
             this.lblPeriodo = new System.Windows.Forms.Label();
+            this.lstDespesasFisicas = new System.Windows.Forms.ListBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numAno)).BeginInit();
             this.panelResumo.SuspendLayout();
@@ -177,6 +177,7 @@
             // 
             this.panelResumo.BackColor = System.Drawing.Color.White;
             this.panelResumo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelResumo.Controls.Add(this.lstDespesasFisicas);
             this.panelResumo.Controls.Add(this.lblPeriodo);
             this.panelResumo.Controls.Add(this.labelDespesasFisicas);
             this.panelResumo.Controls.Add(this.lblTotalFormadores);
@@ -188,28 +189,16 @@
             this.panelResumo.Controls.Add(this.lblSecretárias);
             this.panelResumo.Controls.Add(this.lblDiretores);
             this.panelResumo.Controls.Add(this.LabelDespesasFuncionariosTotal);
-            this.panelResumo.Controls.Add(this.txtBoxDespesasFisicas);
             this.panelResumo.Controls.Add(this.lblTotalDespesas);
             this.panelResumo.Controls.Add(this.lblLabelTotal);
-            this.panelResumo.Controls.Add(this.lblDespesasFuncionariosTotal);
             this.panelResumo.Controls.Add(this.lblDespesasFuncionarios);
+            this.panelResumo.Controls.Add(this.lablDespesasFuncionarios);
             this.panelResumo.Controls.Add(this.lblDespesasFisicas);
             this.panelResumo.Controls.Add(this.lblLabelDespesasFisicas);
             this.panelResumo.Location = new System.Drawing.Point(12, 164);
             this.panelResumo.Name = "panelResumo";
             this.panelResumo.Size = new System.Drawing.Size(511, 463);
             this.panelResumo.TabIndex = 1;
-            // 
-            // txtBoxDespesasFisicas
-            // 
-            this.txtBoxDespesasFisicas.BackColor = System.Drawing.Color.LightGray;
-            this.txtBoxDespesasFisicas.Location = new System.Drawing.Point(72, 50);
-            this.txtBoxDespesasFisicas.Multiline = true;
-            this.txtBoxDespesasFisicas.Name = "txtBoxDespesasFisicas";
-            this.txtBoxDespesasFisicas.ReadOnly = true;
-            this.txtBoxDespesasFisicas.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtBoxDespesasFisicas.Size = new System.Drawing.Size(295, 112);
-            this.txtBoxDespesasFisicas.TabIndex = 6;
             // 
             // lblTotalDespesas
             // 
@@ -233,26 +222,26 @@
             this.lblLabelTotal.TabIndex = 4;
             this.lblLabelTotal.Text = "💶 TOTAL:";
             // 
-            // lblDespesasFuncionariosTotal
-            // 
-            this.lblDespesasFuncionariosTotal.AutoSize = true;
-            this.lblDespesasFuncionariosTotal.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDespesasFuncionariosTotal.Location = new System.Drawing.Point(312, 385);
-            this.lblDespesasFuncionariosTotal.Name = "lblDespesasFuncionariosTotal";
-            this.lblDespesasFuncionariosTotal.Size = new System.Drawing.Size(55, 23);
-            this.lblDespesasFuncionariosTotal.TabIndex = 3;
-            this.lblDespesasFuncionariosTotal.Text = "€ 0,00";
-            this.lblDespesasFuncionariosTotal.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // lblDespesasFuncionarios
             // 
             this.lblDespesasFuncionarios.AutoSize = true;
             this.lblDespesasFuncionarios.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDespesasFuncionarios.Location = new System.Drawing.Point(32, 202);
+            this.lblDespesasFuncionarios.Location = new System.Drawing.Point(312, 385);
             this.lblDespesasFuncionarios.Name = "lblDespesasFuncionarios";
-            this.lblDespesasFuncionarios.Size = new System.Drawing.Size(209, 23);
-            this.lblDespesasFuncionarios.TabIndex = 2;
-            this.lblDespesasFuncionarios.Text = "👥 Despesas Funcionários";
+            this.lblDespesasFuncionarios.Size = new System.Drawing.Size(55, 23);
+            this.lblDespesasFuncionarios.TabIndex = 3;
+            this.lblDespesasFuncionarios.Text = "€ 0,00";
+            this.lblDespesasFuncionarios.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // lablDespesasFuncionarios
+            // 
+            this.lablDespesasFuncionarios.AutoSize = true;
+            this.lablDespesasFuncionarios.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lablDespesasFuncionarios.Location = new System.Drawing.Point(32, 202);
+            this.lablDespesasFuncionarios.Name = "lablDespesasFuncionarios";
+            this.lablDespesasFuncionarios.Size = new System.Drawing.Size(209, 23);
+            this.lablDespesasFuncionarios.TabIndex = 2;
+            this.lablDespesasFuncionarios.Text = "👥 Despesas Funcionários";
             // 
             // lblDespesasFisicas
             // 
@@ -291,18 +280,19 @@
             this.dgvHistorico.AllowUserToAddRows = false;
             this.dgvHistorico.AllowUserToDeleteRows = false;
             this.dgvHistorico.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvHistorico.BackgroundColor = System.Drawing.Color.LightGray;
             this.dgvHistorico.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvHistorico.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
             this.Column2,
             this.Column3,
             this.Column4});
-            this.dgvHistorico.Location = new System.Drawing.Point(50, 52);
+            this.dgvHistorico.Location = new System.Drawing.Point(28, 52);
             this.dgvHistorico.Name = "dgvHistorico";
             this.dgvHistorico.RowHeadersWidth = 51;
             this.dgvHistorico.RowTemplate.Height = 24;
             this.dgvHistorico.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvHistorico.Size = new System.Drawing.Size(293, 141);
+            this.dgvHistorico.Size = new System.Drawing.Size(453, 224);
             this.dgvHistorico.TabIndex = 1;
             // 
             // Column1
@@ -333,7 +323,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(33, 12);
+            this.label2.Location = new System.Drawing.Point(137, 12);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(214, 23);
             this.label2.TabIndex = 0;
@@ -495,11 +485,23 @@
             // 
             this.lblPeriodo.AutoSize = true;
             this.lblPeriodo.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPeriodo.Location = new System.Drawing.Point(297, 12);
+            this.lblPeriodo.Location = new System.Drawing.Point(217, 18);
             this.lblPeriodo.Name = "lblPeriodo";
             this.lblPeriodo.Size = new System.Drawing.Size(51, 23);
             this.lblPeriodo.TabIndex = 17;
             this.lblPeriodo.Text = "Total ";
+            // 
+            // lstDespesasFisicas
+            // 
+            this.lstDespesasFisicas.BackColor = System.Drawing.Color.LightGray;
+            this.lstDespesasFisicas.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lstDespesasFisicas.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lstDespesasFisicas.FormattingEnabled = true;
+            this.lstDespesasFisicas.ItemHeight = 20;
+            this.lstDespesasFisicas.Location = new System.Drawing.Point(63, 52);
+            this.lstDespesasFisicas.Name = "lstDespesasFisicas";
+            this.lstDespesasFisicas.Size = new System.Drawing.Size(393, 100);
+            this.lstDespesasFisicas.TabIndex = 18;
             // 
             // FormDespesas
             // 
@@ -537,8 +539,8 @@
         private System.Windows.Forms.Button btnVerAnoCompleto;
         private System.Windows.Forms.NumericUpDown numAno;
         private System.Windows.Forms.Panel panelResumo;
-        private System.Windows.Forms.Label lblDespesasFuncionariosTotal;
         private System.Windows.Forms.Label lblDespesasFuncionarios;
+        private System.Windows.Forms.Label lablDespesasFuncionarios;
         private System.Windows.Forms.Label lblDespesasFisicas;
         private System.Windows.Forms.Label lblLabelDespesasFisicas;
         private System.Windows.Forms.Label lblTotalDespesas;
@@ -554,7 +556,6 @@
         private System.Windows.Forms.Button btnAtualizar;
         private System.Windows.Forms.Button btnExportar;
         private System.Windows.Forms.Button btnFechar;
-        private System.Windows.Forms.TextBox txtBoxDespesasFisicas;
         private System.Windows.Forms.Label LabelDespesasFuncionariosTotal;
         private System.Windows.Forms.Label lblCoordenadores;
         private System.Windows.Forms.Label lblFormadores;
@@ -566,5 +567,6 @@
         private System.Windows.Forms.Label lblTotalSecretarias;
         private System.Windows.Forms.Label lblTotalDiretores;
         private System.Windows.Forms.Label lblPeriodo;
+        private System.Windows.Forms.ListBox lstDespesasFisicas;
     }
 }
