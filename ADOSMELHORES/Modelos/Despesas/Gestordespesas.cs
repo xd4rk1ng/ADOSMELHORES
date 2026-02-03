@@ -5,13 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 
-namespace ADOSMELHORES.Modelos
+namespace ADOSMELHORES.Modelos.Despesas
 {
-    /// <summary>
-    /// Gerencia todas as operações relacionadas a despesas
-    /// ARMAZENAMENTO TEMPORÁRIO EM MEMÓRIA (dados perdidos ao fechar)
-    /// MIGRAÇÃO BD: Substituir lista por consultas ao banco de dados
-    /// </summary>
+    // Gerencia todas as operações relacionadas a despesas
+    // ARMAZENAMENTO TEMPORÁRIO EM MEMÓRIA (dados perdidos ao fechar)
+    // MIGRAÇÃO BD: Substituir lista por consultas ao banco de dados
+
     public class GestorDespesas
     {
         private Empresa empresa;
@@ -48,7 +47,7 @@ namespace ADOSMELHORES.Modelos
             // }
         }
 
-        /// Remove uma despesa física
+        // Remove uma despesa física
         public bool RemoverDespesaFisica(int id)
         {
             //TEMPORÁRIO - Remove da lista em memória
@@ -74,7 +73,7 @@ namespace ADOSMELHORES.Modelos
             // }
         }
 
-        /// Obtém todas as despesas físicas
+        // Obtém todas as despesas físicas
         public List<DespesaFisica> ObterTodasDespesasFisicas()
         {
             // TEMPORÁRIO - Retorna da lista em memória
@@ -87,7 +86,7 @@ namespace ADOSMELHORES.Modelos
             // }
         }
 
-        /// Obtém despesas físicas de um mês específico
+        // Obtém despesas físicas de um mês específico
         public List<DespesaFisica> ObterDespesasFisicasPorMes(int mes, int ano)
         {
             // TEMPORÁRIO - Filtra da lista em memória
@@ -106,7 +105,7 @@ namespace ADOSMELHORES.Modelos
             // }
         }
 
-        /// Calcula total de despesas físicas de um mês
+        // Calcula total de despesas físicas de um mês
         public decimal CalcularDespesasFisicasMes(int mes, int ano)
         {
             // TEMPORÁRIO - Calcula da lista em memória
@@ -123,7 +122,7 @@ namespace ADOSMELHORES.Modelos
             // }
         }
 
-        /// Busca despesa física por ID
+        // Busca despesa física por ID
         public DespesaFisica BuscarDespesaFisicaPorId(int id)
         {
             // TEMPORÁRIO - Busca na lista em memória
@@ -140,35 +139,35 @@ namespace ADOSMELHORES.Modelos
         // Também precisa mudar com migração BD
         // Pois busca diretamente da lista de funcionários da Empresa
 
-        /// Calcula despesas com diretores do mês
+        // Calcula despesas com diretores do mês
         public decimal CalcularDespesasDiretores()
         {
             var diretores = empresa.ObterDiretores();
             return diretores.Sum(d => d.CalcularCustoMensal());
         }
 
-        /// Calcula despesas com secretárias do mês
+        // Calcula despesas com secretárias do mês
         public decimal CalcularDespesasSecretarias()
         {
             var secretarias = empresa.ObterSecretarias();
             return secretarias.Sum(s => s.CalcularCustoMensal());
         }
 
-        /// Calcula despesas com coordenadores do mês
+        // Calcula despesas com coordenadores do mês
         public decimal CalcularDespesasCoordenadores()
         {
             // TODO: Implementar quando houver coordenadores na Empresa
             return 0m;
         }
 
-        /// Calcula despesas com formadores do mês
+        // Calcula despesas com formadores do mês
         public decimal CalcularDespesasFormadores()
         {
             var formadores = empresa.ObterFormadores();
             return formadores.Sum(f => f.CalcularCustoMensal());
         }
 
-        /// Calcula total de despesas com funcionários
+        // Calcula total de despesas com funcionários
         public decimal CalcularTotalFuncionarios()
         {
             return CalcularDespesasDiretores() +
@@ -178,7 +177,7 @@ namespace ADOSMELHORES.Modelos
         }
 
         // ========== RELATÓRIOS ==========
-        /// Gera relatório completo de um mês
+        // Gera relatório completo de um mês
         public RelatorioDespesas GerarRelatorioMes(int mes, int ano)
         {
             return new RelatorioDespesas(mes, ano)
@@ -191,13 +190,13 @@ namespace ADOSMELHORES.Modelos
             };
         }
 
-        /// Gera relatório do mês atual
+        // Gera relatório do mês atual
         public RelatorioDespesas GerarRelatorioMesAtual()
         {
             return GerarRelatorioMes(DateTime.Now.Month, DateTime.Now.Year);
         }
 
-        /// Gera relatório anual (todos os 12 meses)
+        // Gera relatório anual (todos os 12 meses)
         public List<RelatorioDespesas> GerarRelatorioAnual(int ano)
         {
             var relatorios = new List<RelatorioDespesas>();
@@ -208,7 +207,7 @@ namespace ADOSMELHORES.Modelos
             return relatorios;
         }
 
-        /// Gera relatório dos últimos N meses
+        // Gera relatório dos últimos N meses
         public List<RelatorioDespesas> GerarRelatorioUltimosMeses(int quantidadeMeses)
         {
             var relatorios = new List<RelatorioDespesas>();
@@ -225,7 +224,7 @@ namespace ADOSMELHORES.Modelos
 
         // ========== EXPORTAÇÃO CSV ==========
         //
-        /// Exporta relatório mensal para CSV
+        // Exporta relatório mensal para CSV
         public void ExportarRelatorioMensalCSV(int mes, int ano, string caminhoArquivo)
         {
             var relatorio = GerarRelatorioMes(mes, ano);
@@ -253,7 +252,7 @@ namespace ADOSMELHORES.Modelos
             File.WriteAllText(caminhoArquivo, csv.ToString(), Encoding.UTF8);
         }
 
-        /// Exporta relatório anual para CSV
+        // Exporta relatório anual para CSV
         public void ExportarRelatorioAnualCSV(int ano, string caminhoArquivo)
         {
             var relatorios = GerarRelatorioAnual(ano);
@@ -291,7 +290,7 @@ namespace ADOSMELHORES.Modelos
 
         // ========== MÉTODOS AUXILIARES ==========
 
-        /// Obtém próximo ID disponível para despesa física
+        // Obtém próximo ID disponível para despesa física
         private int ObterProximoIdDespesa()
         {
             // TEMPORÁRIO - Calcula da lista em memória
@@ -308,7 +307,7 @@ namespace ADOSMELHORES.Modelos
             // }
         }
 
-        /// Limpa todas as despesas físicas (usar com cuidado!)
+        // Limpa todas as despesas físicas (usar com cuidado!)
         public void LimparDespesasFisicas()
         {
             // TEMPORÁRIO - Limpa lista em memória
@@ -322,7 +321,7 @@ namespace ADOSMELHORES.Modelos
             // }
         }
 
-        /// Obtém quantidade de despesas físicas registradas
+        // Obtém quantidade de despesas físicas registradas
         public int ObterQuantidadeDespesasFisicas()
         {
             // TEMPORÁRIO - Conta da lista em memória

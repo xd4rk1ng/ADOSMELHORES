@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ADOSMELHORES.Modelos
+namespace ADOSMELHORES.Modelos.Despesas
 {
-    /// <summary>
-    /// Relatório consolidado de despesas mensais
-    /// </summary>
+
+    // Relatório consolidado de despesas mensais
     public class RelatorioDespesas
     {
         public int Mes { get; set; }
@@ -23,27 +22,19 @@ namespace ADOSMELHORES.Modelos
         public decimal DespesasCoordenadores { get; set; }
         public decimal DespesasFormadores { get; set; }
 
-        /// <summary>
-        /// Total de despesas com funcionários
-        /// </summary>
+        // Total de despesas com funcionários
         public decimal TotalFuncionarios => DespesasDiretores +
                                              DespesasSecretarias +
                                              DespesasCoordenadores +
                                              DespesasFormadores;
 
-        /// <summary>
-        /// Total geral de despesas do mês
-        /// </summary>
+       
         public decimal TotalDespesas => DespesasFisicas + TotalFuncionarios;
 
-        /// <summary>
-        /// Nome do mês (Janeiro, Fevereiro, etc.)
-        /// </summary>
+        // Nome do mês (Janeiro, Fevereiro, etc.)
         public string NomeMes => ObterNomeMes(Mes);
 
-        /// <summary>
-        /// Descrição do período (Dezembro 2024)
-        /// </summary>
+        // Descrição do período (Dezembro 2024)
         public string Periodo => $"{NomeMes} {Ano}";
 
         public RelatorioDespesas()
@@ -58,9 +49,7 @@ namespace ADOSMELHORES.Modelos
             Ano = ano;
         }
 
-        /// <summary>
-        /// Obtém o nome do mês em português
-        /// </summary>
+
         public static string ObterNomeMes(int mes)
         {
             switch (mes)

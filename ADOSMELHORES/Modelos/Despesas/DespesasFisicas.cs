@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ADOSMELHORES.Modelos
+namespace ADOSMELHORES.Modelos.Despesas
 {
     
     public class DespesaFisica

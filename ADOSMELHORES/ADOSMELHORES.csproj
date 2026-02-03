@@ -161,9 +161,9 @@
     <Compile Include="Forms\Secretarias\FormGerirSecretarias.Designer.cs">
       <DependentUpon>FormGerirSecretarias.cs</DependentUpon>
     </Compile>
-    <Compile Include="Modelos\Gestordespesas.cs" />
-    <Compile Include="Modelos\DespesasFisicas.cs" />
-    <Compile Include="Modelos\DespesasRelatorio.cs" />
+    <Compile Include="Modelos\Despesas\Gestordespesas.cs" />
+    <Compile Include="Modelos\Despesas\DespesasFisicas.cs" />
+    <Compile Include="Modelos\Despesas\DespesasRelatorio.cs" />
     <Compile Include="Modelos\Exemplo.cs" />
     <Compile Include="Modelos\Empresa.cs" />
     <Compile Include="Modelos\Funcionario.cs" />
