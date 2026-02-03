@@ -31,11 +31,10 @@ namespace ADOSMELHORES
             Application.Run(new Forms.FormLogin(empresa));
         }
 
-        
-        /// <summary>
-        /// MÉTODO TEMPORÁRIO - Carrega dados de teste para desenvolvimento
-        /// TODO: REMOVER este método quando a base de dados estiver implementada
-        /// </summary>
+               
+        // MÉTODO TEMPORÁRIO - Carrega dados de teste para desenvolvimento
+        // TODO: REMOVER este método quando a base de dados estiver implementada
+
         private static void CarregarDadosTeste(Empresa empresa)
         {
             // Data base para os contratos
@@ -56,8 +55,7 @@ namespace ADOSMELHORES
                 dataFimContrato: fimContrato,
                 dataIniContrato: inicioContrato,
                 dataFimRegistoCrim: fimRegistoCriminal,
-                dataNascimento: new DateTime(1975, 3, 15),
-                bonusMensal: 800m,
+                dataNascimento: new DateTime(1975, 3, 15),                
                 carroEmpresa: true,
                 isencaoHorario: true
             );
@@ -74,8 +72,7 @@ namespace ADOSMELHORES
                 dataFimContrato: fimContrato,
                 dataIniContrato: inicioContrato,
                 dataFimRegistoCrim: fimRegistoCriminal,
-                dataNascimento: new DateTime(1980, 7, 22),
-                bonusMensal: 1000m,
+                dataNascimento: new DateTime(1980, 7, 22),               
                 carroEmpresa: true,
                 isencaoHorario: true
             );
@@ -92,8 +89,7 @@ namespace ADOSMELHORES
                 dataFimContrato: fimContrato,
                 dataIniContrato: inicioContrato,
                 dataFimRegistoCrim: fimRegistoCriminal,
-                dataNascimento: new DateTime(1978, 11, 5),
-                bonusMensal: 600m,
+                dataNascimento: new DateTime(1978, 11, 5),                
                 carroEmpresa: false,
                 isencaoHorario: true
             );

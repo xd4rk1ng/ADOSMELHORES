@@ -15,7 +15,6 @@ namespace ADOSMELHORES.Forms.Diretores
 {
     /// <summary>
     /// Form completo para gestão de Diretores
-    /// Inclui: Inserir, Alterar, Alocar secretarias, Calcular Valores, Alterar Registo Criminal
     /// </summary>
     public partial class FormGerirDiretores : Form
     {
@@ -33,8 +32,7 @@ namespace ADOSMELHORES.Forms.Diretores
             //substitui por um evento Load do form
             this.Load += FormGerirDiretores_Load;
         }
-
-        //novo
+            
         private void FormGerirDiretores_Load(object sender, EventArgs e)
         {
             ConfigurarForm();
@@ -215,7 +213,7 @@ namespace ADOSMELHORES.Forms.Diretores
             }
 
             CarregarSecretariasDisponiveis();            
-            MarcarSecretariasAlocadas(diretor);//Marcar as secretárias já alocadas ao diretor
+            MarcarSecretariasAlocadas(diretor);
                         
             remuneracaoCalculada = true;
             AtualizarEstadoBotoes();            
@@ -243,8 +241,7 @@ namespace ADOSMELHORES.Forms.Diretores
         private void CarregarSecretariasDisponiveis()
         {
             checkedListBoxSecretarias.Items.Clear();
-
-            // ✅ Usando método novo da Empresa
+            
             var todasSecretarias = empresa.ObterSecretarias();
 
             // Obter as áreas selecionadas do diretor
@@ -261,7 +258,7 @@ namespace ADOSMELHORES.Forms.Diretores
             }
 
             // Filtrar secretárias pelas áreas selecionadas
-            // AGORA: correspondência direta entre área do diretor e área da secretária
+            // correspondência direta entre área do diretor e área da secretária
             foreach (var secretaria in todasSecretarias)
             {
                 bool pertenceAreaSelecionada = false;
@@ -286,7 +283,7 @@ namespace ADOSMELHORES.Forms.Diretores
         }
 
 
-        // Marcar secretárias já alocadas ao diretor VERIFICAR SE ISSO É UTIL
+        // Marcar secretárias já alocadas ao diretor 
         private void MarcarSecretariasAlocadas(Diretor diretor)
         {
             if (diretor == null || diretor.SecretariasSubordinadas == null)
@@ -340,8 +337,7 @@ namespace ADOSMELHORES.Forms.Diretores
         }
 
         private void LimparCampos()
-        {
-            //txtID.Clear();
+        {           
             txtNIF.Clear();
             txtNome.Clear();
             txtMorada.Clear();
@@ -437,7 +433,7 @@ namespace ADOSMELHORES.Forms.Diretores
 
         // ==================== MÉTODOS DE VALIDAÇÃO ====================
                 
-        /// Valida NIF: deve ter 9 dígitos numéricos entre 111111111 e 999999999        
+        // NIF: deve ter 9 dígitos numéricos entre 111111111 e 999999999        
         private bool ValidarNIF(string nif)
         {
             // Remover espaços em branco
@@ -465,7 +461,7 @@ namespace ADOSMELHORES.Forms.Diretores
         }
 
         
-        /// Valida Contacto: deve ter 9 dígitos numéricos entre 900000000 e 999999999 (começa com 9)        
+        // Valida Contacto: deve ter 9 dígitos numéricos entre 900000000 e 999999999         
         private bool ValidarContacto(string contacto)
         {
             // Remover espaços em branco
@@ -531,8 +527,7 @@ namespace ADOSMELHORES.Forms.Diretores
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-        
+             
 
         private void btnAlterar_Click(object sender, EventArgs e)
         {
@@ -671,7 +666,6 @@ namespace ADOSMELHORES.Forms.Diretores
                     DateTime.Now, // DataIniContrato
                     dtpDataRegistoCriminal.Value,
                     DateTime.Now, // DataNascimento
-                    0, // BonusMensal será calculado
                     false, // CarroEmpresa - será definido no form de cálculo
                     false  // IsencaoHorario - será definido no form de cálculo
                 );
@@ -700,6 +694,7 @@ namespace ADOSMELHORES.Forms.Diretores
                     if (resultado == DialogResult.OK)
                     {
                         // IMPORTANTE: O diretor temporário JÁ FOI MODIFICADO pelo formulário
+                        //O BonusMensal é calculado automaticamente quando acessado
                         // porque passamos a REFERÊNCIA do objeto
                         remuneracaoCalculada = true;                                               
 

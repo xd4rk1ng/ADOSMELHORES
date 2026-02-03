@@ -69,7 +69,7 @@ namespace ADOSMELHORES.Forms.Diretores
                 decimal salarioTotal = diretor.SalarioBase + bonusCalculado;
 
                 // Atualizar o bônus no objeto diretor
-                diretor.BonusMensal = bonusCalculado;
+                //diretor.BonusMensal = bonusCalculado;
 
                 // Exibir o resultado detalhado
                 ExibirResultado(bonusCalculado, salarioTotal);               
@@ -158,7 +158,9 @@ namespace ADOSMELHORES.Forms.Diretores
             try
             {
                 // Verificar se já foi calculado
-                if (diretor.BonusMensal == 0)
+                if (diretor.BonusMensal == 0 && 
+                    (diretor.AreasDiretoria?.Count ?? 0) == 0 &&
+                    (diretor.SecretariasSubordinadas?.Count ?? 0) == 0)
                 {
                     MessageBox.Show("Por favor, calcule a remuneração primeiro!", "Aviso",
                         MessageBoxButtons.OK, MessageBoxIcon.Warning);

@@ -6,7 +6,9 @@ namespace ADOSMELHORES.Modelos
     public class Diretor : Funcionario
     {
         public bool IsencaoHorario { get; set; }
-        public decimal BonusMensal { get; set; }
+
+        public decimal BonusMensal => CalcularBonusMensal();
+        //public decimal BonusMensal { get; set; }
         public bool CarroEmpresa { get; set; }
 
         //atributos adicionais
@@ -35,8 +37,7 @@ namespace ADOSMELHORES.Modelos
                 DateTime dataFimContrato,
                 DateTime dataIniContrato,
                 DateTime dataFimRegistoCrim,
-                DateTime dataNascimento,
-                decimal bonusMensal,
+                DateTime dataNascimento,                
                 bool carroEmpresa,
                 bool isencaoHorario
                 //string areaDiretoria
@@ -54,10 +55,8 @@ namespace ADOSMELHORES.Modelos
                 dataNascimento
             )
         {
-            IsencaoHorario = isencaoHorario;
-            BonusMensal = bonusMensal;
-            CarroEmpresa = carroEmpresa;
-            IsencaoHorario = isencaoHorario;
+            IsencaoHorario = isencaoHorario;            
+            CarroEmpresa = carroEmpresa;          
             
             //AreaDiretoria = areaDiretoria;
             AreasDiretoria = new List<string>();
@@ -65,7 +64,10 @@ namespace ADOSMELHORES.Modelos
         }
 
         //implementar método de calcula de salario do diretor
-        //public override decimal CalcularSalario() => SalarioBase + BonusMensal;
+        public override decimal CalcularCustoMensal()
+        {
+            return SalarioBase + BonusMensal;
+        }
 
         //metodo para calcular bonus mensal(irá para FormsCalcularRemuneracao)
         public decimal CalcularBonusMensal()
@@ -88,7 +90,7 @@ namespace ADOSMELHORES.Modelos
             //4. Se tem isençao de horário
             if (IsencaoHorario)
             {
-                bonus += 200; //adiciona 200 ao bonus se tiver isenção de horário
+                bonus += 200; 
             }
 
             return Math.Max(bonus, 0);//garante que o bonus não seja negativo

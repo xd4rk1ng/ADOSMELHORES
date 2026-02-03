@@ -143,7 +143,7 @@ namespace ADOSMELHORES.Modelos.Despesas
         public decimal CalcularDespesasDiretores()
         {
             var diretores = empresa.ObterDiretores();
-            return diretores.Sum(d => d.SalarioBase + d.CalcularCustoMensal());
+            return diretores.Sum(d => d.CalcularCustoMensal());
         }
 
         // Calcula despesas com secretárias do mês
