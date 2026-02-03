@@ -194,12 +194,12 @@ namespace ADOSMELHORES.Forms.Despesas
                 // Adicionar cada despesa
                 foreach (var d in despesas)
                 {
-                    string linha = $"{d.Data:dd/MM} │ {d.TipoDescricao,-35} │ €{d.Valor,8:N2}";
+                    string linha = $"{d.Data:dd/MM} │ {d.TipoDescricao,-24} │ €{d.Valor,8:N2}";
                     lstDespesasFisicas.Items.Add(linha);
                 }
 
                 // Total
-                lstDespesasFisicas.Items.Add("".PadRight(60, '─'));
+                lstDespesasFisicas.Items.Add("".PadRight(55, '─'));
                 decimal total = despesas.Sum(x => x.Valor);
                 lstDespesasFisicas.Items.Add($"TOTAL: €{total:N2}");
             }

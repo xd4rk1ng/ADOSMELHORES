@@ -11,14 +11,12 @@
             "id": "a96831e975b2b29c",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "pdf",
               "state": {
-                "file": "WinformsDocs/Modelos/Formador.md",
-                "mode": "source",
-                "source": false
+                "file": "Relatório/TA-606-2.pdf"
               },
-              "icon": "lucide-file",
-              "title": "Formador"
+              "icon": "lucide-file-text",
+              "title": "TA-606-2"
             }
           }
         ]
@@ -185,23 +183,24 @@
   },
   "active": "a96831e975b2b29c",
   "lastOpenFiles": [
+    "WinformsDocs/Modelos/Formador.md",
+    "Relacao_classes.png",
+    "Relacao_classes.png.crdownload",
+    "deepseek_mermaid_20260203_dc7bdf.svg",
+    "deepseek_mermaid_20260203_dc7bdf.svg.crdownload",
+    "~WRL0005.tmp",
+    "~WRD0004.tmp",
+    "~WRL0001.tmp",
+    "~WRD0000.tmp",
+    "~$latorio.docx",
     "~WRL1256.tmp",
     "~WRD1237.tmp",
     "WinformsDocs/Modelos/Coordenador.md",
     "WinformsDocs/Estrutura de pastas.md",
     "~WRL0994.tmp",
-    "~WRD0978.tmp",
     "WinformsDocs/Modelos/Secretaria.md",
     "WinformsDocs/Modelos/Diretor.md",
-    "~WRL4001.tmp",
-    "~WRD3966.tmp",
-    "WinformsDocs/Modelos/Formador.md",
     "WinformsDocs/Modelos/(Abstrata) Funcionario.md",
-    "Relatório/TA-606-2.pdf",
-    "~WRL0003.tmp",
-    "~WRD0002.tmp",
-    "ADOSMELHORES/obj/Debug/ADOSMELHORES.Forms.Secretarias.FormGerirSecretarias.resources",
-    "ADOSMELHORES/Forms/Secretarias/FormGerirSecretarias.resx",
     "Relatório/Relatório.md",
     "WinformsDocs/Modelos/Empresa.md",
     "Pasted image 20260112180432.png",
