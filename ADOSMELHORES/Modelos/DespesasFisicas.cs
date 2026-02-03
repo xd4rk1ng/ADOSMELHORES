@@ -6,10 +6,7 @@ using System.Threading.Tasks;
 
 namespace ADOSMELHORES.Modelos
 {
-    /// <summary>
-    /// Representa uma despesa físicas/manual da empresa
-    /// (água, luz, internet, materiais, terceirizados, etc.)
-    /// </summary>
+    
     public class DespesaFisica
     {
         public int Id { get; set; }
@@ -36,14 +33,10 @@ namespace ADOSMELHORES.Modelos
             Fornecedor = fornecedor ?? string.Empty;
         }
 
-        /// <summary>
-        /// Retorna o nome amigável do tipo de despesa
-        /// </summary>
+
         public string TipoDescricao => ObterDescricaoTipo(Tipo);
 
-        /// <summary>
-        /// Obtém descrição amigável do tipo de despesa
-        /// </summary>
+
         public static string ObterDescricaoTipo(TipoDespesaFisica tipo)
         {
             switch (tipo)
@@ -83,9 +76,7 @@ namespace ADOSMELHORES.Modelos
         }
     }
 
-    /// <summary>
-    /// Tipos de despesas manuais/físicas
-    /// </summary>
+
     public enum TipoDespesaFisica
     {
         Agua,
