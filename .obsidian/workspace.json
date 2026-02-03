@@ -11,14 +11,12 @@
             "id": "a96831e975b2b29c",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "pdf",
               "state": {
-                "file": "WinformsDocs/Modelos/Secretaria.md",
-                "mode": "source",
-                "source": false
+                "file": "Relatório/TA-606-2.pdf"
               },
-              "icon": "lucide-file",
-              "title": "Secretaria"
+              "icon": "lucide-file-text",
+              "title": "TA-606-2"
             }
           }
         ]
@@ -185,26 +183,28 @@
   },
   "active": "a96831e975b2b29c",
   "lastOpenFiles": [
-    "ADOSMELHORES/obj/Debug/ADOSMELHORES.Forms.Secretarias.FormGerirSecretarias.resources",
-    "WinformsDocs/Modelos/Diretor.md",
+    "~$latorio.docx",
+    "~WRL0003.tmp",
+    "~WRD0002.tmp",
+    "~WRL0001.tmp",
+    "~WRD0000.tmp",
+    "ADOSMELHORES/Modelos/Despesas/Gestordespesas.cs",
+    "ADOSMELHORES/Modelos/Despesas/DespesasRelatorio.cs",
+    "ADOSMELHORES/Modelos/Despesas/DespesasFisicas.cs",
+    "ADOSMELHORES/Modelos/Despesas",
+    "WinformsDocs/Modelos/Formador.md",
+    "Relacao_classes.png",
+    "Relacao_classes.png.crdownload",
+    "deepseek_mermaid_20260203_dc7bdf.svg",
+    "deepseek_mermaid_20260203_dc7bdf.svg.crdownload",
+    "WinformsDocs/Modelos/Coordenador.md",
+    "WinformsDocs/Estrutura de pastas.md",
     "WinformsDocs/Modelos/Secretaria.md",
-    "ADOSMELHORES/Forms/Secretarias/FormGerirSecretarias.resx",
-    "ADOSMELHORES/Forms/Secretarias/FormGerirSecretarias.cs",
-    "ADOSMELHORES/Forms/Secretarias/FormGerirSecretarias.Designer.cs",
-    "ADOSMELHORES/Forms/Secretarias",
-    "ADOSMELHORES/Forms/FormsCalcularRemuneracao.resx",
-    "ADOSMELHORES/Forms/FormsCalcularRemuneracao.cs",
-    "ADOSMELHORES/Forms/FormsCalcularRemuneracao.Designer.cs",
-    "ADOSMELHORES/Forms/FormGerirDiretores.resx",
-    "ADOSMELHORES/Forms/FormGerirDiretores.cs",
-    "ADOSMELHORES/Forms/FormGerirDiretores.Designer.cs",
+    "WinformsDocs/Modelos/Diretor.md",
+    "WinformsDocs/Modelos/(Abstrata) Funcionario.md",
     "Relatório/Relatório.md",
     "WinformsDocs/Modelos/Empresa.md",
     "Pasted image 20260112180432.png",
-    "WinformsDocs/Modelos/(Abstrata) Funcionario.md",
-    "WinformsDocs/Estrutura de pastas.md",
-    "WinformsDocs/Modelos/Formador.md",
-    "WinformsDocs/Modelos/Coordenador.md",
     "WinformsDocs/We need think about....md"
   ]
 }

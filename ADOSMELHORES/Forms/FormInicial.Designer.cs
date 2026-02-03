@@ -32,15 +32,17 @@
             this.btnCoordenador = new System.Windows.Forms.Button();
             this.btnSecretaria = new System.Windows.Forms.Button();
             this.btnDiretor = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.lblDataSimulada = new System.Windows.Forms.Label();
             this.btnAvancarDia = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnFormador
             // 
-            this.btnFormador.Location = new System.Drawing.Point(29, 26);
+            this.btnFormador.Location = new System.Drawing.Point(39, 32);
+            this.btnFormador.Margin = new System.Windows.Forms.Padding(4);
             this.btnFormador.Name = "btnFormador";
-            this.btnFormador.Size = new System.Drawing.Size(370, 23);
+            this.btnFormador.Size = new System.Drawing.Size(493, 28);
             this.btnFormador.TabIndex = 0;
             this.btnFormador.Text = "Inserir Formador";
             this.btnFormador.UseVisualStyleBackColor = true;
@@ -48,9 +50,10 @@
             // 
             // btnCoordenador
             // 
-            this.btnCoordenador.Location = new System.Drawing.Point(29, 54);
+            this.btnCoordenador.Location = new System.Drawing.Point(39, 66);
+            this.btnCoordenador.Margin = new System.Windows.Forms.Padding(4);
             this.btnCoordenador.Name = "btnCoordenador";
-            this.btnCoordenador.Size = new System.Drawing.Size(370, 23);
+            this.btnCoordenador.Size = new System.Drawing.Size(493, 28);
             this.btnCoordenador.TabIndex = 1;
             this.btnCoordenador.Text = "Inserir Coordenador";
             this.btnCoordenador.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -59,9 +62,10 @@
             // 
             // btnSecretaria
             // 
-            this.btnSecretaria.Location = new System.Drawing.Point(405, 25);
+            this.btnSecretaria.Location = new System.Drawing.Point(540, 31);
+            this.btnSecretaria.Margin = new System.Windows.Forms.Padding(4);
             this.btnSecretaria.Name = "btnSecretaria";
-            this.btnSecretaria.Size = new System.Drawing.Size(383, 23);
+            this.btnSecretaria.Size = new System.Drawing.Size(511, 28);
             this.btnSecretaria.TabIndex = 2;
             this.btnSecretaria.Text = "Inserir Secretaria";
             this.btnSecretaria.UseVisualStyleBackColor = true;
@@ -69,9 +73,10 @@
             // 
             // btnDiretor
             // 
-            this.btnDiretor.Location = new System.Drawing.Point(405, 54);
+            this.btnDiretor.Location = new System.Drawing.Point(540, 66);
+            this.btnDiretor.Margin = new System.Windows.Forms.Padding(4);
             this.btnDiretor.Name = "btnDiretor";
-            this.btnDiretor.Size = new System.Drawing.Size(383, 23);
+            this.btnDiretor.Size = new System.Drawing.Size(511, 28);
             this.btnDiretor.TabIndex = 3;
             this.btnDiretor.Text = "Inserir Diretor";
             this.btnDiretor.UseVisualStyleBackColor = true;
@@ -98,15 +103,20 @@
             // 
             // FormInicial
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 150);
             this.Controls.Add(this.btnAvancarDia);
             this.Controls.Add(this.lblDataSimulada);
+            this.BackColor = System.Drawing.SystemColors.Control;
+            this.ClientSize = new System.Drawing.Size(1067, 554);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.btnDiretor);
             this.Controls.Add(this.btnSecretaria);
             this.Controls.Add(this.btnCoordenador);
             this.Controls.Add(this.btnFormador);
+            this.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FormInicial";
             this.Text = "Form Inicial";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormInicialClose);
@@ -121,6 +131,7 @@
         private System.Windows.Forms.Button btnCoordenador;
         private System.Windows.Forms.Button btnSecretaria;
         private System.Windows.Forms.Button btnDiretor;
+        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label lblDataSimulada;
         private System.Windows.Forms.Button btnAvancarDia;
     }

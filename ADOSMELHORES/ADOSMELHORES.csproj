@@ -35,6 +35,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,7 +47,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Forms\Coordenadores\FormAdicionarCoordenador.cs">
+    <Compile Include="Forms\Despesas\FormAdicionarDespesa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Despesas\FormAdicionarDespesa.Designer.cs">
+      <DependentUpon>FormAdicionarDespesa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Despesas\FormDespesas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Despesas\FormDespesas.Designer.cs">
+      <DependentUpon>FormDespesas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Extra\FormAdicionarCoordenador.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Coordenadores\FormAdicionarCoordenador.Designer.cs">
@@ -130,10 +143,10 @@
     <Compile Include="Forms\FormInicial.Designer.cs">
       <DependentUpon>FormInicial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Extra\FormsCalcularRemuneracao.cs">
+    <Compile Include="Forms\Diretores\FormsCalcularRemuneracao.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Extra\FormsCalcularRemuneracao.Designer.cs">
+    <Compile Include="Forms\Diretores\FormsCalcularRemuneracao.Designer.cs">
       <DependentUpon>FormsCalcularRemuneracao.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Secretarias\FormGerirSecretarias.cs">
@@ -142,6 +155,9 @@
     <Compile Include="Forms\Secretarias\FormGerirSecretarias.Designer.cs">
       <DependentUpon>FormGerirSecretarias.cs</DependentUpon>
     </Compile>
+    <Compile Include="Modelos\Despesas\Gestordespesas.cs" />
+    <Compile Include="Modelos\Despesas\DespesasFisicas.cs" />
+    <Compile Include="Modelos\Despesas\DespesasRelatorio.cs" />
     <Compile Include="Modelos\Exemplo.cs" />
     <Compile Include="Modelos\Empresa.cs" />
     <Compile Include="Modelos\Funcionario.cs" />
@@ -151,8 +167,11 @@
     <Compile Include="Modelos\Formador.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Forms\Coordenadores\FormGerirCoordenadores.resx">
-      <DependentUpon>FormGerirCoordenadores.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Despesas\FormAdicionarDespesa.resx">
+      <DependentUpon>FormAdicionarDespesa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Despesas\FormDespesas.resx">
+      <DependentUpon>FormDespesas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Formadores\FormGerirFormadores.resx">
       <DependentUpon>FormGerirFormadores.cs</DependentUpon>
@@ -169,7 +188,7 @@
     <EmbeddedResource Include="Forms\FormInicial.resx">
       <DependentUpon>FormInicial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Extra\FormsCalcularRemuneracao.resx">
+    <EmbeddedResource Include="Forms\Diretores\FormsCalcularRemuneracao.resx">
       <DependentUpon>FormsCalcularRemuneracao.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Secretarias\FormGerirSecretarias.resx">
@@ -183,6 +202,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -196,6 +216,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\a-dos-melhores-high-resolution-logo.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
