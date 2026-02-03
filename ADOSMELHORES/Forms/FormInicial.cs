@@ -81,6 +81,30 @@ namespace ADOSMELHORES.Forms
             }
         }
 
+        // Novo: handler para exportar TODOS os funcionários para CSV a partir do menu inicial
+        private void btnExportarFuncionarios_Click(object sender, EventArgs e)
+        {
+            using (var sfd = new SaveFileDialog())
+            {
+                sfd.Filter = "CSV files (*.csv)|*.csv|All files (*.*)|*.*";
+                sfd.FileName = "funcionarios_export.csv";
+                sfd.Title = "Exportar Funcionários para CSV";
+
+                if (sfd.ShowDialog(this) == DialogResult.OK)
+                {
+                    try
+                    {
+                        _empresa.ExportarFuncionariosParaCSV(sfd.FileName);
+                        MessageBox.Show("Exportação concluída com sucesso.", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Erro ao exportar: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+        }
+
         // Avança 1 dia na DataSimulada e verifica alertas
         private void btnAvancarDia_Click(object sender, EventArgs e)
         {

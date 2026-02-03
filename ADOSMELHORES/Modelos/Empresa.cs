@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 
 namespace ADOSMELHORES.Modelos
 {
@@ -128,7 +129,28 @@ namespace ADOSMELHORES.Modelos
             File.WriteAllLines(caminhoFicheiro, lines);
         }
 
-        private string EscapeCsv(string s) => s?.Replace(";", ",") ?? string.Empty;
+        public void ExportarFuncionariosParaCSV(string caminhoFicheiro)
+        {
+            var funcionarios = Funcionarios;
+            var sb = new StringBuilder();
+            sb.AppendLine("Id,Nome,DataFimContrato,DataFimRegistoCrim");
+
+            foreach (var f in funcionarios)
+            {
+                sb.AppendLine($"{f.Id},{EscapeCsv(f.Nome)},{f.DataFimContrato:yyyy-MM-dd},{f.DataFimRegistoCrim:yyyy-MM-dd}");
+            }
+
+            File.WriteAllText(caminhoFicheiro, sb.ToString(), Encoding.UTF8);
+        }
+
+        private string EscapeCsv(string s)
+        {
+            if (s.Contains(",") || s.Contains("\"") || s.Contains("\n"))
+            {
+                return $"\"{s.Replace("\"", "\"\"")}\"";
+            }
+            return s;
+        }
     }
 }
 
