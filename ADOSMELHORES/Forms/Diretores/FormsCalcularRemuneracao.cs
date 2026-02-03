@@ -72,22 +72,7 @@ namespace ADOSMELHORES.Forms.Diretores
                 diretor.BonusMensal = bonusCalculado;
 
                 // Exibir o resultado detalhado
-                ExibirResultado(bonusCalculado, salarioTotal);
-
-                // ✅ NOVO: Após calcular, perguntar se deseja gravar
-                var resultado = MessageBox.Show(
-                    $"Gravar os valores de remuneração para o Diretor {diretor.Nome}?",
-                    "Confirmar Remuneração",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question);
-
-                if (resultado == DialogResult.Yes)
-                {
-                    // ✅ Retornar OK para indicar que foi confirmado
-                    this.DialogResult = DialogResult.OK;
-                    this.Close();
-                }
-                // Se clicar em "Não", o formulário permanece aberto para ajustes
+                ExibirResultado(bonusCalculado, salarioTotal);               
             }
             catch (Exception ex)
             {
@@ -108,10 +93,10 @@ namespace ADOSMELHORES.Forms.Diretores
             int secretariasSubordinadas = diretor.SecretariasSubordinadas?.Count ?? 0;
             bonus += secretariasSubordinadas * 30;
 
-            // 3. Desconto por carro da empresa (-300€)
-            if (diretor.CarroEmpresa)
+            // 3. Bônus por não tem o carro da empresa (300€)
+            if (!diretor.CarroEmpresa)
             {
-                bonus -= 300;
+                bonus += 300;
             }
 
             // 4. Bônus por isenção de horário (+200€)
@@ -141,7 +126,7 @@ namespace ADOSMELHORES.Forms.Diretores
             resultado.AppendLine();
 
             resultado.AppendLine("💰 SALÁRIO BASE:");
-            resultado.AppendLine($"   R$ {diretor.SalarioBase:N2}");
+            resultado.AppendLine($"   $ {diretor.SalarioBase:N2}");
             resultado.AppendLine();
 
             resultado.AppendLine("➕ BÔNUS MENSAL CALCULADO:");
@@ -152,51 +137,86 @@ namespace ADOSMELHORES.Forms.Diretores
             if (areas > 0)
             {
                 resultado.AppendLine($"   • {areas} área(s) de direção:");
-                resultado.AppendLine($"     {areas} × R$ 200,00 = +R$ {areas * 200:N2}");
+                resultado.AppendLine($"     {areas} × 200,00€ = + {areas * 200:N2} €");
             }
 
             if (secretarias > 0)
             {
                 resultado.AppendLine($"   • {secretarias} secretária(s):");
-                resultado.AppendLine($"     {secretarias} × R$ 30,00 = +R$ {secretarias * 30:N2}");
+                resultado.AppendLine($"     {secretarias} × 30,00 € = +{secretarias * 30:N2} €");
             }
 
             if (diretor.IsencaoHorario)
             {
                 resultado.AppendLine($"   • Isenção de horário:");
-                resultado.AppendLine($"     +R$ 200,00");
+                resultado.AppendLine($"     + 200,00 €");
             }
 
-            if (diretor.CarroEmpresa)
+            if (!diretor.CarroEmpresa)
             {
-                resultado.AppendLine($"   • Carro empresa (desconto):");
-                resultado.AppendLine($"     -R$ 300,00");
+                resultado.AppendLine($"   • Sem carro empresa (bônus):");
+                resultado.AppendLine($"     + 300,00 €");
+            }
+            else
+            {
+                resultado.AppendLine($"   • Com carro empresa (sem bônus adicional):");                
             }
 
             resultado.AppendLine();
-            resultado.AppendLine($"   Subtotal de Bônus: R$ {bonusCalculado:N2}");
+            resultado.AppendLine($"   Subtotal de Bônus: {bonusCalculado:N2} €");
             resultado.AppendLine();
 
             resultado.AppendLine("═══════════════════════════════════════════════════════");
-            resultado.AppendLine($"  💶 REMUNERAÇÃO TOTAL: R$ {salarioTotal:N2}".PadRight(54) + "");
+            resultado.AppendLine($"  💶 REMUNERAÇÃO TOTAL: {salarioTotal:N2} €".PadRight(54) + "");
             resultado.AppendLine("═══════════════════════════════════════════════════════");
             resultado.AppendLine();
 
             txtResultado.Text = resultado.ToString();
-        }
-
-        private void btnFechar_Click(object sender, EventArgs e)
-        {
-            // ✅ Se fechar sem confirmar, retorna Cancel
-            this.DialogResult = DialogResult.Cancel;
-            this.Close();
-        }
+        }               
               
 
         // Propriedade para acessar o número de áreas
         private int areasDiretoria
         {
             get { return diretor.AreasDiretoria?.Count ?? 0; }
+        }
+
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Verificar se já foi calculado
+                if (diretor.BonusMensal == 0)
+                {
+                    MessageBox.Show("Por favor, calcule a remuneração primeiro!", "Aviso",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // Confirmar se deseja gravar
+                var resultado = MessageBox.Show(
+                    $"Deseja gravar os valores de remuneração para o Diretor {diretor.Nome}?",
+                    "Confirmar Remuneração",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question);
+
+                if (resultado == DialogResult.Yes)
+                {
+                    // Retornar OK para indicar que foi confirmado
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erro ao gravar remuneração: {ex.Message}", "Erro",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnFechar_Click(object sender, EventArgs e)
+        {            
+            this.Close();
         }
     }
 }
