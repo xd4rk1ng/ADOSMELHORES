@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ADOSMELHORES.Forms.Despesas;
+using ADOSMELHORES.Modelos.Despesas;
 
 namespace ADOSMELHORES.Forms.Despesas
 {

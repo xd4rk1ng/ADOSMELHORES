@@ -63,7 +63,7 @@ namespace ADOSMELHORES.Forms.Diretores
                 diretor.IsencaoHorario = chkIsencaoHorario.Checked;
 
                 // Calcular o bônus mensal
-                decimal bonusCalculado = CalcularBonusMensal();
+                decimal bonusCalculado = diretor.CalcularBonusMensal();
 
                 // Calcular o salário total
                 decimal salarioTotal = diretor.SalarioBase + bonusCalculado;
@@ -81,35 +81,7 @@ namespace ADOSMELHORES.Forms.Diretores
             }
         }
 
-        private decimal CalcularBonusMensal()
-        {
-            decimal bonus = 0;
-
-            // 1. Bônus por áreas de direção (200€ por área)
-            int areasDiretoria = diretor.AreasDiretoria?.Count ?? 0;
-            bonus += areasDiretoria * 200;
-
-            // 2. Bônus por secretárias subordinadas (30€ por secretária)
-            int secretariasSubordinadas = diretor.SecretariasSubordinadas?.Count ?? 0;
-            bonus += secretariasSubordinadas * 30;
-
-            // 3. Bônus por não tem o carro da empresa (300€)
-            if (!diretor.CarroEmpresa)
-            {
-                bonus += 300;
-            }
-
-            // 4. Bônus por isenção de horário (+200€)
-            if (diretor.IsencaoHorario)
-            {
-                bonus += 200;
-            }
-
-            // Garantir que o bônus não seja negativo
-            return Math.Max(bonus, 0);
-        }
-
-
+       
         private void ExibirResultado(decimal bonusCalculado, decimal salarioTotal)
         {
             StringBuilder resultado = new StringBuilder();

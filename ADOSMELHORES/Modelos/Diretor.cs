@@ -79,12 +79,11 @@ namespace ADOSMELHORES.Modelos
             // 2. Bônus por secretárias subordinadas (30€ por secretária)
             bonus += (SecretariasSubordinadas?.Count ?? 0) * 30;
 
-            //3. Se tem carro da empresa
-            if (CarroEmpresa)
+            //3. Se nao tem carro da empresa
+            if (!CarroEmpresa)
             {
-                bonus -= 300; //desconta 300 do bonus se tiver carro da empresa
+                bonus += 300; 
             }
-
 
             //4. Se tem isençao de horário
             if (IsencaoHorario)
