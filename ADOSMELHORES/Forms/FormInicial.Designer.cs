@@ -35,12 +35,13 @@
             this.button1 = new System.Windows.Forms.Button();
             this.lblDataSimulada = new System.Windows.Forms.Label();
             this.btnAvancarDia = new System.Windows.Forms.Button();
+            this.btnExportarFuncionarios = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnFormador
             // 
             this.btnFormador.Location = new System.Drawing.Point(39, 32);
-            this.btnFormador.Margin = new System.Windows.Forms.Padding(4);
+            this.btnFormador.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnFormador.Name = "btnFormador";
             this.btnFormador.Size = new System.Drawing.Size(493, 28);
             this.btnFormador.TabIndex = 0;
@@ -51,7 +52,7 @@
             // btnCoordenador
             // 
             this.btnCoordenador.Location = new System.Drawing.Point(39, 66);
-            this.btnCoordenador.Margin = new System.Windows.Forms.Padding(4);
+            this.btnCoordenador.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnCoordenador.Name = "btnCoordenador";
             this.btnCoordenador.Size = new System.Drawing.Size(493, 28);
             this.btnCoordenador.TabIndex = 1;
@@ -63,7 +64,7 @@
             // btnSecretaria
             // 
             this.btnSecretaria.Location = new System.Drawing.Point(540, 31);
-            this.btnSecretaria.Margin = new System.Windows.Forms.Padding(4);
+            this.btnSecretaria.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnSecretaria.Name = "btnSecretaria";
             this.btnSecretaria.Size = new System.Drawing.Size(511, 28);
             this.btnSecretaria.TabIndex = 2;
@@ -74,7 +75,7 @@
             // btnDiretor
             // 
             this.btnDiretor.Location = new System.Drawing.Point(540, 66);
-            this.btnDiretor.Margin = new System.Windows.Forms.Padding(4);
+            this.btnDiretor.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnDiretor.Name = "btnDiretor";
             this.btnDiretor.Size = new System.Drawing.Size(511, 28);
             this.btnDiretor.TabIndex = 3;
@@ -85,27 +86,40 @@
             // lblDataSimulada
             // 
             this.lblDataSimulada.AutoSize = true;
-            this.lblDataSimulada.Location = new System.Drawing.Point(29, 95);
+            this.lblDataSimulada.Location = new System.Drawing.Point(39, 117);
+            this.lblDataSimulada.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblDataSimulada.Name = "lblDataSimulada";
-            this.lblDataSimulada.Size = new System.Drawing.Size(110, 13);
+            this.lblDataSimulada.Size = new System.Drawing.Size(140, 16);
             this.lblDataSimulada.TabIndex = 4;
             this.lblDataSimulada.Text = "Data simulada: --/--/----";
             // 
             // btnAvancarDia
             // 
-            this.btnAvancarDia.Location = new System.Drawing.Point(405, 90);
+            this.btnAvancarDia.Location = new System.Drawing.Point(540, 111);
+            this.btnAvancarDia.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnAvancarDia.Name = "btnAvancarDia";
-            this.btnAvancarDia.Size = new System.Drawing.Size(150, 23);
+            this.btnAvancarDia.Size = new System.Drawing.Size(200, 28);
             this.btnAvancarDia.TabIndex = 5;
             this.btnAvancarDia.Text = "Avançar 1 dia";
             this.btnAvancarDia.UseVisualStyleBackColor = true;
             this.btnAvancarDia.Click += new System.EventHandler(this.btnAvancarDia_Click);
             // 
+            // btnExportarFuncionarios
+            // 
+            this.btnExportarFuncionarios.Location = new System.Drawing.Point(806, 110);
+            this.btnExportarFuncionarios.Name = "btnExportarFuncionarios";
+            this.btnExportarFuncionarios.Size = new System.Drawing.Size(180, 28);
+            this.btnExportarFuncionarios.TabIndex = 6;
+            this.btnExportarFuncionarios.Text = "Exportar CSV";
+            this.btnExportarFuncionarios.UseVisualStyleBackColor = true;
+            this.btnExportarFuncionarios.Click += new System.EventHandler(this.btnExportarFuncionarios_Click);
+            // 
             // FormInicial
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 150);
+            this.ClientSize = new System.Drawing.Size(1067, 185);
+            this.Controls.Add(this.btnExportarFuncionarios);
             this.Controls.Add(this.btnAvancarDia);
             this.Controls.Add(this.lblDataSimulada);
             this.BackColor = System.Drawing.SystemColors.Control;
@@ -115,8 +129,7 @@
             this.Controls.Add(this.btnSecretaria);
             this.Controls.Add(this.btnCoordenador);
             this.Controls.Add(this.btnFormador);
-            this.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "FormInicial";
             this.Text = "Form Inicial";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormInicialClose);
@@ -134,6 +147,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label lblDataSimulada;
         private System.Windows.Forms.Button btnAvancarDia;
+        private System.Windows.Forms.Button btnExportarFuncionarios;
     }
 }
 
