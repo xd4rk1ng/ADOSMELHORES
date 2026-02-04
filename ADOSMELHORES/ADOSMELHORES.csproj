@@ -167,6 +167,12 @@
     <Compile Include="Modelos\Formador.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\Coordenadores\FormAlocarFormador.resx">
+      <DependentUpon>FormAlocarFormador.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Coordenadores\FormGerirCoordenadores.resx">
+      <DependentUpon>FormGerirCoordenadores.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Despesas\FormAdicionarDespesa.resx">
       <DependentUpon>FormAdicionarDespesa.cs</DependentUpon>
     </EmbeddedResource>
