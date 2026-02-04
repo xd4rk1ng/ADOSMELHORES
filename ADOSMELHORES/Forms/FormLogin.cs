@@ -17,7 +17,7 @@ namespace ADOSMELHORES.Forms
         {
             if (ValidarCampos())
             {
-                var mainForm = new FormInicial(_empresa);
+                var mainForm = new FormInicialWIP(_empresa);
                 mainForm.Show();
                 Hide();
             }
