@@ -56,12 +56,5 @@ namespace ADOSMELHORES.Modelos
         {
             return $"{base.ToString()} - {AreaCoordenacao} - {NumeroFormadores} formadores";
         }
-
-        
-        public DateTime ValidadeRegistoCriminal
-        {
-            get => DataFimRegistoCrim;
-            set => DataFimRegistoCrim = value;
-        }
     }
 }
