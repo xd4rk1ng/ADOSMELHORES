@@ -65,12 +65,6 @@
     <Compile Include="Forms\Formadores\FormAtualizarRegistoCriminal.Designer.cs">
       <DependentUpon>FormAtualizarRegistoCriminal.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Coordenadores\FormAtualizarRegistoCriminalCoordenador.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Coordenadores\FormAtualizarRegistoCriminalCoordenador.Designer.cs">
-      <DependentUpon>FormAtualizarRegistoCriminalCoordenador.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\Formadores\FormCalcularValorFormacao.cs">
       <SubType>Form</SubType>
     </Compile>
