@@ -59,12 +59,6 @@
     <Compile Include="Forms\Despesas\FormDespesas.Designer.cs">
       <DependentUpon>FormDespesas.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Formadores\FormAtualizarRegistoCriminal.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Formadores\FormAtualizarRegistoCriminal.Designer.cs">
-      <DependentUpon>FormAtualizarRegistoCriminal.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\Formadores\FormCalcularValorFormacao.cs">
       <SubType>Form</SubType>
     </Compile>
