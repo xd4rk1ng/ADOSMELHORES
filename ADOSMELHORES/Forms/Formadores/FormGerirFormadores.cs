@@ -595,20 +595,7 @@ namespace ADOSMELHORES.Forms.Formadores
             }
         }
 
-        private void btnAlocarFormador_Click(object sender, EventArgs e)
-        {
-            if (formadorSelecionado == null)
-            {
-                MessageBox.Show("Selecione um formador para alocar.", "Aviso",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
 
-            using (var formAlocar = new ADOSMELHORES.Forms.FormAlocarFormador(formadorSelecionado, empresa))
-            {
-                formAlocar.ShowDialog(this);
-            }
-        }
 
         private void btnFiltrarDisponibilidade_Click(object sender, EventArgs e)
         {
