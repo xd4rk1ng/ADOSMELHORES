@@ -7,6 +7,7 @@ using ADOSMELHORES.Forms.Formadores;
 using ADOSMELHORES.Forms.Diretores;
 using ADOSMELHORES.Forms.Secretarias;
 using ADOSMELHORES.Forms.Coordenadores;
+using System.Text;
 
 namespace ADOSMELHORES.Forms
 {
