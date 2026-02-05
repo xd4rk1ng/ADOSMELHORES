@@ -30,6 +30,13 @@ namespace ADOSMELHORES.Forms
             controlPanel.BackColor = Color.FromArgb(246, 252, 249);
             pictureLogo.SizeMode = PictureBoxSizeMode.CenterImage;
 
+            // Bloquear maximização / redimensionamento
+            this.FormBorderStyle = FormBorderStyle.FixedSingle; // impede redimensionamento pelas bordas
+            this.MaximizeBox = false; // desativa botão de maximizar
+            // opcional: fixa tamanho (impede redimensionamento por código ou sistema)
+            this.MinimumSize = this.Size;
+            this.MaximumSize = this.Size;
+
             _empresa = empresa ?? throw new ArgumentNullException(nameof(empresa));
 
             // Inicialização de todos os user controls
