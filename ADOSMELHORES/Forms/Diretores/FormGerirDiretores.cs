@@ -213,9 +213,10 @@ namespace ADOSMELHORES.Forms.Diretores
                 try { dtpDataRegistoCriminal.Value = dtpDataRegistoCriminal.MinDate; } catch { /* ignora */ }
             }
 
-            CarregarSecretariasDisponiveis();            
+            CarregarSecretariasDisponiveis();
             MarcarSecretariasAlocadas(diretor);
-                        
+            VerificarStatusRegistoCriminal(diretor);
+
             remuneracaoCalculada = true;
             AtualizarEstadoBotoes();            
         }
@@ -747,6 +748,7 @@ namespace ADOSMELHORES.Forms.Diretores
                     diretorSelecionado.DataFimRegistoCrim = novaData.Value;
                     dtpDataRegistoCriminal.Value = diretorSelecionado.DataFimRegistoCrim;
                     AtualizarListaDiretores();
+                    VerificarStatusRegistoCriminal(diretorSelecionado);
 
                     DialogHelper.MostrarSucesso("Registo criminal atualizado com sucesso!");
                 }
@@ -756,7 +758,18 @@ namespace ADOSMELHORES.Forms.Diretores
                 }
             }
         }
-               
+
+
+        private void VerificarStatusRegistoCriminal(Diretor diretor)
+        {
+            if (diretor == null) return;
+
+            DialogHelper.AtualizarTextBoxStatusRegistoCriminal(
+                txtStatusRegistoCriminal,
+                diretor, 
+                empresa
+            );
+        }
 
 
         private void btnFechar_Click(object sender, EventArgs e)

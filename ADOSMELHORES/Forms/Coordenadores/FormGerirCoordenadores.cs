@@ -92,7 +92,9 @@ namespace ADOSMELHORES.Forms.Coordenadores
             dtpDataFimContrato.Value = coordenador.DataFimContrato;
             dtpDataRegistoCriminal.Value = coordenador.DataFimRegistoCrim;
 
-            txtStatusRegistoCriminal.Text = coordenador.RegistoCriminalExpirado(DateTime.Now) ? "Expirado" : "Válido";
+            VerificarStatusRegistoCriminal(coordenador);
+
+            //txtStatusRegistoCriminal.Text = coordenador.RegistoCriminalExpirado(DateTime.Now) ? "Expirado" : "Válido";
         }
 
         private void TxtNIF_KeyPress(object sender, KeyPressEventArgs e)
@@ -532,6 +534,17 @@ namespace ADOSMELHORES.Forms.Coordenadores
             }
 
             lblTotal.Text = $"Coordenadores Válidos: {coordenadoresValidos.Count} de {empresa.Funcionarios.OfType<Coordenador>().Count()}";
+        }
+
+        private void VerificarStatusRegistoCriminal(Coordenador coordenador)
+        {
+            if (coordenador == null) return;
+                        
+            DialogHelper.AtualizarTextBoxStatusRegistoCriminal(
+                txtStatusRegistoCriminal,
+                coordenador,  
+                empresa
+            );
         }
 
         private void btnFechar_Click(object sender, EventArgs e)

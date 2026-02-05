@@ -62,8 +62,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.checkedListBoxIdiomas = new System.Windows.Forms.CheckedListBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
+            this.txtStatusRegistoCriminal = new System.Windows.Forms.TextBox();
             this.grpDadosSecretaria.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numSalarioBase)).BeginInit();
             this.grpAcoes.SuspendLayout();
@@ -75,7 +75,7 @@
             // 
             // grpDadosSecretaria
             // 
-            this.grpDadosSecretaria.Controls.Add(this.label12);
+            this.grpDadosSecretaria.Controls.Add(this.txtStatusRegistoCriminal);
             this.grpDadosSecretaria.Controls.Add(this.txtNIF);
             this.grpDadosSecretaria.Controls.Add(this.label13);
             this.grpDadosSecretaria.Controls.Add(this.label6);
@@ -466,16 +466,6 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Dados Profissionais";
             // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(538, 248);
-            this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(15, 20);
-            this.label12.TabIndex = 23;
-            this.label12.Text = "-";
-            // 
             // label13
             // 
             this.label13.AutoSize = true;
@@ -485,6 +475,16 @@
             this.label13.Size = new System.Drawing.Size(165, 20);
             this.label13.TabIndex = 22;
             this.label13.Text = "Status Registo Criminal:";
+            // 
+            // txtStatusRegistoCriminal
+            // 
+            this.txtStatusRegistoCriminal.Enabled = false;
+            this.txtStatusRegistoCriminal.Location = new System.Drawing.Point(533, 244);
+            this.txtStatusRegistoCriminal.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtStatusRegistoCriminal.Name = "txtStatusRegistoCriminal";
+            this.txtStatusRegistoCriminal.ReadOnly = true;
+            this.txtStatusRegistoCriminal.Size = new System.Drawing.Size(106, 27);
+            this.txtStatusRegistoCriminal.TabIndex = 23;
             // 
             // FormGerirSecretarias
             // 
@@ -552,7 +552,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckedListBox checkedListBoxIdiomas;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TextBox txtStatusRegistoCriminal;
     }
 }

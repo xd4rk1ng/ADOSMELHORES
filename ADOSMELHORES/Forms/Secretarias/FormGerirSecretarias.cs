@@ -209,6 +209,7 @@ namespace ADOSMELHORES.Forms.Secretarias
                     }
                 }
             }
+            VerificarStatusRegistoCriminal(secretaria);
         }
 
         private void CarregarIdiomas(Secretaria secretaria)
@@ -654,6 +655,8 @@ namespace ADOSMELHORES.Forms.Secretarias
                     dtpDataRegistoCriminal.Value = secretariaSelecionada.DataFimRegistoCrim;
                     AtualizarListaSecretarias();
 
+                    VerificarStatusRegistoCriminal(secretariaSelecionada);
+
                     DialogHelper.MostrarSucesso("Registo criminal atualizado com sucesso!");
                 }
                 catch (Exception ex)
@@ -662,39 +665,19 @@ namespace ADOSMELHORES.Forms.Secretarias
                 }
             }
         }
-        //private void btnAtualizarRegistoCriminal_Click(object sender, EventArgs e)
-        //{
-        //    if (secretariaSelecionada == null)
-        //    {
-        //        MessageBox.Show("Selecione uma secretária para atualizar o registo criminal.", "Aviso",
-        //            MessageBoxButtons.OK, MessageBoxIcon.Warning);
-        //        return;
-        //    }
 
-        //    var resultado = MessageBox.Show(
-        //        "Deseja atualizar a data de registo criminal para 5 anos a partir de hoje?",
-        //        "Atualizar Registo Criminal",
-        //        MessageBoxButtons.YesNo,
-        //        MessageBoxIcon.Question);
+        private void VerificarStatusRegistoCriminal(Secretaria secretaria)
+        {
+            if (secretaria == null) return;
 
-        //    if (resultado == DialogResult.Yes)
-        //    {
-        //        try
-        //        {
-        //            secretariaSelecionada.DataFimRegistoCrim = DateTime.Now.AddYears(5);
-        //            dtpDataRegistoCriminal.Value = secretariaSelecionada.DataFimRegistoCrim;
-        //            AtualizarListaSecretarias();
+            DialogHelper.AtualizarTextBoxStatusRegistoCriminal(
+                txtStatusRegistoCriminal,
+                secretaria, 
+                empresa
+            );
+        }
 
-        //            MessageBox.Show("Registo criminal atualizado com sucesso!", "Sucesso",
-        //                MessageBoxButtons.OK, MessageBoxIcon.Information);
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            MessageBox.Show($"Erro ao atualizar registo criminal: {ex.Message}", "Erro",
-        //                MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //        }
-        //    }
-        //}
+
 
         private void btnFechar_Click(object sender, EventArgs e)
         {
