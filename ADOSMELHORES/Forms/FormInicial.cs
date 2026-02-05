@@ -104,58 +104,5 @@ namespace ADOSMELHORES.Forms
                 }
             }
         }
-
-        // Avança 1 dia na DataSimulada e verifica alertas
-        private void btnAvancarDia_Click(object sender, EventArgs e)
-        {
-            _empresa.DataSimulada = _empresa.DataSimulada.AddDays(1);
-            AtualizarLabelDataSimulada();
-            VerificarAlertasData(_empresa.DataSimulada);
-        }
-
-        // Verifica contratos e registos criminais atingidos na data simulada
-        private void VerificarAlertasData(DateTime dataSimulada)
-        {
-            var funcionarios = _empresa.Funcionarios.ToList();
-
-            var contratosQueTerminam = funcionarios
-                .Where(f => f.DataFimContrato.Date == dataSimulada.Date)
-                .ToList();
-
-            var registosAtingidos = funcionarios
-                .Where(f => f.DataFimRegistoCrim.Date == dataSimulada.Date)
-                .ToList();
-
-            StringBuilder sb = new StringBuilder();
-
-            if (contratosQueTerminam.Any())
-            {
-                sb.AppendLine("Contratos com fim na data simulada:");
-                foreach (var f in contratosQueTerminam)
-                {
-                    sb.AppendLine($" - {f.Nome} (ID: {f.Id}) termina contrato em {f.DataFimContrato:dd/MM/yyyy}");
-                }
-                sb.AppendLine();
-            }
-
-            if (registosAtingidos.Any())
-            {
-                sb.AppendLine("Registos criminais atingem validade na data simulada:");
-                foreach (var f in registosAtingidos)
-                {
-                    sb.AppendLine($" - {f.Nome} (ID: {f.Id}) registo termina em {f.DataFimRegistoCrim:dd/MM/yyyy}");
-                }
-                sb.AppendLine();
-            }
-
-            if (sb.Length > 0)
-            {
-                MessageBox.Show(sb.ToString(), "Alerta - Data Simulada", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-            else
-            {
-                MessageBox.Show("Nenhum contrato ou registo criminal atinge término nesta data simulada.", "Sem alertas", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
     }
 }

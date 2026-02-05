@@ -32,9 +32,7 @@
             this.btnCoordenador = new System.Windows.Forms.Button();
             this.btnSecretaria = new System.Windows.Forms.Button();
             this.btnDiretor = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.lblDataSimulada = new System.Windows.Forms.Label();
-            this.btnAvancarDia = new System.Windows.Forms.Button();
             this.btnExportarFuncionarios = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -93,17 +91,6 @@
             this.lblDataSimulada.TabIndex = 4;
             this.lblDataSimulada.Text = "Data simulada: --/--/----";
             // 
-            // btnAvancarDia
-            // 
-            this.btnAvancarDia.Location = new System.Drawing.Point(540, 111);
-            this.btnAvancarDia.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.btnAvancarDia.Name = "btnAvancarDia";
-            this.btnAvancarDia.Size = new System.Drawing.Size(200, 28);
-            this.btnAvancarDia.TabIndex = 5;
-            this.btnAvancarDia.Text = "Avançar 1 dia";
-            this.btnAvancarDia.UseVisualStyleBackColor = true;
-            this.btnAvancarDia.Click += new System.EventHandler(this.btnAvancarDia_Click);
-            // 
             // btnExportarFuncionarios
             // 
             this.btnExportarFuncionarios.Location = new System.Drawing.Point(806, 110);
@@ -120,11 +107,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1067, 185);
             this.Controls.Add(this.btnExportarFuncionarios);
-            this.Controls.Add(this.btnAvancarDia);
             this.Controls.Add(this.lblDataSimulada);
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1067, 554);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.btnDiretor);
             this.Controls.Add(this.btnSecretaria);
             this.Controls.Add(this.btnCoordenador);
@@ -144,9 +129,7 @@
         private System.Windows.Forms.Button btnCoordenador;
         private System.Windows.Forms.Button btnSecretaria;
         private System.Windows.Forms.Button btnDiretor;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label lblDataSimulada;
-        private System.Windows.Forms.Button btnAvancarDia;
         private System.Windows.Forms.Button btnExportarFuncionarios;
     }
 }
