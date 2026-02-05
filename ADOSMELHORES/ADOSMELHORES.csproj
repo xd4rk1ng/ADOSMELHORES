@@ -173,9 +173,6 @@
     <EmbeddedResource Include="Forms\Controls\ControlInicio.resx">
       <DependentUpon>ControlInicio.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Coordenadores\FormAlocarFormador.resx">
-      <DependentUpon>FormAlocarFormador.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Coordenadores\FormGerirCoordenadores.resx">
       <DependentUpon>FormGerirCoordenadores.cs</DependentUpon>
     </EmbeddedResource>
