@@ -1,4 +1,5 @@
 ﻿using ADOSMELHORES.Modelos;
+using ADOSMELHORES.Validacoes;
 using System;
 using System.Linq;
 using System.Windows.Forms;
@@ -59,6 +60,14 @@ namespace ADOSMELHORES.Forms
 
         private void btnFiltrar_Click(object sender, EventArgs e)
         {
+            // Validar seleção usando validações centralizadas
+            if (!ValidarCampos.ValidarEMostrar(
+                ValidarCampos.ValidarComboBox(cmbDisponibilidade, "a disponibilidade")
+            ))
+            {
+                return;
+            }
+
             Disponibilidade disponibilidade = (Disponibilidade)cmbDisponibilidade.SelectedItem;
 
             var formadoresFiltrados = empresa.Funcionarios

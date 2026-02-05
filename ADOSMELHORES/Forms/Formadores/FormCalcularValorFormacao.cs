@@ -1,4 +1,5 @@
 ﻿using ADOSMELHORES.Modelos;
+using ADOSMELHORES.Validacoes;
 using System;
 using System.Windows.Forms;
 
@@ -19,17 +20,40 @@ namespace ADOSMELHORES.Forms
         {
             this.Text = $"Calcular Valor Formação - {formador.Nome}";
             lblFormador.Text = $"Formador: {formador.Nome} ({formador.ValorHora:C}/hora)";
-            dtpDataInicio.Value = DateTime.Now.Date;
-            dtpDataFim.Value = DateTime.Now.Date.AddDays(5);
+
+            // Definir valores seguros usando DateTimeHelper
+            DateTimeHelper.DefinirValorSeguro(dtpDataInicio, DateTime.Now.Date);
+            DateTimeHelper.DefinirValorSeguro(dtpDataFim, DateTime.Now.Date.AddDays(5));
         }
 
         private void btnCalcular_Click(object sender, EventArgs e)
         {
             try
             {
-                // Garantir que o cálculo ignora componente hora e inclui o dia final
+                // Normalizar datas (ignorar componente hora)
                 var inicio = dtpDataInicio.Value.Date;
                 var fim = dtpDataFim.Value.Date;
+
+                // Validar ordem de datas (permitir igual, impedir fim anterior)
+                ResultadoValidacao ordenacao;
+                if (fim < inicio)
+                {
+                    ordenacao = ResultadoValidacao.Erro("Data final não pode ser anterior à data inicial", "Data Inválida");
+                }
+                else
+                {
+                    ordenacao = ResultadoValidacao.Sucesso();
+                }
+
+                if (!ordenacao.Valido)
+                {
+                    ordenacao.MostrarMensagem();
+                    return;
+                }
+
+                // Opcional: garantir fim não no passado relativo a hoje (se necessário)
+                // var validacaoFutura = DateTimeHelper.ValidarDataFutura(fim, DateTime.Now, "Data final");
+                // if (!validacaoFutura.Valido) { validacaoFutura.MostrarMensagem(); return; }
 
                 decimal valor = formador.CalcularValorFormacao(inicio, fim);
                 int dias = (fim - inicio).Days + 1;
@@ -43,8 +67,7 @@ namespace ADOSMELHORES.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Erro ao calcular: {ex.Message}", "Erro",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                DialogHelper.ErroOperacao("calcular valor da formação", ex);
             }
         }
 
