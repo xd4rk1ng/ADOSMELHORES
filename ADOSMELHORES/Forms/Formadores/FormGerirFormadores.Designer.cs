@@ -52,7 +52,6 @@ namespace ADOSMELHORES.Forms.Formadores
             this.grpListaFormadores = new System.Windows.Forms.GroupBox();
             this.lblTotalFormadores = new System.Windows.Forms.Label();
             this.dgvFormadores = new System.Windows.Forms.DataGridView();
-            this.btnFechar = new System.Windows.Forms.Button();
             this.grpDadosFormador.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numValorHora)).BeginInit();
             this.grpAcoes.SuspendLayout();
@@ -413,7 +412,7 @@ namespace ADOSMELHORES.Forms.Formadores
             this.grpListaFormadores.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.grpListaFormadores.Name = "grpListaFormadores";
             this.grpListaFormadores.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.grpListaFormadores.Size = new System.Drawing.Size(941, 332);
+            this.grpListaFormadores.Size = new System.Drawing.Size(941, 256);
             this.grpListaFormadores.TabIndex = 2;
             this.grpListaFormadores.TabStop = false;
             this.grpListaFormadores.Text = "Lista de Formadores";
@@ -422,7 +421,7 @@ namespace ADOSMELHORES.Forms.Formadores
             // 
             this.lblTotalFormadores.AutoSize = true;
             this.lblTotalFormadores.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold);
-            this.lblTotalFormadores.Location = new System.Drawing.Point(20, 298);
+            this.lblTotalFormadores.Location = new System.Drawing.Point(20, 218);
             this.lblTotalFormadores.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTotalFormadores.Name = "lblTotalFormadores";
             this.lblTotalFormadores.Size = new System.Drawing.Size(185, 18);
@@ -441,28 +440,16 @@ namespace ADOSMELHORES.Forms.Formadores
             this.dgvFormadores.ReadOnly = true;
             this.dgvFormadores.RowHeadersWidth = 51;
             this.dgvFormadores.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvFormadores.Size = new System.Drawing.Size(900, 249);
+            this.dgvFormadores.Size = new System.Drawing.Size(900, 183);
             this.dgvFormadores.TabIndex = 0;
             this.dgvFormadores.SelectionChanged += new System.EventHandler(this.dgvFormadores_SelectionChanged);
-            // 
-            // btnFechar
-            // 
-            this.btnFechar.Location = new System.Drawing.Point(825, 804);
-            this.btnFechar.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btnFechar.Name = "btnFechar";
-            this.btnFechar.Size = new System.Drawing.Size(133, 46);
-            this.btnFechar.TabIndex = 3;
-            this.btnFechar.Text = "Fechar";
-            this.btnFechar.UseVisualStyleBackColor = true;
-            this.btnFechar.Click += new System.EventHandler(this.btnFechar_Click);
             // 
             // FormGerirFormadores
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(252)))), ((int)(((byte)(249)))));
-            this.ClientSize = new System.Drawing.Size(973, 857);
-            this.Controls.Add(this.btnFechar);
+            this.ClientSize = new System.Drawing.Size(973, 743);
             this.Controls.Add(this.grpListaFormadores);
             this.Controls.Add(this.grpAcoes);
             this.Controls.Add(this.grpDadosFormador);
@@ -524,7 +511,5 @@ namespace ADOSMELHORES.Forms.Formadores
         private System.Windows.Forms.GroupBox grpListaFormadores;
         private System.Windows.Forms.DataGridView dgvFormadores;
         private System.Windows.Forms.Label lblTotalFormadores;
-
-        private System.Windows.Forms.Button btnFechar;
     }
 }

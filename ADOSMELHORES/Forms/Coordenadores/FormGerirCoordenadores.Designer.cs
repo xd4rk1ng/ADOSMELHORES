@@ -19,7 +19,6 @@
             this.txtNIF = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.lblId = new System.Windows.Forms.Label();
-            this.btnLimparCampos = new System.Windows.Forms.Button();
             this.txtId = new System.Windows.Forms.TextBox();
             this.lblNome = new System.Windows.Forms.Label();
             this.txtNome = new System.Windows.Forms.TextBox();
@@ -36,7 +35,7 @@
             this.lblDataRegistoCriminal = new System.Windows.Forms.Label();
             this.dtpDataRegistoCriminal = new System.Windows.Forms.DateTimePicker();
             this.lblStatusRegistoCriminal = new System.Windows.Forms.Label();
-            this.txtStatusRegistoCriminal = new System.Windows.Forms.TextBox();
+            this.btnLimparCampos = new System.Windows.Forms.Button();
             this.groupBoxAcoes = new System.Windows.Forms.GroupBox();
             this.btnInserirNovo = new System.Windows.Forms.Button();
             this.btnAlterarSelecionado = new System.Windows.Forms.Button();
@@ -57,6 +56,7 @@
             this.columnHeaderStatusRegistoCriminal = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lblTotal = new System.Windows.Forms.Label();
             this.btnFechar = new System.Windows.Forms.Button();
+            this.txtStatusRegistoCriminal = new System.Windows.Forms.TextBox();
             this.groupBoxDados.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numSalarioBase)).BeginInit();
             this.groupBoxAcoes.SuspendLayout();
@@ -121,17 +121,6 @@
             this.lblId.Size = new System.Drawing.Size(27, 20);
             this.lblId.TabIndex = 0;
             this.lblId.Text = "ID:";
-            // 
-            // btnLimparCampos
-            // 
-            this.btnLimparCampos.Location = new System.Drawing.Point(20, 131);
-            this.btnLimparCampos.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btnLimparCampos.Name = "btnLimparCampos";
-            this.btnLimparCampos.Size = new System.Drawing.Size(172, 37);
-            this.btnLimparCampos.TabIndex = 3;
-            this.btnLimparCampos.Text = "Limpar Campos";
-            this.btnLimparCampos.UseVisualStyleBackColor = true;
-            this.btnLimparCampos.Click += new System.EventHandler(this.btnLimparCampos_Click);
             // 
             // txtId
             // 
@@ -287,15 +276,16 @@
             this.lblStatusRegistoCriminal.TabIndex = 18;
             this.lblStatusRegistoCriminal.Text = "Status Registo Criminal:";
             // 
-            // txtStatusRegistoCriminal
+            // btnLimparCampos
             // 
-            this.txtStatusRegistoCriminal.Enabled = false;
-            this.txtStatusRegistoCriminal.Location = new System.Drawing.Point(208, 360);
-            this.txtStatusRegistoCriminal.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.txtStatusRegistoCriminal.Name = "txtStatusRegistoCriminal";
-            this.txtStatusRegistoCriminal.ReadOnly = true;
-            this.txtStatusRegistoCriminal.Size = new System.Drawing.Size(132, 27);
-            this.txtStatusRegistoCriminal.TabIndex = 19;
+            this.btnLimparCampos.Location = new System.Drawing.Point(20, 131);
+            this.btnLimparCampos.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnLimparCampos.Name = "btnLimparCampos";
+            this.btnLimparCampos.Size = new System.Drawing.Size(172, 37);
+            this.btnLimparCampos.TabIndex = 3;
+            this.btnLimparCampos.Text = "Limpar Campos";
+            this.btnLimparCampos.UseVisualStyleBackColor = true;
+            this.btnLimparCampos.Click += new System.EventHandler(this.btnLimparCampos_Click);
             // 
             // groupBoxAcoes
             // 
@@ -488,6 +478,16 @@
             this.btnFechar.UseVisualStyleBackColor = true;
             this.btnFechar.Click += new System.EventHandler(this.btnFechar_Click);
             // 
+            // txtStatusRegistoCriminal
+            // 
+            this.txtStatusRegistoCriminal.Enabled = false;
+            this.txtStatusRegistoCriminal.Location = new System.Drawing.Point(208, 360);
+            this.txtStatusRegistoCriminal.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtStatusRegistoCriminal.Name = "txtStatusRegistoCriminal";
+            this.txtStatusRegistoCriminal.ReadOnly = true;
+            this.txtStatusRegistoCriminal.Size = new System.Drawing.Size(132, 27);
+            this.txtStatusRegistoCriminal.TabIndex = 19;
+            // 
             // FormGerirCoordenadores
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -534,7 +534,6 @@
         private System.Windows.Forms.Label lblDataRegistoCriminal;
         private System.Windows.Forms.DateTimePicker dtpDataRegistoCriminal;
         private System.Windows.Forms.Label lblStatusRegistoCriminal;
-        private System.Windows.Forms.TextBox txtStatusRegistoCriminal;
 
         private System.Windows.Forms.GroupBox groupBoxAcoes;
         private System.Windows.Forms.Button btnInserirNovo;
@@ -561,5 +560,6 @@
         private System.Windows.Forms.Button btnFechar;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtNIF;
+        private System.Windows.Forms.TextBox txtStatusRegistoCriminal;
     }
 }

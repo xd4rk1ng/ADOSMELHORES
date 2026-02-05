@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using System.Reflection;
 using ADOSMELHORES.Modelos;
 using System.ComponentModel;
+using ADOSMELHORES.Validacoes;
 
 namespace ADOSMELHORES.Forms.Coordenadores
 {
@@ -91,7 +92,9 @@ namespace ADOSMELHORES.Forms.Coordenadores
             dtpDataFimContrato.Value = coordenador.DataFimContrato;
             dtpDataRegistoCriminal.Value = coordenador.DataFimRegistoCrim;
 
-            txtStatusRegistoCriminal.Text = coordenador.RegistoCriminalExpirado(DateTime.Now) ? "Expirado" : "Válido";
+            VerificarStatusRegistoCriminal(coordenador);
+
+            //txtStatusRegistoCriminal.Text = coordenador.RegistoCriminalExpirado(DateTime.Now) ? "Expirado" : "Válido";
         }
 
         private void TxtNIF_KeyPress(object sender, KeyPressEventArgs e)
@@ -482,51 +485,29 @@ namespace ADOSMELHORES.Forms.Coordenadores
         {
             if (coordenadorSelecionado == null)
             {
-                MessageBox.Show("Selecione um coordenador.", "Aviso",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                DialogHelper.AvisoSelecionarItem("atualizar o registo criminal", "coordenador");
                 return;
             }
 
-            using (Form formData = new Form())
+            var novaData = DialogHelper.DialogoAtualizarRegistoCriminal(this);
+
+            if (novaData.HasValue)
             {
-                formData.Text = "Atualizar Registo Criminal";
-                formData.Size = new System.Drawing.Size(300, 150);
-                formData.StartPosition = FormStartPosition.CenterParent;
-
-                Label lblInfo = new Label()
+                try
                 {
-                    Text = "Nova data de validade:",
-                    Location = new System.Drawing.Point(20, 20),
-                    AutoSize = true
-                };
-                DateTimePicker dtp = new DateTimePicker()
-                {
-                    Location = new System.Drawing.Point(20, 50),
-                    Width = 240,
-                    Value = DateTime.Now.AddYears(1)
-                };
-                Button btnOk = new Button()
-                {
-                    Text = "OK",
-                    DialogResult = DialogResult.OK,
-                    Location = new System.Drawing.Point(100, 80)
-                };
-
-                formData.Controls.Add(lblInfo);
-                formData.Controls.Add(dtp);
-                formData.Controls.Add(btnOk);
-                formData.AcceptButton = btnOk;
-
-                if (formData.ShowDialog() == DialogResult.OK)
-                {
-                    coordenadorSelecionado.DataFimRegistoCrim = dtp.Value;
+                    coordenadorSelecionado.DataFimRegistoCrim = novaData.Value;
                     AtualizarListagem();
                     PreencherCampos(coordenadorSelecionado);
-                    MessageBox.Show("Registo criminal atualizado com sucesso!", "Sucesso",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    DialogHelper.MostrarSucesso("Registo criminal atualizado com sucesso!");
+                }
+                catch (Exception ex)
+                {
+                    DialogHelper.ErroOperacao("atualizar registo criminal", ex);
                 }
             }
         }
+               
 
         private void btnFiltrarPorDisponibilidade_Click(object sender, EventArgs e)
         {
@@ -553,6 +534,17 @@ namespace ADOSMELHORES.Forms.Coordenadores
             }
 
             lblTotal.Text = $"Coordenadores Válidos: {coordenadoresValidos.Count} de {empresa.Funcionarios.OfType<Coordenador>().Count()}";
+        }
+
+        private void VerificarStatusRegistoCriminal(Coordenador coordenador)
+        {
+            if (coordenador == null) return;
+                        
+            DialogHelper.AtualizarTextBoxStatusRegistoCriminal(
+                txtStatusRegistoCriminal,
+                coordenador,  
+                empresa
+            );
         }
 
         private void btnFechar_Click(object sender, EventArgs e)
