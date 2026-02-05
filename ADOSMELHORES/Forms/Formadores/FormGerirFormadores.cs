@@ -253,7 +253,7 @@ namespace ADOSMELHORES.Forms.Formadores
             // DataRegistoCriminal
             try
             {
-                DateTime fallbackRegisto = DateTime.Now.AddYears(5);
+                DateTime fallbackRegisto = DateTime.Now;
                 DateTime dataRegistoCriminal;
                 try
                 {
@@ -326,7 +326,7 @@ namespace ADOSMELHORES.Forms.Formadores
             numValorHora.Value = 0;
             // Valores seguros por defeito
             try { dtpDataFimContrato.Value = DateTime.Now.AddYears(1); } catch { /* ignora */ }
-            try { dtpDataRegistoCriminal.Value = DateTime.Now.AddYears(5); } catch { /* ignora */ }
+            try { dtpDataRegistoCriminal.Value = DateTime.Now; } catch { /* ignora */ }
             lblStatusRegistoCriminal.Text = "";
             formadorSelecionado = null;
             HabilitarBotoesEdicao(false);

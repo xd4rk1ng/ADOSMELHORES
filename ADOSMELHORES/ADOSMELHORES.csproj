@@ -182,6 +182,12 @@
     <EmbeddedResource Include="Forms\Despesas\FormDespesas.resx">
       <DependentUpon>FormDespesas.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Formadores\FormCalcularValorFormacao.resx">
+      <DependentUpon>FormCalcularValorFormacao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Formadores\FormFiltrarFormadores.resx">
+      <DependentUpon>FormFiltrarFormadores.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Formadores\FormGerirFormadores.resx">
       <DependentUpon>FormGerirFormadores.cs</DependentUpon>
     </EmbeddedResource>

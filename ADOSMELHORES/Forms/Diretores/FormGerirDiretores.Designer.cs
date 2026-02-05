@@ -21,7 +21,6 @@
             this.txtNIF = new System.Windows.Forms.TextBox();
             this.labelNIF = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.btnCalcularValor = new System.Windows.Forms.Button();
             this.checkedListBoxAreasDiretoria = new System.Windows.Forms.CheckedListBox();
             this.numSalarioBase = new System.Windows.Forms.NumericUpDown();
             this.label7 = new System.Windows.Forms.Label();
@@ -39,6 +38,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.txtNome = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.btnCalcularValor = new System.Windows.Forms.Button();
             this.grpAcoes = new System.Windows.Forms.GroupBox();
             this.btnAtualizarRegistoCriminal = new System.Windows.Forms.Button();
             this.btnLimpar = new System.Windows.Forms.Button();
@@ -49,6 +49,8 @@
             this.lblTotalDiretores = new System.Windows.Forms.Label();
             this.dgvDiretores = new System.Windows.Forms.DataGridView();
             this.btnFechar = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.grpDadosDiretor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numSalarioBase)).BeginInit();
             this.grpAcoes.SuspendLayout();
@@ -58,7 +60,9 @@
             // 
             // grpDadosDiretor
             // 
+            this.grpDadosDiretor.Controls.Add(this.label1);
             this.grpDadosDiretor.Controls.Add(this.txtNIF);
+            this.grpDadosDiretor.Controls.Add(this.label6);
             this.grpDadosDiretor.Controls.Add(this.labelNIF);
             this.grpDadosDiretor.Controls.Add(this.label8);
             this.grpDadosDiretor.Controls.Add(this.checkedListBoxAreasDiretoria);
@@ -113,18 +117,6 @@
             this.label8.Size = new System.Drawing.Size(126, 20);
             this.label8.TabIndex = 15;
             this.label8.Text = "Áreas de Direção:";
-            // 
-            // btnCalcularValor
-            // 
-            this.btnCalcularValor.Enabled = false;
-            this.btnCalcularValor.Location = new System.Drawing.Point(27, 403);
-            this.btnCalcularValor.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btnCalcularValor.Name = "btnCalcularValor";
-            this.btnCalcularValor.Size = new System.Drawing.Size(195, 54);
-            this.btnCalcularValor.TabIndex = 19;
-            this.btnCalcularValor.Text = "Calcular Remuneração";
-            this.btnCalcularValor.UseVisualStyleBackColor = true;
-            this.btnCalcularValor.Click += new System.EventHandler(this.btnCalcularValor_Click);
             // 
             // checkedListBoxAreasDiretoria
             // 
@@ -297,6 +289,18 @@
             this.label2.TabIndex = 2;
             this.label2.Text = "Nome:";
             // 
+            // btnCalcularValor
+            // 
+            this.btnCalcularValor.Enabled = false;
+            this.btnCalcularValor.Location = new System.Drawing.Point(27, 403);
+            this.btnCalcularValor.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnCalcularValor.Name = "btnCalcularValor";
+            this.btnCalcularValor.Size = new System.Drawing.Size(195, 54);
+            this.btnCalcularValor.TabIndex = 19;
+            this.btnCalcularValor.Text = "Calcular Remuneração";
+            this.btnCalcularValor.UseVisualStyleBackColor = true;
+            this.btnCalcularValor.Click += new System.EventHandler(this.btnCalcularValor_Click);
+            // 
             // grpAcoes
             // 
             this.grpAcoes.Controls.Add(this.btnAtualizarRegistoCriminal);
@@ -421,6 +425,26 @@
             this.btnFechar.UseVisualStyleBackColor = true;
             this.btnFechar.Click += new System.EventHandler(this.btnFechar_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(534, 248);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(15, 20);
+            this.label1.TabIndex = 23;
+            this.label1.Text = "-";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(361, 249);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(165, 20);
+            this.label6.TabIndex = 22;
+            this.label6.Text = "Status Registo Criminal:";
+            // 
             // FormGerirDiretores
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -487,5 +511,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtNIF;
         private System.Windows.Forms.Label labelNIF;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label6;
     }
 }
