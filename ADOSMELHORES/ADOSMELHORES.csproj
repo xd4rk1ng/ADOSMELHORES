@@ -53,23 +53,11 @@
     <Compile Include="Forms\Controls\ControlBoasVindas.Designer.cs">
       <DependentUpon>ControlBoasVindas.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Controls\ControlDadosFormador.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Forms\Controls\ControlDadosFormador.Designer.cs">
-      <DependentUpon>ControlDadosFormador.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\Controls\ControlDespesas.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Forms\Controls\ControlDespesas.Designer.cs">
       <DependentUpon>ControlDespesas.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Controls\ControlFuncionario.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Forms\Controls\ControlFuncionario.Designer.cs">
-      <DependentUpon>ControlFuncionario.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Controls\ControlGerir.cs">
       <SubType>UserControl</SubType>
@@ -186,14 +174,8 @@
     <EmbeddedResource Include="Forms\Controls\ControlBoasVindas.resx">
       <DependentUpon>ControlBoasVindas.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Controls\ControlDadosFormador.resx">
-      <DependentUpon>ControlDadosFormador.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Controls\ControlDespesas.resx">
       <DependentUpon>ControlDespesas.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Controls\ControlFuncionario.resx">
-      <DependentUpon>ControlFuncionario.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Controls\ControlGerir.resx">
       <DependentUpon>ControlGerir.cs</DependentUpon>
