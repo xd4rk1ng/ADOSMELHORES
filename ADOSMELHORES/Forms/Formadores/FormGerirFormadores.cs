@@ -417,7 +417,7 @@ namespace ADOSMELHORES.Forms.Formadores
                     txtNome.Text.Trim(), // Nome
                     txtMorada.Text.Trim(), // Morada
                     txtContacto.Text.Trim(), // Contacto
-                    0m, // SalarioBase removido para formador -> passa-se 0
+                    0m, // SalarioBase removido para formadores -> passa-se 0
                     DateTime.Now, // DataIniContrato
                     dtpDataFimContrato.Value, // DataFimContrato
                     dtpDataRegistoCriminal.Value, // DataFimRegistoCrim
@@ -584,29 +584,54 @@ namespace ADOSMELHORES.Forms.Formadores
                 return;
             }
 
-            // Abrir o Form existente do projecto que implementa a lógica de actualização
-            using (var formRegistoCriminal = new ADOSMELHORES.Forms.FormAtualizarRegistoCriminal(formadorSelecionado, empresa))
+            // Mesma lógica usada no FormGerirCoordenadores: abrir diálogo simples com DateTimePicker
+            using (Form formData = new Form())
             {
-                if (formRegistoCriminal.ShowDialog(this) == DialogResult.OK)
+                formData.Text = "Atualizar Registo Criminal";
+                formData.Size = new System.Drawing.Size(300, 150);
+                formData.StartPosition = FormStartPosition.CenterParent;
+
+                Label lblInfo = new Label()
                 {
-                    AtualizarListaFormadores();
-                    CarregarDadosFormador(formadorSelecionado);
+                    Text = "Nova data de validade:",
+                    Location = new System.Drawing.Point(20, 20),
+                    AutoSize = true
+                };
+                DateTimePicker dtp = new DateTimePicker()
+                {
+                    Location = new System.Drawing.Point(20, 50),
+                    Width = 240,
+                    Value = DateTime.Now.AddYears(1)
+                };
+                Button btnOk = new Button()
+                {
+                    Text = "OK",
+                    DialogResult = DialogResult.OK,
+                    Location = new System.Drawing.Point(100, 80)
+                };
+
+                formData.Controls.Add(lblInfo);
+                formData.Controls.Add(dtp);
+                formData.Controls.Add(btnOk);
+                formData.AcceptButton = btnOk;
+
+                if (formData.ShowDialog(this) == DialogResult.OK)
+                {
+                    try
+                    {
+                        formadorSelecionado.DataFimRegistoCrim = dtp.Value;
+                        AtualizarListaFormadores();
+                        CarregarDadosFormador(formadorSelecionado);
+
+                        MessageBox.Show("Registo criminal atualizado com sucesso!", "Sucesso",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Erro ao atualizar registo criminal: {ex.Message}", "Erro",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
-            }
-        }
-
-        private void btnAlocarFormador_Click(object sender, EventArgs e)
-        {
-            if (formadorSelecionado == null)
-            {
-                MessageBox.Show("Selecione um formador para alocar.", "Aviso",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            using (var formAlocar = new ADOSMELHORES.Forms.FormAlocarFormador(formadorSelecionado, empresa))
-            {
-                formAlocar.ShowDialog(this);
             }
         }
 
