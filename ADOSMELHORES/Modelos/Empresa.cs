@@ -114,6 +114,11 @@ namespace ADOSMELHORES.Modelos
             return funcionarios.OfType<Diretor>().ToList();
         }
 
+        public List<Coordenador> ObterCoordenadores()
+        {
+            return funcionarios.OfType<Coordenador>().ToList();
+        }
+
         public Diretor BuscarDiretorPorId(int id)
         {
             return funcionarios.OfType<Diretor>().FirstOrDefault(d => d.Id == id);

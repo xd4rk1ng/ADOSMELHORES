@@ -157,7 +157,8 @@ namespace ADOSMELHORES.Modelos.Despesas
         public decimal CalcularDespesasCoordenadores()
         {
             // TODO: Implementar quando houver coordenadores na Empresa
-            return 0m;
+            var coordenadores = empresa.ObterCoordenadores();
+            return coordenadores.Sum(d => d.CalcularCustoMensal());
         }
 
         // Calcula despesas com formadores do mês
