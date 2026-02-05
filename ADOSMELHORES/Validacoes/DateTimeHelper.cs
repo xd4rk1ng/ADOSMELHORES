@@ -7,6 +7,9 @@ using System.Windows.Forms;
 
 namespace ADOSMELHORES.Validacoes
 {
+    /// <summary>
+    /// Helper para operações com DateTime e DateTimePicker
+    /// </summary>
     public static class DateTimeHelper
     {
         /// <summary>
@@ -28,7 +31,7 @@ namespace ADOSMELHORES.Validacoes
         /// </summary>
         /// <param name="dateTimePicker">DateTimePicker a configurar</param>
         /// <param name="value">Valor desejado</param>
-        /// <returns>True se conseguiu definir o valor, False se usou valor padrão</returns>
+        /// <returns>True se conseguiu definir o valor exato, False se usou valor ajustado</returns>
         public static bool DefinirValorSeguro(DateTimePicker dateTimePicker, DateTime value)
         {
             if (dateTimePicker == null)
@@ -41,7 +44,7 @@ namespace ADOSMELHORES.Validacoes
                 try
                 {
                     dateTimePicker.Value = safeValue;
-                    return true;
+                    return value == safeValue; // Retorna true apenas se não precisou ajustar
                 }
                 catch (ArgumentOutOfRangeException)
                 {
@@ -64,4 +67,82 @@ namespace ADOSMELHORES.Validacoes
             }
         }
 
+        /// <summary>
+        /// Valida se uma data está dentro de um intervalo
+        /// </summary>
+        public static ResultadoValidacao ValidarIntervalo(
+            DateTime data,
+            DateTime dataMinima,
+            DateTime dataMaxima,
+            string nomeCampo = "Data")
+        {
+            if (data < dataMinima || data > dataMaxima)
+            {
+                return ResultadoValidacao.Erro(
+                    $"{nomeCampo} deve estar entre {dataMinima:dd/MM/yyyy} e {dataMaxima:dd/MM/yyyy}.",
+                    "Data Inválida");
+            }
+
+            return ResultadoValidacao.Sucesso();
+        }
+
+        /// <summary>
+        /// Valida se a data de início é anterior à data de fim
+        /// </summary>
+        public static ResultadoValidacao ValidarOrdemDatas(
+            DateTime dataInicio,
+            DateTime dataFim,
+            string nomeCampoInicio = "Data de início",
+            string nomeCampoFim = "Data de fim")
+        {
+            if (dataInicio >= dataFim)
+            {
+                return ResultadoValidacao.Erro(
+                    $"{nomeCampoInicio} deve ser anterior a {nomeCampoFim}.",
+                    "Datas Inválidas");
+            }
+
+            return ResultadoValidacao.Sucesso();
+        }
+
+        /// <summary>
+        /// Valida se uma data não está no passado
+        /// </summary>
+        public static ResultadoValidacao ValidarDataFutura(
+            DateTime data,
+            DateTime? dataReferencia = null,
+            string nomeCampo = "Data")
+        {
+            DateTime referencia = dataReferencia ?? DateTime.Now;
+
+            if (data.Date < referencia.Date)
+            {
+                return ResultadoValidacao.Erro(
+                    $"{nomeCampo} não pode estar no passado.",
+                    "Data Inválida");
+            }
+
+            return ResultadoValidacao.Sucesso();
+        }
+
+        /// <summary>
+        /// Valida se uma data não está no futuro
+        /// </summary>
+        public static ResultadoValidacao ValidarDataPassada(
+            DateTime data,
+            DateTime? dataReferencia = null,
+            string nomeCampo = "Data")
+        {
+            DateTime referencia = dataReferencia ?? DateTime.Now;
+
+            if (data.Date > referencia.Date)
+            {
+                return ResultadoValidacao.Erro(
+                    $"{nomeCampo} não pode estar no futuro.",
+                    "Data Inválida");
+            }
+
+            return ResultadoValidacao.Sucesso();
+        }
     }
+}

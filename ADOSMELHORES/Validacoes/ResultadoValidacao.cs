@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ADOSMELHORES.Validacoes
-{   
+{
     /// Classe que representa o resultado de uma validação
-    
     public class ResultadoValidacao
     {
         public bool Valido { get; set; }

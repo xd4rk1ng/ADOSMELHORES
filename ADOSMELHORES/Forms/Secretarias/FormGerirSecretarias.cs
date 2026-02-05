@@ -670,10 +670,10 @@ namespace ADOSMELHORES.Forms.Secretarias
         {
             if (secretaria == null) return;
 
-            DialogHelper.AtualizarTextBoxStatusRegistoCriminal(
+            DialogHelper.AtualizarStatusRegistoCriminal(
                 txtStatusRegistoCriminal,
-                secretaria, 
-                empresa
+                secretaria,
+                empresa.DataSimulada > DateTime.MinValue ? empresa.DataSimulada : (DateTime?)null
             );
         }
 

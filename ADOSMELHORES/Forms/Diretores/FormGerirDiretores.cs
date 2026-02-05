@@ -764,10 +764,10 @@ namespace ADOSMELHORES.Forms.Diretores
         {
             if (diretor == null) return;
 
-            DialogHelper.AtualizarTextBoxStatusRegistoCriminal(
+            DialogHelper.AtualizarStatusRegistoCriminal(
                 txtStatusRegistoCriminal,
-                diretor, 
-                empresa
+                diretor,
+                empresa.DataSimulada > DateTime.MinValue ? empresa.DataSimulada : (DateTime?)null
             );
         }
 

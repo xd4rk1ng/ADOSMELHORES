@@ -12,25 +12,21 @@ namespace ADOSMELHORES.Forms.Coordenadores
     public partial class FormGerirCoordenadores : Form
     {
         private Empresa empresa;
-        private Coordenador coordenadorSelecionado;
-
-        // constantes para validação do NIF
-        private const int NIF_MIN = 100000000;
-        private const int NIF_MAX = 999999999;
+        private Coordenador coordenadorSelecionado;             
 
         public FormGerirCoordenadores(Empresa empresa)
         {
             InitializeComponent();
-            this.empresa = empresa;
+            this.empresa = empresa;                       
 
-            // Subscrever eventos do campo NIF (uso correto do txtNIF)
-            this.txtNIF.KeyPress += TxtNIF_KeyPress;
-            this.txtNIF.Validating += TxtNIF_Validating;
+            ValidarCampos.ConfigurarTextBoxNIF(this.txtNIF, obrigatorio: true);
+            ValidarCampos.ConfigurarTextBoxContacto(this.txtContacto, obrigatorio: false);
 
             AtualizarListagem();
             LimparCampos();
         }
 
+        // Métodos de Atualização e Preenchimento
         private void AtualizarListagem()
         {
             listViewCoordenadores.Items.Clear();
@@ -64,22 +60,14 @@ namespace ADOSMELHORES.Forms.Coordenadores
             txtMorada.Clear();
             txtContacto.Clear();
             txtAreaCoordenacao.Clear();
-            numSalarioBase.Value = 0;
-            dtpDataFimContrato.Value = DateTime.Now.AddYears(1);
-            dtpDataRegistoCriminal.Value = DateTime.Now.AddYears(1);
+            numSalarioBase.Value = 0;            
+            DateTimeHelper.DefinirValorSeguro(dtpDataFimContrato, DateTime.Now.AddYears(1));
+            DateTimeHelper.DefinirValorSeguro(dtpDataRegistoCriminal, DateTime.Now.AddYears(1));
             txtStatusRegistoCriminal.Text = "-";
             coordenadorSelecionado = null;
         }
 
-        private void listViewCoordenadores_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (listViewCoordenadores.SelectedItems.Count > 0)
-            {
-                coordenadorSelecionado = (Coordenador)listViewCoordenadores.SelectedItems[0].Tag;
-                PreencherCampos(coordenadorSelecionado);
-            }
-        }
-
+       
         private void PreencherCampos(Coordenador coordenador)
         {
             txtId.Text = coordenador.Id.ToString();
@@ -89,251 +77,191 @@ namespace ADOSMELHORES.Forms.Coordenadores
             txtContacto.Text = coordenador.Contacto;
             txtAreaCoordenacao.Text = coordenador.AreaCoordenacao;
             numSalarioBase.Value = coordenador.SalarioBase;
-            dtpDataFimContrato.Value = coordenador.DataFimContrato;
-            dtpDataRegistoCriminal.Value = coordenador.DataFimRegistoCrim;
+
+            DateTimeHelper.DefinirValorSeguro(dtpDataFimContrato, coordenador.DataFimContrato);
+            DateTimeHelper.DefinirValorSeguro(dtpDataRegistoCriminal, coordenador.DataFimRegistoCrim);
 
             VerificarStatusRegistoCriminal(coordenador);
-
-            //txtStatusRegistoCriminal.Text = coordenador.RegistoCriminalExpirado(DateTime.Now) ? "Expirado" : "Válido";
         }
 
-        private void TxtNIF_KeyPress(object sender, KeyPressEventArgs e)
+        // Método de Seleção
+        private void listViewCoordenadores_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // permitir apenas dígitos e teclas de controlo
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            if (listViewCoordenadores.SelectedItems.Count > 0)
             {
-                e.Handled = true;
+                coordenadorSelecionado = (Coordenador)listViewCoordenadores.SelectedItems[0].Tag;
+                PreencherCampos(coordenadorSelecionado);
             }
         }
 
-        private void TxtNIF_Validating(object sender, CancelEventArgs e)
-        {
-            string text = txtNIF.Text?.Trim() ?? string.Empty;
-
-            if (string.IsNullOrEmpty(text))
-            {
-                // Se optar por tornar NIF obrigatório, cancele e mostre mensagem.
-                // Por agora permitimos vazio, mas se preenchido valida-se abaixo.
-                return;
-            }
-
-            if (!text.All(char.IsDigit))
-            {
-                e.Cancel = true;
-                MessageBox.Show("NIF deve conter apenas dígitos.", "Entrada Inválida", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            if (text.Length != 9)
-            {
-                e.Cancel = true;
-                MessageBox.Show("NIF deve ter 9 dígitos.", "Entrada Inválida", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            int nif;
-            if (!int.TryParse(text, out nif) || nif < NIF_MIN || nif > NIF_MAX)
-            {
-                e.Cancel = true;
-                MessageBox.Show($"NIF deve estar entre {NIF_MIN} e {NIF_MAX}.", "Entrada Inválida", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-        }
-
-        // Helper para verificar duplicação de NIF entre coordenadores
-        private bool NifDuplicado(int nif, int? excludeId = null)
-        {
-            if (nif < NIF_MIN || nif > NIF_MAX) return false;
-            return empresa.Funcionarios
-                .OfType<Coordenador>()
-                .Any(c => c.Nif == nif && (!excludeId.HasValue || c.Id != excludeId.Value));
-        }
-
+       // Botões de Ação
+       
         private void btnInserirNovo_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtNome.Text))
+            // Validar todos os campos obrigatórios de uma vez
+            if (!ValidarCampos.ValidarEMostrar(
+                ValidarCampos.ValidarCampoObrigatorio(txtNome.Text, "o nome do coordenador"),
+                ValidarCampos.ValidarCampoObrigatorio(txtAreaCoordenacao.Text, "a área de coordenação"),
+                ValidarCampos.ValidarNIF(txtNIF.Text, obrigatorio: true),
+                ValidarCampos.ValidarContacto(txtContacto.Text, obrigatorio: false),
+                ValidarCampos.ValidarValorMaiorQueZero(numSalarioBase, "Salário base")
+            ))
             {
-                MessageBox.Show("Por favor, insira o nome do coordenador.", "Aviso",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
+                return; 
             }
 
-            if (string.IsNullOrWhiteSpace(txtAreaCoordenacao.Text))
+            if (!ValidarCampos.TentarObterNIF(txtNIF.Text, out int nif))
             {
-                MessageBox.Show("Por favor, insira a área de coordenação.", "Aviso",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            // validar NIF (obrigatório para este fluxo)
-            if (string.IsNullOrWhiteSpace(txtNIF.Text) || !txtNIF.Text.All(char.IsDigit) || txtNIF.Text.Length != 9)
-            {
-                MessageBox.Show("Por favor, insira um NIF válido de 9 dígitos.", "Aviso",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtNIF.Focus();
-                return;
-            }
-
-            int nif = int.Parse(txtNIF.Text);
-
-            if (nif < NIF_MIN || nif > NIF_MAX)
-            {
-                MessageBox.Show($"NIF deve estar entre {NIF_MIN} e {NIF_MAX}.", "Aviso",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                DialogHelper.MostrarAviso("NIF inválido.");
                 txtNIF.Focus();
                 return;
             }
 
             if (NifDuplicado(nif))
             {
-                MessageBox.Show("Já existe um coordenador com este NIF.", "NIF Duplicado",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                DialogHelper.MostrarAviso("Já existe um coordenador com este NIF.", "NIF Duplicado");
                 txtNIF.Focus();
                 return;
             }
 
-            int novoId = empresa.ObterProximoID();
-
-            Coordenador novoCoordenador = new Coordenador(
-                id: novoId,
-                nif: nif,
-                nome: txtNome.Text,
-                morada: txtMorada.Text,
-                contacto: txtContacto.Text,
-                salarioBase: numSalarioBase.Value,
-                dataIniContrato: DateTime.Now,
-                dataFimContrato: dtpDataFimContrato.Value,
-                dataFimRegistoCrim: dtpDataRegistoCriminal.Value,
-                dataNascimento: DateTime.Now.AddYears(-30),
-                areaCoordenacao: txtAreaCoordenacao.Text
+            
+            var validacaoData = DateTimeHelper.ValidarDataFutura(
+                dtpDataFimContrato.Value,
+                DateTime.Now,
+                "Data de fim de contrato"
             );
 
-            empresa.AdicionarFuncionario(novoCoordenador);
-            AtualizarListagem();
-
-            // selecionar o novo item na listView e preencher os campos para permitir uso imediato dos botões laterais
-            var item = listViewCoordenadores.Items
-                .Cast<ListViewItem>()
-                .FirstOrDefault(i => ((Coordenador)i.Tag).Id == novoCoordenador.Id);
-
-            if (item != null)
+            if (!validacaoData.Valido)
             {
-                // garante seleção única e foco
-                listViewCoordenadores.SelectedItems.Clear();
-                item.Selected = true;
-                listViewCoordenadores.EnsureVisible(item.Index);
-
-                // atualizar estado interno e UI com os dados do novo coordenador
-                coordenadorSelecionado = novoCoordenador;
-                PreencherCampos(coordenadorSelecionado);
-                listViewCoordenadores.Focus();
+                validacaoData.MostrarMensagem();
+                return;
             }
 
-            MessageBox.Show("Coordenador adicionado com sucesso!", "Sucesso",
-                MessageBoxButtons.OK, MessageBoxIcon.Information);
+            try
+            {
+                int novoId = empresa.ObterProximoID();
+
+                Coordenador novoCoordenador = new Coordenador(
+                    id: novoId,
+                    nif: nif,
+                    nome: txtNome.Text.Trim(),
+                    morada: txtMorada.Text.Trim(),
+                    contacto: txtContacto.Text.Trim(),
+                    salarioBase: numSalarioBase.Value,
+                    dataIniContrato: DateTime.Now,
+                    dataFimContrato: dtpDataFimContrato.Value,
+                    dataFimRegistoCrim: dtpDataRegistoCriminal.Value,
+                    dataNascimento: DateTime.Now.AddYears(-30),
+                    areaCoordenacao: txtAreaCoordenacao.Text.Trim()
+                );
+
+                empresa.AdicionarFuncionario(novoCoordenador);
+                AtualizarListagem();
+
+                // Selecionar o novo item
+                var item = listViewCoordenadores.Items
+                    .Cast<ListViewItem>()
+                    .FirstOrDefault(i => ((Coordenador)i.Tag).Id == novoCoordenador.Id);
+
+                if (item != null)
+                {
+                    listViewCoordenadores.SelectedItems.Clear();
+                    item.Selected = true;
+                    listViewCoordenadores.EnsureVisible(item.Index);
+
+                    coordenadorSelecionado = novoCoordenador;
+                    PreencherCampos(coordenadorSelecionado);
+                    listViewCoordenadores.Focus();
+                }
+
+                DialogHelper.MostrarSucesso("Coordenador adicionado com sucesso!");
+            }
+            catch (Exception ex)
+            {                
+                DialogHelper.ErroOperacao("adicionar coordenador", ex);
+            }
         }
+
 
         private void btnAlterarSelecionado_Click(object sender, EventArgs e)
         {
+            
             if (coordenadorSelecionado == null)
             {
-                MessageBox.Show("Selecione um coordenador para alterar.", "Aviso",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                DialogHelper.AvisoSelecionarItem("alterar", "coordenador");
+                return;
+            }
+                        
+            if (!ValidarCampos.ValidarEMostrar(
+                ValidarCampos.ValidarCampoObrigatorio(txtNome.Text, "o nome do coordenador"),
+                ValidarCampos.ValidarCampoObrigatorio(txtAreaCoordenacao.Text, "a área de coordenação"),
+                ValidarCampos.ValidarNIF(txtNIF.Text, obrigatorio: true),
+                ValidarCampos.ValidarContacto(txtContacto.Text, obrigatorio: false)
+            ))
+            {
                 return;
             }
 
-            // validar NIF (obrigatório para alteração também)
-            if (string.IsNullOrWhiteSpace(txtNIF.Text) || !txtNIF.Text.All(char.IsDigit) || txtNIF.Text.Length != 9)
+            if (!ValidarCampos.TentarObterNIF(txtNIF.Text, out int nif))
             {
-                MessageBox.Show("Por favor, insira um NIF válido de 9 dígitos.", "Aviso",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                DialogHelper.MostrarAviso("NIF inválido.");
                 txtNIF.Focus();
                 return;
             }
 
-            int nif = int.Parse(txtNIF.Text);
-
-            if (nif < NIF_MIN || nif > NIF_MAX)
-            {
-                MessageBox.Show($"NIF deve estar entre {NIF_MIN} e {NIF_MAX}.", "Aviso",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtNIF.Focus();
-                return;
-            }
-
+            // Verificar duplicação (excluindo o próprio coordenador)
             if (NifDuplicado(nif, coordenadorSelecionado.Id))
             {
-                MessageBox.Show("Outro coordenador já utiliza este NIF. Corrija o NIF.", "NIF Duplicado",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                DialogHelper.MostrarAviso(
+                    "Outro coordenador já utiliza este NIF. Corrija o NIF.",
+                    "NIF Duplicado");
                 txtNIF.Focus();
                 return;
             }
 
-            coordenadorSelecionado.Nif = nif;
-            coordenadorSelecionado.Nome = txtNome.Text;
-            coordenadorSelecionado.Morada = txtMorada.Text;
-            coordenadorSelecionado.Contacto = txtContacto.Text;
-            coordenadorSelecionado.AreaCoordenacao = txtAreaCoordenacao.Text;
-            coordenadorSelecionado.SalarioBase = numSalarioBase.Value;
-            coordenadorSelecionado.DataFimContrato = dtpDataFimContrato.Value;
-            coordenadorSelecionado.DataFimRegistoCrim = dtpDataRegistoCriminal.Value;
+            try
+            {
+                coordenadorSelecionado.Nif = nif;
+                coordenadorSelecionado.Nome = txtNome.Text.Trim();
+                coordenadorSelecionado.Morada = txtMorada.Text.Trim();
+                coordenadorSelecionado.Contacto = txtContacto.Text.Trim();
+                coordenadorSelecionado.AreaCoordenacao = txtAreaCoordenacao.Text.Trim();
+                coordenadorSelecionado.SalarioBase = numSalarioBase.Value;
+                coordenadorSelecionado.DataFimContrato = dtpDataFimContrato.Value;
+                coordenadorSelecionado.DataFimRegistoCrim = dtpDataRegistoCriminal.Value;
 
-            AtualizarListagem();
-            MessageBox.Show("Coordenador atualizado com sucesso!", "Sucesso",
-                MessageBoxButtons.OK, MessageBoxIcon.Information);
+                AtualizarListagem();
+                DialogHelper.MostrarSucesso("Coordenador atualizado com sucesso!");
+            }
+            catch (Exception ex)
+            {
+                DialogHelper.ErroOperacao("atualizar coordenador", ex);
+            }
         }
 
         private void btnRemover_Click(object sender, EventArgs e)
         {
             if (coordenadorSelecionado == null)
             {
-                MessageBox.Show("Selecione um coordenador para remover.", "Aviso",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                DialogHelper.AvisoSelecionarItem("remover", "coordenador");
+                return;
+            }
+                        
+            if (!DialogHelper.ConfirmarRemocao(coordenadorSelecionado.Nome, "o coordenador"))
+            {
                 return;
             }
 
-            DialogResult result = MessageBox.Show(
-                $"Tem certeza que deseja remover o coordenador {coordenadorSelecionado.Nome}?",
-                "Confirmação",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question);
-
-            if (result == DialogResult.Yes)
+            try
             {
-                MethodInfo removerFuncionarioMetodo = empresa.GetType().GetMethod("RemoverFuncionario", new Type[] { typeof(Funcionario) });
-
-                if (removerFuncionarioMetodo != null)
-                {
-                    removerFuncionarioMetodo.Invoke(empresa, new object[] { coordenadorSelecionado });
-                }
-                else
-                {
-                    FieldInfo fieldFuncionarios = empresa.GetType().GetField("funcionarios", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
-                    if (fieldFuncionarios != null)
-                    {
-                        var lista = fieldFuncionarios.GetValue(empresa) as List<Funcionario>;
-                        if (lista != null)
-                        {
-                            lista.Remove(coordenadorSelecionado);
-                        }
-                        else
-                        {
-                            MessageBox.Show("Não foi possível remover o coordenador: lista interna não encontrada.", "Erro",
-                                MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return;
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("Não foi possível remover o coordenador: método de remoção não encontrado.", "Erro",
-                            MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
-                    }
-                }
-
+                empresa.RemoverFuncionario(coordenadorSelecionado);
                 AtualizarListagem();
                 LimparCampos();
-                MessageBox.Show("Coordenador removido com sucesso!", "Sucesso",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                DialogHelper.MostrarSucesso("Coordenador removido com sucesso!");
+            }
+            catch (Exception ex)
+            {
+                DialogHelper.ErroOperacao("remover coordenador", ex);
             }
         }
 
@@ -342,6 +270,7 @@ namespace ADOSMELHORES.Forms.Coordenadores
             LimparCampos();
         }
 
+        //Gestao de Formadores
         private void btnAlocarFormador_Click(object sender, EventArgs e)
         {
             if (coordenadorSelecionado == null)
@@ -429,8 +358,7 @@ namespace ADOSMELHORES.Forms.Coordenadores
                 }
             }
         }
-
-        // Novo botão: lista de formadores alocados ao coordenador selecionado
+                
         private void btnListaFormadoresAlocados_Click(object sender, EventArgs e)
         {
             if (coordenadorSelecionado == null)
@@ -481,34 +409,6 @@ namespace ADOSMELHORES.Forms.Coordenadores
             }
         }
 
-        private void btnAtualizarRegistoCriminal_Click(object sender, EventArgs e)
-        {
-            if (coordenadorSelecionado == null)
-            {
-                DialogHelper.AvisoSelecionarItem("atualizar o registo criminal", "coordenador");
-                return;
-            }
-
-            var novaData = DialogHelper.DialogoAtualizarRegistoCriminal(this);
-
-            if (novaData.HasValue)
-            {
-                try
-                {
-                    coordenadorSelecionado.DataFimRegistoCrim = novaData.Value;
-                    AtualizarListagem();
-                    PreencherCampos(coordenadorSelecionado);
-
-                    DialogHelper.MostrarSucesso("Registo criminal atualizado com sucesso!");
-                }
-                catch (Exception ex)
-                {
-                    DialogHelper.ErroOperacao("atualizar registo criminal", ex);
-                }
-            }
-        }
-               
-
         private void btnFiltrarPorDisponibilidade_Click(object sender, EventArgs e)
         {
             var coordenadoresValidos = empresa.Funcionarios
@@ -536,30 +436,48 @@ namespace ADOSMELHORES.Forms.Coordenadores
             lblTotal.Text = $"Coordenadores Válidos: {coordenadoresValidos.Count} de {empresa.Funcionarios.OfType<Coordenador>().Count()}";
         }
 
+        //Registo criminal
+        private void btnAtualizarRegistoCriminal_Click(object sender, EventArgs e)
+        {
+            if (coordenadorSelecionado == null)
+            {
+                DialogHelper.AvisoSelecionarItem("atualizar", "coordenador");
+                return;
+            }
+
+            DateTime? novaData = DialogHelper.DialogoAtualizarRegistoCriminal(this);
+
+            if (novaData.HasValue)
+            {
+                coordenadorSelecionado.DataFimRegistoCrim = novaData.Value;
+                AtualizarListagem();
+                PreencherCampos(coordenadorSelecionado);
+                DialogHelper.MostrarSucesso("Registo criminal atualizado!");
+            }
+        }
+
         private void VerificarStatusRegistoCriminal(Coordenador coordenador)
         {
-            if (coordenador == null) return;
-                        
-            DialogHelper.AtualizarTextBoxStatusRegistoCriminal(
+            DialogHelper.AtualizarStatusRegistoCriminal(
                 txtStatusRegistoCriminal,
-                coordenador,  
-                empresa
+                coordenador,
+                empresa.DataSimulada > DateTime.MinValue ? empresa.DataSimulada : (DateTime?)null
             );
         }
+
+
+        private bool NifDuplicado(int nif, int? excludeId = null)
+        {
+            return empresa.Funcionarios
+                .OfType<Coordenador>()
+                .Any(c => c.Nif == nif && (!excludeId.HasValue || c.Id != excludeId.Value));
+        }
+
 
         private void btnFechar_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
-        private void groupBoxDados_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }
