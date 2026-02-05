@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -15,40 +16,68 @@ namespace ADOSMELHORES.Forms.Controls
     public partial class ControlVistaGeral : UserControl
     {
         private readonly Empresa _empresa;
+        private Filtros _filtroSelecionado;
+
+        public enum Filtros
+        {
+            Todos = 0,
+            ContratosValidos,
+            RegCrimExpirados,
+            Validos
+        }
         public ControlVistaGeral(Empresa empresa)
         {
             _empresa = empresa;
+            _filtroSelecionado = Filtros.Todos;
             InitializeComponent();
+            cmbFiltros.DataSource = Enum.GetValues(typeof(Filtros));
+
 
             lstFuncionarios.View = View.Details;
             lstFuncionarios.FullRowSelect = true;
             lstFuncionarios.GridLines = true;
 
-            lblLista.Text = "Lista de Funcioários";
+            lblLista.Text = "Lista de Funcionários";
             lstFuncionarios.Columns.Add("ID", 60);
             lstFuncionarios.Columns.Add("Nome", 150);
             lstFuncionarios.Columns.Add("Função", 120);
-            lstFuncionarios.Columns.Add("Ativo", 80);
 
             AtualizarDados();
 
         }
-        public void AtualizarDados()
+        public void AtualizarDados(Filtros filtroSelecionado = Filtros.Todos)
         {
             lstFuncionarios.Items.Clear();
-            foreach (var funcionario in _empresa.Funcionarios)
+
+            List<Funcionario> listaFiltrada = null;
+            switch (filtroSelecionado)
+            {
+                case Filtros.Todos:
+                    listaFiltrada = _empresa.Funcionarios.Where(f => 1==1).ToList();
+                    break;
+                case Filtros.ContratosValidos:
+                    listaFiltrada = _empresa.Funcionarios.Where(f => f.ContratoValido(DateTime.Now)).ToList();
+                    break;
+                case Filtros.RegCrimExpirados:
+                    listaFiltrada = _empresa.Funcionarios.Where(f => f.RegistoCriminalExpirado(DateTime.Now)).ToList();
+                    break;
+                case Filtros.Validos:
+                    listaFiltrada = _empresa.Funcionarios.Where(f => f.ContratoValido(DateTime.Now) && !f.RegistoCriminalExpirado(DateTime.Now)).ToList();
+                    break;
+            }
+
+            foreach (var funcionario in listaFiltrada)
             {
                 var item = new ListViewItem(funcionario.Id.ToString());
                 item.SubItems.Add(funcionario.Nome);
                 item.SubItems.Add(funcionario.GetType().Name);
-                item.SubItems.Add(funcionario.ContratoValido(DateTime.Now) ? "Sim" : "Não");
                 lstFuncionarios.Items.Add(item);
             }
         }
 
         private void frm_onClick(object sender, EventArgs e)
         {
-            AtualizarDados();
+            AtualizarDados(_filtroSelecionado);
         }
 
         private void btnCSV_Click(object sender, EventArgs e)
@@ -72,6 +101,12 @@ namespace ADOSMELHORES.Forms.Controls
                     }
                 }
             }
+        }
+
+        private void cmbFiltros_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _filtroSelecionado = (Filtros)cmbFiltros.SelectedItem;
+            AtualizarDados(_filtroSelecionado);
         }
     }
 }

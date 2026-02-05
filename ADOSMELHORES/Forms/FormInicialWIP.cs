@@ -10,7 +10,6 @@ using System.Windows.Forms;
 
 using ADOSMELHORES.Forms.Controls;
 using ADOSMELHORES.Modelos;
-using System.Text; // necessário para StringBuilder
 
 namespace ADOSMELHORES.Forms
 {
