@@ -113,12 +113,6 @@
     <Compile Include="Forms\Formadores\FormGerirFormadores.Designer.cs">
       <DependentUpon>FormGerirFormadores.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Extra\FormExemplo.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Extra\FormExemplo.Designer.cs">
-      <DependentUpon>FormExemplo.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\Diretores\FormGerirDiretores.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -136,12 +130,6 @@
     </Compile>
     <Compile Include="Forms\FormLogin.Designer.cs">
       <DependentUpon>FormLogin.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\FormInicial.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\FormInicial.Designer.cs">
-      <DependentUpon>FormInicial.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Diretores\FormsCalcularRemuneracao.cs">
       <SubType>Form</SubType>
@@ -204,9 +192,6 @@
     <EmbeddedResource Include="Forms\Formadores\FormGerirFormadores.resx">
       <DependentUpon>FormGerirFormadores.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Extra\FormExemplo.resx">
-      <DependentUpon>FormExemplo.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Diretores\FormGerirDiretores.resx">
       <DependentUpon>FormGerirDiretores.cs</DependentUpon>
     </EmbeddedResource>
@@ -215,9 +200,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormLogin.resx">
       <DependentUpon>FormLogin.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormInicial.resx">
-      <DependentUpon>FormInicial.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Diretores\FormsCalcularRemuneracao.resx">
       <DependentUpon>FormsCalcularRemuneracao.cs</DependentUpon>

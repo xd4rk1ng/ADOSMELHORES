@@ -107,8 +107,7 @@ namespace ADOSMELHORES.Forms.Secretarias
                 Width = 100
             });
         }
-
-        //NOVO AtualizarListaSecretarias
+     
         private void AtualizarListaSecretarias()
         {
             // Usando método novo da Empresa - facilita migração para BD
@@ -124,40 +123,48 @@ namespace ADOSMELHORES.Forms.Secretarias
                 dgvSecretarias.Rows[0].Selected = true;
             }
         }
-                
 
-        private void dgvSecretarias_SelectionChanged(object sender, EventArgs e)
+        private void LimparCampos()
         {
-            if (dgvSecretarias.SelectedRows.Count > 0)
+            txtNome.Clear();
+            txtNIF.Clear();
+            txtMorada.Clear();
+            txtContacto.Clear();
+            numSalarioBase.Value = 0;
+
+            // Limpar seleção de área
+            listBoxArea.SelectedIndex = -1;
+
+            // Limpar seleção de idiomas
+            for (int i = 0; i < checkedListBoxIdiomas.Items.Count; i++)
             {
-                secretariaSelecionada = dgvSecretarias.SelectedRows[0].DataBoundItem as Secretaria;
-                if (secretariaSelecionada != null)
-                {
-                    CarregarDadosSecretaria(secretariaSelecionada);
-                    HabilitarBotoesEdicao(true);
-                }
+                checkedListBoxIdiomas.SetItemChecked(i, false);
             }
-            else
-            {
-                HabilitarBotoesEdicao(false);
-            }
+
+            // Limpar diretores
+            checkedListBoxDiretores.Items.Clear();
+
+            // Valores padrão
+            DateTimeHelper.DefinirValorSeguro(dtpDataFimContrato, DateTime.Now.AddYears(1));
+            DateTimeHelper.DefinirValorSeguro(dtpDataRegistoCriminal, DateTime.Now.AddYears(1));
+
+            secretariaSelecionada = null;
+            btnInserir.Enabled = false;
         }
+
 
         private void CarregarDadosSecretaria(Secretaria secretaria)
         {
-            // Helper para limitar valores DateTime
-            DateTime Clamp(DateTime value, DateTime min, DateTime max)
-            {
-                if (value < min) return min;
-                if (value > max) return max;
-                return value;
-            }
-
+            
             txtNome.Text = secretaria.Nome;
             txtNIF.Text = secretaria.Nif.ToString();
             txtMorada.Text = secretaria.Morada;
             txtContacto.Text = secretaria.Contacto;
             numSalarioBase.Value = secretaria.SalarioBase;
+
+            DateTimeHelper.DefinirValorSeguro(dtpDataFimContrato, secretaria.DataFimContrato);
+            DateTimeHelper.DefinirValorSeguro(dtpDataRegistoCriminal, secretaria.DataFimRegistoCrim);
+                                  
 
             // Selecionar área
             if (!string.IsNullOrEmpty(secretaria.Area))
@@ -172,27 +179,7 @@ namespace ADOSMELHORES.Forms.Secretarias
             // Marcar idiomas
             CarregarIdiomas(secretaria);
 
-            // Datas
-            try
-            {
-                DateTime safeFim = Clamp(secretaria.DataFimContrato, dtpDataFimContrato.MinDate, dtpDataFimContrato.MaxDate);
-                dtpDataFimContrato.Value = safeFim;
-            }
-            catch
-            {
-                dtpDataFimContrato.Value = dtpDataFimContrato.MinDate;
-            }
-
-            try
-            {
-                DateTime safeRegisto = Clamp(secretaria.DataFimRegistoCrim, dtpDataRegistoCriminal.MinDate, dtpDataRegistoCriminal.MaxDate);
-                dtpDataRegistoCriminal.Value = safeRegisto;
-            }
-            catch
-            {
-                dtpDataRegistoCriminal.Value = dtpDataRegistoCriminal.MinDate;
-            }
-
+            
             // Carregar diretor responsável
             CarregarDiretoresDisponiveis();
             if (secretaria.DiretorReporta != null)
@@ -209,8 +196,13 @@ namespace ADOSMELHORES.Forms.Secretarias
                     }
                 }
             }
-            VerificarStatusRegistoCriminal(secretaria);
+            DialogHelper.AtualizarStatusRegistoCriminal(
+                txtStatusRegistoCriminal,
+                secretaria,
+                empresa.DataSimulada > DateTime.MinValue ? empresa.DataSimulada : (DateTime?)null
+            );
         }
+
 
         private void CarregarIdiomas(Secretaria secretaria)
         {
@@ -231,6 +223,23 @@ namespace ADOSMELHORES.Forms.Secretarias
                         checkedListBoxIdiomas.SetItemChecked(index, true);
                     }
                 }
+            }
+        }
+
+        private void dgvSecretarias_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgvSecretarias.SelectedRows.Count > 0)
+            {
+                secretariaSelecionada = dgvSecretarias.SelectedRows[0].DataBoundItem as Secretaria;
+                if (secretariaSelecionada != null)
+                {
+                    CarregarDadosSecretaria(secretariaSelecionada);
+                    HabilitarBotoesEdicao(true);
+                }
+            }
+            else
+            {
+                HabilitarBotoesEdicao(false);
             }
         }
 
@@ -268,8 +277,7 @@ namespace ADOSMELHORES.Forms.Secretarias
                 }
             }
         }
-
-       
+               
         private void ValidarCamposParaHabilitarInserir(object sender, EventArgs e)
         {
             this.BeginInvoke(new Action(() =>
@@ -294,98 +302,41 @@ namespace ADOSMELHORES.Forms.Secretarias
             btnAtualizarRegistoCriminal.Enabled = habilitar;
         }
 
-        private void LimparCampos()
+                
+        private bool ValidarCamposForm()
         {
-            txtNome.Clear();
-            txtNIF.Clear();
-            txtMorada.Clear();
-            txtContacto.Clear();
-            numSalarioBase.Value = 0;
-
-            // Limpar seleção de área
-            listBoxArea.SelectedIndex = -1;
-
-            // Limpar seleção de idiomas
-            for (int i = 0; i < checkedListBoxIdiomas.Items.Count; i++)
+            if (!ValidarCampos.ValidarEMostrar(
+                ValidarCampos.ValidarCampoObrigatorio(txtNome.Text, "o nome da secretária"),
+                ValidarCampos.ValidarNIF(txtNIF.Text, obrigatorio: true),
+                ValidarCampos.ValidarContacto(txtContacto.Text, obrigatorio: true)
+            ))
             {
-                checkedListBoxIdiomas.SetItemChecked(i, false);
-            }
-
-            // Limpar diretores
-            checkedListBoxDiretores.Items.Clear();
-
-            // Valores padrão
-            try { dtpDataFimContrato.Value = DateTime.Now.AddYears(1); } catch { }
-            try { dtpDataRegistoCriminal.Value = DateTime.Now.AddYears(5); } catch { }
-
-            secretariaSelecionada = null;
-            btnInserir.Enabled = false;
-        }
-
-        private bool ValidarCampos()
-        {
-            if (string.IsNullOrWhiteSpace(txtNome.Text))
-            {
-                MessageBox.Show("Por favor, insira o nome da secretária.", "Campo Obrigatório",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtNome.Focus();
                 return false;
             }
-
-            if (!ValidarNIF(txtNIF.Text))
-            {
-                MessageBox.Show("NIF inválido! O NIF deve ter 9 dígitos (entre 111111111 e 999999999).",
-                    "NIF Inválido",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtNIF.Focus();
-                return false;
-            }
-
-            if (!ValidarContacto(txtContacto.Text))
-            {
-                MessageBox.Show("Contacto inválido! O contacto deve ter 9 dígitos e começar com 9 (ex: 912345678).",
-                    "Contacto Inválido",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtContacto.Focus();
-                return false;
-            }
-
-            //if (string.IsNullOrWhiteSpace(txtNIF.Text) || !int.TryParse(txtNIF.Text, out _))
-            //{
-            //    MessageBox.Show("Por favor, insira um NIF válido.", "Campo Obrigatório",
-            //        MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            //    txtNIF.Focus();
-            //    return false;
-            //}
-
-            //if (string.IsNullOrWhiteSpace(txtContacto.Text))
-            //{
-            //    MessageBox.Show("Por favor, insira o contacto.", "Campo Obrigatório",
-            //        MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            //    txtContacto.Focus();
-            //    return false;
-            //}
 
             if (listBoxArea.SelectedItem == null)
             {
-                MessageBox.Show("Por favor, selecione uma área de secretaria.", "Campo Obrigatório",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                DialogHelper.MostrarAviso("Por favor, selecione uma área de secretaria.", "Campo Obrigatório");
                 listBoxArea.Focus();
                 return false;
             }
 
             if (checkedListBoxIdiomas.CheckedItems.Count == 0)
             {
-                MessageBox.Show("Por favor, selecione pelo menos um idioma.", "Campo Obrigatório",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                DialogHelper.MostrarAviso("Por favor, selecione pelo menos um idioma.", "Campo Obrigatório");
                 checkedListBoxIdiomas.Focus();
                 return false;
             }
 
-            if (dtpDataFimContrato.Value <= DateTime.Now)
+            var validacaoData = DateTimeHelper.ValidarDataFutura(
+                dtpDataFimContrato.Value,
+                DateTime.Now,
+                "Data de fim de contrato"
+            );
+
+            if (!validacaoData.Valido)
             {
-                MessageBox.Show("A data de fim de contrato deve ser futura.", "Data Inválida",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                validacaoData.MostrarMensagem();
                 dtpDataFimContrato.Focus();
                 return false;
             }
@@ -393,72 +344,12 @@ namespace ADOSMELHORES.Forms.Secretarias
             return true;
         }
 
-        // ==================== MÉTODOS DE VALIDAÇÃO ====================
-
-        /// Valida NIF: deve ter 9 dígitos numéricos entre 111111111 e 999999999        
-        private bool ValidarNIF(string nif)
-        {
-            // Remover espaços em branco
-            nif = nif?.Trim();
-
-            // Verificar se está vazio
-            if (string.IsNullOrWhiteSpace(nif))
-                return false;
-
-            // Verificar se tem exatamente 9 caracteres
-            if (nif.Length != 9)
-                return false;
-
-            // Verificar se são todos dígitos
-            if (!nif.All(char.IsDigit))
-                return false;
-
-            // Converter para número e verificar intervalo
-            if (int.TryParse(nif, out int nifNumero))
-            {
-                return nifNumero >= 111111111 && nifNumero <= 999999999;
-            }
-
-            return false;
-        }
-
-
-        /// Valida Contacto: deve ter 9 dígitos numéricos entre 900000000 e 999999999 (começa com 9)        
-        private bool ValidarContacto(string contacto)
-        {
-            // Remover espaços em branco
-            contacto = contacto?.Trim();
-
-            // Verificar se está vazio
-            if (string.IsNullOrWhiteSpace(contacto))
-                return false;
-
-            // Verificar se tem exatamente 9 caracteres
-            if (contacto.Length != 9)
-                return false;
-
-            // Verificar se são todos dígitos
-            if (!contacto.All(char.IsDigit))
-                return false;
-
-            // Verificar se começa com 9
-            if (!contacto.StartsWith("9"))
-                return false;
-
-            // Converter para número e verificar intervalo
-            if (int.TryParse(contacto, out int contactoNumero))
-            {
-                return contactoNumero >= 900000000 && contactoNumero <= 999999999;
-            }
-
-            return false;
-        }
 
         // ==================== EVENTOS DE BOTÕES ====================
 
         private void btnInserir_Click(object sender, EventArgs e)
         {
-            if (!ValidarCampos())
+            if (!ValidarCamposForm())
                 return;
 
             try
@@ -502,13 +393,11 @@ namespace ADOSMELHORES.Forms.Secretarias
                 AtualizarListaSecretarias();
                 LimparCampos();
 
-                MessageBox.Show($"Secretária '{novaSecretaria.Nome}' inserida com sucesso!", "Sucesso",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                DialogHelper.MostrarSucesso($"Secretária '{novaSecretaria.Nome}' inserida com sucesso!");
             }
             catch (Exception ex)
-            {
-                MessageBox.Show($"Erro ao inserir secretária: {ex.Message}", "Erro",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            {                
+                DialogHelper.ErroOperacao("inserir secretária", ex);
             }
         }
 
@@ -516,12 +405,11 @@ namespace ADOSMELHORES.Forms.Secretarias
         {
             if (secretariaSelecionada == null)
             {
-                MessageBox.Show("Selecione uma secretária para alterar.", "Aviso",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                DialogHelper.AvisoSelecionarItem("alterar", "secretária");
                 return;
             }
 
-            if (!ValidarCampos())
+            if (!ValidarCamposForm())
                 return;
 
             try
@@ -567,13 +455,11 @@ namespace ADOSMELHORES.Forms.Secretarias
 
                 AtualizarListaSecretarias();
 
-                MessageBox.Show($"Secretária '{secretariaSelecionada.Nome}' alterada com sucesso!", "Sucesso",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                DialogHelper.MostrarSucesso($"Secretária '{secretariaSelecionada.Nome}' alterada com sucesso!");
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Erro ao alterar secretária: {ex.Message}", "Erro",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                DialogHelper.ErroOperacao("alterar secretária", ex);
             }
         }
        
@@ -581,8 +467,7 @@ namespace ADOSMELHORES.Forms.Secretarias
         {
             if (secretariaSelecionada == null)
             {
-                MessageBox.Show("Selecione uma secretária para remover.", "Aviso",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                DialogHelper.AvisoSelecionarItem("remover", "secretária"); 
                 return;
             }
 
@@ -601,8 +486,7 @@ namespace ADOSMELHORES.Forms.Secretarias
                     {
                         secretariaSelecionada.DiretorReporta.RemoverSecretaria(secretariaSelecionada);
                     }
-
-                    // ✅ Usando método novo da Empresa
+                                        
                     bool removido = empresa.RemoverSecretariaPorId(secretariaSelecionada.Id);
 
                     if (removido)
@@ -610,19 +494,16 @@ namespace ADOSMELHORES.Forms.Secretarias
                         AtualizarListaSecretarias();
                         LimparCampos();
 
-                        MessageBox.Show("Secretária removida com sucesso!", "Sucesso",
-                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        DialogHelper.MostrarSucesso("Secretária removida com sucesso!");
                     }
                     else
                     {
-                        MessageBox.Show("Erro ao remover secretária.", "Erro",
-                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        DialogHelper.MostrarErro("Erro ao remover secretária.");
                     }
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Erro ao remover secretária: {ex.Message}", "Erro",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    DialogHelper.ErroOperacao("remover secretária", ex);
                 }
             }
         }
@@ -641,7 +522,7 @@ namespace ADOSMELHORES.Forms.Secretarias
         {
             if (secretariaSelecionada == null)
             {
-                DialogHelper.AvisoSelecionarItem("atualizar o registo criminal", "secretária");
+                DialogHelper.AvisoSelecionarItem("atualizar registo criminal", "secretária");
                 return;
             }
 

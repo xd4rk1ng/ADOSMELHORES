@@ -13,17 +13,15 @@ using System.Windows.Forms;
 
 namespace ADOSMELHORES.Forms.Formadores
 {
-    /// <summary>
-    /// Form completo para gestão de Formadores
-    /// Inclui: Inserir, Alterar, Alocar, Calcular Valores, Alterar Registo Criminal
-    /// </summary>
+    
+    /// Form completo para gestão de Formadores       
     public partial class FormGerirFormadores : Form
     {
-        private readonly Empresa empresa; // Corrigido aqui
+        private readonly Empresa empresa;
         private Formador formadorSelecionado;
         private BindingSource bsFormadores;
 
-        public FormGerirFormadores(Empresa empresaRef) // Corrigido aqui
+        public FormGerirFormadores(Empresa empresaRef) 
         {
             InitializeComponent();
             empresa = empresaRef;
@@ -52,17 +50,6 @@ namespace ADOSMELHORES.Forms.Formadores
             AtualizarListaFormadores();
         }
 
-        private void TxtNIF_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            // Delegar comportamento de KeyPress para o helper
-            ValidarCampos.NIF_KeyPress(sender, e);
-        }
-
-        private void TxtNIF_Validating(object sender, CancelEventArgs e)
-        {
-            // NIF obrigatório para formadores => obrigatorio: true
-            ValidarCampos.NIF_Validating(sender, e, obrigatorio: true);
-        }
 
         private void ConfigurarDataGridView()
         {
@@ -267,7 +254,7 @@ namespace ADOSMELHORES.Forms.Formadores
         private void LimparCampos()
         {
             txtID.Clear();
-            txtNIF.Clear(); // limpar NIF
+            txtNIF.Clear(); 
             txtNome.Clear();
             txtMorada.Clear();
             txtContacto.Clear();
@@ -514,8 +501,6 @@ namespace ADOSMELHORES.Forms.Formadores
             }
         }
 
-
-
         private void btnFiltrarDisponibilidade_Click(object sender, EventArgs e)
         {
             using (var formFiltro = new ADOSMELHORES.Forms.FormFiltrarFormadores(empresa))
@@ -538,11 +523,7 @@ namespace ADOSMELHORES.Forms.Formadores
             this.Close();
         }
 
-        private void label11_Click(object sender, EventArgs e)
-        {
-
-        }
-
+       
         // novo helper para verificar duplicados de NIF
         private bool NifDuplicado(int nif, int? excludeId = null)
         {
