@@ -210,6 +210,134 @@ namespace ADOSMELHORES
             diretor2.AdicionarSecretaria(secretaria3);
             diretor2.AdicionarSecretaria(secretaria4);
             diretor3.AdicionarSecretaria(secretaria5);
+
+            // ========== CRIANDO 2 COORDENADORES ==========
+            var coordenador1 = new Coordenador(
+                id: 9,
+                nif: 308111222,
+                nome: "Rui Almeida",
+                morada: "Rua do Mercado, 10, Porto",
+                contacto: "920111222",
+                salarioBase: 1800m,
+                dataIniContrato: inicioContrato,
+                dataFimContrato: fimContrato,
+                dataFimRegistoCrim: fimRegistoCriminal,
+                dataNascimento: new DateTime(1985, 4, 2),
+                areaCoordenacao: "Formação"
+            );
+
+            var coordenador2 = new Coordenador(
+                id: 10,
+                nif: 299333444,
+                nome: "Patrícia Gomes",
+                morada: "Rua das Acácias, 45, Coimbra",
+                contacto: "921333444",
+                salarioBase: 1750m,
+                dataIniContrato: inicioContrato,
+                dataFimContrato: fimContrato,
+                dataFimRegistoCrim: fimRegistoCriminal,
+                dataNascimento: new DateTime(1986, 9, 12),
+                areaCoordenacao: "Comercial"
+            );
+
+            empresa.AdicionarFuncionario(coordenador1);
+            empresa.AdicionarFuncionario(coordenador2);
+
+            // ========== CRIANDO 5 FORMADORES ==========
+            var formadores = new List<Formador>
+            {
+                new Formador(
+                    id: 11,
+                    nif: 101101101,
+                    nome: "Pedro Nunes",
+                    morada: "Rua da Alegria, 1, Braga",
+                    contacto: "930111222",
+                    salarioBase: 0m,
+                    dataIniContrato: inicioContrato,
+                    dataFimContrato: fimContrato,
+                    dataFimRegistoCrim: fimRegistoCriminal,
+                    dataNascimento: new DateTime(1990, 6, 15),
+                    areaLeciona: "Programação C#",
+                    disponibilidade: Disponibilidade.Laboral,
+                    valorHora: 25m
+                ),
+                new Formador(
+                    id: 12,
+                    nif: 202202202,
+                    nome: "Marta Oliveira",
+                    morada: "Largo do Carmo, 5, Lisboa",
+                    contacto: "931222333",
+                    salarioBase: 0m,
+                    dataIniContrato: inicioContrato,
+                    dataFimContrato: fimContrato,
+                    dataFimRegistoCrim: fimRegistoCriminal,
+                    dataNascimento: new DateTime(1989, 2, 20),
+                    areaLeciona: "Gestão de Projetos",
+                    disponibilidade: Disponibilidade.PosLaboral,
+                    valorHora: 30m
+                ),
+                new Formador(
+                    id: 13,
+                    nif: 303303303,
+                    nome: "Bruno Costa",
+                    morada: "Av. do Sol, 77, Faro",
+                    contacto: "932333444",
+                    salarioBase: 0m,
+                    dataIniContrato: inicioContrato,
+                    dataFimContrato: fimContrato,
+                    dataFimRegistoCrim: fimRegistoCriminal,
+                    dataNascimento: new DateTime(1982, 12, 1),
+                    areaLeciona: "Marketing Digital",
+                    disponibilidade: Disponibilidade.Ambas,
+                    valorHora: 28m
+                ),
+                new Formador(
+                    id: 14,
+                    nif: 247404404,
+                    nome: "Inês Ferreira",
+                    morada: "Rua Nova, 9, Setúbal",
+                    contacto: "933444555",
+                    salarioBase: 0m,
+                    dataIniContrato: inicioContrato,
+                    dataFimContrato: fimContrato,
+                    dataFimRegistoCrim: fimRegistoCriminal,
+                    dataNascimento: new DateTime(1993, 8, 8),
+                    areaLeciona: "Qualidade e Auditoria",
+                    disponibilidade: Disponibilidade.Laboral,
+                    valorHora: 22.5m
+                ),
+                new Formador(
+                    id: 15,
+                    nif: 189505505,
+                    nome: "Rita Marques",
+                    morada: "Rua das Oliveiras, 20, Porto",
+                    contacto: "934555666",
+                    salarioBase: 0m,
+                    dataIniContrato: inicioContrato,
+                    dataFimContrato: fimContrato,
+                    dataFimRegistoCrim: fimRegistoCriminal,
+                    dataNascimento: new DateTime(1991, 3, 3),
+                    areaLeciona: "Excel Avançado",
+                    disponibilidade: Disponibilidade.PosLaboral,
+                    valorHora: 20m
+                )
+            };
+
+            foreach (var f in formadores)
+            {
+                empresa.AdicionarFuncionario(f);
+            }
+
+            // ========== ALOCAR FORMADORES AOS COORDENADORES (aleatório) ==========
+            var coordenadores = empresa.Funcionarios.OfType<Coordenador>().ToList();
+            var rng = new Random();
+
+            foreach (var f in formadores)
+            {
+                // escolhe aleatoriamente um dos coordenadores e adiciona
+                var escolhido = coordenadores[rng.Next(coordenadores.Count)];
+                escolhido.AdicionarFormador(f);
+            }
         }
 
         /// MÉTODO TEMPORÁRIO - Carrega dados de despesas de exemplo
