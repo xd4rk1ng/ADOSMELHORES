@@ -161,7 +161,9 @@
     <Compile Include="Modelos\Formador.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Validacoes\DateTimeHelper.cs" />
     <Compile Include="Validacoes\DialogHelper.cs" />
+    <Compile Include="Validacoes\ResultadoValidacao.cs" />
     <Compile Include="Validacoes\ValidarCampos.cs" />
     <EmbeddedResource Include="Forms\Controls\ControlDadosFormador.resx">
       <DependentUpon>ControlDadosFormador.cs</DependentUpon>

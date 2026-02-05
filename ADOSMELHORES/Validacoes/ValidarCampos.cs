@@ -4,20 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-/*
+
 namespace ADOSMELHORES.Validacoes
 {
-    
+    // VALIDACOES DE CAMPOS DE TEXTO
     public static class ValidarCampos
     {
-        // VALIDACOES DE CAMPOS DE TEXTO
-
+        
         /// Valida se um campo de texto não está vazio
         /// </summary>
         /// <param name="valor">Valor do campo</param>
         /// <param name="nomeCampo">Nome do campo para mensagem</param>
         /// <param name="titulo">Título da mensagem de erro</param>
-        /// <returns>ResultadoValidacao</returns>
+        /// <returns>ValidarCampos</returns>
         public static ResultadoValidacao ValidarCampoObrigatorio(
             string valor,
             string nomeCampo,
@@ -191,46 +190,6 @@ namespace ADOSMELHORES.Validacoes
 
 
 
-        // Validação de Datas
-        // Valida se uma data não está no passado
-
-        public static ResultadoValidacao ValidarDataFutura(
-            DateTime data,
-            string nomeCampo,
-            bool incluirHoje = true)
-        {
-            DateTime hoje = DateTime.Today;
-            DateTime comparacao = incluirHoje ? hoje : hoje.AddDays(1);
-
-            if (data < comparacao)
-            {
-                string mensagem = incluirHoje
-                    ? $"{nomeCampo} não pode ser anterior a hoje."
-                    : $"{nomeCampo} deve ser posterior a hoje.";
-
-                return ResultadoValidacao.Erro(mensagem, "Data Inválida");
-            }
-
-            return ResultadoValidacao.Sucesso();
-        }
-
-
-        // Valida se uma data está dentro de um período
-        public static ResultadoValidacao ValidarPeriodoData(
-            DateTime data,
-            DateTime dataInicio,
-            DateTime dataFim,
-            string nomeCampo)
-        {
-            if (data < dataInicio || data > dataFim)
-            {
-                return ResultadoValidacao.Erro(
-                    $"{nomeCampo} deve estar entre {dataInicio:dd/MM/yyyy} e {dataFim:dd/MM/yyyy}.",
-                    "Data Inválida");
-            }
-
-            return ResultadoValidacao.Sucesso();
-        }
 
 
         // Validação de Contacto telemovel 
@@ -343,6 +302,35 @@ namespace ADOSMELHORES.Validacoes
             return int.TryParse(nif?.Trim(), out nifNumero);
         }
 
+
+        /// <summary>
+        /// Handler para KeyPress que permite apenas dígitos (para usar em TextBox.KeyPress)
+        /// </summary>
+        public static void NIF_KeyPress(object sender, System.Windows.Forms.KeyPressEventArgs e)
+        {
+            // Permitir apenas dígitos e teclas de controlo (backspace, delete, etc.)
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        /// <summary>
+        /// Handler para Validating que valida o NIF (para usar em TextBox.Validating)
+        /// </summary>
+        public static void NIF_Validating(object sender, System.ComponentModel.CancelEventArgs e, bool obrigatorio = true)
+        {
+            if (sender is System.Windows.Forms.TextBox textBox)
+            {
+                var resultado = ValidarNIF(textBox.Text, obrigatorio);
+
+                if (!resultado.Valido)
+                {
+                    e.Cancel = true;
+                    resultado.MostrarMensagem();
+                }
+            }
+        }
         /// Configura eventos de validação automática para um TextBox de NIF
         /// </summary>
         /// <param name="txtNIF">TextBox para configurar</param>
@@ -354,7 +342,10 @@ namespace ADOSMELHORES.Validacoes
 
             // Configurar MaxLength
             txtNIF.MaxLength = NIF_TAMANHO;
-                       
+
+            // Subscrever evento KeyPress
+            //txtNIF.KeyPress -= NIF_KeyPress;  // Remove para evitar duplicação
+            txtNIF.KeyPress += NIF_KeyPress;
 
             // Subscrever evento Validating
             txtNIF.Validating -= (s, e) => NIF_Validating(s, e, obrigatorio);
@@ -362,7 +353,19 @@ namespace ADOSMELHORES.Validacoes
         }
 
 
+        /// <summary>
+        /// Valida múltiplos resultados e retorna o primeiro erro encontrado
+        /// </summary>
+        public static ResultadoValidacao ValidarTodos(params ResultadoValidacao[] resultados)
+        {
+            foreach (var resultado in resultados)
+            {
+                if (!resultado.Valido)
+                    return resultado;
+            }
 
+            return ResultadoValidacao.Sucesso();
+        }
 
 
         /// Valida e mostra mensagem do primeiro erro encontrado
@@ -382,5 +385,3 @@ namespace ADOSMELHORES.Validacoes
 
     }
 }
-
-    */

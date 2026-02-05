@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ADOSMELHORES.Validacoes;
 
 namespace ADOSMELHORES.Validacoes
 {
@@ -15,7 +16,7 @@ namespace ADOSMELHORES.Validacoes
         /// <param name="parent">Form pai para centralizar</param>
         /// <returns>Nova data se OK, null se cancelado</returns>
         /// 
-        public static DateTime? DialogoAtualizarRegistoCriminal(Form parent)
+        public static DateTimeHelper? DialogoAtualizarRegistoCriminal(Form parent)
         {
             using (Form formData = new Form())
             {
@@ -34,7 +35,7 @@ namespace ADOSMELHORES.Validacoes
                 {
                     Location = new Point(20, 50),
                     Width = 240,
-                    Value = DateTime.Now  
+                    Value = DateTimeHelper.Now  
                 };
 
                 Button btnOk = new Button()
@@ -107,7 +108,7 @@ namespace ADOSMELHORES.Validacoes
             }
 
             // Determinar data de referência
-            DateTime referencia = DateTime.Now.Date;
+            DateTimeHelper referencia = DateTimeHelper.Now.Date;
 
             // Se empresa foi fornecida e tem DataSimulada configurada, usar ela
             if (empresa != null)
@@ -117,8 +118,8 @@ namespace ADOSMELHORES.Validacoes
                     var propriedade = empresa.GetType().GetProperty("DataSimulada");
                     if (propriedade != null)
                     {
-                        var dataSimulada = (DateTime)propriedade.GetValue(empresa);
-                        if (dataSimulada > DateTime.MinValue)
+                        var dataSimulada = (DateTimeHelper)propriedade.GetValue(empresa);
+                        if (dataSimulada > DateTimeHelper.MinValue)
                         {
                             referencia = dataSimulada.Date;
                         }
@@ -127,7 +128,7 @@ namespace ADOSMELHORES.Validacoes
                 catch
                 {
                     // Se falhar, usa data atual
-                    referencia = DateTime.Now.Date;
+                    referencia = DateTimeHelper.Now.Date;
                 }
             }
 
@@ -178,7 +179,7 @@ namespace ADOSMELHORES.Validacoes
             }
 
             // Determinar data de referência
-            DateTime referencia = DateTime.Now.Date;
+            DateTimeHelper referencia = DateTimeHelper.Now.Date;
 
             // Se empresa foi fornecida e tem DataSimulada configurada, usar ela
             if (empresa != null)
@@ -188,8 +189,8 @@ namespace ADOSMELHORES.Validacoes
                     var propriedade = empresa.GetType().GetProperty("DataSimulada");
                     if (propriedade != null)
                     {
-                        var dataSimulada = (DateTime)propriedade.GetValue(empresa);
-                        if (dataSimulada > DateTime.MinValue)
+                        var dataSimulada = (DateTimeHelper)propriedade.GetValue(empresa);
+                        if (dataSimulada > DateTimeHelper.MinValue)
                         {
                             referencia = dataSimulada.Date;
                         }
@@ -198,7 +199,7 @@ namespace ADOSMELHORES.Validacoes
                 catch
                 {
                     // Se falhar, usa data atual
-                    referencia = DateTime.Now.Date;
+                    referencia = DateTimeHelper.Now.Date;
                 }
             }
 
