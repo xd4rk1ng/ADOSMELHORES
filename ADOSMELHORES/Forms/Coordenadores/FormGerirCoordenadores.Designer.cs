@@ -93,7 +93,6 @@
             this.groupBoxDados.TabIndex = 0;
             this.groupBoxDados.TabStop = false;
             this.groupBoxDados.Text = "Dados do Coordenador";
-            this.groupBoxDados.Enter += new System.EventHandler(this.groupBoxDados_Enter);
             // 
             // txtNIF
             // 
@@ -110,7 +109,6 @@
             this.label1.Size = new System.Drawing.Size(34, 20);
             this.label1.TabIndex = 20;
             this.label1.Text = "NIF:";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // lblId
             // 
