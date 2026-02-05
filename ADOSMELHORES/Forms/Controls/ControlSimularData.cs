@@ -24,39 +24,58 @@ namespace ADOSMELHORES.Forms.Controls
 
             dtpDataDefinida.Value = _dataSimulada;
 
-            lstFuncionarios.View = View.Details;
-            lstFuncionarios.FullRowSelect = true;
-            lstFuncionarios.GridLines = true;
+            lstInvalidos.View = View.Details;
+            lstInvalidos.FullRowSelect = true;
+            lstInvalidos.GridLines = true;
 
-            lstFuncionarios.Columns.Add("ID", 60);
-            lstFuncionarios.Columns.Add("Nome", 150);
-            lstFuncionarios.Columns.Add("Função", 120);
+            lstInvalidos.Columns.Add("ID", 60);
+            lstInvalidos.Columns.Add("Nome", 150);
+            lstInvalidos.Columns.Add("Função", 120);
+
+
+            lstExpirados.View = View.Details;
+            lstExpirados.FullRowSelect = true;
+            lstExpirados.GridLines = true;
+
+            lstExpirados.Columns.Add("ID", 60);
+            lstExpirados.Columns.Add("Nome", 150);
+            lstExpirados.Columns.Add("Função", 120);
 
             AtualizarDados();
 
         }
         public void AtualizarDados()
         {
-            List<Funcionario> totalContratosExpirados;
-            List<Funcionario> totalRegistosExpirados;
+            List<Funcionario> contratosInvalidos;
+            List<Funcionario> registosExpirados;
 
-            VerificarAlertasData(out totalContratosExpirados, out totalRegistosExpirados);
+            VerificarAlertasData(out contratosInvalidos, out registosExpirados);
 
-            lstFuncionarios.Items.Clear();
+            lstInvalidos.Items.Clear();
+            lstExpirados.Items.Clear();
 
-            // insere na listview todos os funcionários com contrato inválido na data simulada ou registo criminal expirado
-            foreach (var funcionario in totalContratosExpirados.Concat(totalRegistosExpirados).ToList())
+            foreach (var funcionario in contratosInvalidos)
             {
                 var item = new ListViewItem(funcionario.Id.ToString());
                 item.SubItems.Add(funcionario.Nome);
                 item.SubItems.Add(funcionario.GetType().Name);
-                lstFuncionarios.Items.Add(item);
+                lstInvalidos.Items.Add(item);
             }
 
+            foreach (var funcionario in registosExpirados)
+            {
+                var item = new ListViewItem(funcionario.Id.ToString());
+                item.SubItems.Add(funcionario.Nome);
+                item.SubItems.Add(funcionario.GetType().Name);
+                lstExpirados.Items.Add(item);
+            }
 
-            lblExpirados1.Text = $"Contrato inválido: {totalContratosExpirados.Count}";
-            lblExpirados2.Text = $"Registo criminal expirado: {totalRegistosExpirados.Count}";
-            lblNumTotal.Text = $"{totalContratosExpirados.Count + totalRegistosExpirados.Count}";
+            var totalInvalidos = contratosInvalidos.Count;
+            var totalExpirados = registosExpirados.Count;
+
+            lblNumTotalInvalidos.Text = totalInvalidos.ToString();
+            lblNumTotalExpirados.Text = totalExpirados.ToString();
+            lblNumTotal.Text = (totalInvalidos + totalExpirados).ToString();
         }
         private void VerificarAlertasData(out List<Funcionario> contratosQueTerminam, out List<Funcionario> registosAtingidos)
         {
