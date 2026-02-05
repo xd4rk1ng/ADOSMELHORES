@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ADOSMELHORES.Validacoes;
 
 namespace ADOSMELHORES.Forms.Diretores
 {
@@ -729,40 +730,33 @@ namespace ADOSMELHORES.Forms.Diretores
             }
         }
 
-        
         private void btnAtualizarRegistoCriminal_Click(object sender, EventArgs e)
         {
             if (diretorSelecionado == null)
             {
-                MessageBox.Show("Selecione um diretor para atualizar o registo criminal.", "Aviso",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                DialogHelper.AvisoSelecionarItem("atualizar o registo criminal", "diretor");
                 return;
             }
 
-            var resultado = MessageBox.Show(
-                "Deseja atualizar a data de registo criminal para 5 anos a partir de hoje?",
-                "Atualizar Registo Criminal",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question);
+            var novaData = DialogHelper.DialogoAtualizarRegistoCriminal(this);
 
-            if (resultado == DialogResult.Yes)
+            if (novaData.HasValue)
             {
                 try
                 {
-                    diretorSelecionado.DataFimRegistoCrim = DateTime.Now.AddYears(5);
+                    diretorSelecionado.DataFimRegistoCrim = novaData.Value;
                     dtpDataRegistoCriminal.Value = diretorSelecionado.DataFimRegistoCrim;
                     AtualizarListaDiretores();
 
-                    MessageBox.Show("Registo criminal atualizado com sucesso!", "Sucesso",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    DialogHelper.MostrarSucesso("Registo criminal atualizado com sucesso!");
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Erro ao atualizar registo criminal: {ex.Message}", "Erro",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    DialogHelper.ErroOperacao("atualizar registo criminal", ex);
                 }
             }
         }
+               
 
 
         private void btnFechar_Click(object sender, EventArgs e)
@@ -773,30 +767,5 @@ namespace ADOSMELHORES.Forms.Diretores
 
     }
 
-    //internal class FormAtualizarRegistoCriminal : IDisposable
-    //{
-    //    public FormAtualizarRegistoCriminal(Diretor diretorSelecionado, Empresa empresa)
-    //    {
-    //        DiretorSelecionado = diretorSelecionado;
-    //        Empresa = empresa;
-    //    }
-
-    //    public Diretor DiretorSelecionado { get; }
-    //    public Empresa Empresa { get; }
-
-    //    internal DialogResult ShowDialog()
-    //    {
-    //        throw new NotImplementedException();
-    //    }
-
-    //    public void Dispose()
-    //    {
-    //        // Implementação de Dispose se necessário
-    //    }
-    //}
-
-
     
-    //    // resto igual (usar 'funcionarios' internamente)
-    //}
 }
