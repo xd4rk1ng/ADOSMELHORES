@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ADOSMELHORES.Modelos;
+using ADOSMELHORES.Validacoes;
 
 namespace ADOSMELHORES.Forms.Secretarias
 {    
@@ -208,6 +209,7 @@ namespace ADOSMELHORES.Forms.Secretarias
                     }
                 }
             }
+            VerificarStatusRegistoCriminal(secretaria);
         }
 
         private void CarregarIdiomas(Secretaria secretaria)
@@ -639,35 +641,43 @@ namespace ADOSMELHORES.Forms.Secretarias
         {
             if (secretariaSelecionada == null)
             {
-                MessageBox.Show("Selecione uma secretária para atualizar o registo criminal.", "Aviso",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                DialogHelper.AvisoSelecionarItem("atualizar o registo criminal", "secretária");
                 return;
             }
 
-            var resultado = MessageBox.Show(
-                "Deseja atualizar a data de registo criminal para 5 anos a partir de hoje?",
-                "Atualizar Registo Criminal",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question);
+            var novaData = DialogHelper.DialogoAtualizarRegistoCriminal(this);
 
-            if (resultado == DialogResult.Yes)
+            if (novaData.HasValue)
             {
                 try
                 {
-                    secretariaSelecionada.DataFimRegistoCrim = DateTime.Now.AddYears(5);
+                    secretariaSelecionada.DataFimRegistoCrim = novaData.Value;
                     dtpDataRegistoCriminal.Value = secretariaSelecionada.DataFimRegistoCrim;
                     AtualizarListaSecretarias();
 
-                    MessageBox.Show("Registo criminal atualizado com sucesso!", "Sucesso",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    VerificarStatusRegistoCriminal(secretariaSelecionada);
+
+                    DialogHelper.MostrarSucesso("Registo criminal atualizado com sucesso!");
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Erro ao atualizar registo criminal: {ex.Message}", "Erro",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    DialogHelper.ErroOperacao("atualizar registo criminal", ex);
                 }
             }
         }
+
+        private void VerificarStatusRegistoCriminal(Secretaria secretaria)
+        {
+            if (secretaria == null) return;
+
+            DialogHelper.AtualizarStatusRegistoCriminal(
+                txtStatusRegistoCriminal,
+                secretaria,
+                empresa.DataSimulada > DateTime.MinValue ? empresa.DataSimulada : (DateTime?)null
+            );
+        }
+
+
 
         private void btnFechar_Click(object sender, EventArgs e)
         {

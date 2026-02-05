@@ -57,12 +57,13 @@
             this.grpListaSecretarias = new System.Windows.Forms.GroupBox();
             this.lblTotalSecretarias = new System.Windows.Forms.Label();
             this.dgvSecretarias = new System.Windows.Forms.DataGridView();
-            this.btnFechar = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.listBoxArea = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.checkedListBoxIdiomas = new System.Windows.Forms.CheckedListBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.txtStatusRegistoCriminal = new System.Windows.Forms.TextBox();
             this.grpDadosSecretaria.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numSalarioBase)).BeginInit();
             this.grpAcoes.SuspendLayout();
@@ -74,7 +75,9 @@
             // 
             // grpDadosSecretaria
             // 
+            this.grpDadosSecretaria.Controls.Add(this.txtStatusRegistoCriminal);
             this.grpDadosSecretaria.Controls.Add(this.txtNIF);
+            this.grpDadosSecretaria.Controls.Add(this.label13);
             this.grpDadosSecretaria.Controls.Add(this.label6);
             this.grpDadosSecretaria.Controls.Add(this.numSalarioBase);
             this.grpDadosSecretaria.Controls.Add(this.label7);
@@ -257,7 +260,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(19, 40);
+            this.label8.Location = new System.Drawing.Point(19, 24);
             this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(140, 20);
@@ -267,7 +270,7 @@
             // checkedListBoxDiretores
             // 
             this.checkedListBoxDiretores.FormattingEnabled = true;
-            this.checkedListBoxDiretores.Location = new System.Drawing.Point(184, 133);
+            this.checkedListBoxDiretores.Location = new System.Drawing.Point(184, 117);
             this.checkedListBoxDiretores.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.checkedListBoxDiretores.Name = "checkedListBoxDiretores";
             this.checkedListBoxDiretores.Size = new System.Drawing.Size(188, 48);
@@ -276,7 +279,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(19, 133);
+            this.label5.Location = new System.Drawing.Point(19, 117);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(165, 20);
@@ -294,7 +297,7 @@
             this.grpAcoes.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.grpAcoes.Name = "grpAcoes";
             this.grpAcoes.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.grpAcoes.Size = new System.Drawing.Size(267, 497);
+            this.grpAcoes.Size = new System.Drawing.Size(267, 481);
             this.grpAcoes.TabIndex = 2;
             this.grpAcoes.TabStop = false;
             this.grpAcoes.Text = "Ações";
@@ -361,11 +364,11 @@
             // 
             this.grpListaSecretarias.Controls.Add(this.lblTotalSecretarias);
             this.grpListaSecretarias.Controls.Add(this.dgvSecretarias);
-            this.grpListaSecretarias.Location = new System.Drawing.Point(13, 521);
+            this.grpListaSecretarias.Location = new System.Drawing.Point(13, 504);
             this.grpListaSecretarias.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.grpListaSecretarias.Name = "grpListaSecretarias";
             this.grpListaSecretarias.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.grpListaSecretarias.Size = new System.Drawing.Size(941, 271);
+            this.grpListaSecretarias.Size = new System.Drawing.Size(930, 234);
             this.grpListaSecretarias.TabIndex = 7;
             this.grpListaSecretarias.TabStop = false;
             this.grpListaSecretarias.Text = "Lista de Secretárias";
@@ -374,7 +377,7 @@
             // 
             this.lblTotalSecretarias.AutoSize = true;
             this.lblTotalSecretarias.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold);
-            this.lblTotalSecretarias.Location = new System.Drawing.Point(17, 236);
+            this.lblTotalSecretarias.Location = new System.Drawing.Point(17, 201);
             this.lblTotalSecretarias.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTotalSecretarias.Name = "lblTotalSecretarias";
             this.lblTotalSecretarias.Size = new System.Drawing.Size(179, 18);
@@ -391,20 +394,9 @@
             this.dgvSecretarias.Name = "dgvSecretarias";
             this.dgvSecretarias.ReadOnly = true;
             this.dgvSecretarias.RowHeadersWidth = 51;
-            this.dgvSecretarias.Size = new System.Drawing.Size(898, 192);
+            this.dgvSecretarias.Size = new System.Drawing.Size(898, 157);
             this.dgvSecretarias.TabIndex = 0;
             this.dgvSecretarias.SelectionChanged += new System.EventHandler(this.dgvSecretarias_SelectionChanged);
-            // 
-            // btnFechar
-            // 
-            this.btnFechar.Location = new System.Drawing.Point(821, 802);
-            this.btnFechar.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btnFechar.Name = "btnFechar";
-            this.btnFechar.Size = new System.Drawing.Size(133, 46);
-            this.btnFechar.TabIndex = 8;
-            this.btnFechar.Text = "Fechar";
-            this.btnFechar.UseVisualStyleBackColor = true;
-            this.btnFechar.Click += new System.EventHandler(this.btnFechar_Click);
             // 
             // groupBox1
             // 
@@ -416,7 +408,7 @@
             this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox1.Size = new System.Drawing.Size(406, 201);
+            this.groupBox1.Size = new System.Drawing.Size(406, 185);
             this.groupBox1.TabIndex = 9;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Dados da Direção";
@@ -431,7 +423,7 @@
             "Formação",
             "Comercial",
             "Direção-Geral"});
-            this.listBoxArea.Location = new System.Drawing.Point(187, 40);
+            this.listBoxArea.Location = new System.Drawing.Point(186, 24);
             this.listBoxArea.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.listBoxArea.Name = "listBoxArea";
             this.listBoxArea.Size = new System.Drawing.Size(186, 84);
@@ -440,7 +432,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 31);
+            this.label1.Location = new System.Drawing.Point(21, 24);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(118, 20);
             this.label1.TabIndex = 0;
@@ -455,7 +447,7 @@
             "Espanhol",
             "Francês",
             "Alemão"});
-            this.checkedListBoxIdiomas.Location = new System.Drawing.Point(25, 68);
+            this.checkedListBoxIdiomas.Location = new System.Drawing.Point(25, 48);
             this.checkedListBoxIdiomas.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.checkedListBoxIdiomas.Name = "checkedListBoxIdiomas";
             this.checkedListBoxIdiomas.Size = new System.Drawing.Size(172, 92);
@@ -469,20 +461,39 @@
             this.groupBox2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox2.Size = new System.Drawing.Size(231, 201);
+            this.groupBox2.Size = new System.Drawing.Size(231, 185);
             this.groupBox2.TabIndex = 10;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Dados Profissionais";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(365, 249);
+            this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(165, 20);
+            this.label13.TabIndex = 22;
+            this.label13.Text = "Status Registo Criminal:";
+            // 
+            // txtStatusRegistoCriminal
+            // 
+            this.txtStatusRegistoCriminal.Enabled = false;
+            this.txtStatusRegistoCriminal.Location = new System.Drawing.Point(533, 244);
+            this.txtStatusRegistoCriminal.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtStatusRegistoCriminal.Name = "txtStatusRegistoCriminal";
+            this.txtStatusRegistoCriminal.ReadOnly = true;
+            this.txtStatusRegistoCriminal.Size = new System.Drawing.Size(106, 27);
+            this.txtStatusRegistoCriminal.TabIndex = 23;
             // 
             // FormGerirSecretarias
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(252)))), ((int)(((byte)(249)))));
-            this.ClientSize = new System.Drawing.Size(973, 857);
+            this.ClientSize = new System.Drawing.Size(973, 753);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.btnFechar);
             this.Controls.Add(this.grpListaSecretarias);
             this.Controls.Add(this.grpAcoes);
             this.Controls.Add(this.grpDadosSecretaria);
@@ -534,7 +545,6 @@
         private System.Windows.Forms.GroupBox grpListaSecretarias;
         private System.Windows.Forms.Label lblTotalSecretarias;
         private System.Windows.Forms.DataGridView dgvSecretarias;
-        private System.Windows.Forms.Button btnFechar;
         private System.Windows.Forms.TextBox txtNIF;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.GroupBox groupBox1;
@@ -542,5 +552,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckedListBox checkedListBoxIdiomas;
         private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TextBox txtStatusRegistoCriminal;
     }
 }

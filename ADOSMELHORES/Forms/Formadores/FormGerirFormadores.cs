@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ADOSMELHORES.Validacoes;
 
 namespace ADOSMELHORES.Forms.Formadores
 {
@@ -253,7 +254,7 @@ namespace ADOSMELHORES.Forms.Formadores
             // DataRegistoCriminal
             try
             {
-                DateTime fallbackRegisto = DateTime.Now.AddYears(5);
+                DateTime fallbackRegisto = DateTime.Now;
                 DateTime dataRegistoCriminal;
                 try
                 {
@@ -326,7 +327,7 @@ namespace ADOSMELHORES.Forms.Formadores
             numValorHora.Value = 0;
             // Valores seguros por defeito
             try { dtpDataFimContrato.Value = DateTime.Now.AddYears(1); } catch { /* ignora */ }
-            try { dtpDataRegistoCriminal.Value = DateTime.Now.AddYears(5); } catch { /* ignora */ }
+            try { dtpDataRegistoCriminal.Value = DateTime.Now; } catch { /* ignora */ }
             lblStatusRegistoCriminal.Text = "";
             formadorSelecionado = null;
             HabilitarBotoesEdicao(false);
@@ -574,63 +575,30 @@ namespace ADOSMELHORES.Forms.Formadores
                 formCalculo.ShowDialog(this);
             }
         }
-
+        //NOVO 
         private void btnAtualizarRegistoCriminal_Click(object sender, EventArgs e)
         {
             if (formadorSelecionado == null)
             {
-                MessageBox.Show("Selecione um formador para atualizar o registo criminal.", "Aviso",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                DialogHelper.AvisoSelecionarItem("atualizar o registo criminal", "formador");
                 return;
             }
 
-            // Mesma lógica usada no FormGerirCoordenadores: abrir diálogo simples com DateTimePicker
-            using (Form formData = new Form())
+            var novaData = DialogHelper.DialogoAtualizarRegistoCriminal(this);
+
+            if (novaData.HasValue)
             {
-                formData.Text = "Atualizar Registo Criminal";
-                formData.Size = new System.Drawing.Size(300, 150);
-                formData.StartPosition = FormStartPosition.CenterParent;
-
-                Label lblInfo = new Label()
+                try
                 {
-                    Text = "Nova data de validade:",
-                    Location = new System.Drawing.Point(20, 20),
-                    AutoSize = true
-                };
-                DateTimePicker dtp = new DateTimePicker()
-                {
-                    Location = new System.Drawing.Point(20, 50),
-                    Width = 240,
-                    Value = DateTime.Now.AddYears(1)
-                };
-                Button btnOk = new Button()
-                {
-                    Text = "OK",
-                    DialogResult = DialogResult.OK,
-                    Location = new System.Drawing.Point(100, 80)
-                };
+                    formadorSelecionado.DataFimRegistoCrim = novaData.Value;
+                    AtualizarListaFormadores();
+                    CarregarDadosFormador(formadorSelecionado);
 
-                formData.Controls.Add(lblInfo);
-                formData.Controls.Add(dtp);
-                formData.Controls.Add(btnOk);
-                formData.AcceptButton = btnOk;
-
-                if (formData.ShowDialog(this) == DialogResult.OK)
+                    DialogHelper.MostrarSucesso("Registo criminal atualizado com sucesso!");
+                }
+                catch (Exception ex)
                 {
-                    try
-                    {
-                        formadorSelecionado.DataFimRegistoCrim = dtp.Value;
-                        AtualizarListaFormadores();
-                        CarregarDadosFormador(formadorSelecionado);
-
-                        MessageBox.Show("Registo criminal atualizado com sucesso!", "Sucesso",
-                            MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show($"Erro ao atualizar registo criminal: {ex.Message}", "Erro",
-                            MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
+                    DialogHelper.ErroOperacao("atualizar registo criminal", ex);
                 }
             }
         }

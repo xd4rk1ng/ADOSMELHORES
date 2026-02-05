@@ -161,6 +161,10 @@
     <Compile Include="Modelos\Formador.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Validacoes\DateTimeHelper.cs" />
+    <Compile Include="Validacoes\DialogHelper.cs" />
+    <Compile Include="Validacoes\ResultadoValidacao.cs" />
+    <Compile Include="Validacoes\ValidarCampos.cs" />
     <EmbeddedResource Include="Forms\Controls\ControlDadosFormador.resx">
       <DependentUpon>ControlDadosFormador.cs</DependentUpon>
     </EmbeddedResource>
@@ -181,6 +185,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Despesas\FormDespesas.resx">
       <DependentUpon>FormDespesas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Formadores\FormCalcularValorFormacao.resx">
+      <DependentUpon>FormCalcularValorFormacao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Formadores\FormFiltrarFormadores.resx">
+      <DependentUpon>FormFiltrarFormadores.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Formadores\FormGerirFormadores.resx">
       <DependentUpon>FormGerirFormadores.cs</DependentUpon>
