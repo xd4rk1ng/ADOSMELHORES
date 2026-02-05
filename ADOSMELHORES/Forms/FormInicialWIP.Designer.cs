@@ -124,7 +124,7 @@
             this.btnInicio.Name = "btnInicio";
             this.btnInicio.Size = new System.Drawing.Size(143, 58);
             this.btnInicio.TabIndex = 0;
-            this.btnInicio.Text = "Inicio";
+            this.btnInicio.Text = "Vista Geral";
             this.btnInicio.UseVisualStyleBackColor = true;
             this.btnInicio.Click += new System.EventHandler(this.btnInicio_Click);
             // 
