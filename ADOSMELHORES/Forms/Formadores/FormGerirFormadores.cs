@@ -1,5 +1,6 @@
 ﻿using ADOSMELHORES;
 using ADOSMELHORES.Modelos;
+using ADOSMELHORES.Validacoes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,7 +10,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using ADOSMELHORES.Validacoes;
 
 namespace ADOSMELHORES.Forms.Formadores
 {
@@ -36,9 +36,11 @@ namespace ADOSMELHORES.Forms.Formadores
             // Configurar ComboBox de Disponibilidade
             cmbDisponibilidade.DataSource = Enum.GetValues(typeof(Disponibilidade));
 
-            // Subscribes para validação do NIF
-            txtNIF.KeyPress += TxtNIF_KeyPress;
-            txtNIF.Validating += TxtNIF_Validating;
+            // Usar validadores centralizados — NIF obrigatório para Formadores
+            ValidarCampos.ConfigurarTextBoxNIF(txtNIF, obrigatorio: true);
+
+            // Aplicar validação de contacto centralizada (agora obrigatória/handler)
+            ValidarCampos.ConfigurarTextBoxContacto(txtContacto, obrigatorio: true);
 
             // Configurar DataGridView
             ConfigurarDataGridView();
@@ -52,38 +54,14 @@ namespace ADOSMELHORES.Forms.Formadores
 
         private void TxtNIF_KeyPress(object sender, KeyPressEventArgs e)
         {
-            // Permitir apenas dígitos e teclas de controlo (backspace, etc.)
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-            {
-                e.Handled = true;
-            }
+            // Delegar comportamento de KeyPress para o helper
+            ValidarCampos.NIF_KeyPress(sender, e);
         }
 
         private void TxtNIF_Validating(object sender, CancelEventArgs e)
         {
-            string text = txtNIF.Text?.Trim() ?? string.Empty;
-
-            if (string.IsNullOrEmpty(text))
-            {
-                // Se NIF for obrigatório descomente abaixo:
-                // e.Cancel = true;
-                // MessageBox.Show("Por favor, insira o NIF.", "Campo Obrigatório", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            if (!text.All(char.IsDigit))
-            {
-                e.Cancel = true;
-                MessageBox.Show("NIF deve conter apenas dígitos.", "Entrada Inválida", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            // Validação opcional de comprimento (NIF PT tem 9 dígitos)
-            if (text.Length != 9)
-            {
-                e.Cancel = true;
-                MessageBox.Show("NIF deve ter 9 dígitos.", "Entrada Inválida", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
+            // NIF obrigatório para formadores => obrigatorio: true
+            ValidarCampos.NIF_Validating(sender, e, obrigatorio: true);
         }
 
         private void ConfigurarDataGridView()
@@ -234,52 +212,23 @@ namespace ADOSMELHORES.Forms.Formadores
             // numSalarioBase.Value = formador.SalarioBase; // removido: não preencher salário base para formadores
 
             // DataFimContrato: clamp + safe assign
-            try
-            {
-                DateTime safeFim = Clamp(formador.DataFimContrato, dtpDataFimContrato.MinDate, dtpDataFimContrato.MaxDate);
-                try
-                {
-                    dtpDataFimContrato.Value = safeFim;
-                }
-                catch (ArgumentOutOfRangeException)
-                {
-                    dtpDataFimContrato.Value = dtpDataFimContrato.MinDate;
-                }
-            }
-            catch
-            {
-                try { dtpDataFimContrato.Value = dtpDataFimContrato.MinDate; } catch { /* ignora */ }
-            }
+            DateTime safeFim = Clamp(formador.DataFimContrato, dtpDataFimContrato.MinDate, dtpDataFimContrato.MaxDate);
+            DateTimeHelper.DefinirValorSeguro(dtpDataFimContrato, safeFim);
 
             // DataRegistoCriminal
+            DateTime fallbackRegisto = DateTime.Now.AddYears(5);
+            DateTime dataRegistoCriminal;
             try
             {
-                DateTime fallbackRegisto = DateTime.Now;
-                DateTime dataRegistoCriminal;
-                try
-                {
-                    dataRegistoCriminal = formador.DataFimRegistoCrim;
-                }
-                catch
-                {
-                    dataRegistoCriminal = fallbackRegisto;
-                }
-
-                DateTime safeRegisto = Clamp(dataRegistoCriminal, dtpDataRegistoCriminal.MinDate, dtpDataRegistoCriminal.MaxDate);
-
-                try
-                {
-                    dtpDataRegistoCriminal.Value = safeRegisto;
-                }
-                catch (ArgumentOutOfRangeException)
-                {
-                    dtpDataRegistoCriminal.Value = dtpDataRegistoCriminal.MinDate;
-                }
+                dataRegistoCriminal = formador.DataFimRegistoCrim;
             }
             catch
             {
-                try { dtpDataRegistoCriminal.Value = dtpDataRegistoCriminal.MinDate; } catch { /* ignora */ }
+                dataRegistoCriminal = fallbackRegisto;
             }
+
+            DateTime safeRegisto = Clamp(dataRegistoCriminal, dtpDataRegistoCriminal.MinDate, dtpDataRegistoCriminal.MaxDate);
+            DateTimeHelper.DefinirValorSeguro(dtpDataRegistoCriminal, safeRegisto);
 
             // Verificar status do registo criminal
             VerificarStatusRegistoCriminal(formador);
@@ -326,92 +275,55 @@ namespace ADOSMELHORES.Forms.Formadores
             cmbDisponibilidade.SelectedIndex = 0;
             numValorHora.Value = 0;
             // Valores seguros por defeito
-            try { dtpDataFimContrato.Value = DateTime.Now.AddYears(1); } catch { /* ignora */ }
-            try { dtpDataRegistoCriminal.Value = DateTime.Now; } catch { /* ignora */ }
+            DateTimeHelper.DefinirValorSeguro(dtpDataFimContrato, DateTime.Now.AddYears(1));
+            DateTimeHelper.DefinirValorSeguro(dtpDataRegistoCriminal, DateTime.Now.AddYears(5));
             lblStatusRegistoCriminal.Text = "";
             formadorSelecionado = null;
             HabilitarBotoesEdicao(false);
-        }
-
-        private bool ValidarCampos()
-        {
-            if (string.IsNullOrWhiteSpace(txtNome.Text))
-            {
-                MessageBox.Show("Por favor, insira o nome do formador.", "Campo Obrigatório",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtNome.Focus();
-                return false;
-            }
-
-            if (string.IsNullOrWhiteSpace(txtContacto.Text))
-            {
-                MessageBox.Show("Por favor, insira o contacto do formador.", "Campo Obrigatório",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtContacto.Focus();
-                return false;
-            }
-
-            if (string.IsNullOrWhiteSpace(txtAreaLeciona.Text))
-            {
-                MessageBox.Show("Por favor, insira a área que o formador leciona.", "Campo Obrigatório",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtAreaLeciona.Focus();
-                return false;
-            }
-
-            // Verifica NIF (se preenchido deve conter apenas dígitos)
-            if (!string.IsNullOrWhiteSpace(txtNIF.Text) && !txtNIF.Text.Trim().All(char.IsDigit))
-            {
-                MessageBox.Show("O NIF deve conter apenas números.", "Campo Inválido",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtNIF.Focus();
-                return false;
-            }
-
-            // Se quiser tornar NIF obrigatório:
-            // if (string.IsNullOrWhiteSpace(txtNIF.Text)) { ... }
-
-            if (numValorHora.Value <= 0)
-            {
-                MessageBox.Show("Por favor, insira um valor por hora válido.", "Campo Obligatório",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                numValorHora.Focus();
-                return false;
-            }
-
-            if (dtpDataFimContrato.Value <= DateTime.Now)
-            {
-                MessageBox.Show("A data de fim de contrato deve ser futura.", "Data Inválida",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                dtpDataFimContrato.Focus();
-                return false;
-            }
-
-            return true;
         }
 
         // ==================== EVENTOS DE BOTÕES ====================
 
         private void btnInserir_Click(object sender, EventArgs e)
         {
-            if (!ValidarCampos())
+            // Validar campos usando o conjunto centralizado (contacto valida formato)
+            if (!ValidarCampos.ValidarEMostrar(
+                ValidarCampos.ValidarCampoObrigatorio(txtNome.Text, "o nome do formador"),
+                ValidarCampos.ValidarContacto(txtContacto.Text, obrigatorio: true),
+                ValidarCampos.ValidarCampoObrigatorio(txtAreaLeciona.Text, "a área que o formador leciona"),
+                ValidarCampos.ValidarValorMaiorQueZero(numValorHora, "Valor por hora"),
+                ValidarCampos.ValidarNIF(txtNIF.Text, obrigatorio: true)
+            ))
+            {
                 return;
+            }
+
+            // obter NIF com segurança
+            if (!ValidarCampos.TentarObterNIF(txtNIF.Text, out int nif))
+            {
+                DialogHelper.MostrarAviso("NIF inválido.");
+                txtNIF.Focus();
+                return;
+            }
+
+            // duplicado
+            if (nif > 0 && NifDuplicado(nif, /* excludeId quando alterar */ null))
+            {
+                DialogHelper.MostrarAviso("Já existe um formador com este NIF.", "NIF Duplicado");
+                txtNIF.Focus();
+                return;
+            }
+
+            // validar data
+            var validacaoData = DateTimeHelper.ValidarDataFutura(dtpDataFimContrato.Value, DateTime.Now, "Data de fim de contrato");
+            if (!validacaoData.Valido)
+            {
+                validacaoData.MostrarMensagem();
+                return;
+            }
 
             try
             {
-                // ler NIF com parsing seguro
-                int nif = 0;
-                int.TryParse(txtNIF.Text?.Trim(), out nif);
-
-                // Impedir duplicação de NIF
-                if (nif > 0 && NifDuplicado(nif))
-                {
-                    MessageBox.Show("Já existe um formador com este NIF.", "NIF Duplicado",
-                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    txtNIF.Focus();
-                    return;
-                }
-
                 var novoFormador = new Formador(
                     empresa.ObterProximoID(), // id
                     nif, // Nif agora vindo do campo
@@ -449,13 +361,11 @@ namespace ADOSMELHORES.Forms.Formadores
                     }
                 }
 
-                MessageBox.Show($"Formador '{novoFormador.Nome}' inserido com sucesso!", "Sucesso",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                DialogHelper.MostrarSucesso($"Formador '{novoFormador.Nome}' inserido com sucesso!");
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Erro ao inserir formador: {ex.Message}", "Erro",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                DialogHelper.ErroOperacao("inserir formador", ex);
             }
         }
 
@@ -463,29 +373,46 @@ namespace ADOSMELHORES.Forms.Formadores
         {
             if (formadorSelecionado == null)
             {
-                MessageBox.Show("Selecione um formador para alterar.", "Aviso",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                DialogHelper.AvisoSelecionarItem("alterar", "formador");
                 return;
             }
 
-            if (!ValidarCampos())
+            if (!ValidarCampos.ValidarEMostrar(
+                ValidarCampos.ValidarCampoObrigatorio(txtNome.Text, "o nome do formador"),
+                ValidarCampos.ValidarCampoObrigatorio(txtContacto.Text, "o contacto do formador"),
+                ValidarCampos.ValidarCampoObrigatorio(txtAreaLeciona.Text, "a área que o formador leciona"),
+                ValidarCampos.ValidarValorMaiorQueZero(numValorHora, "Valor por hora"),
+                ValidarCampos.ValidarNIF(txtNIF.Text, obrigatorio: true)
+            ))
+            {
                 return;
+            }
 
+            // obter NIF com segurança
+            if (!ValidarCampos.TentarObterNIF(txtNIF.Text, out int nif))
+            {
+                DialogHelper.MostrarAviso("NIF inválido.");
+                txtNIF.Focus();
+                return;
+            }
+
+            if (nif > 0 && NifDuplicado(nif, formadorSelecionado.Id))
+            {
+                DialogHelper.MostrarAviso("Outro formador já utiliza este NIF. Corrija o NIF.", "NIF Duplicado");
+                txtNIF.Focus();
+                return;
+            }
+
+            var validacaoData = DateTimeHelper.ValidarDataFutura(dtpDataFimContrato.Value, DateTime.Now, "Data de fim de contrato");
+            if (!validacaoData.Valido)
+            {
+                validacaoData.MostrarMensagem();
+                return;
+            }
+
+            // aplicar alterações ao objeto e persistir via Empresa
             try
             {
-                // validar/parsar NIF do campo
-                int nif;
-                int.TryParse(txtNIF.Text?.Trim(), out nif);
-
-                // Impedir duplicação (excluir o próprio formador da verificação)
-                if (nif > 0 && NifDuplicado(nif, formadorSelecionado.Id))
-                {
-                    MessageBox.Show("Outro formador já utiliza este NIF. Corrija o NIF.", "NIF Duplicado",
-                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    txtNIF.Focus();
-                    return;
-                }
-
                 formadorSelecionado.Nome = txtNome.Text.Trim();
                 formadorSelecionado.Morada = txtMorada.Text.Trim();
                 formadorSelecionado.Contacto = txtContacto.Text.Trim();
@@ -495,24 +422,19 @@ namespace ADOSMELHORES.Forms.Formadores
                 formadorSelecionado.DataFimContrato = dtpDataFimContrato.Value;
                 formadorSelecionado.DataFimRegistoCrim = dtpDataRegistoCriminal.Value;
 
-                // actualizar NIF se o campo estiver presente e for válido
-                if (nif > 0)
-                {
-                    formadorSelecionado.Nif = nif;
-                }
+                // actualizar NIF
+                formadorSelecionado.Nif = nif;
 
                 // Persistir via Empresa (se existir método especifico)
                 empresa.AtualizarFormador(formadorSelecionado);
 
                 AtualizarListaFormadores();
 
-                MessageBox.Show($"Formador '{formadorSelecionado.Nome}' alterado com sucesso!", "Sucesso",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                DialogHelper.MostrarSucesso($"Formador '{formadorSelecionado.Nome}' alterado com sucesso!");
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Erro ao alterar formador: {ex.Message}", "Erro",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                DialogHelper.ErroOperacao("alterar formador", ex);
             }
         }
 
@@ -520,33 +442,24 @@ namespace ADOSMELHORES.Forms.Formadores
         {
             if (formadorSelecionado == null)
             {
-                MessageBox.Show("Selecione um formador para remover.", "Aviso",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                DialogHelper.AvisoSelecionarItem("remover", "formador");
                 return;
             }
 
-            var resultado = MessageBox.Show(
-                $"Tem certeza que deseja remover o formador '{formadorSelecionado.Nome}'?",
-                "Confirmar Remoção",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question);
+            if (!DialogHelper.ConfirmarRemocao(formadorSelecionado.Nome, "o formador"))
+                return;
 
-            if (resultado == DialogResult.Yes)
+            try
             {
-                try
-                {
-                    empresa.RemoverFuncionario(formadorSelecionado);
-                    AtualizarListaFormadores();
-                    LimparCampos();
+                empresa.RemoverFuncionario(formadorSelecionado);
+                AtualizarListaFormadores();
+                LimparCampos();
 
-                    MessageBox.Show("Formador removido com sucesso!", "Sucesso",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Erro ao remover formador: {ex.Message}", "Erro",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                DialogHelper.MostrarSucesso("Formador removido com sucesso!");
+            }
+            catch (Exception ex)
+            {
+                DialogHelper.ErroOperacao("remover formador", ex);
             }
         }
 
@@ -563,8 +476,7 @@ namespace ADOSMELHORES.Forms.Formadores
         {
             if (formadorSelecionado == null)
             {
-                MessageBox.Show("Selecione um formador para calcular o valor da formação.", "Aviso",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                DialogHelper.MostrarAviso("Selecione um formador para calcular o valor da formação.", "Aviso");
                 return;
             }
 
@@ -575,16 +487,16 @@ namespace ADOSMELHORES.Forms.Formadores
                 formCalculo.ShowDialog(this);
             }
         }
-        //NOVO 
+
         private void btnAtualizarRegistoCriminal_Click(object sender, EventArgs e)
         {
             if (formadorSelecionado == null)
             {
-                DialogHelper.AvisoSelecionarItem("atualizar o registo criminal", "formador");
+                DialogHelper.AvisoSelecionarItem("atualizar", "formador");
                 return;
             }
 
-            var novaData = DialogHelper.DialogoAtualizarRegistoCriminal(this);
+            DateTime? novaData = DialogHelper.DialogoAtualizarRegistoCriminal(this);
 
             if (novaData.HasValue)
             {
@@ -593,8 +505,7 @@ namespace ADOSMELHORES.Forms.Formadores
                     formadorSelecionado.DataFimRegistoCrim = novaData.Value;
                     AtualizarListaFormadores();
                     CarregarDadosFormador(formadorSelecionado);
-
-                    DialogHelper.MostrarSucesso("Registo criminal atualizado com sucesso!");
+                    DialogHelper.MostrarSucesso("Registo criminal atualizado!");
                 }
                 catch (Exception ex)
                 {
@@ -602,6 +513,8 @@ namespace ADOSMELHORES.Forms.Formadores
                 }
             }
         }
+
+
 
         private void btnFiltrarDisponibilidade_Click(object sender, EventArgs e)
         {

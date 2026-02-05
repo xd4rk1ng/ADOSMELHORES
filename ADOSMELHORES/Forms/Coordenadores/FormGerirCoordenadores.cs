@@ -17,7 +17,14 @@ namespace ADOSMELHORES.Forms.Coordenadores
         public FormGerirCoordenadores(Empresa empresa)
         {
             InitializeComponent();
-            this.empresa = empresa;                       
+            this.empresa = empresa;
+
+            // Desactivar validação automática ao mudar de foco.
+            // Assim cliques na listView não irão disparar o evento Validating dos TextBoxes.
+            this.AutoValidate = AutoValidate.Disable;
+
+            // Evita que clicar na listView provoque validação dos TextBoxes (ex.: txtNIF)
+            this.listViewCoordenadores.CausesValidation = false;
 
             ValidarCampos.ConfigurarTextBoxNIF(this.txtNIF, obrigatorio: true);
             ValidarCampos.ConfigurarTextBoxContacto(this.txtContacto, obrigatorio: false);
