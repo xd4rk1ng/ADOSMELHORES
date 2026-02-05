@@ -479,9 +479,8 @@
             // 
             // btnFechar
             // 
-            this.btnFechar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnFechar.Location = new System.Drawing.Point(880, 818);
-            this.btnFechar.Margin = new System.Windows.Forms.Padding(4);
+            this.btnFechar.Location = new System.Drawing.Point(880, 1023);
+            this.btnFechar.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnFechar.Name = "btnFechar";
             this.btnFechar.Size = new System.Drawing.Size(133, 46);
             this.btnFechar.TabIndex = 4;

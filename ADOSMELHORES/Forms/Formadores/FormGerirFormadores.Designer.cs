@@ -425,7 +425,7 @@ namespace ADOSMELHORES.Forms.Formadores
             this.lblTotalFormadores.Location = new System.Drawing.Point(20, 298);
             this.lblTotalFormadores.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTotalFormadores.Name = "lblTotalFormadores";
-            this.lblTotalFormadores.Size = new System.Drawing.Size(156, 15);
+            this.lblTotalFormadores.Size = new System.Drawing.Size(185, 18);
             this.lblTotalFormadores.TabIndex = 1;
             this.lblTotalFormadores.Text = "Total de Formadores: 0";
             // 
@@ -433,7 +433,6 @@ namespace ADOSMELHORES.Forms.Formadores
             // 
             this.dgvFormadores.AllowUserToAddRows = false;
             this.dgvFormadores.AllowUserToDeleteRows = false;
-            this.dgvFormadores.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             this.dgvFormadores.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvFormadores.Location = new System.Drawing.Point(23, 30);
             this.dgvFormadores.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
