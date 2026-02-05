@@ -1,4 +1,5 @@
-﻿using ADOSMELHORES.Modelos;
+﻿using ADOSMELHORES.Forms;
+using ADOSMELHORES.Modelos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,16 +20,25 @@ namespace ADOSMELHORES
             Application.SetCompatibleTextRenderingDefault(false);
 
             // Corrigido: instanciando Empresa e passando para FormInicial
-            var empresa = new Empresa("NomeDaEmpresa");
+            var empresa = new Empresa("ADOSMELHORES");
 
             //TEMPORÁRIO: Carregar dados de teste e dados despesas (remover quando implementar Base de Dados)
             CarregarDadosTeste(empresa);
             CarregarDadosDespesasExemplo(empresa);
 
-            // Carregar dados da base de dados UTILIZAR ESTE MÉTODO QUANDO A BASE DE DADOS ESTIVER IMPLEMENTADA
-            //CarregarDadosDaBaseDeDados(empresa);
+            var login = new FormLogin();
 
-            Application.Run(new Forms.FormLogin(empresa));
+            while (true) {
+                // mostra o form de login, espera validação
+                if (login.ShowDialog() == DialogResult.OK)
+                    Application.Run(new Forms.FormInicialWIP(empresa));
+                // se tentar novamente, reabre o form de login
+                else if (login.DialogResult == DialogResult.Retry)
+                    continue;
+                // se sair do form, termina execução
+                else if (login.DialogResult == DialogResult.Cancel)
+                    break;
+            }
         }
 
                

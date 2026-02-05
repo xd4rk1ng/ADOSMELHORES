@@ -16,14 +16,14 @@ namespace ADOSMELHORES.Forms
     public partial class FormInicialWIP : Form
     {
 
-        ControlInicio _ctrlInicio;
+        ControlVistaGeral _ctrlInicio;
         ControlGestao _ctrlGestao;
         public FormInicialWIP(Empresa empresa)
         {
             InitializeComponent();
 
             // Inicialização de todos os user controls
-            _ctrlInicio = new ControlInicio(empresa);
+            _ctrlInicio = new ControlVistaGeral(empresa);
             _ctrlGestao = new ControlGestao(empresa);
         }
 
@@ -42,8 +42,8 @@ namespace ADOSMELHORES.Forms
                 (panel1.Height - userControl.Height) / 2
                 );
 
-            // Remover transparência
-            userControl.BackColor = Color.Transparent;
+            userControl.BackColor = Color.FromArgb(246, 252, 249);
+
             userControl.BringToFront();
 
         }

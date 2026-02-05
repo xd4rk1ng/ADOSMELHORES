@@ -29,12 +29,14 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btnFormadores = new System.Windows.Forms.Button();
-            this.btnCoordenadores = new System.Windows.Forms.Button();
-            this.btnSecretarias = new System.Windows.Forms.Button();
             this.btnDiretores = new System.Windows.Forms.Button();
+            this.btnSecretarias = new System.Windows.Forms.Button();
+            this.btnCoordenadores = new System.Windows.Forms.Button();
+            this.btnFormadores = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -43,43 +45,10 @@
             this.panel1.Controls.Add(this.btnSecretarias);
             this.panel1.Controls.Add(this.btnCoordenadores);
             this.panel1.Controls.Add(this.btnFormadores);
-            this.panel1.Location = new System.Drawing.Point(0, 87);
+            this.panel1.Location = new System.Drawing.Point(8, 52);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(395, 100);
             this.panel1.TabIndex = 0;
-            // 
-            // btnFormadores
-            // 
-            this.btnFormadores.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnFormadores.Location = new System.Drawing.Point(0, 0);
-            this.btnFormadores.Name = "btnFormadores";
-            this.btnFormadores.Size = new System.Drawing.Size(99, 100);
-            this.btnFormadores.TabIndex = 0;
-            this.btnFormadores.Text = "Formadores";
-            this.btnFormadores.UseVisualStyleBackColor = true;
-            this.btnFormadores.Click += new System.EventHandler(this.btnFormadores_Click);
-            // 
-            // btnCoordenadores
-            // 
-            this.btnCoordenadores.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnCoordenadores.Location = new System.Drawing.Point(99, 0);
-            this.btnCoordenadores.Name = "btnCoordenadores";
-            this.btnCoordenadores.Size = new System.Drawing.Size(99, 100);
-            this.btnCoordenadores.TabIndex = 1;
-            this.btnCoordenadores.Text = "Coordenadores";
-            this.btnCoordenadores.UseVisualStyleBackColor = true;
-            this.btnCoordenadores.Click += new System.EventHandler(this.btnCoordenadores_Click);
-            // 
-            // btnSecretarias
-            // 
-            this.btnSecretarias.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnSecretarias.Location = new System.Drawing.Point(198, 0);
-            this.btnSecretarias.Name = "btnSecretarias";
-            this.btnSecretarias.Size = new System.Drawing.Size(99, 100);
-            this.btnSecretarias.TabIndex = 2;
-            this.btnSecretarias.Text = "Secretárias";
-            this.btnSecretarias.UseVisualStyleBackColor = true;
-            this.btnSecretarias.Click += new System.EventHandler(this.btnSecretarias_Click);
             // 
             // btnDiretores
             // 
@@ -92,28 +61,70 @@
             this.btnDiretores.UseVisualStyleBackColor = true;
             this.btnDiretores.Click += new System.EventHandler(this.btnDiretores_Click);
             // 
+            // btnSecretarias
+            // 
+            this.btnSecretarias.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnSecretarias.Location = new System.Drawing.Point(198, 0);
+            this.btnSecretarias.Name = "btnSecretarias";
+            this.btnSecretarias.Size = new System.Drawing.Size(99, 100);
+            this.btnSecretarias.TabIndex = 2;
+            this.btnSecretarias.Text = "Secretárias";
+            this.btnSecretarias.UseVisualStyleBackColor = true;
+            this.btnSecretarias.Click += new System.EventHandler(this.btnSecretarias_Click);
+            // 
+            // btnCoordenadores
+            // 
+            this.btnCoordenadores.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnCoordenadores.Location = new System.Drawing.Point(99, 0);
+            this.btnCoordenadores.Name = "btnCoordenadores";
+            this.btnCoordenadores.Size = new System.Drawing.Size(99, 100);
+            this.btnCoordenadores.TabIndex = 1;
+            this.btnCoordenadores.Text = "Coordenadores";
+            this.btnCoordenadores.UseVisualStyleBackColor = true;
+            this.btnCoordenadores.Click += new System.EventHandler(this.btnCoordenadores_Click);
+            // 
+            // btnFormadores
+            // 
+            this.btnFormadores.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnFormadores.Location = new System.Drawing.Point(0, 0);
+            this.btnFormadores.Name = "btnFormadores";
+            this.btnFormadores.Size = new System.Drawing.Size(99, 100);
+            this.btnFormadores.TabIndex = 0;
+            this.btnFormadores.Text = "Formadores";
+            this.btnFormadores.UseVisualStyleBackColor = true;
+            this.btnFormadores.Click += new System.EventHandler(this.btnFormadores_Click);
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(154, 36);
+            this.label1.Location = new System.Drawing.Point(162, 24);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(88, 20);
             this.label1.TabIndex = 1;
             this.label1.Text = "Gestão de:";
             // 
-            // ControlGerir
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.label1);
+            this.panel2.Controls.Add(this.panel1);
+            this.panel2.Location = new System.Drawing.Point(123, 76);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(411, 195);
+            this.panel2.TabIndex = 2;
+            // 
+            // ControlGestao
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightGray;
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.panel1);
-            this.Name = "ControlGerir";
-            this.Size = new System.Drawing.Size(395, 233);
+            this.Controls.Add(this.panel2);
+            this.Name = "ControlGestao";
+            this.Size = new System.Drawing.Size(684, 358);
             this.panel1.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -125,5 +136,6 @@
         private System.Windows.Forms.Button btnCoordenadores;
         private System.Windows.Forms.Button btnFormadores;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Panel panel2;
     }
 }

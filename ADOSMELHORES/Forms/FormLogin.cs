@@ -6,10 +6,8 @@ namespace ADOSMELHORES.Forms
 {
     public partial class FormLogin : Form
     {
-        private Empresa _empresa;
-        public FormLogin(Empresa empresa)
+        public FormLogin()
         {
-            _empresa = empresa;
             InitializeComponent();
         }
 
@@ -17,13 +15,13 @@ namespace ADOSMELHORES.Forms
         {
             if (ValidarCampos())
             {
-                var mainForm = new FormInicialWIP(_empresa);
-                mainForm.Show();
-                Hide();
+                MessageBox.Show("Login efetuado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                DialogResult = DialogResult.OK;
             }
             else
             {
-                MessageBox.Show("Password Incorreta");
+                MessageBox.Show("Login falhou! Tente outra vez", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                DialogResult = DialogResult.Retry;
             }
 
         }
@@ -31,12 +29,17 @@ namespace ADOSMELHORES.Forms
         private bool ValidarCampos()
         {
             // Para ser facil
-            return true;
+            //return true;
 
             if (txtPassword.Text == "admin123")
                 return true;
             else
                 return false;
+        }
+
+        private void frm_onClosing(object sender, FormClosingEventArgs e)
+        {
+            DialogResult = DialogResult.Cancel;
         }
     }
 }
