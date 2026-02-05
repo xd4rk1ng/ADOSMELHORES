@@ -14,8 +14,7 @@ using System.Windows.Forms;
 namespace ADOSMELHORES.Forms.Formadores
 {
     /// <summary>
-    /// Form completo para gestão de Formadores
-    /// Inclui: Inserir, Alterar, Alocar, Calcular Valores, Alterar Registo Criminal
+    /// Form completo para gestão de Formadores   
     /// </summary>
     public partial class FormGerirFormadores : Form
     {
@@ -52,17 +51,17 @@ namespace ADOSMELHORES.Forms.Formadores
             AtualizarListaFormadores();
         }
 
-        private void TxtNIF_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            // Delegar comportamento de KeyPress para o helper
-            ValidarCampos.NIF_KeyPress(sender, e);
-        }
+        //private void TxtNIF_KeyPress(object sender, KeyPressEventArgs e)
+        //{
+        //    // Delegar comportamento de KeyPress para o helper
+        //    ValidarCampos.NIF_KeyPress(sender, e);
+        //}
 
-        private void TxtNIF_Validating(object sender, CancelEventArgs e)
-        {
-            // NIF obrigatório para formadores => obrigatorio: true
-            ValidarCampos.NIF_Validating(sender, e, obrigatorio: true);
-        }
+        //private void TxtNIF_Validating(object sender, CancelEventArgs e)
+        //{
+        //    // NIF obrigatório para formadores => obrigatorio: true
+        //    ValidarCampos.NIF_Validating(sender, e, obrigatorio: true);
+        //}
 
         private void ConfigurarDataGridView()
         {
