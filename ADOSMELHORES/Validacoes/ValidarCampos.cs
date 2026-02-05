@@ -457,38 +457,9 @@ namespace ADOSMELHORES.Validacoes
 
         #endregion
 
-        #region Validação de Email
+       
 
-        /// <summary>
-        /// Valida formato de email
-        /// </summary>
-        public static ResultadoValidacao ValidarEmail(string email, bool obrigatorio = true)
-        {
-            email = email?.Trim();
-
-            if (string.IsNullOrWhiteSpace(email))
-            {
-                if (obrigatorio)
-                    return ResultadoValidacao.Erro(
-                        "Por favor, insira o email.",
-                        "Campo Obrigatório");
-                else
-                    return ResultadoValidacao.Sucesso();
-            }
-
-            // Validação básica de email usando regex
-            string pattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
-            if (!Regex.IsMatch(email, pattern))
-            {
-                return ResultadoValidacao.Erro(
-                    "Por favor, insira um email válido.",
-                    "Email Inválido");
-            }
-
-            return ResultadoValidacao.Sucesso();
-        }
-
-        #endregion
+        
 
         #region Validações Combinadas
 
