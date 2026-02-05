@@ -14,7 +14,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ADOSMELHORES.Controls
+namespace ADOSMELHORES.Forms.Controls
 {
     public partial class ControlGestao : UserControl
     {

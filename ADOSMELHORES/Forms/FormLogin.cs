@@ -16,11 +16,13 @@ namespace ADOSMELHORES.Forms
             if (ValidarCampos())
             {
                 MessageBox.Show("Login efetuado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txtPassword.Clear();
                 DialogResult = DialogResult.OK;
             }
             else
             {
                 MessageBox.Show("Login falhou! Tente outra vez", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txtPassword.Clear();
                 DialogResult = DialogResult.Retry;
             }
 
@@ -28,7 +30,7 @@ namespace ADOSMELHORES.Forms
 
         private bool ValidarCampos()
         {
-            // Para ser facil
+            // Para entrar sem senha, descomente a linha abaixo
             //return true;
 
             if (txtPassword.Text == "admin123")

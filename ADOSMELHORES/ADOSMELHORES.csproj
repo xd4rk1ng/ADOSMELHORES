@@ -47,11 +47,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\Controls\ControlBoasVindas.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Controls\ControlBoasVindas.Designer.cs">
+      <DependentUpon>ControlBoasVindas.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Controls\ControlDadosFormador.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Forms\Controls\ControlDadosFormador.Designer.cs">
       <DependentUpon>ControlDadosFormador.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Controls\ControlDespesas.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Controls\ControlDespesas.Designer.cs">
+      <DependentUpon>ControlDespesas.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Controls\ControlFuncionario.cs">
       <SubType>UserControl</SubType>
@@ -64,6 +76,12 @@
     </Compile>
     <Compile Include="Forms\Controls\ControlGerir.Designer.cs">
       <DependentUpon>ControlGerir.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Controls\ControlSimularData.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Controls\ControlSimularData.Designer.cs">
+      <DependentUpon>ControlSimularData.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Controls\ControlVistaGeral.cs">
       <SubType>UserControl</SubType>
@@ -163,14 +181,23 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Validacoes\DialogHelper.cs" />
     <Compile Include="Validacoes\ValidarCampos.cs" />
+    <EmbeddedResource Include="Forms\Controls\ControlBoasVindas.resx">
+      <DependentUpon>ControlBoasVindas.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Controls\ControlDadosFormador.resx">
       <DependentUpon>ControlDadosFormador.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Controls\ControlDespesas.resx">
+      <DependentUpon>ControlDespesas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Controls\ControlFuncionario.resx">
       <DependentUpon>ControlFuncionario.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Controls\ControlGerir.resx">
       <DependentUpon>ControlGerir.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Controls\ControlSimularData.resx">
+      <DependentUpon>ControlSimularData.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Controls\ControlVistaGeral.resx">
       <DependentUpon>ControlVistaGeral.cs</DependentUpon>
@@ -240,6 +267,8 @@
   <ItemGroup>
     <None Include="Properties\a-dos-melhores-high-resolution-logo.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\a-dos-melhores-high-resolution-logo resized.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

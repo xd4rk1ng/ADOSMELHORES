@@ -1,4 +1,4 @@
-﻿namespace ADOSMELHORES.Controls
+﻿namespace ADOSMELHORES.Forms.Controls
 {
     partial class ControlVistaGeral
     {

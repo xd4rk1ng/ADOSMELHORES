@@ -28,6 +28,7 @@ namespace ADOSMELHORES.Modelos
         {
             Nome = nome ?? throw new ArgumentNullException(nameof(nome));
             funcionarios = new List<Funcionario>();
+            DataSimulada = DateTime.Now;
 
             // ⚠️ TEMPORÁRIO - Inicializa gestor em memória
             // 🔄 MIGRAÇÃO BD: Continuar inicializando, mas dados virão do BD

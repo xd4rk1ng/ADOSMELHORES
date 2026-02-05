@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using ADOSMELHORES.Controls;
+using ADOSMELHORES.Forms.Controls;
 using ADOSMELHORES.Modelos;
 using System.Text; // necessário para StringBuilder
 
@@ -16,9 +16,11 @@ namespace ADOSMELHORES.Forms
 {
     public partial class FormInicialWIP : Form
     {
-
-        ControlVistaGeral _ctrlInicio;
-        ControlGestao _ctrlGestao;
+        private ControlBoasVindas _ctrlBoasVindas;
+        private ControlVistaGeral _ctrlInicio;
+        private ControlGestao _ctrlGestao;
+        private ControlSimularData _ctrlSimData;
+        private ControlDespesas _ctrlDespesas;
         private Empresa _empresa;
 
         public FormInicialWIP(Empresa empresa)
@@ -28,14 +30,20 @@ namespace ADOSMELHORES.Forms
             _empresa = empresa ?? throw new ArgumentNullException(nameof(empresa));
 
             // Inicialização de todos os user controls
+            _ctrlBoasVindas = new ControlBoasVindas();
             _ctrlInicio = new ControlVistaGeral(_empresa);
             _ctrlGestao = new ControlGestao(_empresa);
+            _ctrlSimData = new ControlSimularData(_empresa);
+            _ctrlDespesas = new ControlDespesas(_empresa);
+
+            MostrarControl(_ctrlBoasVindas);
         }
 
         private void MostrarControl(UserControl userControl)
         {
-            if (!panel1.Controls.Contains(userControl))
-                panel1.Controls.Add(userControl);
+            // Limpar o painel e adicionar o novo controlo
+            panel1.Controls.Clear();
+            panel1.Controls.Add(userControl);
 
             // Facilitar centralização
             userControl.Dock = DockStyle.None;
@@ -53,7 +61,7 @@ namespace ADOSMELHORES.Forms
 
         }
 
-        private void btnInicio_Click(object sender, EventArgs e)
+        private void btnVistaGeral_Click(object sender, EventArgs e)
         {
             MostrarControl(_ctrlInicio);
         }
@@ -64,65 +72,18 @@ namespace ADOSMELHORES.Forms
         }
 
         // Botão "Simular Data" (button3) — avança 1 dia na data simulada e verifica alertas
-        private void button3_Click(object sender, EventArgs e)
+        private void btnSimData_Click(object sender, EventArgs e)
         {
-            if (_empresa == null) return;
+            MostrarControl(_ctrlSimData);
 
-            // garantir data inicial
-            if (_empresa.DataSimulada == DateTime.MinValue)
-                _empresa.DataSimulada = DateTime.Now.Date;
-
-            _empresa.DataSimulada = _empresa.DataSimulada.AddDays(1);
-
-            // Atualizar vista interna se necessário
-            _ctrlInicio?.AtualizarDados();
-
-            VerificarAlertasData(_empresa.DataSimulada);
         }
 
         // Reaproveita lógica semelhante ao FormInicial.VerificarAlertasData
-        private void VerificarAlertasData(DateTime dataSimulada)
+
+
+        private void btnStats_Click(object sender, EventArgs e)
         {
-            var funcionarios = _empresa.Funcionarios.ToList();
-
-            var contratosQueTerminam = funcionarios
-                .Where(f => f.DataFimContrato.Date == dataSimulada.Date)
-                .ToList();
-
-            var registosAtingidos = funcionarios
-                .Where(f => f.DataFimRegistoCrim.Date == dataSimulada.Date)
-                .ToList();
-
-            StringBuilder sb = new StringBuilder();
-
-            if (contratosQueTerminam.Any())
-            {
-                sb.AppendLine("Contratos com fim na data simulada:");
-                foreach (var f in contratosQueTerminam)
-                {
-                    sb.AppendLine($" - {f.Nome} (ID: {f.Id}) termina contrato em {f.DataFimContrato:dd/MM/yyyy}");
-                }
-                sb.AppendLine();
-            }
-
-            if (registosAtingidos.Any())
-            {
-                sb.AppendLine("Registos criminais atingem validade na data simulada:");
-                foreach (var f in registosAtingidos)
-                {
-                    sb.AppendLine($" - {f.Nome} (ID: {f.Id}) registo termina em {f.DataFimRegistoCrim:dd/MM/yyyy}");
-                }
-                sb.AppendLine();
-            }
-
-            if (sb.Length > 0)
-            {
-                MessageBox.Show(sb.ToString(), "Alerta - Data Simulada", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-            else
-            {
-                MessageBox.Show($"Data simulada avançada para {dataSimulada:dd/MM/yyyy}. Nenhum contrato ou registo atinge término nesta data.", "Sem alertas", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
+            MostrarControl(_ctrlDespesas);
         }
     }
 }
