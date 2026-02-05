@@ -79,5 +79,15 @@ namespace ADOSMELHORES.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap a_dos_melhores_high_resolution_logo_small {
+            get {
+                object obj = ResourceManager.GetObject("a-dos-melhores-high-resolution-logo small", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }
