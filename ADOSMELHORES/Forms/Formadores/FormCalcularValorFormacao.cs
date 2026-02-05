@@ -51,16 +51,13 @@ namespace ADOSMELHORES.Forms
                     return;
                 }
 
-                // Opcional: garantir fim não no passado relativo a hoje (se necessário)
-                // var validacaoFutura = DateTimeHelper.ValidarDataFutura(fim, DateTime.Now, "Data final");
-                // if (!validacaoFutura.Valido) { validacaoFutura.MostrarMensagem(); return; }
-
+                // Calcular usando dias úteis (consistente com Formador.CalcularValorFormacao)
+                int diasUteis = DateTimeHelper.CountBusinessDays(inicio, fim);
+                int horas = diasUteis * 6;
                 decimal valor = formador.CalcularValorFormacao(inicio, fim);
-                int dias = (fim - inicio).Days + 1;
-                int horas = dias * 6;
 
                 txtResultado.Text = $"Período: {inicio:dd/MM/yyyy} a {fim:dd/MM/yyyy}\r\n" +
-                                  $"Total de dias: {dias}\r\n" +
+                                  $"Total de dias úteis: {diasUteis}\r\n" +
                                   $"Total de horas (6h/dia): {horas}\r\n" +
                                   $"Valor por hora: {formador.ValorHora:C}\r\n" +
                                   $"\r\nVALOR TOTAL: {valor:C}";
