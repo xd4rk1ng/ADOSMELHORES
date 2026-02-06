@@ -14,7 +14,7 @@ namespace ADOSMELHORES.Modelos
             DateTime dataIniContrato,
             DateTime dataFimContrato,
             DateTime dataFimRegistoCrim
-            
+
         )
         {
             Id = id;

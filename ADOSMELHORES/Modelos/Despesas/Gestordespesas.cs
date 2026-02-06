@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -39,29 +39,6 @@ namespace ADOSMELHORES.Modelos.Despesas
 
         }
 
-        // Remove uma despesa física
-        public bool RemoverDespesaFisica(int id)
-        {
-            //TEMPORÁRIO - Remove da lista em memória
-            var despesa = despesasFisicas.FirstOrDefault(d => d.Id == id);
-            if (despesa != null)
-            {
-                despesasFisicas.Remove(despesa);
-                return true;
-            }
-            return false;
-
-
-        }
-
-        // Obtém todas as despesas físicas
-        public List<DespesaFisica> ObterTodasDespesasFisicas()
-        {
-            // TEMPORÁRIO - Retorna da lista em memória
-            return despesasFisicas.ToList();
-
-
-        }
 
         // Obtém despesas físicas de um mês específico
         public List<DespesaFisica> ObterDespesasFisicasPorMes(int mes, int ano)
@@ -115,15 +92,6 @@ namespace ADOSMELHORES.Modelos.Despesas
         {
             var formadores = empresa.ObterFormadores();
             return formadores.Sum(f => f.CalcularCustoMensal(mes, ano));
-        }
-
-        // Calcula total de despesas com funcionários
-        public decimal CalcularTotalFuncionarios(int mes, int ano)
-        {
-            return CalcularDespesasDiretores() +
-                   CalcularDespesasSecretarias() +
-                   CalcularDespesasCoordenadores() +
-                   CalcularDespesasFormadores(mes, ano);
         }
 
         //  RELATÓRIOS 

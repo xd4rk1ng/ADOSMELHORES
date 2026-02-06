@@ -52,6 +52,7 @@ namespace ADOSMELHORES.Forms.Formadores
 
             // Carregar dados iniciais
             AtualizarListaFormadores();
+
         }
 
 

@@ -10,19 +10,15 @@ namespace ADOSMELHORES
 {
     internal static class Program
     {
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
         [STAThread]
         static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            // Corrigido: instanciando Empresa e passando para FormInicial
+            //instanciando Empresa e passando para FormInicial
             var empresa = new Empresa("ADOSMELHORES");
 
-            //TEMPORÁRIO: Carregar dados de teste e dados despesas (remover quando implementar Base de Dados)
             CarregarDadosTeste(empresa);
             CarregarDadosDespesasExemplo(empresa);
 
@@ -40,10 +36,7 @@ namespace ADOSMELHORES
                     break;
             }
         }
-
-               
-        // MÉTODO TEMPORÁRIO - Carrega dados de teste para desenvolvimento
-        // TODO: REMOVER este método quando a base de dados estiver implementada
+                      
 
         private static void CarregarDadosTeste(Empresa empresa)
         {
@@ -65,7 +58,6 @@ namespace ADOSMELHORES
                 dataFimContrato: fimContrato,
                 dataIniContrato: inicioContrato,
                 dataFimRegistoCrim: fimRegistoCriminal,
-                dataNascimento: new DateTime(1975, 3, 15),                
                 carroEmpresa: true,
                 isencaoHorario: true
             );
@@ -82,7 +74,6 @@ namespace ADOSMELHORES
                 dataFimContrato: fimContrato,
                 dataIniContrato: inicioContrato,
                 dataFimRegistoCrim: fimRegistoCriminal,
-                dataNascimento: new DateTime(1980, 7, 22),               
                 carroEmpresa: true,
                 isencaoHorario: true
             );
@@ -99,7 +90,6 @@ namespace ADOSMELHORES
                 dataFimContrato: fimContrato,
                 dataIniContrato: inicioContrato,
                 dataFimRegistoCrim: fimRegistoCriminal,
-                dataNascimento: new DateTime(1978, 11, 5),                
                 carroEmpresa: false,
                 isencaoHorario: true
             );
@@ -204,7 +194,7 @@ namespace ADOSMELHORES
             diretor1.AdicionarSecretaria(secretaria2);
             diretor2.AdicionarSecretaria(secretaria3);
             diretor2.AdicionarSecretaria(secretaria4);
-            diretor3.AdicionarSecretaria(secretaria5);
+            //diretor3.AdicionarSecretaria(secretaria5);
 
             // ========== CRIANDO 2 COORDENADORES ==========
             var coordenador1 = new Coordenador(
@@ -328,13 +318,10 @@ namespace ADOSMELHORES
             }
         }
 
-        /// MÉTODO TEMPORÁRIO - Carrega dados de despesas de exemplo
+        
         /// Meses: Novembro 2025, Dezembro 2025, Janeiro 2026
-        /// TODO: REMOVER este método quando a base de dados estiver implementada
         private static void CarregarDadosDespesasExemplo(Empresa empresa)
         {
-            // TEMPORÁRIO - Carrega despesas físicas de exemplo
-            // MIGRAÇÃO BD: REMOVER este método completamente
             empresa.GestorDespesas.CarregarDadosExemplo();
         }
     }
