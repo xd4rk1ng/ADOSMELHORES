@@ -9,88 +9,68 @@ using ADOSMELHORES.Validacoes;
 
 namespace ADOSMELHORES.Validacoes
 {
-    /// <summary>
-    /// Helper para diálogos e mensagens comuns
-    /// </summary>
+    // diálogos e mensagens comuns
+    // e
+    // validações específicas como registo criminal
+
     public static class DialogHelper
     {
-        #region Diálogos de Confirmação
+        //Diálogos de confirmação
+        
+        //public static bool ConfirmarAcao(string mensagem, string titulo = "Confirmação")
+        //{
+        //    var resultado = MessageBox.Show(
+        //        mensagem,
+        //        titulo,
+        //        MessageBoxButtons.YesNo,
+        //        MessageBoxIcon.Question);
 
-        /// <summary>
-        /// Mostra um diálogo de confirmação
-        /// </summary>
-        public static bool ConfirmarAcao(string mensagem, string titulo = "Confirmação")
-        {
-            var resultado = MessageBox.Show(
-                mensagem,
-                titulo,
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question);
+        //    return resultado == DialogResult.Yes;
+        //}
 
-            return resultado == DialogResult.Yes;
-        }
+        ///// <summary>
+        ///// Confirma remoção de item
+        ///// </summary>
+        //public static bool ConfirmarRemocao(string nomeItem, string tipoItem = "item")
+        //{
+        //    return ConfirmarAcao(
+        //        $"Tem certeza que deseja remover {tipoItem} '{nomeItem}'?",
+        //        "Confirmar Remoção");
+        //}
 
-        /// <summary>
-        /// Confirma remoção de item
-        /// </summary>
-        public static bool ConfirmarRemocao(string nomeItem, string tipoItem = "item")
-        {
-            return ConfirmarAcao(
-                $"Tem certeza que deseja remover {tipoItem} '{nomeItem}'?",
-                "Confirmar Remoção");
-        }
+               
 
-        #endregion
+        // Mostra mensagens
 
-        #region Mensagens de Aviso e Erro
-
-        /// <summary>
-        /// Mostra mensagem de aviso
-        /// </summary>
         public static void MostrarAviso(string mensagem, string titulo = "Aviso")
         {
             MessageBox.Show(mensagem, titulo, MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
-        /// <summary>
-        /// Mostra mensagem de erro
-        /// </summary>
         public static void MostrarErro(string mensagem, string titulo = "Erro")
         {
             MessageBox.Show(mensagem, titulo, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        /// <summary>
-        /// Mostra mensagem de sucesso
-        /// </summary>
         public static void MostrarSucesso(string mensagem, string titulo = "Sucesso")
         {
             MessageBox.Show(mensagem, titulo, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        /// <summary>
-        /// Mostra mensagem de erro para exceção
-        /// </summary>
         public static void ErroOperacao(string operacao, Exception ex)
         {
             MostrarErro($"Erro ao {operacao}:{Environment.NewLine}{ex.Message}");
         }
 
-        /// <summary>
-        /// Aviso para selecionar item
-        /// </summary>
+        // Aviso para selecionar item
         public static void AvisoSelecionarItem(string acao, string tipoItem = "item")
         {
             MostrarAviso($"Selecione um {tipoItem} para {acao}.");
         }
 
-        #endregion
 
-        #region Registo Criminal
-
-        /// <summary>
-        /// Classe que representa o status do registo criminal
-        /// </summary>
+        // Registo Criminal
+       
         public class StatusRegistoCriminal
         {
             public bool Expirado { get; set; }
@@ -117,11 +97,7 @@ namespace ADOSMELHORES.Validacoes
             }
         }
 
-        /// <summary>
-        /// Mostra diálogo para atualizar data do registo criminal
-        /// </summary>
-        /// <param name="parent">Form pai para centralizar</param>
-        /// <returns>Nova data se OK, null se cancelado</returns>
+        
         public static DateTime? DialogoAtualizarRegistoCriminal(Form parent = null)
         {
             using (Form formData = new Form())
@@ -180,12 +156,9 @@ namespace ADOSMELHORES.Validacoes
             }
         }
 
-        /// <summary>
-        /// Atualiza um TextBox com o status do registo criminal
-        /// </summary>
-        /// <param name="textBox">TextBox a atualizar</param>
-        /// <param name="funcionario">Funcionário (deve ter método RegistoCriminalExpirado)</param>
-        /// <param name="dataReferencia">Data de referência (usa DateTime.Now se não fornecida)</param>
+        
+        // Atualiza um TextBox com o status do registo criminal
+       
         public static void AtualizarStatusRegistoCriminal(
             TextBox textBox,
             object funcionario,
@@ -209,9 +182,9 @@ namespace ADOSMELHORES.Validacoes
             AplicarStatusEmControl(textBox, status);
         }
 
-        /// <summary>
-        /// Atualiza um Label com o status do registo criminal
-        /// </summary>
+        
+        // Atualiza um Label com o status do registo criminal
+
         public static void AtualizarStatusRegistoCriminal(
             Label label,
             object funcionario,
@@ -235,9 +208,8 @@ namespace ADOSMELHORES.Validacoes
             AplicarStatusEmControl(label, status);
         }
 
-        /// <summary>
-        /// Verifica se o registo criminal está expirado usando reflexão
-        /// </summary>
+        
+        // Verifica se o registo criminal está expirado usando reflexão       
         private static bool VerificarRegistoCriminalExpirado(object funcionario, DateTime dataReferencia)
         {
             try
@@ -256,9 +228,8 @@ namespace ADOSMELHORES.Validacoes
             return false;
         }
 
-        /// <summary>
-        /// Aplica o status visual em um control (TextBox ou Label)
-        /// </summary>
+   
+        // Aplica o status visual em um control (TextBox ou Label)    
         private static void AplicarStatusEmControl(Control control, StatusRegistoCriminal status)
         {
             if (control is TextBox textBox)
@@ -275,74 +246,71 @@ namespace ADOSMELHORES.Validacoes
             }
         }
 
-        #endregion
+       // Diálogos de Entrada
 
-        #region Diálogos de Entrada
+        ///// <summary>
+        ///// Mostra diálogo para entrada de texto simples
+        ///// </summary>
+        //public static string DialogoEntradaTexto(
+        //    string titulo,
+        //    string mensagem,
+        //    string valorPadrao = "",
+        //    Form parent = null)
+        //{
+        //    using (Form formInput = new Form())
+        //    {
+        //        formInput.Text = titulo;
+        //        formInput.Size = new Size(400, 150);
+        //        formInput.StartPosition = parent != null
+        //            ? FormStartPosition.CenterParent
+        //            : FormStartPosition.CenterScreen;
+        //        formInput.FormBorderStyle = FormBorderStyle.FixedDialog;
+        //        formInput.MaximizeBox = false;
+        //        formInput.MinimizeBox = false;
 
-        /// <summary>
-        /// Mostra diálogo para entrada de texto simples
-        /// </summary>
-        public static string DialogoEntradaTexto(
-            string titulo,
-            string mensagem,
-            string valorPadrao = "",
-            Form parent = null)
-        {
-            using (Form formInput = new Form())
-            {
-                formInput.Text = titulo;
-                formInput.Size = new Size(400, 150);
-                formInput.StartPosition = parent != null
-                    ? FormStartPosition.CenterParent
-                    : FormStartPosition.CenterScreen;
-                formInput.FormBorderStyle = FormBorderStyle.FixedDialog;
-                formInput.MaximizeBox = false;
-                formInput.MinimizeBox = false;
+        //        Label lblMensagem = new Label()
+        //        {
+        //            Text = mensagem,
+        //            Location = new Point(20, 20),
+        //            AutoSize = true,
+        //            MaximumSize = new Size(340, 0)
+        //        };
 
-                Label lblMensagem = new Label()
-                {
-                    Text = mensagem,
-                    Location = new Point(20, 20),
-                    AutoSize = true,
-                    MaximumSize = new Size(340, 0)
-                };
+        //        TextBox txtInput = new TextBox()
+        //        {
+        //            Location = new Point(20, 50),
+        //            Width = 340,
+        //            Text = valorPadrao
+        //        };
 
-                TextBox txtInput = new TextBox()
-                {
-                    Location = new Point(20, 50),
-                    Width = 340,
-                    Text = valorPadrao
-                };
+        //        Button btnOk = new Button()
+        //        {
+        //            Text = "OK",
+        //            DialogResult = DialogResult.OK,
+        //            Location = new Point(200, 80),
+        //            Size = new Size(75, 30)
+        //        };
 
-                Button btnOk = new Button()
-                {
-                    Text = "OK",
-                    DialogResult = DialogResult.OK,
-                    Location = new Point(200, 80),
-                    Size = new Size(75, 30)
-                };
+        //        Button btnCancelar = new Button()
+        //        {
+        //            Text = "Cancelar",
+        //            DialogResult = DialogResult.Cancel,
+        //            Location = new Point(285, 80),
+        //            Size = new Size(75, 30)
+        //        };
 
-                Button btnCancelar = new Button()
-                {
-                    Text = "Cancelar",
-                    DialogResult = DialogResult.Cancel,
-                    Location = new Point(285, 80),
-                    Size = new Size(75, 30)
-                };
+        //        formInput.Controls.AddRange(new Control[] { lblMensagem, txtInput, btnOk, btnCancelar });
+        //        formInput.AcceptButton = btnOk;
+        //        formInput.CancelButton = btnCancelar;
 
-                formInput.Controls.AddRange(new Control[] { lblMensagem, txtInput, btnOk, btnCancelar });
-                formInput.AcceptButton = btnOk;
-                formInput.CancelButton = btnCancelar;
+        //        if (formInput.ShowDialog(parent) == DialogResult.OK)
+        //        {
+        //            return txtInput.Text;
+        //        }
 
-                if (formInput.ShowDialog(parent) == DialogResult.OK)
-                {
-                    return txtInput.Text;
-                }
+        //        return null;
+        //    }
+        //}
 
-                return null;
-            }
-        }
-
-        #endregion
     }
 }

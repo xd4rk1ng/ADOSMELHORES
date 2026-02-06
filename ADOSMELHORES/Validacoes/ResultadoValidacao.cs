@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace ADOSMELHORES.Validacoes
 {
-    /// Classe que representa o resultado de uma validação
+    // Classe que representa o resultado de uma validação
     public class ResultadoValidacao
     {
         public bool Valido { get; set; }
@@ -28,25 +28,19 @@ namespace ADOSMELHORES.Validacoes
             Titulo = titulo ?? "Validação";
         }
 
-        /// <summary>
-        /// Cria um resultado de sucesso
-        /// </summary>
+       
         public static ResultadoValidacao Sucesso()
         {
             return new ResultadoValidacao(true);
         }
 
-        /// <summary>
-        /// Cria um resultado de erro
-        /// </summary>
+        
         public static ResultadoValidacao Erro(string mensagem, string titulo = "Aviso")
         {
             return new ResultadoValidacao(false, mensagem, titulo);
         }
 
-        /// <summary>
-        /// Mostra a mensagem de validação em um MessageBox (apenas se inválido)
-        /// </summary>
+       // Mostra a mensagem de validação em um MessageBox (apenas se inválido)
         public void MostrarMensagem()
         {
             if (!Valido && !string.IsNullOrEmpty(Mensagem))
@@ -55,9 +49,7 @@ namespace ADOSMELHORES.Validacoes
             }
         }
 
-        /// <summary>
-        /// Mostra a mensagem de validação em um MessageBox (sempre)
-        /// </summary>
+        // Mostra a mensagem de validação em um MessageBox (sempre)
         public void MostrarMensagemSempre()
         {
             if (!string.IsNullOrEmpty(Mensagem))

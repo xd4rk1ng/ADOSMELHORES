@@ -239,5 +239,8 @@
   <ItemGroup>
     <None Include="Resources\a-dos-melhores-high-resolution-logo small.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\color-circle-icon-layout.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
