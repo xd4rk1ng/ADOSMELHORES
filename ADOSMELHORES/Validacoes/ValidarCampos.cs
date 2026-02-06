@@ -11,8 +11,7 @@ namespace ADOSMELHORES.Validacoes
 {
     // VALIDACOES DE CAMPOS DE TEXTO
     public static class ValidarCampos
-    {
-        #region Constantes de Validação
+    {        
 
         // Constantes para NIF
         private const int NIF_TAMANHO = 9;
@@ -23,17 +22,12 @@ namespace ADOSMELHORES.Validacoes
         private const int CONTACTO_TAMANHO = 9;
         private const char CONTACTO_PRIMEIRO_DIGITO = '9';
 
-        #endregion
-
-        #region Validações de Campos de Texto Obrigatórios
-
-        /// <summary>
-        /// Valida se um campo de texto não está vazio
-        /// </summary>
-        /// <param name="valor">Valor do campo</param>
-        /// <param name="nomeCampo">Nome do campo para mensagem</param>
-        /// <param name="titulo">Título da mensagem de erro</param>
-        /// <returns>ResultadoValidacao</returns>
+       
+        // Valida se um campo de texto não está vazio
+        // <param name="valor">Valor do campo</param>
+        // <param name="nomeCampo">Nome do campo para mensagem</param>
+        // <param name="titulo">Título da mensagem de erro</param>
+        // <returns>ResultadoValidacao</returns>
         public static ResultadoValidacao ValidarCampoObrigatorio(
             string valor,
             string nomeCampo,
@@ -49,9 +43,7 @@ namespace ADOSMELHORES.Validacoes
             return ResultadoValidacao.Sucesso();
         }
 
-        /// <summary>
-        /// Valida se um TextBox não está vazio
-        /// </summary>
+        // Valida se um TextBox não está vazio
         public static ResultadoValidacao ValidarTextBox(
             TextBox textBox,
             string nomeCampo,
@@ -63,73 +55,66 @@ namespace ADOSMELHORES.Validacoes
             return ValidarCampoObrigatorio(textBox.Text, nomeCampo, titulo);
         }
 
-        #endregion
+        
 
-        #region Validações de Tamanho
+        ///// <summary>
+        ///// Valida se um campo tem tamanho mínimo
+        ///// </summary>
+        //public static ResultadoValidacao ValidarTamanhoMinimo(
+        //    string valor,
+        //    int tamanhoMinimo,
+        //    string nomeCampo)
+        //{
+        //    if (string.IsNullOrEmpty(valor) || valor.Trim().Length < tamanhoMinimo)
+        //    {
+        //        return ResultadoValidacao.Erro(
+        //            $"{nomeCampo} deve ter no mínimo {tamanhoMinimo} caracteres.",
+        //            "Validação de Tamanho");
+        //    }
 
-        /// <summary>
-        /// Valida se um campo tem tamanho mínimo
-        /// </summary>
-        public static ResultadoValidacao ValidarTamanhoMinimo(
-            string valor,
-            int tamanhoMinimo,
-            string nomeCampo)
-        {
-            if (string.IsNullOrEmpty(valor) || valor.Trim().Length < tamanhoMinimo)
-            {
-                return ResultadoValidacao.Erro(
-                    $"{nomeCampo} deve ter no mínimo {tamanhoMinimo} caracteres.",
-                    "Validação de Tamanho");
-            }
+        //    return ResultadoValidacao.Sucesso();
+        //}
 
-            return ResultadoValidacao.Sucesso();
-        }
+        ///// <summary>
+        ///// Valida se um campo tem tamanho máximo
+        ///// </summary>
+        //public static ResultadoValidacao ValidarTamanhoMaximo(
+        //    string valor,
+        //    int tamanhoMaximo,
+        //    string nomeCampo)
+        //{
+        //    if (!string.IsNullOrEmpty(valor) && valor.Trim().Length > tamanhoMaximo)
+        //    {
+        //        return ResultadoValidacao.Erro(
+        //            $"{nomeCampo} deve ter no máximo {tamanhoMaximo} caracteres.",
+        //            "Validação de Tamanho");
+        //    }
 
-        /// <summary>
-        /// Valida se um campo tem tamanho máximo
-        /// </summary>
-        public static ResultadoValidacao ValidarTamanhoMaximo(
-            string valor,
-            int tamanhoMaximo,
-            string nomeCampo)
-        {
-            if (!string.IsNullOrEmpty(valor) && valor.Trim().Length > tamanhoMaximo)
-            {
-                return ResultadoValidacao.Erro(
-                    $"{nomeCampo} deve ter no máximo {tamanhoMaximo} caracteres.",
-                    "Validação de Tamanho");
-            }
+        //    return ResultadoValidacao.Sucesso();
+        //}
 
-            return ResultadoValidacao.Sucesso();
-        }
+        ///// <summary>
+        ///// Valida se um campo tem tamanho exato
+        ///// </summary>
+        //public static ResultadoValidacao ValidarTamanhoExato(
+        //    string valor,
+        //    int tamanhoExato,
+        //    string nomeCampo)
+        //{
+        //    valor = valor?.Trim() ?? string.Empty;
 
-        /// <summary>
-        /// Valida se um campo tem tamanho exato
-        /// </summary>
-        public static ResultadoValidacao ValidarTamanhoExato(
-            string valor,
-            int tamanhoExato,
-            string nomeCampo)
-        {
-            valor = valor?.Trim() ?? string.Empty;
+        //    if (valor.Length != tamanhoExato)
+        //    {
+        //        return ResultadoValidacao.Erro(
+        //            $"{nomeCampo} deve ter exatamente {tamanhoExato} caracteres.",
+        //            "Validação de Tamanho");
+        //    }
 
-            if (valor.Length != tamanhoExato)
-            {
-                return ResultadoValidacao.Erro(
-                    $"{nomeCampo} deve ter exatamente {tamanhoExato} caracteres.",
-                    "Validação de Tamanho");
-            }
+        //    return ResultadoValidacao.Sucesso();
+        //}
+                
 
-            return ResultadoValidacao.Sucesso();
-        }
-
-        #endregion
-
-        #region Validações de ComboBox e ListBox
-
-        /// <summary>
-        /// Valida se um ComboBox tem item selecionado
-        /// </summary>
+        // Valida se um ComboBox tem item selecionado
         public static ResultadoValidacao ValidarComboBox(
             ComboBox comboBox,
             string nomeCampo)
@@ -147,56 +132,51 @@ namespace ADOSMELHORES.Validacoes
             return ResultadoValidacao.Sucesso();
         }
 
-        /// <summary>
-        /// Valida se um ListBox tem item selecionado
-        /// </summary>
-        public static ResultadoValidacao ValidarListBox(
-            ListBox listBox,
-            string nomeCampo)
-        {
-            if (listBox == null)
-                throw new ArgumentNullException(nameof(listBox));
+        ///// <summary>
+        ///// Valida se um ListBox tem item selecionado
+        ///// </summary>
+        //public static ResultadoValidacao ValidarListBox(
+        //    ListBox listBox,
+        //    string nomeCampo)
+        //{
+        //    if (listBox == null)
+        //        throw new ArgumentNullException(nameof(listBox));
 
-            if (listBox.SelectedIndex < 0 || listBox.SelectedItem == null)
-            {
-                return ResultadoValidacao.Erro(
-                    $"Por favor, selecione {nomeCampo}.",
-                    "Seleção Obrigatória");
-            }
+        //    if (listBox.SelectedIndex < 0 || listBox.SelectedItem == null)
+        //    {
+        //        return ResultadoValidacao.Erro(
+        //            $"Por favor, selecione {nomeCampo}.",
+        //            "Seleção Obrigatória");
+        //    }
 
-            return ResultadoValidacao.Sucesso();
-        }
+        //    return ResultadoValidacao.Sucesso();
+        //}
 
-        /// <summary>
-        /// Valida se um CheckedListBox tem pelo menos um item selecionado
-        /// </summary>
-        public static ResultadoValidacao ValidarCheckedListBox(
-            CheckedListBox checkedListBox,
-            string nomeCampo,
-            int minimoItens = 1)
-        {
-            if (checkedListBox == null)
-                throw new ArgumentNullException(nameof(checkedListBox));
+        ///// <summary>
+        ///// Valida se um CheckedListBox tem pelo menos um item selecionado
+        ///// </summary>
+        //public static ResultadoValidacao ValidarCheckedListBox(
+        //    CheckedListBox checkedListBox,
+        //    string nomeCampo,
+        //    int minimoItens = 1)
+        //{
+        //    if (checkedListBox == null)
+        //        throw new ArgumentNullException(nameof(checkedListBox));
 
-            if (checkedListBox.CheckedItems.Count < minimoItens)
-            {
-                string mensagem = minimoItens == 1
-                    ? $"Por favor, selecione pelo menos um item em {nomeCampo}."
-                    : $"Por favor, selecione pelo menos {minimoItens} itens em {nomeCampo}.";
+        //    if (checkedListBox.CheckedItems.Count < minimoItens)
+        //    {
+        //        string mensagem = minimoItens == 1
+        //            ? $"Por favor, selecione pelo menos um item em {nomeCampo}."
+        //            : $"Por favor, selecione pelo menos {minimoItens} itens em {nomeCampo}.";
 
-                return ResultadoValidacao.Erro(mensagem, "Seleção Obrigatória");
-            }
+        //        return ResultadoValidacao.Erro(mensagem, "Seleção Obrigatória");
+        //    }
 
-            return ResultadoValidacao.Sucesso();
-        }
+        //    return ResultadoValidacao.Sucesso();
+        //}
 
-        #endregion
-
-        #region Validações de Valores Numéricos
-
-        /// <summary>
-        /// Valida se um NumericUpDown tem valor maior que zero
-        /// </summary>
+      
+        // Valida se um NumericUpDown tem valor maior que zero      
         public static ResultadoValidacao ValidarValorMaiorQueZero(
             NumericUpDown numericUpDown,
             string nomeCampo)
@@ -214,35 +194,32 @@ namespace ADOSMELHORES.Validacoes
             return ResultadoValidacao.Sucesso();
         }
 
-        /// <summary>
-        /// Valida se um valor está dentro de um range
-        /// </summary>
-        public static ResultadoValidacao ValidarRange(
-            decimal valor,
-            decimal minimo,
-            decimal maximo,
-            string nomeCampo)
-        {
-            if (valor < minimo || valor > maximo)
-            {
-                return ResultadoValidacao.Erro(
-                    $"{nomeCampo} deve estar entre {minimo} e {maximo}.",
-                    "Valor Inválido");
-            }
+        ///// <summary>
+        ///// Valida se um valor está dentro de um range
+        ///// </summary>
+        //public static ResultadoValidacao ValidarRange(
+        //    decimal valor,
+        //    decimal minimo,
+        //    decimal maximo,
+        //    string nomeCampo)
+        //{
+        //    if (valor < minimo || valor > maximo)
+        //    {
+        //        return ResultadoValidacao.Erro(
+        //            $"{nomeCampo} deve estar entre {minimo} e {maximo}.",
+        //            "Valor Inválido");
+        //    }
 
-            return ResultadoValidacao.Sucesso();
-        }
+        //    return ResultadoValidacao.Sucesso();
+        //}
 
-        #endregion
 
-        #region Validação de NIF (Número de Identificação Fiscal)
+        // Validação de NIF 
 
-        /// <summary>
-        /// Valida se o NIF é válido (9 dígitos entre 111111111 e 999999999)
-        /// </summary>
-        /// <param name="nif">String do NIF a validar</param>
-        /// <param name="obrigatorio">Se o campo é obrigatório</param>
-        /// <returns>ResultadoValidacao</returns>
+        // Valida se o NIF é válido (9 dígitos entre 111111111 e 999999999)
+        // <param name="nif">String do NIF a validar</param>
+        // <param name="obrigatorio">Se o campo é obrigatório</param>
+        // <returns>ResultadoValidacao</returns>
         public static ResultadoValidacao ValidarNIF(string nif, bool obrigatorio = true)
         {
             // Remover espaços em branco
@@ -290,12 +267,7 @@ namespace ADOSMELHORES.Validacoes
                 "NIF Inválido");
         }
 
-        /// <summary>
-        /// Tenta obter o NIF como inteiro se for válido
-        /// </summary>
-        /// <param name="nif">String do NIF</param>
-        /// <param name="nifNumero">NIF convertido (output)</param>
-        /// <returns>True se conseguiu converter e é válido</returns>
+        // Tenta obter o NIF como inteiro se for válido        
         public static bool TentarObterNIF(string nif, out int nifNumero)
         {
             nifNumero = 0;
@@ -307,9 +279,8 @@ namespace ADOSMELHORES.Validacoes
             return int.TryParse(nif?.Trim(), out nifNumero);
         }
 
-        /// <summary>
-        /// Handler para KeyPress que permite apenas dígitos (para TextBox de NIF)
-        /// </summary>
+
+        // Handler para KeyPress que permite apenas dígitos (para TextBox de NIF)
         public static void NIF_KeyPress(object sender, KeyPressEventArgs e)
         {
             // Permitir apenas dígitos e teclas de controlo (backspace, delete, etc.)
@@ -319,9 +290,7 @@ namespace ADOSMELHORES.Validacoes
             }
         }
 
-        /// <summary>
-        /// Handler para Validating que valida o NIF
-        /// </summary>
+        // Handler para Validating que valida o NIF
         public static void NIF_Validating(object sender, CancelEventArgs e, bool obrigatorio = true)
         {
             if (sender is TextBox textBox)
@@ -336,11 +305,7 @@ namespace ADOSMELHORES.Validacoes
             }
         }
 
-        /// <summary>
-        /// Configura eventos de validação automática para um TextBox de NIF
-        /// </summary>
-        /// <param name="txtNIF">TextBox para configurar</param>
-        /// <param name="obrigatorio">Se o NIF é obrigatório</param>
+       // Configura eventos de validação automática para um TextBox de NIF       
         public static void ConfigurarTextBoxNIF(TextBox txtNIF, bool obrigatorio = true)
         {
             if (txtNIF == null)
@@ -365,16 +330,9 @@ namespace ADOSMELHORES.Validacoes
             txtNIF.Validating += (s, ev) => NIF_Validating(s, ev, obrigatorio);
         }
 
-        #endregion
+       // Validação de Contacto
 
-        #region Validação de Contacto
-
-        /// <summary>
-        /// Valida contacto telefónico (9 dígitos começando por 9)
-        /// </summary>
-        /// <param name="contacto">String do contacto</param>
-        /// <param name="obrigatorio">Se o campo é obrigatório</param>
-        /// <returns>ResultadoValidacao</returns>
+        // Valida contacto telefónico (9 dígitos começando por 9)       
         public static ResultadoValidacao ValidarContacto(
             string contacto,
             bool obrigatorio = true)
@@ -424,9 +382,7 @@ namespace ADOSMELHORES.Validacoes
             return ResultadoValidacao.Sucesso();
         }
 
-        /// <summary>
-        /// Handler para KeyPress que permite apenas dígitos (para TextBox de Contacto)
-        /// </summary>
+        // Handler para KeyPress que permite apenas dígitos (para TextBox de Contacto)
         public static void Contacto_KeyPress(object sender, KeyPressEventArgs e)
         {
             // Permitir apenas dígitos, espaços, hífens e teclas de controlo
@@ -439,9 +395,7 @@ namespace ADOSMELHORES.Validacoes
             }
         }
 
-        /// <summary>
-        /// Configura eventos de validação automática para um TextBox de Contacto
-        /// </summary>
+        // Configura eventos de validação automática para um TextBox de Contacto
         public static void ConfigurarTextBoxContacto(TextBox txtContacto, bool obrigatorio = true)
         {
             if (txtContacto == null)
@@ -455,17 +409,9 @@ namespace ADOSMELHORES.Validacoes
             txtContacto.KeyPress += Contacto_KeyPress;
         }
 
-        #endregion
+       // Validações Combinadas
 
-       
-
-        
-
-        #region Validações Combinadas
-
-        /// <summary>
         /// Valida múltiplos resultados e retorna o primeiro erro encontrado
-        /// </summary>
         public static ResultadoValidacao ValidarTodos(params ResultadoValidacao[] resultados)
         {
             foreach (var resultado in resultados)
@@ -477,10 +423,8 @@ namespace ADOSMELHORES.Validacoes
             return ResultadoValidacao.Sucesso();
         }
 
-        /// <summary>
-        /// Valida e mostra mensagem do primeiro erro encontrado
-        /// </summary>
-        /// <returns>True se todos válidos, False se encontrou erro</returns>
+        // Valida e mostra mensagem do primeiro erro encontrado
+        // <returns>True se todos válidos, False se encontrou erro</returns>
         public static bool ValidarEMostrar(params ResultadoValidacao[] resultados)
         {
             var resultado = ValidarTodos(resultados);
@@ -492,8 +436,6 @@ namespace ADOSMELHORES.Validacoes
             }
 
             return true;
-        }
-
-        #endregion
+        }               
     }
 }

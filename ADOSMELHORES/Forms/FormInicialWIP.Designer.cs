@@ -30,13 +30,13 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormInicialWIP));
             this.controlPanel = new System.Windows.Forms.Panel();
-            this.pictureLogo = new System.Windows.Forms.PictureBox();
             this.button7 = new System.Windows.Forms.Button();
             this.btnStats = new System.Windows.Forms.Button();
             this.btnSimData = new System.Windows.Forms.Button();
             this.btnGerir = new System.Windows.Forms.Button();
             this.btnInicio = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.pictureLogo = new System.Windows.Forms.PictureBox();
             this.controlPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureLogo)).BeginInit();
             this.SuspendLayout();
@@ -51,28 +51,18 @@
             this.controlPanel.Controls.Add(this.btnInicio);
             this.controlPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.controlPanel.Location = new System.Drawing.Point(0, 0);
+            this.controlPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.controlPanel.Name = "controlPanel";
-            this.controlPanel.Size = new System.Drawing.Size(143, 570);
+            this.controlPanel.Size = new System.Drawing.Size(189, 702);
             this.controlPanel.TabIndex = 0;
-            // 
-            // pictureLogo
-            // 
-            this.pictureLogo.BackColor = System.Drawing.Color.Transparent;
-            this.pictureLogo.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pictureLogo.Image = global::ADOSMELHORES.Properties.Resources.a_dos_melhores_high_resolution_logo_small;
-            this.pictureLogo.InitialImage = global::ADOSMELHORES.Properties.Resources.a_dos_melhores_high_resolution_logo_small;
-            this.pictureLogo.Location = new System.Drawing.Point(0, 369);
-            this.pictureLogo.Name = "pictureLogo";
-            this.pictureLogo.Size = new System.Drawing.Size(143, 143);
-            this.pictureLogo.TabIndex = 7;
-            this.pictureLogo.TabStop = false;
             // 
             // button7
             // 
             this.button7.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.button7.Location = new System.Drawing.Point(0, 512);
+            this.button7.Location = new System.Drawing.Point(0, 628);
+            this.button7.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(143, 58);
+            this.button7.Size = new System.Drawing.Size(189, 74);
             this.button7.TabIndex = 6;
             this.button7.Text = "Logout";
             this.button7.UseVisualStyleBackColor = true;
@@ -81,9 +71,10 @@
             // btnStats
             // 
             this.btnStats.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnStats.Location = new System.Drawing.Point(0, 174);
+            this.btnStats.Location = new System.Drawing.Point(0, 213);
+            this.btnStats.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnStats.Name = "btnStats";
-            this.btnStats.Size = new System.Drawing.Size(143, 58);
+            this.btnStats.Size = new System.Drawing.Size(189, 71);
             this.btnStats.TabIndex = 3;
             this.btnStats.Text = "Despesas";
             this.btnStats.UseVisualStyleBackColor = true;
@@ -92,9 +83,10 @@
             // btnSimData
             // 
             this.btnSimData.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnSimData.Location = new System.Drawing.Point(0, 116);
+            this.btnSimData.Location = new System.Drawing.Point(0, 142);
+            this.btnSimData.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnSimData.Name = "btnSimData";
-            this.btnSimData.Size = new System.Drawing.Size(143, 58);
+            this.btnSimData.Size = new System.Drawing.Size(189, 71);
             this.btnSimData.TabIndex = 2;
             this.btnSimData.Text = "Simulador de Data";
             this.btnSimData.UseVisualStyleBackColor = true;
@@ -103,9 +95,10 @@
             // btnGerir
             // 
             this.btnGerir.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnGerir.Location = new System.Drawing.Point(0, 58);
+            this.btnGerir.Location = new System.Drawing.Point(0, 71);
+            this.btnGerir.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnGerir.Name = "btnGerir";
-            this.btnGerir.Size = new System.Drawing.Size(143, 58);
+            this.btnGerir.Size = new System.Drawing.Size(189, 71);
             this.btnGerir.TabIndex = 1;
             this.btnGerir.Text = "Gerir";
             this.btnGerir.UseVisualStyleBackColor = true;
@@ -115,8 +108,9 @@
             // 
             this.btnInicio.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnInicio.Location = new System.Drawing.Point(0, 0);
+            this.btnInicio.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnInicio.Name = "btnInicio";
-            this.btnInicio.Size = new System.Drawing.Size(143, 58);
+            this.btnInicio.Size = new System.Drawing.Size(189, 71);
             this.btnInicio.TabIndex = 0;
             this.btnInicio.Text = "Vista Geral";
             this.btnInicio.UseVisualStyleBackColor = true;
@@ -129,19 +123,34 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel1.BackgroundImage")));
-            this.panel1.Location = new System.Drawing.Point(143, 0);
+            this.panel1.Location = new System.Drawing.Point(191, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(778, 570);
+            this.panel1.Size = new System.Drawing.Size(1037, 702);
             this.panel1.TabIndex = 1;
+            // 
+            // pictureLogo
+            // 
+            this.pictureLogo.BackColor = System.Drawing.Color.Transparent;
+            this.pictureLogo.Image = global::ADOSMELHORES.Properties.Resources.color_circle_icon_layout;
+            this.pictureLogo.InitialImage = global::ADOSMELHORES.Properties.Resources.a_dos_melhores_high_resolution_logo_small;
+            this.pictureLogo.Location = new System.Drawing.Point(0, 336);
+            this.pictureLogo.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureLogo.Name = "pictureLogo";
+            this.pictureLogo.Size = new System.Drawing.Size(191, 217);
+            this.pictureLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureLogo.TabIndex = 7;
+            this.pictureLogo.TabStop = false;
             // 
             // FormInicialWIP
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(918, 570);
+            this.ClientSize = new System.Drawing.Size(1224, 702);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.controlPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "FormInicialWIP";
             this.Text = "FormInicialWIP";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormInicialWIP_FormClosing);
