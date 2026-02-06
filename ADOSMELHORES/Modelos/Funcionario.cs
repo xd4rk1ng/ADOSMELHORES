@@ -26,7 +26,6 @@ namespace ADOSMELHORES.Modelos
             DataIniContrato = dataIniContrato;
             DataFimContrato = dataFimContrato;
             DataFimRegistoCrim = dataFimRegistoCrim;
-            DataNascimento = dataNascimento;
         }
 
         public int Id { get; set; }
@@ -38,7 +37,6 @@ namespace ADOSMELHORES.Modelos
         public DateTime DataIniContrato { get; set; }
         public DateTime DataFimContrato { get; set; }
         public DateTime DataFimRegistoCrim { get; set; }
-        public DateTime DataNascimento { get; set; }
 
         public virtual decimal CalcularCustoMensal()
         {
