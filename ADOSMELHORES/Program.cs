@@ -10,19 +10,15 @@ namespace ADOSMELHORES
 {
     internal static class Program
     {
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
         [STAThread]
         static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            // Corrigido: instanciando Empresa e passando para FormInicial
+            //instanciando Empresa e passando para FormInicial
             var empresa = new Empresa("ADOSMELHORES");
 
-            //TEMPORÁRIO: Carregar dados de teste e dados despesas (remover quando implementar Base de Dados)
             CarregarDadosTeste(empresa);
             CarregarDadosDespesasExemplo(empresa);
 
@@ -40,10 +36,7 @@ namespace ADOSMELHORES
                     break;
             }
         }
-
-               
-        // MÉTODO TEMPORÁRIO - Carrega dados de teste para desenvolvimento
-        // TODO: REMOVER este método quando a base de dados estiver implementada
+                      
 
         private static void CarregarDadosTeste(Empresa empresa)
         {
@@ -65,7 +58,6 @@ namespace ADOSMELHORES
                 dataFimContrato: fimContrato,
                 dataIniContrato: inicioContrato,
                 dataFimRegistoCrim: fimRegistoCriminal,
-                dataNascimento: new DateTime(1975, 3, 15),                
                 carroEmpresa: true,
                 isencaoHorario: true
             );
@@ -82,7 +74,6 @@ namespace ADOSMELHORES
                 dataFimContrato: fimContrato,
                 dataIniContrato: inicioContrato,
                 dataFimRegistoCrim: fimRegistoCriminal,
-                dataNascimento: new DateTime(1980, 7, 22),               
                 carroEmpresa: true,
                 isencaoHorario: true
             );
@@ -99,7 +90,6 @@ namespace ADOSMELHORES
                 dataFimContrato: fimContrato,
                 dataIniContrato: inicioContrato,
                 dataFimRegistoCrim: fimRegistoCriminal,
-                dataNascimento: new DateTime(1978, 11, 5),                
                 carroEmpresa: false,
                 isencaoHorario: true
             );
@@ -122,7 +112,6 @@ namespace ADOSMELHORES
                 dataIniContrato: inicioContrato,
                 dataFimContrato: fimContrato,
                 dataFimRegistoCrim: fimRegistoCriminal,
-                dataNascimento: new DateTime(1990, 2, 10),
                 area: "Recursos Humanos",
                 diretorReporta: diretor1
             );
@@ -139,7 +128,6 @@ namespace ADOSMELHORES
                 dataIniContrato: inicioContrato,
                 dataFimContrato: fimContrato,
                 dataFimRegistoCrim: fimRegistoCriminal,
-                dataNascimento: new DateTime(1988, 5, 18),
                 area: "Financeiro",
                 diretorReporta: diretor1
             );
@@ -156,7 +144,6 @@ namespace ADOSMELHORES
                 dataIniContrato: inicioContrato,
                 dataFimContrato: fimContrato,
                 dataFimRegistoCrim: fimRegistoCriminal,
-                dataNascimento: new DateTime(1992, 9, 25),
                 area: "Formação",
                 diretorReporta: diretor2
             );
@@ -174,7 +161,6 @@ namespace ADOSMELHORES
                 dataIniContrato: inicioContrato,
                 dataFimContrato: fimContrato,
                 dataFimRegistoCrim: fimRegistoCriminal,
-                dataNascimento: new DateTime(1995, 1, 30),
                 area: "Comercial"
                 //diretorReporta: diretor2
             );
@@ -190,7 +176,6 @@ namespace ADOSMELHORES
                 dataIniContrato: inicioContrato,
                 dataFimContrato: fimContrato,
                 dataFimRegistoCrim: fimRegistoCriminal,
-                dataNascimento: new DateTime(1987, 12, 8),
                 area: "Recursos Humanos"
                 //diretorReporta: diretor3
             );
@@ -209,7 +194,7 @@ namespace ADOSMELHORES
             diretor1.AdicionarSecretaria(secretaria2);
             diretor2.AdicionarSecretaria(secretaria3);
             diretor2.AdicionarSecretaria(secretaria4);
-            diretor3.AdicionarSecretaria(secretaria5);
+            //diretor3.AdicionarSecretaria(secretaria5);
 
             // ========== CRIANDO 2 COORDENADORES ==========
             var coordenador1 = new Coordenador(
@@ -222,7 +207,6 @@ namespace ADOSMELHORES
                 dataIniContrato: inicioContrato,
                 dataFimContrato: fimContrato,
                 dataFimRegistoCrim: fimRegistoCriminal,
-                dataNascimento: new DateTime(1985, 4, 2),
                 areaCoordenacao: "Formação"
             );
 
@@ -236,7 +220,6 @@ namespace ADOSMELHORES
                 dataIniContrato: inicioContrato,
                 dataFimContrato: fimContrato,
                 dataFimRegistoCrim: fimRegistoCriminal,
-                dataNascimento: new DateTime(1986, 9, 12),
                 areaCoordenacao: "Comercial"
             );
 
@@ -256,7 +239,6 @@ namespace ADOSMELHORES
                     dataIniContrato: inicioContrato,
                     dataFimContrato: fimContrato,
                     dataFimRegistoCrim: fimRegistoCriminal,
-                    dataNascimento: new DateTime(1990, 6, 15),
                     areaLeciona: "Programação C#",
                     disponibilidade: Disponibilidade.Laboral,
                     valorHora: 25m
@@ -271,7 +253,6 @@ namespace ADOSMELHORES
                     dataIniContrato: inicioContrato,
                     dataFimContrato: fimContrato,
                     dataFimRegistoCrim: fimRegistoCriminal,
-                    dataNascimento: new DateTime(1989, 2, 20),
                     areaLeciona: "Gestão de Projetos",
                     disponibilidade: Disponibilidade.PosLaboral,
                     valorHora: 30m
@@ -286,7 +267,6 @@ namespace ADOSMELHORES
                     dataIniContrato: inicioContrato,
                     dataFimContrato: fimContrato,
                     dataFimRegistoCrim: fimRegistoCriminal,
-                    dataNascimento: new DateTime(1982, 12, 1),
                     areaLeciona: "Marketing Digital",
                     disponibilidade: Disponibilidade.Ambas,
                     valorHora: 28m
@@ -301,7 +281,6 @@ namespace ADOSMELHORES
                     dataIniContrato: inicioContrato,
                     dataFimContrato: fimContrato,
                     dataFimRegistoCrim: fimRegistoCriminal,
-                    dataNascimento: new DateTime(1993, 8, 8),
                     areaLeciona: "Qualidade e Auditoria",
                     disponibilidade: Disponibilidade.Laboral,
                     valorHora: 22.5m
@@ -316,7 +295,6 @@ namespace ADOSMELHORES
                     dataIniContrato: inicioContrato,
                     dataFimContrato: fimContrato,
                     dataFimRegistoCrim: fimRegistoCriminal,
-                    dataNascimento: new DateTime(1991, 3, 3),
                     areaLeciona: "Excel Avançado",
                     disponibilidade: Disponibilidade.PosLaboral,
                     valorHora: 20m
@@ -340,13 +318,10 @@ namespace ADOSMELHORES
             }
         }
 
-        /// MÉTODO TEMPORÁRIO - Carrega dados de despesas de exemplo
+        
         /// Meses: Novembro 2025, Dezembro 2025, Janeiro 2026
-        /// TODO: REMOVER este método quando a base de dados estiver implementada
         private static void CarregarDadosDespesasExemplo(Empresa empresa)
         {
-            // TEMPORÁRIO - Carrega despesas físicas de exemplo
-            // MIGRAÇÃO BD: REMOVER este método completamente
             empresa.GestorDespesas.CarregarDadosExemplo();
         }
     }

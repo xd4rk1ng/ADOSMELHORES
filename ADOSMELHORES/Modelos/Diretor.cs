@@ -8,7 +8,7 @@ namespace ADOSMELHORES.Modelos
         public bool IsencaoHorario { get; set; }
 
         public decimal BonusMensal => CalcularBonusMensal();
-        //public decimal BonusMensal { get; set; }
+        
         public bool CarroEmpresa { get; set; }
 
         //atributos adicionais
@@ -37,10 +37,8 @@ namespace ADOSMELHORES.Modelos
                 DateTime dataFimContrato,
                 DateTime dataIniContrato,
                 DateTime dataFimRegistoCrim,
-                DateTime dataNascimento,                
                 bool carroEmpresa,
                 bool isencaoHorario
-                //string areaDiretoria
 
             ) : base (
                 id,
@@ -51,8 +49,7 @@ namespace ADOSMELHORES.Modelos
                 salarioBase,
                 dataIniContrato,
                 dataFimContrato,
-                dataFimRegistoCrim,
-                dataNascimento
+                dataFimRegistoCrim
             )
         {
             IsencaoHorario = isencaoHorario;            

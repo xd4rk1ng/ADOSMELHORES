@@ -13,8 +13,7 @@ namespace ADOSMELHORES.Modelos
             decimal salarioBase,
             DateTime dataIniContrato,
             DateTime dataFimContrato,
-            DateTime dataFimRegistoCrim,
-            DateTime dataNascimento
+            DateTime dataFimRegistoCrim
         )
         {
             Id = id;
