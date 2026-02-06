@@ -166,6 +166,7 @@ namespace ADOSMELHORES.Forms.Secretarias
             DateTimeHelper.DefinirValorSeguro(dtpDataRegistoCriminal, secretaria.DataFimRegistoCrim);
                                   
 
+
             // Selecionar área
             if (!string.IsNullOrEmpty(secretaria.Area))
             {
@@ -360,10 +361,10 @@ namespace ADOSMELHORES.Forms.Secretarias
                 return;
             }
 
-            // verificar duplicado entre secretárias
-            if (NifDuplicado(nif))
+            // verificar duplicado entre todos os funcionários da empresa
+            if (empresa.NifDuplicado(nif))
             {
-                DialogHelper.MostrarAviso("Já existe uma secretária com este NIF.", "NIF Duplicado");
+                DialogHelper.MostrarAviso("Já existe um funcionário com este NIF.", "NIF Duplicado");
                 txtNIF.Focus();
                 return;
             }
@@ -436,8 +437,8 @@ namespace ADOSMELHORES.Forms.Secretarias
                 return;
             }
 
-            // verificar duplicado excluindo a própria secretária
-            if (NifDuplicado(nif, secretariaSelecionada.Id))
+            // verificar duplicado excluindo a própria secretária, usando verificação centralizada na Empresa
+            if (empresa.NifDuplicado(nif, secretariaSelecionada.Id))
             {
                 DialogHelper.MostrarAviso("Outro registo já utiliza este NIF. Corrija o NIF.", "NIF Duplicado");
                 txtNIF.Focus();
@@ -595,12 +596,6 @@ namespace ADOSMELHORES.Forms.Secretarias
         private void btnFechar_Click(object sender, EventArgs e)
         {
             this.Close();
-        }
-
-        private bool NifDuplicado(int nif, int? ignorarId = null)
-        {
-            var secretarias = empresa.ObterSecretarias();
-            return secretarias.Any(s => s.Nif == nif && (!ignorarId.HasValue || s.Id != ignorarId.Value));
         }
     }
 }
