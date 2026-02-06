@@ -40,6 +40,10 @@ namespace ADOSMELHORES.Forms.Formadores
             // Aplicar validação de contacto centralizada (agora obrigatória/handler)
             ValidarCampos.ConfigurarTextBoxContacto(txtContacto, obrigatorio: true);
 
+            // Adicionar Validating handler para garantir validação completa do contacto
+            txtContacto.Validating -= TxtContacto_Validating;
+            txtContacto.Validating += TxtContacto_Validating;
+
             // Configurar DataGridView
             ConfigurarDataGridView();
 
@@ -366,7 +370,8 @@ namespace ADOSMELHORES.Forms.Formadores
 
             if (!ValidarCampos.ValidarEMostrar(
                 ValidarCampos.ValidarCampoObrigatorio(txtNome.Text, "o nome do formador"),
-                ValidarCampos.ValidarCampoObrigatorio(txtContacto.Text, "o contacto do formador"),
+                // Usar a validação centralizada de contacto (9 dígitos começando por 9)
+                ValidarCampos.ValidarContacto(txtContacto.Text, obrigatorio: true),
                 ValidarCampos.ValidarCampoObrigatorio(txtAreaLeciona.Text, "a área que o formador leciona"),
                 ValidarCampos.ValidarValorMaiorQueZero(numValorHora, "Valor por hora"),
                 ValidarCampos.ValidarNIF(txtNIF.Text, obrigatorio: true)
@@ -531,6 +536,17 @@ namespace ADOSMELHORES.Forms.Formadores
             return empresa.Funcionarios
                 .OfType<Formador>()
                 .Any(f => f.Nif == nif && (!excludeId.HasValue || f.Id != excludeId.Value));
+        }
+
+        // Validating handler para contacto que usa a validação centralizada em ValidarCampos
+        private void TxtContacto_Validating(object sender, CancelEventArgs e)
+        {
+            var resultado = ValidarCampos.ValidarContacto(txtContacto.Text, obrigatorio: true);
+            if (!resultado.Valido)
+            {
+                e.Cancel = true;
+                resultado.MostrarMensagem();
+            }
         }
     }
 }

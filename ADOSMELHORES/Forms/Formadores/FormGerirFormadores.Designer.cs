@@ -111,7 +111,7 @@ namespace ADOSMELHORES.Forms.Formadores
             this.label11.Size = new System.Drawing.Size(165, 20);
             this.label11.TabIndex = 20;
             this.label11.Text = "Status Registo Criminal:";
-            this.label11.Click += new System.EventHandler(this.label11_Click);
+            
             // 
             // dtpDataRegistoCriminal
             // 
