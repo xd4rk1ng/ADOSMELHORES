@@ -146,7 +146,6 @@
     <Compile Include="Modelos\Despesas\Gestordespesas.cs" />
     <Compile Include="Modelos\Despesas\DespesasFisicas.cs" />
     <Compile Include="Modelos\Despesas\DespesasRelatorio.cs" />
-    <Compile Include="Modelos\Exemplo.cs" />
     <Compile Include="Modelos\Empresa.cs" />
     <Compile Include="Modelos\Funcionario.cs" />
     <Compile Include="Modelos\Diretor.cs" />
