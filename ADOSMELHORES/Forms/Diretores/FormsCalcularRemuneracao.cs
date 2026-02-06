@@ -16,10 +16,6 @@ namespace ADOSMELHORES.Forms.Diretores
         private Diretor diretor;
         private Empresa empresa;
 
-        public FormsCalcularRemuneracao(Empresa empresa)
-        {
-            this.empresa = empresa;
-        }
 
         public FormsCalcularRemuneracao(Diretor diretorSelecionado, Empresa empresaRef)
         {

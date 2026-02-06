@@ -1,0 +1,15 @@
+root = true
+
+[*.{cs,vb}]
+charset = utf-8
+indent_style = space
+indent_size = 4
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+# Ativar análise Roslyn - configurar severidade da regra IDE0051 (membros privados não usados)
+# Valores possíveis: none, suggestion, silent, warning, error, default
+dotnet_diagnostic.IDE0051.severity = warning
+
+# Recomendações úteis
+# Habilitar análise de solução completa (usa a opção do VS) e instalar Microsoft.CodeAnalysis.NetAnalyzers se desejar regras adicionais

@@ -7,24 +7,21 @@ using System.IO;
 
 namespace ADOSMELHORES.Modelos.Despesas
 {
-    // Gerencia todas as operações relacionadas a despesas
-    // ARMAZENAMENTO TEMPORÁRIO EM MEMÓRIA (dados perdidos ao fechar)
-    // MIGRAÇÃO BD: Substituir lista por consultas ao banco de dados
+    
+   
 
     public class GestorDespesas
     {
         private Empresa empresa;
 
-        // TEMPORÁRIO - Lista em memória (será perdida ao fechar o programa)
-        // MIGRAÇÃO BD: REMOVER esta lista e buscar do banco de dados
+  
         private List<DespesaFisica> despesasFisicas;
 
         public GestorDespesas(Empresa empresaRef)
         {
             empresa = empresaRef ?? throw new ArgumentNullException(nameof(empresaRef));
 
-            // TEMPORÁRIO - Inicializa lista vazia
-            // MIGRAÇÃO BD: REMOVER esta linha, dados virão do BD
+            
             despesasFisicas = new List<DespesaFisica>();
         }
 
@@ -39,12 +36,7 @@ namespace ADOSMELHORES.Modelos.Despesas
             despesa.Id = ObterProximoIdDespesa();
             despesasFisicas.Add(despesa);
 
-            // MIGRAÇÃO BD: Substituir por INSERT
-            // using (var context = new DatabaseContext())
-            // {
-            //     context.DespesasFisicas.Add(despesa);
-            //     context.SaveChanges();
-            // }
+
         }
 
         // Remove uma despesa física
@@ -59,18 +51,7 @@ namespace ADOSMELHORES.Modelos.Despesas
             }
             return false;
 
-            // MIGRAÇÃO BD: Substituir por DELETE
-            // using (var context = new DatabaseContext())
-            // {
-            //     var despesa = context.DespesasFisicas.Find(id);
-            //     if (despesa != null)
-            //     {
-            //         context.DespesasFisicas.Remove(despesa);
-            //         context.SaveChanges();
-            //         return true;
-            //     }
-            //     return false;
-            // }
+
         }
 
         // Obtém todas as despesas físicas
@@ -79,11 +60,7 @@ namespace ADOSMELHORES.Modelos.Despesas
             // TEMPORÁRIO - Retorna da lista em memória
             return despesasFisicas.ToList();
 
-            // MIGRAÇÃO BD: Substituir por SELECT
-            // using (var context = new DatabaseContext())
-            // {
-            //     return context.DespesasFisicas.ToList();
-            // }
+
         }
 
         // Obtém despesas físicas de um mês específico
@@ -95,14 +72,7 @@ namespace ADOSMELHORES.Modelos.Despesas
                 .OrderBy(d => d.Data)
                 .ToList();
 
-            // MIGRAÇÃO BD: Substituir por SELECT com WHERE
-            // using (var context = new DatabaseContext())
-            // {
-            //     return context.DespesasFisicas
-            //         .Where(d => d.Data.Month == mes && d.Data.Year == ano)
-            //         .OrderBy(d => d.Data)
-            //         .ToList();
-            // }
+
         }
 
         // Calcula total de despesas físicas de um mês
@@ -113,27 +83,7 @@ namespace ADOSMELHORES.Modelos.Despesas
                 .Where(d => d.Data.Month == mes && d.Data.Year == ano)
                 .Sum(d => d.Valor);
 
-            // MIGRAÇÃO BD: Pode usar SUM diretamente no banco (mais eficiente)
-            // using (var context = new DatabaseContext())
-            // {
-            //     return context.DespesasFisicas
-            //         .Where(d => d.Data.Month == mes && d.Data.Year == ano)
-            //         .Sum(d => (decimal?)d.Valor) ?? 0;
-            // }
-        }
 
-        // REMOVER ESTA FUNÇÃO SE NÃO FOR USADA
-        // Busca despesa física por ID
-        public DespesaFisica BuscarDespesaFisicaPorId(int id)
-        {
-            // TEMPORÁRIO - Busca na lista em memória
-            return despesasFisicas.FirstOrDefault(d => d.Id == id);
-
-            // MIGRAÇÃO BD: Substituir por SELECT WHERE
-            // using (var context = new DatabaseContext())
-            // {
-            //     return context.DespesasFisicas.Find(id);
-            // }
         }
 
 
@@ -190,25 +140,7 @@ namespace ADOSMELHORES.Modelos.Despesas
             };
         }
 
-        // REMOVER ESTA FUNÇÃO SE NÃO FOR USADA
-        // Gera relatório do mês atual
-        //public RelatorioDespesas GerarRelatorioMesAtual()
-        //{
-        //    return GerarRelatorioMes(DateTime.Now.Month, DateTime.Now.Year);
-        //}
 
-        // Gera relatório anual (todos os 12 meses)
-        //public List<RelatorioDespesas> GerarRelatorioAnual(int ano)
-        //{
-        //    var relatorios = new List<RelatorioDespesas>();
-        //    for (int mes = 1; mes <= 12; mes++)
-        //    {
-        //        relatorios.Add(GerarRelatorioMes(mes, ano));
-        //    }
-        //    return relatorios;
-        //}
-
-        // Gera relatório dos últimos N meses
         public List<RelatorioDespesas> GerarRelatorioUltimosMeses(int quantidadeMeses)
         {
             var relatorios = new List<RelatorioDespesas>();
@@ -253,46 +185,7 @@ namespace ADOSMELHORES.Modelos.Despesas
             File.WriteAllText(caminhoArquivo, csv.ToString(), Encoding.UTF8);
         }
 
-        //REMOVER ESTA FUNÇÃO SE NÃO FOR USADA
-        // Exporta relatório anual para CSV
-        //public void ExportarRelatorioAnualCSV(int ano, string caminhoArquivo)
-        //{
-        //    var relatorios = GerarRelatorioAnual(ano);
 
-        //    StringBuilder csv = new StringBuilder();
-        //    csv.AppendLine($"RELATÓRIO ANUAL DE DESPESAS - {ano}");
-        //    csv.AppendLine();
-        //    csv.AppendLine("Mês;Despesas Físicas;Diretores;Secretárias;Coordenadores;Formadores;Total");
-
-        //    foreach (var r in relatorios)
-        //    {
-        //        csv.AppendLine($"{r.NomeMes};€{r.DespesasFisicas:N2};€{r.DespesasDiretores:N2};€{r.DespesasSecretarias:N2};€{r.DespesasCoordenadores:N2};€{r.DespesasFormadores:N2};€{r.TotalDespesas:N2}");
-        //    }
-
-        //    csv.AppendLine();
-        //    csv.AppendLine($"TOTAL DO ANO;;;;;€{CalcularTotalAno(ano):N2}");
-        //    csv.AppendLine($"MÉDIA MENSAL;;;;;€{CalcularMediaMensalAno(ano):N2}");
-
-        //    File.WriteAllText(caminhoArquivo, csv.ToString(), Encoding.UTF8);
-        //}
-
-        // ========== ANÁLISES ==========
-
-        //public decimal CalcularMediaMensalAno(int ano)
-        //{
-        //    var relatorios = GerarRelatorioAnual(ano);
-        //    return relatorios.Average(r => r.TotalDespesas);
-        //}
-
-        //public decimal CalcularTotalAno(int ano)
-        //{
-        //    var relatorios = GerarRelatorioAnual(ano);
-        //    return relatorios.Sum(r => r.TotalDespesas);
-        //}
-
-        // ========== MÉTODOS AUXILIARES ==========
-
-        // Obtém próximo ID disponível para despesa física
         private int ObterProximoIdDespesa()
         {
             // TEMPORÁRIO - Calcula da lista em memória
@@ -300,52 +193,10 @@ namespace ADOSMELHORES.Modelos.Despesas
                 return 1;
             return despesasFisicas.Max(d => d.Id) + 1;
 
-            // MIGRAÇÃO BD: Usar IDENTITY ou MAX(Id) + 1
-            // using (var context = new DatabaseContext())
-            // {
-            //     if (!context.DespesasFisicas.Any())
-            //         return 1;
-            //     return context.DespesasFisicas.Max(d => d.Id) + 1;
-            // }
+
         }
 
-        // Limpa todas as despesas físicas (usar com cuidado!)
-        //public void LimparDespesasFisicas()
-        //{
-        //    // TEMPORÁRIO - Limpa lista em memória
-        //    despesasFisicas.Clear();
-
-        //    // MIGRAÇÃO BD: DELETE FROM DespesasFisicas
-        //    // using (var context = new DatabaseContext())
-        //    // {
-        //    //     context.DespesasFisicas.RemoveRange(context.DespesasFisicas);
-        //    //     context.SaveChanges();
-        //    // }
-        //}
-
-        // Obtém quantidade de despesas físicas registradas
-        //public int ObterQuantidadeDespesasFisicas()
-        //{
-        //    // TEMPORÁRIO - Conta da lista em memória
-        //    return despesasFisicas.Count;
-
-        //    // MIGRAÇÃO BD: SELECT COUNT(*)
-        //    // using (var context = new DatabaseContext())
-        //    // {
-        //    //     return context.DespesasFisicas.Count();
-        //    // }
-        //}
-
-        // ========== DADOS DE EXEMPLO (REMOVER EM PRODUÇÃO) ==========
-        // MÉTODO TEMPORÁRIO - Apenas para testes
-
-        /// <summary>
-        /// Carrega dados de exemplo para os meses:
-        /// - Novembro 2025
-        /// - Dezembro 2025  
-        /// - Janeiro 2026
-        /// REMOVER quando implementar Base de Dados
-        /// </summary>
+ 
         public void CarregarDadosExemplo()
         {
             // ========== NOVEMBRO 2025 ==========
