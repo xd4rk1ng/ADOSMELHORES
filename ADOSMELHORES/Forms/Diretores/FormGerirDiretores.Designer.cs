@@ -1,4 +1,4 @@
-﻿namespace ADOSMELHORES.Forms.Diretores
+namespace ADOSMELHORES.Forms.Diretores
 {
     partial class FormGerirDiretores
     {
@@ -18,6 +18,7 @@
         private void InitializeComponent()
         {
             this.grpDadosDiretor = new System.Windows.Forms.GroupBox();
+            this.txtStatusRegistoCriminal = new System.Windows.Forms.TextBox();
             this.txtNIF = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.labelNIF = new System.Windows.Forms.Label();
@@ -50,7 +51,7 @@
             this.lblTotalDiretores = new System.Windows.Forms.Label();
             this.dgvDiretores = new System.Windows.Forms.DataGridView();
             this.btnFechar = new System.Windows.Forms.Button();
-            this.txtStatusRegistoCriminal = new System.Windows.Forms.TextBox();
+            this.lblTotalDiretor = new System.Windows.Forms.Label();
             this.grpDadosDiretor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numSalarioBase)).BeginInit();
             this.grpAcoes.SuspendLayout();
@@ -90,6 +91,16 @@
             this.grpDadosDiretor.TabIndex = 0;
             this.grpDadosDiretor.TabStop = false;
             this.grpDadosDiretor.Text = "Dados do Diretor";
+            // 
+            // txtStatusRegistoCriminal
+            // 
+            this.txtStatusRegistoCriminal.Enabled = false;
+            this.txtStatusRegistoCriminal.Location = new System.Drawing.Point(520, 246);
+            this.txtStatusRegistoCriminal.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtStatusRegistoCriminal.Name = "txtStatusRegistoCriminal";
+            this.txtStatusRegistoCriminal.ReadOnly = true;
+            this.txtStatusRegistoCriminal.Size = new System.Drawing.Size(113, 27);
+            this.txtStatusRegistoCriminal.TabIndex = 24;
             // 
             // txtNIF
             // 
@@ -388,13 +399,14 @@
             // 
             // grpListaDiretores
             // 
+            this.grpListaDiretores.Controls.Add(this.lblTotalDiretor);
             this.grpListaDiretores.Controls.Add(this.lblTotalDiretores);
             this.grpListaDiretores.Controls.Add(this.dgvDiretores);
             this.grpListaDiretores.Location = new System.Drawing.Point(16, 515);
             this.grpListaDiretores.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.grpListaDiretores.Name = "grpListaDiretores";
             this.grpListaDiretores.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.grpListaDiretores.Size = new System.Drawing.Size(874, 200);
+            this.grpListaDiretores.Size = new System.Drawing.Size(874, 210);
             this.grpListaDiretores.TabIndex = 2;
             this.grpListaDiretores.TabStop = false;
             this.grpListaDiretores.Text = "Lista de Diretores";
@@ -435,15 +447,16 @@
             this.btnFechar.UseVisualStyleBackColor = true;
             this.btnFechar.Click += new System.EventHandler(this.btnFechar_Click);
             // 
-            // txtStatusRegistoCriminal
+            // lblTotalDiretor
             // 
-            this.txtStatusRegistoCriminal.Enabled = false;
-            this.txtStatusRegistoCriminal.Location = new System.Drawing.Point(520, 246);
-            this.txtStatusRegistoCriminal.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.txtStatusRegistoCriminal.Name = "txtStatusRegistoCriminal";
-            this.txtStatusRegistoCriminal.ReadOnly = true;
-            this.txtStatusRegistoCriminal.Size = new System.Drawing.Size(113, 27);
-            this.txtStatusRegistoCriminal.TabIndex = 24;
+            this.lblTotalDiretor.AutoSize = true;
+            this.lblTotalDiretor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold);
+            this.lblTotalDiretor.Location = new System.Drawing.Point(20, 182);
+            this.lblTotalDiretor.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblTotalDiretor.Name = "lblTotalDiretor";
+            this.lblTotalDiretor.Size = new System.Drawing.Size(163, 18);
+            this.lblTotalDiretor.TabIndex = 4;
+            this.lblTotalDiretor.Text = "Total de Diretores: 0";
             // 
             // FormGerirDiretores
             // 
@@ -513,5 +526,6 @@
         private System.Windows.Forms.Label labelNIF;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtStatusRegistoCriminal;
+        private System.Windows.Forms.Label lblTotalDiretor;
     }
 }

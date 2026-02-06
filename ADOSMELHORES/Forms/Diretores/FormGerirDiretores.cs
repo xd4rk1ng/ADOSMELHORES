@@ -1,4 +1,4 @@
-﻿using ADOSMELHORES;
+using ADOSMELHORES;
 using ADOSMELHORES.Forms;
 using ADOSMELHORES.Modelos;
 using System;
@@ -204,7 +204,7 @@ namespace ADOSMELHORES.Forms.Diretores
             dgvDiretores.DataSource = null;
             dgvDiretores.DataSource = diretores;
 
-            lblTotalDiretores.Text = $"Total de Diretores: {diretores.Count}";
+            lblTotalDiretor.Text = $"Total de Diretores: {diretores.Count}";
 
             if (diretores.Count > 0 && dgvDiretores.Rows.Count > 0)
             {

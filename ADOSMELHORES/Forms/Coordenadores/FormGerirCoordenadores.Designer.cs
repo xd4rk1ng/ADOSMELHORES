@@ -1,4 +1,4 @@
-﻿namespace ADOSMELHORES.Forms.Coordenadores
+namespace ADOSMELHORES.Forms.Coordenadores
 {
     partial class FormGerirCoordenadores
     {
@@ -35,6 +35,7 @@
             this.lblDataRegistoCriminal = new System.Windows.Forms.Label();
             this.dtpDataRegistoCriminal = new System.Windows.Forms.DateTimePicker();
             this.lblStatusRegistoCriminal = new System.Windows.Forms.Label();
+            this.txtStatusRegistoCriminal = new System.Windows.Forms.TextBox();
             this.btnLimparCampos = new System.Windows.Forms.Button();
             this.groupBoxAcoes = new System.Windows.Forms.GroupBox();
             this.btnInserirNovo = new System.Windows.Forms.Button();
@@ -56,7 +57,6 @@
             this.columnHeaderStatusRegistoCriminal = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lblTotal = new System.Windows.Forms.Label();
             this.btnFechar = new System.Windows.Forms.Button();
-            this.txtStatusRegistoCriminal = new System.Windows.Forms.TextBox();
             this.groupBoxDados.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numSalarioBase)).BeginInit();
             this.groupBoxAcoes.SuspendLayout();
@@ -274,6 +274,16 @@
             this.lblStatusRegistoCriminal.TabIndex = 18;
             this.lblStatusRegistoCriminal.Text = "Status Registo Criminal:";
             // 
+            // txtStatusRegistoCriminal
+            // 
+            this.txtStatusRegistoCriminal.Enabled = false;
+            this.txtStatusRegistoCriminal.Location = new System.Drawing.Point(208, 360);
+            this.txtStatusRegistoCriminal.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtStatusRegistoCriminal.Name = "txtStatusRegistoCriminal";
+            this.txtStatusRegistoCriminal.ReadOnly = true;
+            this.txtStatusRegistoCriminal.Size = new System.Drawing.Size(132, 27);
+            this.txtStatusRegistoCriminal.TabIndex = 19;
+            // 
             // btnLimparCampos
             // 
             this.btnLimparCampos.Location = new System.Drawing.Point(20, 131);
@@ -378,7 +388,7 @@
             this.groupBoxLista.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.groupBoxLista.Name = "groupBoxLista";
             this.groupBoxLista.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBoxLista.Size = new System.Drawing.Size(920, 218);
+            this.groupBoxLista.Size = new System.Drawing.Size(920, 223);
             this.groupBoxLista.TabIndex = 2;
             this.groupBoxLista.TabStop = false;
             this.groupBoxLista.Text = "Lista de Coordenadores";
@@ -403,7 +413,7 @@
             this.listViewCoordenadores.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.listViewCoordenadores.MultiSelect = false;
             this.listViewCoordenadores.Name = "listViewCoordenadores";
-            this.listViewCoordenadores.Size = new System.Drawing.Size(912, 188);
+            this.listViewCoordenadores.Size = new System.Drawing.Size(912, 193);
             this.listViewCoordenadores.TabIndex = 0;
             this.listViewCoordenadores.UseCompatibleStateImageBehavior = false;
             this.listViewCoordenadores.View = System.Windows.Forms.View.Details;
@@ -458,7 +468,7 @@
             // 
             this.lblTotal.AutoSize = true;
             this.lblTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold);
-            this.lblTotal.Location = new System.Drawing.Point(20, 1031);
+            this.lblTotal.Location = new System.Drawing.Point(17, 660);
             this.lblTotal.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTotal.Name = "lblTotal";
             this.lblTotal.Size = new System.Drawing.Size(210, 18);
@@ -475,16 +485,6 @@
             this.btnFechar.Text = "Fechar";
             this.btnFechar.UseVisualStyleBackColor = true;
             this.btnFechar.Click += new System.EventHandler(this.btnFechar_Click);
-            // 
-            // txtStatusRegistoCriminal
-            // 
-            this.txtStatusRegistoCriminal.Enabled = false;
-            this.txtStatusRegistoCriminal.Location = new System.Drawing.Point(208, 360);
-            this.txtStatusRegistoCriminal.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.txtStatusRegistoCriminal.Name = "txtStatusRegistoCriminal";
-            this.txtStatusRegistoCriminal.ReadOnly = true;
-            this.txtStatusRegistoCriminal.Size = new System.Drawing.Size(132, 27);
-            this.txtStatusRegistoCriminal.TabIndex = 19;
             // 
             // FormGerirCoordenadores
             // 
