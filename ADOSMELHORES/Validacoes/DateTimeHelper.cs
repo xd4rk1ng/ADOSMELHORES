@@ -7,15 +7,18 @@ using System.Windows.Forms;
 
 namespace ADOSMELHORES.Validacoes
 {
-    /// Validações no DateTime e DateTimePicker
-    
+    /// <summary>
+    /// Helper para operações com DateTime e DateTimePicker
+    /// </summary>
     public static class DateTimeHelper
     {
-        // Limita um valor DateTime dentro de um range mínimo e máximo
-        // <param name="value">Valor a limitar</param>
-        // <param name="min">Valor mínimo</param>
-        // <param name="max">Valor máximo</param>
-        // <returns>Valor limitado dentro do range</returns>
+        /// <summary>
+        /// Limita um valor DateTime dentro de um range mínimo e máximo
+        /// </summary>
+        /// <param name="value">Valor a limitar</param>
+        /// <param name="min">Valor mínimo</param>
+        /// <param name="max">Valor máximo</param>
+        /// <returns>Valor limitado dentro do range</returns>
         public static DateTime Clamp(DateTime value, DateTime min, DateTime max)
         {
             if (value < min) return min;
@@ -23,10 +26,12 @@ namespace ADOSMELHORES.Validacoes
             return value;
         }
 
-        // Define o valor de um DateTimePicker de forma segura, fazendo clamp se necessário
-        // <param name="dateTimePicker">DateTimePicker a configurar</param>
-        // <param name="value">Valor desejado</param>
-        // <returns>True se conseguiu definir o valor exato, False se usou valor ajustado</returns>
+        /// <summary>
+        /// Define o valor de um DateTimePicker de forma segura, fazendo clamp se necessário
+        /// </summary>
+        /// <param name="dateTimePicker">DateTimePicker a configurar</param>
+        /// <param name="value">Valor desejado</param>
+        /// <returns>True se conseguiu definir o valor exato, False se usou valor ajustado</returns>
         public static bool DefinirValorSeguro(DateTimePicker dateTimePicker, DateTime value)
         {
             if (dateTimePicker == null)
@@ -62,38 +67,43 @@ namespace ADOSMELHORES.Validacoes
             }
         }
 
-        //public static ResultadoValidacao ValidarIntervalo(
-        //    DateTime data,
-        //    DateTime dataMinima,
-        //    DateTime dataMaxima,
-        //    string nomeCampo = "Data")
-        //{
-        //    if (data < dataMinima || data > dataMaxima)
-        //    {
-        //        return ResultadoValidacao.Erro(
-        //            $"{nomeCampo} deve estar entre {dataMinima:dd/MM/yyyy} e {dataMaxima:dd/MM/yyyy}.",
-        //            "Data Inválida");
-        //    }
+        /// <summary>
+        /// Valida se uma data está dentro de um intervalo
+        /// </summary>
+        public static ResultadoValidacao ValidarIntervalo(
+            DateTime data,
+            DateTime dataMinima,
+            DateTime dataMaxima,
+            string nomeCampo = "Data")
+        {
+            if (data < dataMinima || data > dataMaxima)
+            {
+                return ResultadoValidacao.Erro(
+                    $"{nomeCampo} deve estar entre {dataMinima:dd/MM/yyyy} e {dataMaxima:dd/MM/yyyy}.",
+                    "Data Inválida");
+            }
 
-        //    return ResultadoValidacao.Sucesso();
-        //}
+            return ResultadoValidacao.Sucesso();
+        }
 
-        
-        //public static ResultadoValidacao ValidarOrdemDatas(
-        //    DateTime dataInicio,
-        //    DateTime dataFim,
-        //    string nomeCampoInicio = "Data de início",
-        //    string nomeCampoFim = "Data de fim")
-        //{
-        //    if (dataInicio >= dataFim)
-        //    {
-        //        return ResultadoValidacao.Erro(
-        //            $"{nomeCampoInicio} deve ser anterior a {nomeCampoFim}.",
-        //            "Datas Inválidas");
-        //    }
+        /// <summary>
+        /// Valida se a data de início é anterior à data de fim
+        /// </summary>
+        public static ResultadoValidacao ValidarOrdemDatas(
+            DateTime dataInicio,
+            DateTime dataFim,
+            string nomeCampoInicio = "Data de início",
+            string nomeCampoFim = "Data de fim")
+        {
+            if (dataInicio >= dataFim)
+            {
+                return ResultadoValidacao.Erro(
+                    $"{nomeCampoInicio} deve ser anterior a {nomeCampoFim}.",
+                    "Datas Inválidas");
+            }
 
-        //    return ResultadoValidacao.Sucesso();
-        //}
+            return ResultadoValidacao.Sucesso();
+        }
 
         /// <summary>
         /// Valida se uma data não está no passado
@@ -115,22 +125,24 @@ namespace ADOSMELHORES.Validacoes
             return ResultadoValidacao.Sucesso();
         }
 
-        
-        //public static ResultadoValidacao ValidarDataPassada(
-        //    DateTime data,
-        //    DateTime? dataReferencia = null,
-        //    string nomeCampo = "Data")
-        //{
-        //    DateTime referencia = dataReferencia ?? DateTime.Now;
+        /// <summary>
+        /// Valida se uma data não está no futuro
+        /// </summary>
+        public static ResultadoValidacao ValidarDataPassada(
+            DateTime data,
+            DateTime? dataReferencia = null,
+            string nomeCampo = "Data")
+        {
+            DateTime referencia = dataReferencia ?? DateTime.Now;
 
-        //    if (data.Date > referencia.Date)
-        //    {
-        //        return ResultadoValidacao.Erro(
-        //            $"{nomeCampo} não pode estar no futuro.",
-        //            "Data Inválida");
-        //    }
+            if (data.Date > referencia.Date)
+            {
+                return ResultadoValidacao.Erro(
+                    $"{nomeCampo} não pode estar no futuro.",
+                    "Data Inválida");
+            }
 
-        //    return ResultadoValidacao.Sucesso();
-        //}
+            return ResultadoValidacao.Sucesso();
+        }
     }
 }
