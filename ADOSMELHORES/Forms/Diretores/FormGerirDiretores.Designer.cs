@@ -48,10 +48,10 @@ namespace ADOSMELHORES.Forms.Diretores
             this.btnAlterar = new System.Windows.Forms.Button();
             this.btnInserir = new System.Windows.Forms.Button();
             this.grpListaDiretores = new System.Windows.Forms.GroupBox();
+            this.lblTotalDiretor = new System.Windows.Forms.Label();
             this.lblTotalDiretores = new System.Windows.Forms.Label();
             this.dgvDiretores = new System.Windows.Forms.DataGridView();
             this.btnFechar = new System.Windows.Forms.Button();
-            this.lblTotalDiretor = new System.Windows.Forms.Label();
             this.grpDadosDiretor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numSalarioBase)).BeginInit();
             this.grpAcoes.SuspendLayout();
@@ -411,6 +411,17 @@ namespace ADOSMELHORES.Forms.Diretores
             this.grpListaDiretores.TabStop = false;
             this.grpListaDiretores.Text = "Lista de Diretores";
             // 
+            // lblTotalDiretor
+            // 
+            this.lblTotalDiretor.AutoSize = true;
+            this.lblTotalDiretor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold);
+            this.lblTotalDiretor.Location = new System.Drawing.Point(20, 182);
+            this.lblTotalDiretor.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblTotalDiretor.Name = "lblTotalDiretor";
+            this.lblTotalDiretor.Size = new System.Drawing.Size(163, 18);
+            this.lblTotalDiretor.TabIndex = 4;
+            this.lblTotalDiretor.Text = "Total de Diretores: 0";
+            // 
             // lblTotalDiretores
             // 
             this.lblTotalDiretores.AutoSize = true;
@@ -446,17 +457,6 @@ namespace ADOSMELHORES.Forms.Diretores
             this.btnFechar.Text = "Fechar";
             this.btnFechar.UseVisualStyleBackColor = true;
             this.btnFechar.Click += new System.EventHandler(this.btnFechar_Click);
-            // 
-            // lblTotalDiretor
-            // 
-            this.lblTotalDiretor.AutoSize = true;
-            this.lblTotalDiretor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold);
-            this.lblTotalDiretor.Location = new System.Drawing.Point(20, 182);
-            this.lblTotalDiretor.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblTotalDiretor.Name = "lblTotalDiretor";
-            this.lblTotalDiretor.Size = new System.Drawing.Size(163, 18);
-            this.lblTotalDiretor.TabIndex = 4;
-            this.lblTotalDiretor.Text = "Total de Diretores: 0";
             // 
             // FormGerirDiretores
             // 

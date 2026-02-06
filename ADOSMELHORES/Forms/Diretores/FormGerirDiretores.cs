@@ -94,7 +94,7 @@ namespace ADOSMELHORES.Forms.Diretores
             dgvDiretores.Columns.Add(new DataGridViewTextBoxColumn
             {
                 DataPropertyName = "AreasDiretoriaString",
-                HeaderText = "Áreas",
+                HeaderText = "Áreas de Direção",
                 Width = 200
             });
             
@@ -112,6 +112,17 @@ namespace ADOSMELHORES.Forms.Diretores
                 DataPropertyName = "Contacto",
                 HeaderText = "Contacto",
                 Width = 100
+            });
+
+            dgvDiretores.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = "DataFimRegistoCrim",
+                HeaderText = "Registo Criminal",
+                Width = 120,
+                DefaultCellStyle = new DataGridViewCellStyle
+                {
+                    Format = "dd/MM/yyyy"
+                }
             });
         }
 
