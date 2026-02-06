@@ -28,7 +28,7 @@ namespace ADOSMELHORES.Modelos.Despesas
             despesasFisicas = new List<DespesaFisica>();
         }
 
-        // ========== DESPESAS FÍSICAS (MANUAIS) ==========
+        // DESPESAS FÍSICAS (MANUAIS) 
                
         public void AdicionarDespesaFisica(DespesaFisica despesa)
         {
@@ -122,6 +122,7 @@ namespace ADOSMELHORES.Modelos.Despesas
             // }
         }
 
+        // REMOVER ESTA FUNÇÃO SE NÃO FOR USADA
         // Busca despesa física por ID
         public DespesaFisica BuscarDespesaFisicaPorId(int id)
         {
@@ -135,9 +136,8 @@ namespace ADOSMELHORES.Modelos.Despesas
             // }
         }
 
-        // ========== DESPESAS COM FUNCIONÁRIOS (AUTOMÁTICO) ==========
-        // Também precisa mudar com migração BD
-        // Pois busca diretamente da lista de funcionários da Empresa
+
+        //  DESPESAS COM FUNCIONÁRIOS (AUTOMÁTICO)
 
         // Calcula despesas com diretores do mês
         public decimal CalcularDespesasDiretores()
@@ -156,7 +156,6 @@ namespace ADOSMELHORES.Modelos.Despesas
         // Calcula despesas com coordenadores do mês
         public decimal CalcularDespesasCoordenadores()
         {
-            // TODO: Implementar quando houver coordenadores na Empresa
             var coordenadores = empresa.ObterCoordenadores();
             return coordenadores.Sum(d => d.CalcularCustoMensal());
         }
@@ -177,7 +176,7 @@ namespace ADOSMELHORES.Modelos.Despesas
                    CalcularDespesasFormadores(mes, ano);
         }
 
-        // ========== RELATÓRIOS ==========
+        //  RELATÓRIOS 
         // Gera relatório completo de um mês
         public RelatorioDespesas GerarRelatorioMes(int mes, int ano)
         {
@@ -191,22 +190,23 @@ namespace ADOSMELHORES.Modelos.Despesas
             };
         }
 
+        // REMOVER ESTA FUNÇÃO SE NÃO FOR USADA
         // Gera relatório do mês atual
-        public RelatorioDespesas GerarRelatorioMesAtual()
-        {
-            return GerarRelatorioMes(DateTime.Now.Month, DateTime.Now.Year);
-        }
+        //public RelatorioDespesas GerarRelatorioMesAtual()
+        //{
+        //    return GerarRelatorioMes(DateTime.Now.Month, DateTime.Now.Year);
+        //}
 
         // Gera relatório anual (todos os 12 meses)
-        public List<RelatorioDespesas> GerarRelatorioAnual(int ano)
-        {
-            var relatorios = new List<RelatorioDespesas>();
-            for (int mes = 1; mes <= 12; mes++)
-            {
-                relatorios.Add(GerarRelatorioMes(mes, ano));
-            }
-            return relatorios;
-        }
+        //public List<RelatorioDespesas> GerarRelatorioAnual(int ano)
+        //{
+        //    var relatorios = new List<RelatorioDespesas>();
+        //    for (int mes = 1; mes <= 12; mes++)
+        //    {
+        //        relatorios.Add(GerarRelatorioMes(mes, ano));
+        //    }
+        //    return relatorios;
+        //}
 
         // Gera relatório dos últimos N meses
         public List<RelatorioDespesas> GerarRelatorioUltimosMeses(int quantidadeMeses)
@@ -253,41 +253,42 @@ namespace ADOSMELHORES.Modelos.Despesas
             File.WriteAllText(caminhoArquivo, csv.ToString(), Encoding.UTF8);
         }
 
+        //REMOVER ESTA FUNÇÃO SE NÃO FOR USADA
         // Exporta relatório anual para CSV
-        public void ExportarRelatorioAnualCSV(int ano, string caminhoArquivo)
-        {
-            var relatorios = GerarRelatorioAnual(ano);
+        //public void ExportarRelatorioAnualCSV(int ano, string caminhoArquivo)
+        //{
+        //    var relatorios = GerarRelatorioAnual(ano);
 
-            StringBuilder csv = new StringBuilder();
-            csv.AppendLine($"RELATÓRIO ANUAL DE DESPESAS - {ano}");
-            csv.AppendLine();
-            csv.AppendLine("Mês;Despesas Físicas;Diretores;Secretárias;Coordenadores;Formadores;Total");
+        //    StringBuilder csv = new StringBuilder();
+        //    csv.AppendLine($"RELATÓRIO ANUAL DE DESPESAS - {ano}");
+        //    csv.AppendLine();
+        //    csv.AppendLine("Mês;Despesas Físicas;Diretores;Secretárias;Coordenadores;Formadores;Total");
 
-            foreach (var r in relatorios)
-            {
-                csv.AppendLine($"{r.NomeMes};€{r.DespesasFisicas:N2};€{r.DespesasDiretores:N2};€{r.DespesasSecretarias:N2};€{r.DespesasCoordenadores:N2};€{r.DespesasFormadores:N2};€{r.TotalDespesas:N2}");
-            }
+        //    foreach (var r in relatorios)
+        //    {
+        //        csv.AppendLine($"{r.NomeMes};€{r.DespesasFisicas:N2};€{r.DespesasDiretores:N2};€{r.DespesasSecretarias:N2};€{r.DespesasCoordenadores:N2};€{r.DespesasFormadores:N2};€{r.TotalDespesas:N2}");
+        //    }
 
-            csv.AppendLine();
-            csv.AppendLine($"TOTAL DO ANO;;;;;€{CalcularTotalAno(ano):N2}");
-            csv.AppendLine($"MÉDIA MENSAL;;;;;€{CalcularMediaMensalAno(ano):N2}");
+        //    csv.AppendLine();
+        //    csv.AppendLine($"TOTAL DO ANO;;;;;€{CalcularTotalAno(ano):N2}");
+        //    csv.AppendLine($"MÉDIA MENSAL;;;;;€{CalcularMediaMensalAno(ano):N2}");
 
-            File.WriteAllText(caminhoArquivo, csv.ToString(), Encoding.UTF8);
-        }
+        //    File.WriteAllText(caminhoArquivo, csv.ToString(), Encoding.UTF8);
+        //}
 
         // ========== ANÁLISES ==========
 
-        public decimal CalcularMediaMensalAno(int ano)
-        {
-            var relatorios = GerarRelatorioAnual(ano);
-            return relatorios.Average(r => r.TotalDespesas);
-        }
+        //public decimal CalcularMediaMensalAno(int ano)
+        //{
+        //    var relatorios = GerarRelatorioAnual(ano);
+        //    return relatorios.Average(r => r.TotalDespesas);
+        //}
 
-        public decimal CalcularTotalAno(int ano)
-        {
-            var relatorios = GerarRelatorioAnual(ano);
-            return relatorios.Sum(r => r.TotalDespesas);
-        }
+        //public decimal CalcularTotalAno(int ano)
+        //{
+        //    var relatorios = GerarRelatorioAnual(ano);
+        //    return relatorios.Sum(r => r.TotalDespesas);
+        //}
 
         // ========== MÉTODOS AUXILIARES ==========
 
@@ -309,31 +310,31 @@ namespace ADOSMELHORES.Modelos.Despesas
         }
 
         // Limpa todas as despesas físicas (usar com cuidado!)
-        public void LimparDespesasFisicas()
-        {
-            // TEMPORÁRIO - Limpa lista em memória
-            despesasFisicas.Clear();
+        //public void LimparDespesasFisicas()
+        //{
+        //    // TEMPORÁRIO - Limpa lista em memória
+        //    despesasFisicas.Clear();
 
-            // MIGRAÇÃO BD: DELETE FROM DespesasFisicas
-            // using (var context = new DatabaseContext())
-            // {
-            //     context.DespesasFisicas.RemoveRange(context.DespesasFisicas);
-            //     context.SaveChanges();
-            // }
-        }
+        //    // MIGRAÇÃO BD: DELETE FROM DespesasFisicas
+        //    // using (var context = new DatabaseContext())
+        //    // {
+        //    //     context.DespesasFisicas.RemoveRange(context.DespesasFisicas);
+        //    //     context.SaveChanges();
+        //    // }
+        //}
 
         // Obtém quantidade de despesas físicas registradas
-        public int ObterQuantidadeDespesasFisicas()
-        {
-            // TEMPORÁRIO - Conta da lista em memória
-            return despesasFisicas.Count;
+        //public int ObterQuantidadeDespesasFisicas()
+        //{
+        //    // TEMPORÁRIO - Conta da lista em memória
+        //    return despesasFisicas.Count;
 
-            // MIGRAÇÃO BD: SELECT COUNT(*)
-            // using (var context = new DatabaseContext())
-            // {
-            //     return context.DespesasFisicas.Count();
-            // }
-        }
+        //    // MIGRAÇÃO BD: SELECT COUNT(*)
+        //    // using (var context = new DatabaseContext())
+        //    // {
+        //    //     return context.DespesasFisicas.Count();
+        //    // }
+        //}
 
         // ========== DADOS DE EXEMPLO (REMOVER EM PRODUÇÃO) ==========
         // MÉTODO TEMPORÁRIO - Apenas para testes

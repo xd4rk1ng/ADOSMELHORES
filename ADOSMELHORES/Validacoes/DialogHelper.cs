@@ -16,29 +16,27 @@ namespace ADOSMELHORES.Validacoes
     public static class DialogHelper
     {
         //Diálogos de confirmação
-        
-        //public static bool ConfirmarAcao(string mensagem, string titulo = "Confirmação")
-        //{
-        //    var resultado = MessageBox.Show(
-        //        mensagem,
-        //        titulo,
-        //        MessageBoxButtons.YesNo,
-        //        MessageBoxIcon.Question);
 
-        //    return resultado == DialogResult.Yes;
-        //}
+        public static bool ConfirmarAcao(string mensagem, string titulo = "Confirmação")
+        {
+            var resultado = MessageBox.Show(
+                mensagem,
+                titulo,
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
 
-        ///// <summary>
-        ///// Confirma remoção de item
-        ///// </summary>
-        //public static bool ConfirmarRemocao(string nomeItem, string tipoItem = "item")
-        //{
-        //    return ConfirmarAcao(
-        //        $"Tem certeza que deseja remover {tipoItem} '{nomeItem}'?",
-        //        "Confirmar Remoção");
-        //}
+            return resultado == DialogResult.Yes;
+        }
 
-               
+        // Confirma remoção de item
+        public static bool ConfirmarRemocao(string nomeItem, string tipoItem = "item")
+        {
+            return ConfirmarAcao(
+                $"Tem certeza que deseja remover {tipoItem} '{nomeItem}'?",
+                "Confirmar Remoção");
+        }
+
+
 
         // Mostra mensagens
 
