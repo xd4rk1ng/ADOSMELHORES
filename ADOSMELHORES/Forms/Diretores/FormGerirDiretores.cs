@@ -264,11 +264,23 @@ namespace ADOSMELHORES.Forms.Diretores
 
             try
             {
-                // Verificação adicional antes de adicionar
-                if (diretorTemporario == null)
+                // Verificar NIF antes de inserir
+                if (!ValidarCampos.TentarObterNIF(txtNIF.Text, out int nifNumero))
                 {
-                    throw new InvalidOperationException("O diretor temporário está null!");
+                    DialogHelper.MostrarAviso("NIF inválido.", "Validação");
+                    txtNIF.Focus();
+                    return;
                 }
+
+                if (NifDuplicado(nifNumero))
+                {
+                    DialogHelper.MostrarAviso($"O NIF '{nifNumero}' já está registado por outro funcionário.", "NIF Duplicado");
+                    txtNIF.Focus();
+                    return;
+                }
+
+                // Atribuir NIF ao diretor temporário antes de adicionar
+                diretorTemporario.Nif = nifNumero;
 
                 empresa.AdicionarFuncionario(diretorTemporario);
                 AtualizarListaDiretores();
@@ -296,8 +308,24 @@ namespace ADOSMELHORES.Forms.Diretores
             if (!ValidarCamposForm())
                 return;
 
+            // Validar NIF e duplicidade antes de aplicar alterações
+            if (!ValidarCampos.TentarObterNIF(txtNIF.Text, out int nifNumero))
+            {
+                DialogHelper.MostrarAviso("NIF inválido.", "Validação");
+                txtNIF.Focus();
+                return;
+            }
+
+            if (NifDuplicado(nifNumero, diretorSelecionado.Id))
+            {
+                DialogHelper.MostrarAviso($"O NIF '{nifNumero}' já está registado por outro diretor.", "NIF Duplicado");
+                txtNIF.Focus();
+                return;
+            }
+
             try
             {
+                diretorSelecionado.Nif = nifNumero;
                 diretorSelecionado.Nome = txtNome.Text.Trim();
                 diretorSelecionado.Morada = txtMorada.Text.Trim();
                 diretorSelecionado.Contacto = txtContacto.Text.Trim();
@@ -313,14 +341,12 @@ namespace ADOSMELHORES.Forms.Diretores
                 }
 
                 // Atualizar alocação de secretárias
-                // Remover todas as secretárias atuais
                 var secretariasAtuais = diretorSelecionado.SecretariasSubordinadas.ToList();
                 foreach (var sec in secretariasAtuais)
                 {
                     diretorSelecionado.RemoverSecretaria(sec);
                 }
 
-                // Adicionar secretárias selecionadas
                 foreach (var item in checkedListBoxSecretarias.CheckedItems)
                 {
                     if (item is Secretaria secretaria)
@@ -703,6 +729,12 @@ namespace ADOSMELHORES.Forms.Diretores
             this.Close();
         }
 
+        private bool NifDuplicado(int nif, int? excludeId = null)
+        {
+            return empresa.Funcionarios
+                .OfType<Diretor>()
+                .Any(d => d.Nif == nif && (!excludeId.HasValue || d.Id != excludeId.Value));
+        }
     }
         
 }
