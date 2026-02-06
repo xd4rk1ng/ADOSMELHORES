@@ -1,4 +1,4 @@
-﻿using ADOSMELHORES.Modelos;
+using ADOSMELHORES.Modelos;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -23,14 +23,26 @@ namespace ADOSMELHORES.Forms.Controls
             Todos = 0,
             ContratosValidos,
             RegCrimExpirados,
-            Validos
+            SituacaoRegular
         }
+        private Dictionary<Filtros, string> filtros = new Dictionary<Filtros, string>
+        {
+            { Filtros.Todos,  "Todos"  },
+            { Filtros.ContratosValidos,  "Contratos Válidos"  },
+            { Filtros.RegCrimExpirados, "Reg. Criminais Expirados" },
+            { Filtros.SituacaoRegular, "Situação Regularizada" }
+        };
+
         public ControlVistaGeral(Empresa empresa)
         {
             _empresa = empresa;
             _filtroSelecionado = Filtros.Todos;
             InitializeComponent();
-            cmbFiltros.DataSource = Enum.GetValues(typeof(Filtros));
+
+            cmbFiltros.DataSource = filtros.ToList();
+            cmbFiltros.DisplayMember = "Value";
+            cmbFiltros.ValueMember = "Key";
+
 
 
             lstFuncionarios.View = View.Details;
@@ -53,7 +65,7 @@ namespace ADOSMELHORES.Forms.Controls
             switch (filtroSelecionado)
             {
                 case Filtros.Todos:
-                    listaFiltrada = _empresa.Funcionarios.Where(f => 1==1).ToList();
+                    listaFiltrada = _empresa.Funcionarios.ToList();
                     break;
                 case Filtros.ContratosValidos:
                     listaFiltrada = _empresa.Funcionarios.Where(f => f.ContratoValido(DateTime.Now)).ToList();
@@ -61,7 +73,7 @@ namespace ADOSMELHORES.Forms.Controls
                 case Filtros.RegCrimExpirados:
                     listaFiltrada = _empresa.Funcionarios.Where(f => f.RegistoCriminalExpirado(DateTime.Now)).ToList();
                     break;
-                case Filtros.Validos:
+                case Filtros.SituacaoRegular:
                     listaFiltrada = _empresa.Funcionarios.Where(f => f.ContratoValido(DateTime.Now) && !f.RegistoCriminalExpirado(DateTime.Now)).ToList();
                     break;
             }
@@ -105,8 +117,11 @@ namespace ADOSMELHORES.Forms.Controls
 
         private void cmbFiltros_SelectedIndexChanged(object sender, EventArgs e)
         {
-            _filtroSelecionado = (Filtros)cmbFiltros.SelectedItem;
-            AtualizarDados(_filtroSelecionado);
+            if (cmbFiltros.SelectedValue is Filtros filtro)
+            {
+                _filtroSelecionado = filtro;
+                AtualizarDados(_filtroSelecionado);
+            }
         }
     }
 }
