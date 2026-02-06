@@ -352,6 +352,22 @@ namespace ADOSMELHORES.Forms.Secretarias
             if (!ValidarCamposForm())
                 return;
 
+            // validar NIF com segurança
+            if (!ValidarCampos.TentarObterNIF(txtNIF.Text, out int nif))
+            {
+                DialogHelper.MostrarAviso("NIF inválido.");
+                txtNIF.Focus();
+                return;
+            }
+
+            // verificar duplicado entre secretárias
+            if (NifDuplicado(nif))
+            {
+                DialogHelper.MostrarAviso("Já existe uma secretária com este NIF.", "NIF Duplicado");
+                txtNIF.Focus();
+                return;
+            }
+
             try
             {
                 // Obter diretor selecionado (apenas 1)
@@ -364,7 +380,7 @@ namespace ADOSMELHORES.Forms.Secretarias
 
                 var novaSecretaria = new Secretaria(
                     empresa.ObterProximoID(),
-                    int.Parse(txtNIF.Text),
+                    nif, // usa nif validado
                     txtNome.Text.Trim(),
                     txtMorada.Text.Trim(),
                     txtContacto.Text.Trim(),
@@ -396,7 +412,7 @@ namespace ADOSMELHORES.Forms.Secretarias
                 DialogHelper.MostrarSucesso($"Secretária '{novaSecretaria.Nome}' inserida com sucesso!");
             }
             catch (Exception ex)
-            {                
+            {
                 DialogHelper.ErroOperacao("inserir secretária", ex);
             }
         }
@@ -412,6 +428,22 @@ namespace ADOSMELHORES.Forms.Secretarias
             if (!ValidarCamposForm())
                 return;
 
+            // validar NIF com segurança
+            if (!ValidarCampos.TentarObterNIF(txtNIF.Text, out int nif))
+            {
+                DialogHelper.MostrarAviso("NIF inválido.");
+                txtNIF.Focus();
+                return;
+            }
+
+            // verificar duplicado excluindo a própria secretária
+            if (NifDuplicado(nif, secretariaSelecionada.Id))
+            {
+                DialogHelper.MostrarAviso("Outro registo já utiliza este NIF. Corrija o NIF.", "NIF Duplicado");
+                txtNIF.Focus();
+                return;
+            }
+
             try
             {
                 // Remover da lista do diretor antigo
@@ -421,7 +453,7 @@ namespace ADOSMELHORES.Forms.Secretarias
                 }
 
                 secretariaSelecionada.Nome = txtNome.Text.Trim();
-                secretariaSelecionada.Nif = int.Parse(txtNIF.Text);
+                secretariaSelecionada.Nif = nif; // usa nif validado
                 secretariaSelecionada.Morada = txtMorada.Text.Trim();
                 secretariaSelecionada.Contacto = txtContacto.Text.Trim();
                 secretariaSelecionada.SalarioBase = numSalarioBase.Value;
@@ -565,6 +597,10 @@ namespace ADOSMELHORES.Forms.Secretarias
             this.Close();
         }
 
-
+        private bool NifDuplicado(int nif, int? ignorarId = null)
+        {
+            var secretarias = empresa.ObterSecretarias();
+            return secretarias.Any(s => s.Nif == nif && (!ignorarId.HasValue || s.Id != ignorarId.Value));
+        }
     }
 }

@@ -28,7 +28,7 @@ namespace ADOSMELHORES.Forms
             InitializeComponent();
             _logout = false;
             controlPanel.BackColor = Color.FromArgb(246, 252, 249);
-            pictureLogo.SizeMode = PictureBoxSizeMode.CenterImage;
+            //pictureLogo.SizeMode = PictureBoxSizeMode.CenterImage;
 
             // Bloquear maximização / redimensionamento
             this.FormBorderStyle = FormBorderStyle.FixedSingle; // impede redimensionamento pelas bordas
