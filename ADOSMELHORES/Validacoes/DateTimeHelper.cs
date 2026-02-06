@@ -144,5 +144,35 @@ namespace ADOSMELHORES.Validacoes
 
             return ResultadoValidacao.Sucesso();
         }
+
+        /// <summary>
+        /// Conta os dias úteis (segunda a sexta) entre duas datas inclusivas.
+        /// Não considera feriados.
+        /// </summary>
+        public static int CountBusinessDays(DateTime start, DateTime end)
+        {
+            if (end < start) return 0;
+
+            int count = 0;
+            for (var date = start.Date; date <= end.Date; date = date.AddDays(1))
+            {
+                if (date.DayOfWeek != DayOfWeek.Saturday &&
+                    date.DayOfWeek != DayOfWeek.Sunday)
+                {
+                    count++;
+                }
+            }
+            return count;
+        }
+
+        /// <summary>
+        /// Conta os dias úteis do mês de uma data (do 1º ao último dia do mês).
+        /// </summary>
+        public static int CountBusinessDaysInMonth(DateTime anyDateInMonth)
+        {
+            var first = new DateTime(anyDateInMonth.Year, anyDateInMonth.Month, 1);
+            var last = first.AddMonths(1).AddDays(-1);
+            return CountBusinessDays(first, last);
+        }
     }
 }

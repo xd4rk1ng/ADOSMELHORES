@@ -115,10 +115,6 @@ namespace ADOSMELHORES.Forms.Controls
             {
                 MessageBox.Show(sb.ToString(), "Alerta - Data Simulada", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            else
-            {
-                MessageBox.Show($"Data simulada avançada para {_dataSimulada:dd/MM/yyyy}. Nenhum contrato ou registo atinge término nesta data.", "Sem alertas", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
         }
 
         private void btnReset_Click(object sender, EventArgs e)

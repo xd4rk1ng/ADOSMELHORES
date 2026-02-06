@@ -161,20 +161,20 @@ namespace ADOSMELHORES.Modelos.Despesas
             return coordenadores.Sum(d => d.CalcularCustoMensal());
         }
 
-        // Calcula despesas com formadores do mês
-        public decimal CalcularDespesasFormadores()
+        // Calcula despesas com formadores do mês (agora por mes/ano)
+        public decimal CalcularDespesasFormadores(int mes, int ano)
         {
             var formadores = empresa.ObterFormadores();
-            return formadores.Sum(f => f.CalcularCustoMensal());
+            return formadores.Sum(f => f.CalcularCustoMensal(mes, ano));
         }
 
         // Calcula total de despesas com funcionários
-        public decimal CalcularTotalFuncionarios()
+        public decimal CalcularTotalFuncionarios(int mes, int ano)
         {
             return CalcularDespesasDiretores() +
                    CalcularDespesasSecretarias() +
                    CalcularDespesasCoordenadores() +
-                   CalcularDespesasFormadores();
+                   CalcularDespesasFormadores(mes, ano);
         }
 
         // ========== RELATÓRIOS ==========
@@ -187,7 +187,7 @@ namespace ADOSMELHORES.Modelos.Despesas
                 DespesasDiretores = CalcularDespesasDiretores(),
                 DespesasSecretarias = CalcularDespesasSecretarias(),
                 DespesasCoordenadores = CalcularDespesasCoordenadores(),
-                DespesasFormadores = CalcularDespesasFormadores()
+                DespesasFormadores = CalcularDespesasFormadores(mes, ano) // usa mês/ano solicitado
             };
         }
 

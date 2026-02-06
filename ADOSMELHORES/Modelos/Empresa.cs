@@ -30,8 +30,6 @@ namespace ADOSMELHORES.Modelos
             funcionarios = new List<Funcionario>();
             DataSimulada = DateTime.Now;
 
-            // ⚠️ TEMPORÁRIO - Inicializa gestor em memória
-            // 🔄 MIGRAÇÃO BD: Continuar inicializando, mas dados virão do BD
             gestorDespesas = new GestorDespesas(this);
         }
 
@@ -199,11 +197,11 @@ namespace ADOSMELHORES.Modelos
         {
             var funcionarios = Funcionarios;
             var sb = new StringBuilder();
-            sb.AppendLine("Id,Nome,DataFimContrato,DataFimRegistoCrim");
+            sb.AppendLine("Id,Nome,Cargo,DataFimContrato,DataFimRegistoCrim");
 
             foreach (var f in funcionarios)
             {
-                sb.AppendLine($"{f.Id},{EscapeCsv(f.Nome)},{f.DataFimContrato:yyyy-MM-dd},{f.DataFimRegistoCrim:yyyy-MM-dd}");
+                sb.AppendLine($"{f.Id},{EscapeCsv(f.Nome)},{f.GetType().Name},{f.DataFimContrato:yyyy-MM-dd},{f.DataFimRegistoCrim:yyyy-MM-dd}");
             }
 
             File.WriteAllText(caminhoFicheiro, sb.ToString(), Encoding.UTF8);
