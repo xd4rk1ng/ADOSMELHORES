@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace ADOSMELHORES.Modelos
@@ -31,7 +31,6 @@ namespace ADOSMELHORES.Modelos
             DateTime dataIniContrato,
             DateTime dataFimContrato,
             DateTime dataFimRegistoCrim,
-            DateTime dataNascimento,
             string area,
             Diretor diretorReporta = null)
             : base(
@@ -43,8 +42,7 @@ namespace ADOSMELHORES.Modelos
                   salarioBase,
                   dataIniContrato,
                   dataFimContrato,
-                  dataFimRegistoCrim,
-                  dataNascimento
+                  dataFimRegistoCrim
             )
         {
             Area = area;

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using ADOSMELHORES.Validacoes;
 
 namespace ADOSMELHORES.Modelos
@@ -26,7 +26,6 @@ namespace ADOSMELHORES.Modelos
             DateTime dataIniContrato,
             DateTime dataFimContrato,
             DateTime dataFimRegistoCrim,
-            DateTime dataNascimento,
             string areaLeciona,
             Disponibilidade disponibilidade,
             decimal valorHora)
@@ -39,8 +38,8 @@ namespace ADOSMELHORES.Modelos
                   salarioBase,
                   dataIniContrato,
                   dataFimContrato,
-                  dataFimRegistoCrim,
-                  dataNascimento
+                  dataFimRegistoCrim
+                  
             )
         {
             AreaLeciona = areaLeciona;

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -389,7 +389,6 @@ namespace ADOSMELHORES.Forms.Secretarias
                     dtpDataFimContrato.Value,
                     DateTime.Now, // DataIniContrato
                     dtpDataRegistoCriminal.Value,
-                    DateTime.Now, // DataNascimento - você pode adicionar um campo se necessário
                     listBoxArea.SelectedItem.ToString(),
                     diretorSelecionado
                 );

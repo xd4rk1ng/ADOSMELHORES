@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace ADOSMELHORES.Modelos
@@ -18,7 +18,6 @@ namespace ADOSMELHORES.Modelos
             DateTime dataIniContrato,
             DateTime dataFimContrato,
             DateTime dataFimRegistoCrim,
-            DateTime dataNascimento,
             string areaCoordenacao)
             : base(
                   id,
@@ -29,8 +28,7 @@ namespace ADOSMELHORES.Modelos
                   salarioBase,
                   dataIniContrato,
                   dataFimContrato,
-                  dataFimRegistoCrim,
-                  dataNascimento
+                  dataFimRegistoCrim
             )
         {
             AreaCoordenacao = areaCoordenacao;

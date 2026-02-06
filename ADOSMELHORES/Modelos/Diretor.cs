@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace ADOSMELHORES.Modelos
@@ -51,8 +51,8 @@ namespace ADOSMELHORES.Modelos
                 salarioBase,
                 dataIniContrato,
                 dataFimContrato,
-                dataFimRegistoCrim,
-                dataNascimento
+                dataFimRegistoCrim
+                
             )
         {
             IsencaoHorario = isencaoHorario;            
