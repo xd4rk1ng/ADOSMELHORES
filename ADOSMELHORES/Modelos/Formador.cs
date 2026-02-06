@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using ADOSMELHORES.Validacoes;
 
 namespace ADOSMELHORES.Modelos
@@ -39,6 +39,7 @@ namespace ADOSMELHORES.Modelos
                   dataIniContrato,
                   dataFimContrato,
                   dataFimRegistoCrim
+                  
             )
         {
             AreaLeciona = areaLeciona;

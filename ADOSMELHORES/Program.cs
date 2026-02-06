@@ -1,4 +1,4 @@
-﻿using ADOSMELHORES.Forms;
+using ADOSMELHORES.Forms;
 using ADOSMELHORES.Modelos;
 using System;
 using System.Collections.Generic;

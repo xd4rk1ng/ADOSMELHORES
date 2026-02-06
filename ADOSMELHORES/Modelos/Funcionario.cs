@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace ADOSMELHORES.Modelos
 {
@@ -14,6 +14,7 @@ namespace ADOSMELHORES.Modelos
             DateTime dataIniContrato,
             DateTime dataFimContrato,
             DateTime dataFimRegistoCrim
+
         )
         {
             Id = id;
