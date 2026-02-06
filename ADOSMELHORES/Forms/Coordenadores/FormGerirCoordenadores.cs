@@ -126,7 +126,7 @@ namespace ADOSMELHORES.Forms.Coordenadores
 
             if (NifDuplicado(nif))
             {
-                DialogHelper.MostrarAviso("Já existe um coordenador com este NIF.", "NIF Duplicado");
+                DialogHelper.MostrarAviso("Já existe um funcionário com este NIF.", "NIF Duplicado");
                 txtNIF.Focus();
                 return;
             }
@@ -475,9 +475,7 @@ namespace ADOSMELHORES.Forms.Coordenadores
 
         private bool NifDuplicado(int nif, int? excludeId = null)
         {
-            return empresa.Funcionarios
-                .OfType<Coordenador>()
-                .Any(c => c.Nif == nif && (!excludeId.HasValue || c.Id != excludeId.Value));
+            return empresa != null && empresa.NifDuplicado(nif, excludeId);
         }
 
 

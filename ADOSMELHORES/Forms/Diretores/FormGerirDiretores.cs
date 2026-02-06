@@ -731,9 +731,8 @@ namespace ADOSMELHORES.Forms.Diretores
 
         private bool NifDuplicado(int nif, int? excludeId = null)
         {
-            return empresa.Funcionarios
-                .OfType<Diretor>()
-                .Any(d => d.Nif == nif && (!excludeId.HasValue || d.Id != excludeId.Value));
+            // Usar verificação centralizada da Empresa (verifica todos os funcionários)
+            return empresa != null && empresa.NifDuplicado(nif, excludeId);
         }
     }
         

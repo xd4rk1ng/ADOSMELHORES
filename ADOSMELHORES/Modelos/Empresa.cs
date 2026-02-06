@@ -45,6 +45,12 @@ namespace ADOSMELHORES.Modelos
             funcionarios.Add(funcionario);
         }
 
+        // ===== Método centralizado para verificar NIF duplicado =====
+        public bool NifDuplicado(int nif, int? ignorarId = null)
+        {
+            return funcionarios.Any(f => f.Nif == nif && (!ignorarId.HasValue || f.Id != ignorarId.Value));
+        }
+
         // ===== Métodos para gerir Formadores =====
         public void AdicionarFuncionario(Formador novoFormador)
         {
@@ -217,7 +223,6 @@ namespace ADOSMELHORES.Modelos
         }
     }
 }
-
 
 
 
