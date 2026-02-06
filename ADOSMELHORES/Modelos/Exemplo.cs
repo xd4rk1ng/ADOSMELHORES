@@ -28,8 +28,7 @@ namespace ADOSMELHORES.Modelos
                 salarioBase,
                 dataIniContrato,
                 dataFimContrato,
-                dataFimRegistoCrim,
-                dataNascimento)
+                dataFimRegistoCrim)
         {
 
         }

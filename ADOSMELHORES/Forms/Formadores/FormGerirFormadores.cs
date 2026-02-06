@@ -52,6 +52,7 @@ namespace ADOSMELHORES.Forms.Formadores
 
             // Carregar dados iniciais
             AtualizarListaFormadores();
+
         }
 
 
@@ -325,7 +326,6 @@ namespace ADOSMELHORES.Forms.Formadores
                     DateTime.Now, // DataIniContrato
                     dtpDataFimContrato.Value, // DataFimContrato
                     dtpDataRegistoCriminal.Value, // DataFimRegistoCrim
-                    DateTime.Now.AddYears(-30), // DataNascimento (valor por defeito)
                     txtAreaLeciona.Text.Trim(), // areaLeciona
                     (Disponibilidade)cmbDisponibilidade.SelectedItem, // disponibilidade
                     numValorHora.Value // valorHora

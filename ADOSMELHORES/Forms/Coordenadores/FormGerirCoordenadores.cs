@@ -158,7 +158,6 @@ namespace ADOSMELHORES.Forms.Coordenadores
                     dataIniContrato: DateTime.Now,
                     dataFimContrato: dtpDataFimContrato.Value,
                     dataFimRegistoCrim: dtpDataRegistoCriminal.Value,
-                    dataNascimento: DateTime.Now.AddYears(-30),
                     areaCoordenacao: txtAreaCoordenacao.Text.Trim()
                 );
 
