@@ -25,7 +25,7 @@ namespace ADOSMELHORES.Forms.Secretarias
             //substitui por um evento Load do form
             this.Load += FormGerirSecretarias_Load;
         }
-        //novo
+        
         private void FormGerirSecretarias_Load(object sender, EventArgs e)
         {
             ConfigurarForm();
@@ -54,6 +54,8 @@ namespace ADOSMELHORES.Forms.Secretarias
 
             // Estado inicial dos botões
             btnInserir.Enabled = false;
+
+            LimparCampos();
         }
 
         private void ConfigurarDataGridView()

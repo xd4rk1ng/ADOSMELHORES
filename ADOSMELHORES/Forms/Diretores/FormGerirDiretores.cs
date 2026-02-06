@@ -38,9 +38,10 @@ namespace ADOSMELHORES.Forms.Diretores
             ConfigurarForm();
         }
 
+       
         private void ConfigurarForm()
         {
-            //novo
+            
             ValidarCampos.ConfigurarTextBoxNIF(txtNIF, obrigatorio: true);
             ValidarCampos.ConfigurarTextBoxContacto(txtContacto, obrigatorio: true);
 
@@ -49,7 +50,7 @@ namespace ADOSMELHORES.Forms.Diretores
 
             // Configurar evento para áreas de direção
             checkedListBoxAreasDiretoria.ItemCheck += checkedListBoxAreasDiretoria_ItemCheck;
-                       
+
             // Eventos para validação em tempo real para habilitar o botão Calcular Remuneração
             txtNome.TextChanged += ValidarCamposParaCalcular;
             txtMorada.TextChanged += ValidarCamposParaCalcular;
@@ -57,16 +58,17 @@ namespace ADOSMELHORES.Forms.Diretores
             numSalarioBase.ValueChanged += ValidarCamposParaCalcular;
             dtpDataFimContrato.ValueChanged += ValidarCamposParaCalcular;
             checkedListBoxAreasDiretoria.ItemCheck += ValidarCamposParaCalcular;
-            checkedListBoxSecretarias.ItemCheck += ValidarCamposParaCalcular;
-
+            
             // Carregar dados iniciais
             AtualizarListaDiretores();
 
             //Estado inicial dos botões Calcular Remuneração e Inserir Novo Diretor
             btnCalcularValor.Enabled = false;
-            btnInserir.Enabled = false;
+            btnInserir.Enabled = false;            
+            
+            LimparCampos();
         }
-                       
+
 
         private void ConfigurarDataGridView()
         {
@@ -131,6 +133,16 @@ namespace ADOSMELHORES.Forms.Diretores
 
         private void CarregarSecretariasDisponiveis()
         {
+            // Guardar secretárias atualmente selecionadas antes de limpar
+            var secretariasSelecionadas = new HashSet<int>();
+            foreach (var item in checkedListBoxSecretarias.CheckedItems)
+            {
+                if (item is Secretaria sec)
+                {
+                    secretariasSelecionadas.Add(sec.Id);
+                }
+            }
+
             checkedListBoxSecretarias.Items.Clear();
 
             var todasSecretarias = empresa.ObterSecretarias();
@@ -168,15 +180,25 @@ namespace ADOSMELHORES.Forms.Diretores
                 if (pertenceAreaSelecionada)
                 {
                     checkedListBoxSecretarias.Items.Add(secretaria);
+
+                    // Remarcar secretárias que estavam selecionadas antes
+                    if (secretariasSelecionadas.Contains(secretaria.Id))
+                    {
+                        int index = checkedListBoxSecretarias.Items.IndexOf(secretaria);
+                        if (index >= 0)
+                        {
+                            checkedListBoxSecretarias.SetItemChecked(index, true);
+                        }
+                    }
                 }
             }
             AtualizarEstadoBotoes();
         }
 
+        
         // Atualização de dados
-
         private void AtualizarListaDiretores()
-        {            
+        {
             var diretores = empresa.ObterDiretores();
 
             dgvDiretores.DataSource = null;
@@ -190,7 +212,7 @@ namespace ADOSMELHORES.Forms.Diretores
             }
         }
 
-       
+
         private void LimparCampos()
         {
             txtNIF.Clear();
@@ -295,8 +317,7 @@ namespace ADOSMELHORES.Forms.Diretores
                 DialogHelper.ErroOperacao("inserir diretor", ex);
             }
         }
-
-        
+                
         private void btnAlterar_Click(object sender, EventArgs e)
         {
             if (diretorSelecionado == null)
@@ -354,10 +375,12 @@ namespace ADOSMELHORES.Forms.Diretores
                         diretorSelecionado.AdicionarSecretaria(secretaria);
                     }
                 }
+                // Guardar o nome ANTES de atualizar a lista
+               string nomeDiretor = diretorSelecionado.Nome;
 
                 AtualizarListaDiretores();
 
-                DialogHelper.MostrarSucesso($"Diretor '{diretorSelecionado.Nome}' alterado com sucesso!");
+                DialogHelper.MostrarSucesso($"Diretor '{nomeDiretor}' alterado com sucesso!");
             }
             catch (Exception ex)
             {
@@ -413,8 +436,6 @@ namespace ADOSMELHORES.Forms.Diretores
             }
         }
 
-
-
         private void btnLimpar_Click(object sender, EventArgs e)
         {
             LimparCampos();
@@ -423,7 +444,6 @@ namespace ADOSMELHORES.Forms.Diretores
                 dgvDiretores.ClearSelection();
             }
         }
-
 
 
         // Criar um diretor temporário e abrir formulário de cálculo
@@ -445,7 +465,6 @@ namespace ADOSMELHORES.Forms.Diretores
                     dtpDataFimContrato.Value,
                     DateTime.Now, // DataIniContrato
                     dtpDataRegistoCriminal.Value,
-                    DateTime.Now, // DataNascimento
                     false, // CarroEmpresa - será definido no form de cálculo
                     false  // IsencaoHorario - será definido no form de cálculo
                 );
@@ -616,8 +635,9 @@ namespace ADOSMELHORES.Forms.Diretores
                                       !string.IsNullOrWhiteSpace(txtContacto.Text) &&
                                       numSalarioBase.Value > 0 &&
                                       dtpDataFimContrato.Value > DateTime.Now &&
-                                      checkedListBoxAreasDiretoria.CheckedItems.Count > 0 &&
-                                      checkedListBoxSecretarias.CheckedItems.Count > 0;
+                                      checkedListBoxAreasDiretoria.CheckedItems.Count > 0;
+                                    //checkedListBoxAreasDiretoria.CheckedItems.Count > 0 &&
+                                    //checkedListBoxSecretarias.CheckedItems.Count > 0;
 
             // Botão Calcular: habilitado se campos estão preenchidos E remuneração ainda não foi calculada
             btnCalcularValor.Enabled = camposPreenchidos && !remuneracaoCalculada;

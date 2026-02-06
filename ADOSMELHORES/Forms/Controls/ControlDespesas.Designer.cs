@@ -75,10 +75,10 @@
             this.btnExportar.BackColor = System.Drawing.Color.Orange;
             this.btnExportar.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExportar.ForeColor = System.Drawing.Color.White;
-            this.btnExportar.Location = new System.Drawing.Point(393, 409);
-            this.btnExportar.Margin = new System.Windows.Forms.Padding(2);
+            this.btnExportar.Location = new System.Drawing.Point(524, 503);
+            this.btnExportar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnExportar.Name = "btnExportar";
-            this.btnExportar.Size = new System.Drawing.Size(254, 31);
+            this.btnExportar.Size = new System.Drawing.Size(339, 38);
             this.btnExportar.TabIndex = 17;
             this.btnExportar.Text = "📄 Exportar CSV";
             this.btnExportar.UseVisualStyleBackColor = false;
@@ -88,10 +88,10 @@
             this.btnAtualizar.BackColor = System.Drawing.Color.Blue;
             this.btnAtualizar.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAtualizar.ForeColor = System.Drawing.Color.White;
-            this.btnAtualizar.Location = new System.Drawing.Point(393, 444);
-            this.btnAtualizar.Margin = new System.Windows.Forms.Padding(2);
+            this.btnAtualizar.Location = new System.Drawing.Point(524, 546);
+            this.btnAtualizar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnAtualizar.Name = "btnAtualizar";
-            this.btnAtualizar.Size = new System.Drawing.Size(254, 31);
+            this.btnAtualizar.Size = new System.Drawing.Size(339, 38);
             this.btnAtualizar.TabIndex = 16;
             this.btnAtualizar.Text = "📋 Atualizar";
             this.btnAtualizar.UseVisualStyleBackColor = false;
@@ -101,10 +101,10 @@
             this.btnAdicionar.BackColor = System.Drawing.Color.Green;
             this.btnAdicionar.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAdicionar.ForeColor = System.Drawing.Color.White;
-            this.btnAdicionar.Location = new System.Drawing.Point(393, 374);
-            this.btnAdicionar.Margin = new System.Windows.Forms.Padding(2);
+            this.btnAdicionar.Location = new System.Drawing.Point(524, 460);
+            this.btnAdicionar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnAdicionar.Name = "btnAdicionar";
-            this.btnAdicionar.Size = new System.Drawing.Size(254, 31);
+            this.btnAdicionar.Size = new System.Drawing.Size(339, 38);
             this.btnAdicionar.TabIndex = 15;
             this.btnAdicionar.Text = "➕ Adicionar Despesa";
             this.btnAdicionar.UseVisualStyleBackColor = false;
@@ -115,10 +115,10 @@
             this.panelHistorico.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelHistorico.Controls.Add(this.dgvHistorico);
             this.panelHistorico.Controls.Add(this.label2);
-            this.panelHistorico.Location = new System.Drawing.Point(365, 125);
-            this.panelHistorico.Margin = new System.Windows.Forms.Padding(2);
+            this.panelHistorico.Location = new System.Drawing.Point(487, 154);
+            this.panelHistorico.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelHistorico.Name = "panelHistorico";
-            this.panelHistorico.Size = new System.Drawing.Size(317, 240);
+            this.panelHistorico.Size = new System.Drawing.Size(422, 295);
             this.panelHistorico.TabIndex = 14;
             // 
             // dgvHistorico
@@ -133,13 +133,13 @@
             this.Column2,
             this.Column3,
             this.Column4});
-            this.dgvHistorico.Location = new System.Drawing.Point(2, 42);
-            this.dgvHistorico.Margin = new System.Windows.Forms.Padding(2);
+            this.dgvHistorico.Location = new System.Drawing.Point(3, 52);
+            this.dgvHistorico.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgvHistorico.Name = "dgvHistorico";
             this.dgvHistorico.RowHeadersWidth = 51;
             this.dgvHistorico.RowTemplate.Height = 24;
             this.dgvHistorico.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvHistorico.Size = new System.Drawing.Size(340, 182);
+            this.dgvHistorico.Size = new System.Drawing.Size(414, 224);
             this.dgvHistorico.TabIndex = 1;
             // 
             // Column1
@@ -170,10 +170,9 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(85, 15);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label2.Location = new System.Drawing.Point(113, 18);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(174, 19);
+            this.label2.Size = new System.Drawing.Size(214, 23);
             this.label2.TabIndex = 0;
             this.label2.Text = " 📊 Histórico de Despesas ";
             // 
@@ -199,10 +198,10 @@
             this.panelResumo.Controls.Add(this.lablDespesasFuncionarios);
             this.panelResumo.Controls.Add(this.lblDespesasFisicas);
             this.panelResumo.Controls.Add(this.lblLabelDespesasFisicas);
-            this.panelResumo.Location = new System.Drawing.Point(2, 125);
-            this.panelResumo.Margin = new System.Windows.Forms.Padding(2);
+            this.panelResumo.Location = new System.Drawing.Point(3, 154);
+            this.panelResumo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelResumo.Name = "panelResumo";
-            this.panelResumo.Size = new System.Drawing.Size(357, 371);
+            this.panelResumo.Size = new System.Drawing.Size(475, 456);
             this.panelResumo.TabIndex = 13;
             // 
             // lstDespesasFisicas
@@ -211,21 +210,20 @@
             this.lstDespesasFisicas.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.lstDespesasFisicas.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lstDespesasFisicas.FormattingEnabled = true;
-            this.lstDespesasFisicas.ItemHeight = 14;
-            this.lstDespesasFisicas.Location = new System.Drawing.Point(27, 42);
-            this.lstDespesasFisicas.Margin = new System.Windows.Forms.Padding(2);
+            this.lstDespesasFisicas.ItemHeight = 18;
+            this.lstDespesasFisicas.Location = new System.Drawing.Point(36, 52);
+            this.lstDespesasFisicas.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.lstDespesasFisicas.Name = "lstDespesasFisicas";
-            this.lstDespesasFisicas.Size = new System.Drawing.Size(326, 84);
+            this.lstDespesasFisicas.Size = new System.Drawing.Size(435, 90);
             this.lstDespesasFisicas.TabIndex = 18;
             // 
             // lblPeriodo
             // 
             this.lblPeriodo.AutoSize = true;
             this.lblPeriodo.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPeriodo.Location = new System.Drawing.Point(163, 15);
-            this.lblPeriodo.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblPeriodo.Location = new System.Drawing.Point(217, 18);
             this.lblPeriodo.Name = "lblPeriodo";
-            this.lblPeriodo.Size = new System.Drawing.Size(42, 19);
+            this.lblPeriodo.Size = new System.Drawing.Size(51, 23);
             this.lblPeriodo.TabIndex = 17;
             this.lblPeriodo.Text = "Total ";
             // 
@@ -233,10 +231,9 @@
             // 
             this.labelDespesasFisicas.AutoSize = true;
             this.labelDespesasFisicas.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelDespesasFisicas.Location = new System.Drawing.Point(44, 138);
-            this.labelDespesasFisicas.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelDespesasFisicas.Location = new System.Drawing.Point(59, 170);
             this.labelDespesasFisicas.Name = "labelDespesasFisicas";
-            this.labelDespesasFisicas.Size = new System.Drawing.Size(144, 19);
+            this.labelDespesasFisicas.Size = new System.Drawing.Size(177, 23);
             this.labelDespesasFisicas.TabIndex = 16;
             this.labelDespesasFisicas.Text = "Total Despesas Físicas:";
             // 
@@ -244,10 +241,9 @@
             // 
             this.lblTotalFormadores.AutoSize = true;
             this.lblTotalFormadores.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalFormadores.Location = new System.Drawing.Point(234, 277);
-            this.lblTotalFormadores.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblTotalFormadores.Location = new System.Drawing.Point(312, 341);
             this.lblTotalFormadores.Name = "lblTotalFormadores";
-            this.lblTotalFormadores.Size = new System.Drawing.Size(48, 19);
+            this.lblTotalFormadores.Size = new System.Drawing.Size(55, 23);
             this.lblTotalFormadores.TabIndex = 15;
             this.lblTotalFormadores.Text = "€ 0,00";
             this.lblTotalFormadores.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -256,10 +252,9 @@
             // 
             this.lblTotalCoordenadores.AutoSize = true;
             this.lblTotalCoordenadores.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalCoordenadores.Location = new System.Drawing.Point(234, 248);
-            this.lblTotalCoordenadores.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblTotalCoordenadores.Location = new System.Drawing.Point(312, 305);
             this.lblTotalCoordenadores.Name = "lblTotalCoordenadores";
-            this.lblTotalCoordenadores.Size = new System.Drawing.Size(48, 19);
+            this.lblTotalCoordenadores.Size = new System.Drawing.Size(55, 23);
             this.lblTotalCoordenadores.TabIndex = 14;
             this.lblTotalCoordenadores.Text = "€ 0,00";
             this.lblTotalCoordenadores.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -268,10 +263,9 @@
             // 
             this.lblTotalSecretarias.AutoSize = true;
             this.lblTotalSecretarias.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalSecretarias.Location = new System.Drawing.Point(234, 220);
-            this.lblTotalSecretarias.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblTotalSecretarias.Location = new System.Drawing.Point(312, 271);
             this.lblTotalSecretarias.Name = "lblTotalSecretarias";
-            this.lblTotalSecretarias.Size = new System.Drawing.Size(48, 19);
+            this.lblTotalSecretarias.Size = new System.Drawing.Size(55, 23);
             this.lblTotalSecretarias.TabIndex = 13;
             this.lblTotalSecretarias.Text = "€ 0,00";
             this.lblTotalSecretarias.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -280,10 +274,9 @@
             // 
             this.lblTotalDiretores.AutoSize = true;
             this.lblTotalDiretores.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalDiretores.Location = new System.Drawing.Point(234, 193);
-            this.lblTotalDiretores.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblTotalDiretores.Location = new System.Drawing.Point(312, 238);
             this.lblTotalDiretores.Name = "lblTotalDiretores";
-            this.lblTotalDiretores.Size = new System.Drawing.Size(48, 19);
+            this.lblTotalDiretores.Size = new System.Drawing.Size(55, 23);
             this.lblTotalDiretores.TabIndex = 12;
             this.lblTotalDiretores.Text = "€ 0,00";
             this.lblTotalDiretores.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -292,10 +285,9 @@
             // 
             this.lblCoordenadores.AutoSize = true;
             this.lblCoordenadores.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCoordenadores.Location = new System.Drawing.Point(61, 248);
-            this.lblCoordenadores.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblCoordenadores.Location = new System.Drawing.Point(81, 305);
             this.lblCoordenadores.Name = "lblCoordenadores";
-            this.lblCoordenadores.Size = new System.Drawing.Size(106, 19);
+            this.lblCoordenadores.Size = new System.Drawing.Size(131, 23);
             this.lblCoordenadores.TabIndex = 11;
             this.lblCoordenadores.Text = "Coordenadores:";
             // 
@@ -303,10 +295,9 @@
             // 
             this.lblFormadores.AutoSize = true;
             this.lblFormadores.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFormadores.Location = new System.Drawing.Point(61, 277);
-            this.lblFormadores.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblFormadores.Location = new System.Drawing.Point(81, 341);
             this.lblFormadores.Name = "lblFormadores";
-            this.lblFormadores.Size = new System.Drawing.Size(85, 19);
+            this.lblFormadores.Size = new System.Drawing.Size(104, 23);
             this.lblFormadores.TabIndex = 10;
             this.lblFormadores.Text = "Formadores:";
             // 
@@ -314,10 +305,9 @@
             // 
             this.lblSecretárias.AutoSize = true;
             this.lblSecretárias.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSecretárias.Location = new System.Drawing.Point(61, 220);
-            this.lblSecretárias.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblSecretárias.Location = new System.Drawing.Point(81, 271);
             this.lblSecretárias.Name = "lblSecretárias";
-            this.lblSecretárias.Size = new System.Drawing.Size(77, 19);
+            this.lblSecretárias.Size = new System.Drawing.Size(96, 23);
             this.lblSecretárias.TabIndex = 9;
             this.lblSecretárias.Text = "Secretárias:";
             // 
@@ -325,10 +315,9 @@
             // 
             this.lblDiretores.AutoSize = true;
             this.lblDiretores.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDiretores.Location = new System.Drawing.Point(61, 193);
-            this.lblDiretores.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblDiretores.Location = new System.Drawing.Point(81, 238);
             this.lblDiretores.Name = "lblDiretores";
-            this.lblDiretores.Size = new System.Drawing.Size(68, 19);
+            this.lblDiretores.Size = new System.Drawing.Size(83, 23);
             this.lblDiretores.TabIndex = 8;
             this.lblDiretores.Text = "Diretores:";
             // 
@@ -336,10 +325,9 @@
             // 
             this.LabelDespesasFuncionariosTotal.AutoSize = true;
             this.LabelDespesasFuncionariosTotal.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LabelDespesasFuncionariosTotal.Location = new System.Drawing.Point(44, 313);
-            this.LabelDespesasFuncionariosTotal.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.LabelDespesasFuncionariosTotal.Location = new System.Drawing.Point(59, 385);
             this.LabelDespesasFuncionariosTotal.Name = "LabelDespesasFuncionariosTotal";
-            this.LabelDespesasFuncionariosTotal.Size = new System.Drawing.Size(183, 19);
+            this.LabelDespesasFuncionariosTotal.Size = new System.Drawing.Size(226, 23);
             this.LabelDespesasFuncionariosTotal.TabIndex = 7;
             this.LabelDespesasFuncionariosTotal.Text = "Total Despesas Funcionários:";
             // 
@@ -348,10 +336,9 @@
             this.lblTotalDespesas.AutoSize = true;
             this.lblTotalDespesas.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotalDespesas.ForeColor = System.Drawing.Color.Red;
-            this.lblTotalDespesas.Location = new System.Drawing.Point(222, 340);
-            this.lblTotalDespesas.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblTotalDespesas.Location = new System.Drawing.Point(296, 418);
             this.lblTotalDespesas.Name = "lblTotalDespesas";
-            this.lblTotalDespesas.Size = new System.Drawing.Size(54, 21);
+            this.lblTotalDespesas.Size = new System.Drawing.Size(71, 28);
             this.lblTotalDespesas.TabIndex = 5;
             this.lblTotalDespesas.Text = "€ 0,00";
             this.lblTotalDespesas.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -360,10 +347,9 @@
             // 
             this.lblLabelTotal.AutoSize = true;
             this.lblLabelTotal.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLabelTotal.Location = new System.Drawing.Point(23, 340);
-            this.lblLabelTotal.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblLabelTotal.Location = new System.Drawing.Point(31, 418);
             this.lblLabelTotal.Name = "lblLabelTotal";
-            this.lblLabelTotal.Size = new System.Drawing.Size(87, 21);
+            this.lblLabelTotal.Size = new System.Drawing.Size(111, 28);
             this.lblLabelTotal.TabIndex = 4;
             this.lblLabelTotal.Text = "💶 TOTAL:";
             // 
@@ -371,10 +357,9 @@
             // 
             this.lblDespesasFuncionarios.AutoSize = true;
             this.lblDespesasFuncionarios.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDespesasFuncionarios.Location = new System.Drawing.Point(234, 313);
-            this.lblDespesasFuncionarios.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblDespesasFuncionarios.Location = new System.Drawing.Point(312, 385);
             this.lblDespesasFuncionarios.Name = "lblDespesasFuncionarios";
-            this.lblDespesasFuncionarios.Size = new System.Drawing.Size(48, 19);
+            this.lblDespesasFuncionarios.Size = new System.Drawing.Size(55, 23);
             this.lblDespesasFuncionarios.TabIndex = 3;
             this.lblDespesasFuncionarios.Text = "€ 0,00";
             this.lblDespesasFuncionarios.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -383,10 +368,9 @@
             // 
             this.lablDespesasFuncionarios.AutoSize = true;
             this.lablDespesasFuncionarios.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lablDespesasFuncionarios.Location = new System.Drawing.Point(24, 164);
-            this.lablDespesasFuncionarios.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lablDespesasFuncionarios.Location = new System.Drawing.Point(32, 202);
             this.lablDespesasFuncionarios.Name = "lablDespesasFuncionarios";
-            this.lablDespesasFuncionarios.Size = new System.Drawing.Size(170, 19);
+            this.lablDespesasFuncionarios.Size = new System.Drawing.Size(209, 23);
             this.lablDespesasFuncionarios.TabIndex = 2;
             this.lablDespesasFuncionarios.Text = "👥 Despesas Funcionários";
             // 
@@ -394,10 +378,9 @@
             // 
             this.lblDespesasFisicas.AutoSize = true;
             this.lblDespesasFisicas.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDespesasFisicas.Location = new System.Drawing.Point(234, 138);
-            this.lblDespesasFisicas.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblDespesasFisicas.Location = new System.Drawing.Point(312, 170);
             this.lblDespesasFisicas.Name = "lblDespesasFisicas";
-            this.lblDespesasFisicas.Size = new System.Drawing.Size(48, 19);
+            this.lblDespesasFisicas.Size = new System.Drawing.Size(55, 23);
             this.lblDespesasFisicas.TabIndex = 1;
             this.lblDespesasFisicas.Text = "€ 0,00";
             this.lblDespesasFisicas.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -406,10 +389,9 @@
             // 
             this.lblLabelDespesasFisicas.AutoSize = true;
             this.lblLabelDespesasFisicas.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLabelDespesasFisicas.Location = new System.Drawing.Point(24, 15);
-            this.lblLabelDespesasFisicas.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblLabelDespesasFisicas.Location = new System.Drawing.Point(32, 18);
             this.lblLabelDespesasFisicas.Name = "lblLabelDespesasFisicas";
-            this.lblLabelDespesasFisicas.Size = new System.Drawing.Size(131, 19);
+            this.lblLabelDespesasFisicas.Size = new System.Drawing.Size(160, 23);
             this.lblLabelDespesasFisicas.TabIndex = 0;
             this.lblLabelDespesasFisicas.Text = "💰 Despesas Físicas";
             // 
@@ -422,17 +404,17 @@
             this.panel1.Controls.Add(this.lblAno);
             this.panel1.Controls.Add(this.lblMes);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(2, 2);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2);
+            this.panel1.Location = new System.Drawing.Point(3, 2);
+            this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(680, 104);
+            this.panel1.Size = new System.Drawing.Size(906, 128);
             this.panel1.TabIndex = 12;
             // 
             // numAno
             // 
             this.numAno.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numAno.Location = new System.Drawing.Point(430, 61);
-            this.numAno.Margin = new System.Windows.Forms.Padding(2);
+            this.numAno.Location = new System.Drawing.Point(573, 75);
+            this.numAno.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.numAno.Maximum = new decimal(new int[] {
             2030,
             0,
@@ -444,7 +426,7 @@
             0,
             0});
             this.numAno.Name = "numAno";
-            this.numAno.Size = new System.Drawing.Size(77, 26);
+            this.numAno.Size = new System.Drawing.Size(103, 30);
             this.numAno.TabIndex = 4;
             this.numAno.Value = new decimal(new int[] {
             2026,
@@ -470,20 +452,19 @@
             "Outubro",
             "Novembro",
             "Dezembro"});
-            this.cmbMes.Location = new System.Drawing.Point(246, 59);
-            this.cmbMes.Margin = new System.Windows.Forms.Padding(2);
+            this.cmbMes.Location = new System.Drawing.Point(328, 73);
+            this.cmbMes.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cmbMes.Name = "cmbMes";
-            this.cmbMes.Size = new System.Drawing.Size(92, 27);
+            this.cmbMes.Size = new System.Drawing.Size(121, 31);
             this.cmbMes.TabIndex = 3;
             // 
             // lblAno
             // 
             this.lblAno.AutoSize = true;
             this.lblAno.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAno.Location = new System.Drawing.Point(386, 62);
-            this.lblAno.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblAno.Location = new System.Drawing.Point(515, 76);
             this.lblAno.Name = "lblAno";
-            this.lblAno.Size = new System.Drawing.Size(40, 19);
+            this.lblAno.Size = new System.Drawing.Size(47, 23);
             this.lblAno.TabIndex = 2;
             this.lblAno.Text = "Ano:";
             // 
@@ -491,10 +472,9 @@
             // 
             this.lblMes.AutoSize = true;
             this.lblMes.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMes.Location = new System.Drawing.Point(208, 61);
-            this.lblMes.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblMes.Location = new System.Drawing.Point(277, 75);
             this.lblMes.Name = "lblMes";
-            this.lblMes.Size = new System.Drawing.Size(40, 19);
+            this.lblMes.Size = new System.Drawing.Size(47, 23);
             this.lblMes.TabIndex = 1;
             this.lblMes.Text = "Mês:";
             // 
@@ -502,16 +482,15 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(240, 11);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Location = new System.Drawing.Point(320, 14);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(239, 32);
+            this.label1.Size = new System.Drawing.Size(293, 41);
             this.label1.TabIndex = 0;
             this.label1.Text = "Gestão de Despesas";
             // 
             // ControlDespesas
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.btnExportar);
             this.Controls.Add(this.btnAtualizar);
@@ -519,8 +498,9 @@
             this.Controls.Add(this.panelHistorico);
             this.Controls.Add(this.panelResumo);
             this.Controls.Add(this.panel1);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "ControlDespesas";
-            this.Size = new System.Drawing.Size(684, 525);
+            this.Size = new System.Drawing.Size(912, 646);
             this.panelHistorico.ResumeLayout(false);
             this.panelHistorico.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHistorico)).EndInit();
