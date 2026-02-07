@@ -11,8 +11,7 @@ namespace ADOSMELHORES.Modelos
     {
         private readonly List<Funcionario> funcionarios;
 
-        // ⚠️ TEMPORÁRIO - Gestor de despesas em memória
-        // 🔄 MIGRAÇÃO BD: Manter esta propriedade, mas o GestorDespesas buscará do BD
+
         private GestorDespesas gestorDespesas;
 
         public string Nome { get; set; }

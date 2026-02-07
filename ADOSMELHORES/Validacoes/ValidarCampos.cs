@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -57,61 +57,7 @@ namespace ADOSMELHORES.Validacoes
 
         
 
-        ///// <summary>
-        ///// Valida se um campo tem tamanho mínimo
-        ///// </summary>
-        //public static ResultadoValidacao ValidarTamanhoMinimo(
-        //    string valor,
-        //    int tamanhoMinimo,
-        //    string nomeCampo)
-        //{
-        //    if (string.IsNullOrEmpty(valor) || valor.Trim().Length < tamanhoMinimo)
-        //    {
-        //        return ResultadoValidacao.Erro(
-        //            $"{nomeCampo} deve ter no mínimo {tamanhoMinimo} caracteres.",
-        //            "Validação de Tamanho");
-        //    }
 
-        //    return ResultadoValidacao.Sucesso();
-        //}
-
-        ///// <summary>
-        ///// Valida se um campo tem tamanho máximo
-        ///// </summary>
-        //public static ResultadoValidacao ValidarTamanhoMaximo(
-        //    string valor,
-        //    int tamanhoMaximo,
-        //    string nomeCampo)
-        //{
-        //    if (!string.IsNullOrEmpty(valor) && valor.Trim().Length > tamanhoMaximo)
-        //    {
-        //        return ResultadoValidacao.Erro(
-        //            $"{nomeCampo} deve ter no máximo {tamanhoMaximo} caracteres.",
-        //            "Validação de Tamanho");
-        //    }
-
-        //    return ResultadoValidacao.Sucesso();
-        //}
-
-        ///// <summary>
-        ///// Valida se um campo tem tamanho exato
-        ///// </summary>
-        //public static ResultadoValidacao ValidarTamanhoExato(
-        //    string valor,
-        //    int tamanhoExato,
-        //    string nomeCampo)
-        //{
-        //    valor = valor?.Trim() ?? string.Empty;
-
-        //    if (valor.Length != tamanhoExato)
-        //    {
-        //        return ResultadoValidacao.Erro(
-        //            $"{nomeCampo} deve ter exatamente {tamanhoExato} caracteres.",
-        //            "Validação de Tamanho");
-        //    }
-
-        //    return ResultadoValidacao.Sucesso();
-        //}
                 
 
         // Valida se um ComboBox tem item selecionado
@@ -132,48 +78,7 @@ namespace ADOSMELHORES.Validacoes
             return ResultadoValidacao.Sucesso();
         }
 
-        ///// <summary>
-        ///// Valida se um ListBox tem item selecionado
-        ///// </summary>
-        //public static ResultadoValidacao ValidarListBox(
-        //    ListBox listBox,
-        //    string nomeCampo)
-        //{
-        //    if (listBox == null)
-        //        throw new ArgumentNullException(nameof(listBox));
 
-        //    if (listBox.SelectedIndex < 0 || listBox.SelectedItem == null)
-        //    {
-        //        return ResultadoValidacao.Erro(
-        //            $"Por favor, selecione {nomeCampo}.",
-        //            "Seleção Obrigatória");
-        //    }
-
-        //    return ResultadoValidacao.Sucesso();
-        //}
-
-        ///// <summary>
-        ///// Valida se um CheckedListBox tem pelo menos um item selecionado
-        ///// </summary>
-        //public static ResultadoValidacao ValidarCheckedListBox(
-        //    CheckedListBox checkedListBox,
-        //    string nomeCampo,
-        //    int minimoItens = 1)
-        //{
-        //    if (checkedListBox == null)
-        //        throw new ArgumentNullException(nameof(checkedListBox));
-
-        //    if (checkedListBox.CheckedItems.Count < minimoItens)
-        //    {
-        //        string mensagem = minimoItens == 1
-        //            ? $"Por favor, selecione pelo menos um item em {nomeCampo}."
-        //            : $"Por favor, selecione pelo menos {minimoItens} itens em {nomeCampo}.";
-
-        //        return ResultadoValidacao.Erro(mensagem, "Seleção Obrigatória");
-        //    }
-
-        //    return ResultadoValidacao.Sucesso();
-        //}
 
       
         // Valida se um NumericUpDown tem valor maior que zero      
@@ -194,32 +99,7 @@ namespace ADOSMELHORES.Validacoes
             return ResultadoValidacao.Sucesso();
         }
 
-        ///// <summary>
-        ///// Valida se um valor está dentro de um range
-        ///// </summary>
-        //public static ResultadoValidacao ValidarRange(
-        //    decimal valor,
-        //    decimal minimo,
-        //    decimal maximo,
-        //    string nomeCampo)
-        //{
-        //    if (valor < minimo || valor > maximo)
-        //    {
-        //        return ResultadoValidacao.Erro(
-        //            $"{nomeCampo} deve estar entre {minimo} e {maximo}.",
-        //            "Valor Inválido");
-        //    }
 
-        //    return ResultadoValidacao.Sucesso();
-        //}
-
-
-        // Validação de NIF 
-
-        // Valida se o NIF é válido (9 dígitos entre 111111111 e 999999999)
-        // <param name="nif">String do NIF a validar</param>
-        // <param name="obrigatorio">Se o campo é obrigatório</param>
-        // <returns>ResultadoValidacao</returns>
         public static ResultadoValidacao ValidarNIF(string nif, bool obrigatorio = true)
         {
             // Remover espaços em branco
