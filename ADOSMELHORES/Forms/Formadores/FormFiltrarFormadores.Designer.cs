@@ -1,4 +1,4 @@
-﻿namespace ADOSMELHORES.Forms
+namespace ADOSMELHORES.Forms
 {
     partial class FormFiltrarFormadores
     {
@@ -27,7 +27,7 @@
             // lblDisponibilidade
             // 
             this.lblDisponibilidade.AutoSize = true;
-            this.lblDisponibilidade.Location = new System.Drawing.Point(16, 22);
+            this.lblDisponibilidade.Location = new System.Drawing.Point(13, 59);
             this.lblDisponibilidade.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblDisponibilidade.Name = "lblDisponibilidade";
             this.lblDisponibilidade.Size = new System.Drawing.Size(118, 20);
@@ -38,7 +38,7 @@
             // 
             this.cmbDisponibilidade.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbDisponibilidade.FormattingEnabled = true;
-            this.cmbDisponibilidade.Location = new System.Drawing.Point(147, 19);
+            this.cmbDisponibilidade.Location = new System.Drawing.Point(162, 50);
             this.cmbDisponibilidade.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cmbDisponibilidade.Name = "cmbDisponibilidade";
             this.cmbDisponibilidade.Size = new System.Drawing.Size(265, 28);
@@ -46,7 +46,7 @@
             // 
             // btnFiltrar
             // 
-            this.btnFiltrar.Location = new System.Drawing.Point(427, 15);
+            this.btnFiltrar.Location = new System.Drawing.Point(466, 45);
             this.btnFiltrar.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnFiltrar.Name = "btnFiltrar";
             this.btnFiltrar.Size = new System.Drawing.Size(133, 39);
@@ -60,18 +60,18 @@
             this.dgvResultados.AllowUserToAddRows = false;
             this.dgvResultados.AllowUserToDeleteRows = false;
             this.dgvResultados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvResultados.Location = new System.Drawing.Point(20, 78);
+            this.dgvResultados.Location = new System.Drawing.Point(20, 125);
             this.dgvResultados.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dgvResultados.Name = "dgvResultados";
             this.dgvResultados.ReadOnly = true;
             this.dgvResultados.RowHeadersWidth = 51;
-            this.dgvResultados.Size = new System.Drawing.Size(705, 362);
+            this.dgvResultados.Size = new System.Drawing.Size(705, 316);
             this.dgvResultados.TabIndex = 3;
             // 
             // lblResultado
             // 
             this.lblResultado.AutoSize = true;
-            this.lblResultado.Location = new System.Drawing.Point(16, 78);
+            this.lblResultado.Location = new System.Drawing.Point(39, 90);
             this.lblResultado.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblResultado.Name = "lblResultado";
             this.lblResultado.Size = new System.Drawing.Size(0, 20);
@@ -79,7 +79,7 @@
             // 
             // btnFechar
             // 
-            this.btnFechar.Location = new System.Drawing.Point(580, 15);
+            this.btnFechar.Location = new System.Drawing.Point(607, 45);
             this.btnFechar.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnFechar.Name = "btnFechar";
             this.btnFechar.Size = new System.Drawing.Size(133, 39);
