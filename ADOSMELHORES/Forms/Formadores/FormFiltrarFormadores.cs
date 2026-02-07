@@ -1,4 +1,4 @@
-﻿using ADOSMELHORES.Modelos;
+using ADOSMELHORES.Modelos;
 using ADOSMELHORES.Validacoes;
 using System;
 using System.Linq;
