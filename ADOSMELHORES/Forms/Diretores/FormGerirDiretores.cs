@@ -22,6 +22,7 @@ namespace ADOSMELHORES.Forms.Diretores
         private Diretor diretorSelecionado;
         private Diretor diretorTemporario; //Armazenar o diretor para calcular a remuneração antes de inserir/salvar
         private bool remuneracaoCalculada = false; // Flag para controlar se a remuneração foi calculada
+        private bool carregandoDados = false; // Flag para evitar eventos durante o carregamento de dados
 
         public FormGerirDiretores(Empresa empresaRef)
         {
@@ -37,8 +38,7 @@ namespace ADOSMELHORES.Forms.Diretores
         {
             ConfigurarForm();
         }
-
-       
+               
         private void ConfigurarForm()
         {
             
