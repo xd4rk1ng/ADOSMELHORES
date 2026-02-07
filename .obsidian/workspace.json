@@ -11,12 +11,14 @@
             "id": "a96831e975b2b29c",
             "type": "leaf",
             "state": {
-              "type": "pdf",
+              "type": "markdown",
               "state": {
-                "file": "Relatório/TA-606-2.pdf"
+                "file": "Relatório/Relatório.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-file-text",
-              "title": "TA-606-2"
+              "icon": "lucide-file",
+              "title": "Relatório"
             }
           }
         ]
@@ -183,6 +185,7 @@
   },
   "active": "a96831e975b2b29c",
   "lastOpenFiles": [
+    "Relatório/TA-606-2.pdf",
     "ADOSMELHORES/Forms/Extra/FormExemplo.resx",
     "ADOSMELHORES/Forms/Extra/FormExemplo.Designer.cs",
     "ADOSMELHORES/Forms/Extra/FormExemplo.cs",
@@ -194,7 +197,6 @@
     "ADOSMELHORES/Forms/Controls/ControlDespesas.resx",
     "ADOSMELHORES/Forms/Controls/ControlSimularData.cs",
     "ADOSMELHORES/Forms/Controls/ControlDespesas.cs",
-    "ADOSMELHORES/obj/Debug/ADOSMELHORES.Forms.Controls.ControlVistaGeral.resources",
     "ADOSMELHORES/Resources/a-dos-melhores-high-resolution-logo resized.png",
     "WinformsDocs/Modelos/Formador.md",
     "Relacao_classes.png",
