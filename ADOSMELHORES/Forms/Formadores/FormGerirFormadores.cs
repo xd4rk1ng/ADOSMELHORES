@@ -58,16 +58,17 @@ namespace ADOSMELHORES.Forms.Formadores
             cmbDisponibilidade.DataBindings.Clear();
             numValorHora.DataBindings.Clear();
             btnLimpar.CausesValidation = false;
+
             // ----------------------------------------------------------------------
 
             // Configurar ComboBox de Disponibilidade
             cmbDisponibilidade.DataSource = Enum.GetValues(typeof(Disponibilidade));
 
             // Usar validadores centralizados — NIF obrigatório para Formadores
-            ValidarCampos.ConfigurarTextBoxNIF(txtNIF, obrigatorio: true);
+            
 
             // Aplicar validação de contacto centralizada (agora obrigatória/handler)
-            ValidarCampos.ConfigurarTextBoxContacto(txtContacto, obrigatorio: true);
+            
 
             // Adicionar Validating handler para garantir validação completa do contacto
             txtContacto.Validating -= TxtContacto_Validating;
