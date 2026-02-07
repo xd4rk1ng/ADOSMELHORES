@@ -13,24 +13,53 @@ using System.Windows.Forms;
 
 namespace ADOSMELHORES.Forms.Formadores
 {
-    
     /// Form completo para gestão de Formadores       
     public partial class FormGerirFormadores : Form
     {
         private readonly Empresa empresa;
         private Formador formadorSelecionado;
         private BindingSource bsFormadores;
+        private bool inicializando;
 
-        public FormGerirFormadores(Empresa empresaRef) 
+        public FormGerirFormadores(Empresa empresaRef)
         {
             InitializeComponent();
             empresa = empresaRef;
             bsFormadores = new BindingSource();
+            this.AutoValidate = AutoValidate.EnableAllowFocusChange;
+            inicializando = true;
             ConfigurarForm();
+            // LimparCampos() aqui no construtor é ignorado porque o Grid seleciona sozinho ao abrir.
+            // Removemos daqui e passamos para o OnShown (ver abaixo).
+            inicializando = false;
         }
+
+        // --- CORREÇÃO IMPORTANTE: Garantir que inicia vazio APÓS o form aparecer ---
+        protected override void OnShown(EventArgs e)
+        {
+            base.OnShown(e);
+            // Isto corre depois do Windows Forms tentar selecionar a primeira linha automaticamente
+            dgvFormadores.ClearSelection();
+            dgvFormadores.CurrentCell = null;
+            this.ActiveControl = null;
+            LimparCampos();
+        }
+        // --------------------------------------------------------------------------
 
         private void ConfigurarForm()
         {
+            // --- CORREÇÃO: Prevenir bindings automáticas que possam ter sobrado ---
+            txtID.DataBindings.Clear();
+            txtNIF.DataBindings.Clear();
+            txtNome.DataBindings.Clear();
+            txtMorada.DataBindings.Clear();
+            txtContacto.DataBindings.Clear();
+            txtAreaLeciona.DataBindings.Clear();
+            cmbDisponibilidade.DataBindings.Clear();
+            numValorHora.DataBindings.Clear();
+            btnLimpar.CausesValidation = false;
+            // ----------------------------------------------------------------------
+
             // Configurar ComboBox de Disponibilidade
             cmbDisponibilidade.DataSource = Enum.GetValues(typeof(Disponibilidade));
 
@@ -52,15 +81,16 @@ namespace ADOSMELHORES.Forms.Formadores
 
             // Carregar dados iniciais
             AtualizarListaFormadores();
-
         }
-
 
         private void ConfigurarDataGridView()
         {
             dgvFormadores.AutoGenerateColumns = false;
             dgvFormadores.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvFormadores.MultiSelect = false;
+            // Impede que o TAB foque automaticamente numa célula
+            dgvFormadores.StandardTab = true;
+            dgvFormadores.CausesValidation = false;
 
             dgvFormadores.Columns.Clear();
 
@@ -122,50 +152,60 @@ namespace ADOSMELHORES.Forms.Formadores
                 .OfType<Formador>()
                 .ToList();
 
-            // Atualizar BindingSource — DataGridView atualiza automaticamente
+            // Guardar o formador que estava selecionado antes de atualizar a lista
+            var formadorAnterior = formadorSelecionado;
+
+            // Desligar o evento para evitar seleção automática durante a carga
+            dgvFormadores.SelectionChanged -= dgvFormadores_SelectionChanged;
+
+            // Atualizar BindingSource
             bsFormadores.DataSource = formadores;
 
             lblTotalFormadores.Text = $"Total de Formadores: {formadores.Count}";
 
-            // Tentar preservar seleção atual (se existir) ou selecionar o primeiro
-            if (formadores.Count > 0 && dgvFormadores.Rows.Count > 0)
+            // Lógica de preservação da seleção
+            bool selecaoRestaurada = false;
+
+            if (formadores.Count > 0)
             {
+                if (formadorAnterior != null)
+                {
+                    // Tentar encontrar e selecionar o mesmo formador (cenário de edição)
+                    int index = formadores.FindIndex(f => f.Id == formadorAnterior.Id);
+                    if (index >= 0)
+                    {
+                        dgvFormadores.ClearSelection();
+                        dgvFormadores.Rows[index].Selected = true;
+                        try { dgvFormadores.CurrentCell = dgvFormadores.Rows[index].Cells[0]; } catch { /* ignora */ }
+
+                        // Atualizar referência e carregar dados atualizados
+                        formadorSelecionado = formadores[index];
+                        CarregarDadosFormador(formadorSelecionado);
+                        HabilitarBotoesEdicao(true);
+                        selecaoRestaurada = true;
+                    }
+                }
+            }
+
+            // Se não conseguimos restaurar uma seleção (ex: início do form ou item removido), limpar tudo
+            if (!selecaoRestaurada)
+            {
+                // --- CORREÇÃO: Forçar anulação da célula atual para não ficar com "borda" na linha 0
                 dgvFormadores.ClearSelection();
-
-                int indexToSelect = 0;
-                if (formadorSelecionado != null)
-                {
-                    int found = formadores.FindIndex(f => f.Id == formadorSelecionado.Id);
-                    if (found >= 0)
-                        indexToSelect = found;
-                }
-
-                dgvFormadores.Rows[indexToSelect].Selected = true;
-                try { dgvFormadores.CurrentCell = dgvFormadores.Rows[indexToSelect].Cells[0]; } catch { /* ignora */ }
-
-                // Atualizar estado interno e campos visuais
-                formadorSelecionado = dgvFormadores.SelectedRows.Count > 0
-                    ? dgvFormadores.SelectedRows[0].DataBoundItem as Formador
-                    : null;
-
-                if (formadorSelecionado != null)
-                {
-                    CarregarDadosFormador(formadorSelecionado);
-                    HabilitarBotoesEdicao(true);
-                }
-                else
-                {
-                    HabilitarBotoesEdicao(false);
-                }
+                dgvFormadores.CurrentCell = null;
+                LimparCampos();
             }
-            else
-            {
-                HabilitarBotoesEdicao(false);
-            }
+
+            // Voltar a ligar o evento
+            dgvFormadores.SelectionChanged += new System.EventHandler(this.dgvFormadores_SelectionChanged);
         }
 
         private void dgvFormadores_SelectionChanged(object sender, EventArgs e)
         {
+            // Ignorar eventos de seleção durante a inicialização do form
+            if (inicializando)
+                return;
+
             if (dgvFormadores.SelectedRows.Count > 0)
             {
                 formadorSelecionado = dgvFormadores.SelectedRows[0].DataBoundItem as Formador;
@@ -177,7 +217,8 @@ namespace ADOSMELHORES.Forms.Formadores
             }
             else
             {
-                HabilitarBotoesEdicao(false);
+                // Se o utilizador clicar no vazio ou a seleção for limpa programaticamente
+                LimparCampos();
             }
         }
 
@@ -199,9 +240,14 @@ namespace ADOSMELHORES.Forms.Formadores
             txtMorada.Text = formador.Morada;
             txtContacto.Text = formador.Contacto;
             txtAreaLeciona.Text = formador.AreaLeciona;
-            cmbDisponibilidade.SelectedItem = formador.Disponibilidade;
+
+            // Proteção contra valores nulos no combo
+            if (Enum.IsDefined(typeof(Disponibilidade), formador.Disponibilidade))
+                cmbDisponibilidade.SelectedItem = formador.Disponibilidade;
+            else
+                cmbDisponibilidade.SelectedIndex = 0;
+
             numValorHora.Value = formador.ValorHora;
-            // numSalarioBase.Value = formador.SalarioBase; // removido: não preencher salário base para formadores
 
             // DataFimContrato: clamp + safe assign
             DateTime safeFim = Clamp(formador.DataFimContrato, dtpDataFimContrato.MinDate, dtpDataFimContrato.MaxDate);
@@ -212,7 +258,8 @@ namespace ADOSMELHORES.Forms.Formadores
             DateTime dataRegistoCriminal;
             try
             {
-                dataRegistoCriminal = formador.DataFimRegistoCrim;
+                // Se for MinValue (não definida), usa fallback
+                dataRegistoCriminal = formador.DataFimRegistoCrim == DateTime.MinValue ? fallbackRegisto : formador.DataFimRegistoCrim;
             }
             catch
             {
@@ -233,7 +280,6 @@ namespace ADOSMELHORES.Forms.Formadores
                 ? empresa.DataSimulada.Date
                 : DateTime.Now.Date;
 
-            // Normalizar comparação para ignorar componente hora
             if (formador.RegistoCriminalExpirado(referencia))
             {
                 lblStatusRegistoCriminal.Text = "EXPIRADO";
@@ -254,22 +300,30 @@ namespace ADOSMELHORES.Forms.Formadores
             btnRemover.Enabled = habilitar;
             btnCalcularValor.Enabled = habilitar;
             btnAtualizarRegistoCriminal.Enabled = habilitar;
+
+            // Opcional: Se quiser bloquear a inserção enquanto edita
+            // btnInserir.Enabled = !habilitar; 
         }
 
         private void LimparCampos()
         {
             txtID.Clear();
-            txtNIF.Clear(); 
+            txtNIF.Clear();
             txtNome.Clear();
             txtMorada.Clear();
             txtContacto.Clear();
             txtAreaLeciona.Clear();
-            cmbDisponibilidade.SelectedIndex = 0;
+
+            if (cmbDisponibilidade.Items.Count > 0)
+                cmbDisponibilidade.SelectedIndex = 0;
+
             numValorHora.Value = 0;
+
             // Valores seguros por defeito
             DateTimeHelper.DefinirValorSeguro(dtpDataFimContrato, DateTime.Now.AddYears(1));
             DateTimeHelper.DefinirValorSeguro(dtpDataRegistoCriminal, DateTime.Now.AddYears(5));
             lblStatusRegistoCriminal.Text = "";
+
             formadorSelecionado = null;
             HabilitarBotoesEdicao(false);
         }
@@ -445,7 +499,8 @@ namespace ADOSMELHORES.Forms.Formadores
             {
                 empresa.RemoverFuncionario(formadorSelecionado);
                 AtualizarListaFormadores();
-                LimparCampos();
+                // O AtualizarListaFormadores já limpa se a lista ficar vazia, mas podemos forçar:
+                if (dgvFormadores.Rows.Count == 0) LimparCampos();
 
                 DialogHelper.MostrarSucesso("Formador removido com sucesso!");
             }
@@ -461,6 +516,7 @@ namespace ADOSMELHORES.Forms.Formadores
             if (dgvFormadores.Rows.Count > 0)
             {
                 dgvFormadores.ClearSelection();
+                dgvFormadores.CurrentCell = null; // Remove foco
             }
         }
 
@@ -496,7 +552,10 @@ namespace ADOSMELHORES.Forms.Formadores
                 {
                     formadorSelecionado.DataFimRegistoCrim = novaData.Value;
                     AtualizarListaFormadores();
-                    CarregarDadosFormador(formadorSelecionado);
+                    // Como AtualizarListaFormadores tenta restaurar a seleção,
+                    // devemos garantir que os detalhes na UI estão sincronizados
+                    if (formadorSelecionado != null) CarregarDadosFormador(formadorSelecionado);
+
                     DialogHelper.MostrarSucesso("Registo criminal atualizado!");
                 }
                 catch (Exception ex)
@@ -531,6 +590,8 @@ namespace ADOSMELHORES.Forms.Formadores
         // Validating handler para contacto que usa a validação centralizada em ValidarCampos
         private void TxtContacto_Validating(object sender, CancelEventArgs e)
         {
+            // Nota: Se o campo estiver vazio e não for obrigatório neste contexto, ajustar a validação.
+            // Aqui assumimos obrigatório conforme definido no ConfigurarForm
             var resultado = ValidarCampos.ValidarContacto(txtContacto.Text, obrigatorio: true);
             if (!resultado.Valido)
             {
