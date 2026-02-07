@@ -71,8 +71,7 @@ namespace ADOSMELHORES.Forms.Formadores
             
 
             // Adicionar Validating handler para garantir validação completa do contacto
-            txtContacto.Validating -= TxtContacto_Validating;
-            txtContacto.Validating += TxtContacto_Validating;
+
 
             // Configurar DataGridView
             ConfigurarDataGridView();
