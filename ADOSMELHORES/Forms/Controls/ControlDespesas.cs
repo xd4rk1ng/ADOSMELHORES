@@ -1,4 +1,4 @@
-﻿using ADOSMELHORES.Forms.Despesas;
+using ADOSMELHORES.Forms.Despesas;
 using ADOSMELHORES.Modelos;
 using ADOSMELHORES.Modelos.Despesas;
 using System;
@@ -92,6 +92,7 @@ namespace ADOSMELHORES.Forms.Controls
             dgvHistorico.ReadOnly = true;
             dgvHistorico.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvHistorico.MultiSelect = false;
+            dgvHistorico.RowHeadersVisible = false;
 
             // Adicionar colunas
             dgvHistorico.Columns.Add(new DataGridViewTextBoxColumn
