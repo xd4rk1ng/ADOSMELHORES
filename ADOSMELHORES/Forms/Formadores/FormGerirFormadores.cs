@@ -1,4 +1,4 @@
-﻿using ADOSMELHORES;
+using ADOSMELHORES;
 using ADOSMELHORES.Modelos;
 using ADOSMELHORES.Validacoes;
 using System;
@@ -299,7 +299,7 @@ namespace ADOSMELHORES.Forms.Formadores
             }
 
             // duplicado
-            if (nif > 0 && NifDuplicado(nif, /* excludeId quando alterar */ null))
+            if (nif > 0 && empresa != null && empresa.NifDuplicado(nif))
             {
                 DialogHelper.MostrarAviso("Já existe um funcionário com este NIF.", "NIF Duplicado");
                 txtNIF.Focus();
@@ -388,7 +388,7 @@ namespace ADOSMELHORES.Forms.Formadores
                 return;
             }
 
-            if (nif > 0 && NifDuplicado(nif, formadorSelecionado.Id))
+            if (nif > 0 && empresa != null && empresa.NifDuplicado(nif, formadorSelecionado.Id))
             {
                 DialogHelper.MostrarAviso("Outro formador já utiliza este NIF. Corrija o NIF.", "NIF Duplicado");
                 txtNIF.Focus();
@@ -526,14 +526,6 @@ namespace ADOSMELHORES.Forms.Formadores
         private void btnFechar_Click(object sender, EventArgs e)
         {
             this.Close();
-        }
-
-       
-        // novo helper para verificar duplicados de NIF
-        private bool NifDuplicado(int nif, int? excludeId = null)
-        {
-            if (nif <= 0) return false; // mantém a regra original
-            return empresa != null && empresa.NifDuplicado(nif, excludeId);
         }
 
         // Validating handler para contacto que usa a validação centralizada em ValidarCampos

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -55,44 +55,7 @@ namespace ADOSMELHORES.Validacoes
         }
 
         
-        //public static ResultadoValidacao ValidarIntervalo(
-        //    DateTime data,
-        //    DateTime dataMinima,
-        //    DateTime dataMaxima,
-        //    string nomeCampo = "Data")
-        //{
-        //    if (data < dataMinima || data > dataMaxima)
-        //    {
-        //        return ResultadoValidacao.Erro(
-        //            $"{nomeCampo} deve estar entre {dataMinima:dd/MM/yyyy} e {dataMaxima:dd/MM/yyyy}.",
-        //            "Data Inválida");
-        //    }
 
-        //    return ResultadoValidacao.Sucesso();
-        //}
-
-        ///// <summary>
-        ///// Valida se a data de início é anterior à data de fim
-        ///// </summary>
-        //public static ResultadoValidacao ValidarOrdemDatas(
-        //    DateTime dataInicio,
-        //    DateTime dataFim,
-        //    string nomeCampoInicio = "Data de início",
-        //    string nomeCampoFim = "Data de fim")
-        //{
-        //    if (dataInicio >= dataFim)
-        //    {
-        //        return ResultadoValidacao.Erro(
-        //            $"{nomeCampoInicio} deve ser anterior a {nomeCampoFim}.",
-        //            "Datas Inválidas");
-        //    }
-
-        //    return ResultadoValidacao.Sucesso();
-        //}
-
-        /// <summary>
-        /// Valida se uma data não está no passado
-        /// </summary>
         public static ResultadoValidacao ValidarDataFutura(
             DateTime data,
             DateTime? dataReferencia = null,
@@ -110,28 +73,7 @@ namespace ADOSMELHORES.Validacoes
             return ResultadoValidacao.Sucesso();
         }
 
-        ///// <summary>
-        ///// Valida se uma data não está no futuro
-        ///// </summary>
-        //public static ResultadoValidacao ValidarDataPassada(
-        //    DateTime data,
-        //    DateTime? dataReferencia = null,
-        //    string nomeCampo = "Data")
-        //{
-        //    DateTime referencia = dataReferencia ?? DateTime.Now;
 
-        //    if (data.Date > referencia.Date)
-        //    {
-        //        return ResultadoValidacao.Erro(
-        //            $"{nomeCampo} não pode estar no futuro.",
-        //            "Data Inválida");
-        //    }
-
-        //    return ResultadoValidacao.Sucesso();
-        //}
-
-        // Conta os dias úteis (segunda a sexta) entre duas datas inclusivas.
-        // Não considera feriados.
         public static int CountBusinessDays(DateTime start, DateTime end)
         {
             if (end < start) return 0;

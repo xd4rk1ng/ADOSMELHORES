@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -244,71 +244,7 @@ namespace ADOSMELHORES.Validacoes
             }
         }
 
-       // Diálogos de Entrada
 
-        ///// <summary>
-        ///// Mostra diálogo para entrada de texto simples
-        ///// </summary>
-        //public static string DialogoEntradaTexto(
-        //    string titulo,
-        //    string mensagem,
-        //    string valorPadrao = "",
-        //    Form parent = null)
-        //{
-        //    using (Form formInput = new Form())
-        //    {
-        //        formInput.Text = titulo;
-        //        formInput.Size = new Size(400, 150);
-        //        formInput.StartPosition = parent != null
-        //            ? FormStartPosition.CenterParent
-        //            : FormStartPosition.CenterScreen;
-        //        formInput.FormBorderStyle = FormBorderStyle.FixedDialog;
-        //        formInput.MaximizeBox = false;
-        //        formInput.MinimizeBox = false;
-
-        //        Label lblMensagem = new Label()
-        //        {
-        //            Text = mensagem,
-        //            Location = new Point(20, 20),
-        //            AutoSize = true,
-        //            MaximumSize = new Size(340, 0)
-        //        };
-
-        //        TextBox txtInput = new TextBox()
-        //        {
-        //            Location = new Point(20, 50),
-        //            Width = 340,
-        //            Text = valorPadrao
-        //        };
-
-        //        Button btnOk = new Button()
-        //        {
-        //            Text = "OK",
-        //            DialogResult = DialogResult.OK,
-        //            Location = new Point(200, 80),
-        //            Size = new Size(75, 30)
-        //        };
-
-        //        Button btnCancelar = new Button()
-        //        {
-        //            Text = "Cancelar",
-        //            DialogResult = DialogResult.Cancel,
-        //            Location = new Point(285, 80),
-        //            Size = new Size(75, 30)
-        //        };
-
-        //        formInput.Controls.AddRange(new Control[] { lblMensagem, txtInput, btnOk, btnCancelar });
-        //        formInput.AcceptButton = btnOk;
-        //        formInput.CancelButton = btnCancelar;
-
-        //        if (formInput.ShowDialog(parent) == DialogResult.OK)
-        //        {
-        //            return txtInput.Text;
-        //        }
-
-        //        return null;
-        //    }
-        //}
 
     }
 }

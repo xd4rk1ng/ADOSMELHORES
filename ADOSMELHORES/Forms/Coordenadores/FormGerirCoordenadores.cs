@@ -124,7 +124,7 @@ namespace ADOSMELHORES.Forms.Coordenadores
                 return;
             }
 
-            if (NifDuplicado(nif))
+            if (empresa != null && empresa.NifDuplicado(nif))
             {
                 DialogHelper.MostrarAviso("Já existe um funcionário com este NIF.", "NIF Duplicado");
                 txtNIF.Focus();
@@ -216,7 +216,7 @@ namespace ADOSMELHORES.Forms.Coordenadores
             }
 
             // Verificar duplicação (excluindo o próprio coordenador)
-            if (NifDuplicado(nif, coordenadorSelecionado.Id))
+            if (empresa != null && empresa.NifDuplicado(nif, coordenadorSelecionado.Id))
             {
                 DialogHelper.MostrarAviso(
                     "Outro coordenador já utiliza este NIF. Corrija o NIF.",
@@ -469,12 +469,6 @@ namespace ADOSMELHORES.Forms.Coordenadores
                 coordenador,
                 empresa.DataSimulada > DateTime.MinValue ? empresa.DataSimulada : (DateTime?)null
             );
-        }
-
-
-        private bool NifDuplicado(int nif, int? excludeId = null)
-        {
-            return empresa != null && empresa.NifDuplicado(nif, excludeId);
         }
 
 

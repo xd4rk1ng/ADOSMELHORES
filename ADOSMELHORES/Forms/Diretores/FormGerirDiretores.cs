@@ -305,7 +305,7 @@ namespace ADOSMELHORES.Forms.Diretores
                     return;
                 }
 
-                if (NifDuplicado(nifNumero))
+                if (empresa != null && empresa.NifDuplicado(nifNumero))
                 {
                     DialogHelper.MostrarAviso($"O NIF '{nifNumero}' já está registado por outro funcionário.", "NIF Duplicado");
                     txtNIF.Focus();
@@ -348,7 +348,7 @@ namespace ADOSMELHORES.Forms.Diretores
                 return;
             }
 
-            if (NifDuplicado(nifNumero, diretorSelecionado.Id))
+            if (empresa != null && empresa.NifDuplicado(nifNumero, diretorSelecionado.Id))
             {
                 DialogHelper.MostrarAviso($"O NIF '{nifNumero}' já está registado por outro diretor.", "NIF Duplicado");
                 txtNIF.Focus();
@@ -754,17 +754,9 @@ namespace ADOSMELHORES.Forms.Diretores
             );
         }
 
-
         private void btnFechar_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
-        private bool NifDuplicado(int nif, int? excludeId = null)
-        {
-            // Usar verificação centralizada da Empresa (verifica todos os funcionários)
-            return empresa != null && empresa.NifDuplicado(nif, excludeId);
-        }
     }
-        
 }
